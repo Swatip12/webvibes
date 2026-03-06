@@ -7,18 +7,18 @@ This implementation plan breaks down the WebVibes Technology full-stack website 
 ## Tasks
 
 - [ ] 1. Backend project setup and configuration
-  - [~] 1.1 Create Spring Boot project with Maven
+  - [x] 1.1 Create Spring Boot project with Maven
     - Initialize Spring Boot 3.x project with dependencies: Spring Web, Spring Data JPA, MySQL Driver, Validation, Lombok
     - Configure project structure with packages: controller, service, repository, entity, dto, exception
     - _Requirements: 12.1, 12.2, 12.3_
   
-  - [~] 1.2 Configure database connection and properties
+  - [x] 1.2 Configure database connection and properties
     - Create application.properties with MySQL connection settings (URL, username, password)
     - Configure JPA/Hibernate properties (ddl-auto, dialect, show-sql)
     - Set up server port and context path
     - _Requirements: 12.2, 12.3, 13.1-13.6_
   
-  - [~] 1.3 Configure CORS for Angular frontend
+  - [-] 1.3 Configure CORS for Angular frontend
     - Create CorsConfig class to allow requests from Angular dev server (http://localhost:4200)
     - Configure allowed methods (GET, POST, PUT, DELETE) and headers
     - _Requirements: 12.5_
