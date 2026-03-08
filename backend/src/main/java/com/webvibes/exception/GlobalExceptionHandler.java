@@ -1,0 +1,64 @@
+package com.webvibes.exception;
+
+import com.webvibes.dto.MessageResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import jakarta.persistence.EntityNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+    
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, Object>> handleValidationException(MethodArgumentNotValidException ex) {
+        logger.error("Validation error occurred: {}", ex.getMessage());
+        
+        Map<String, String> fieldErrors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach(error -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            fieldErrors.put(fieldName, errorMessage);
+        });
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Validation failed");
+        response.put("errors", fieldErrors);
+        
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+    
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<MessageResponse> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+        logger.error("Data integrity violation: {}", ex.getMessage());
+        
+        MessageResponse response = new MessageResponse("Data integrity violation occurred");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+    }
+    
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<MessageResponse> handleEntityNotFound(EntityNotFoundException ex) {
+        logger.error("Entity not found: {}", ex.getMessage());
+        
+        MessageResponse response = new MessageResponse(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+    
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<MessageResponse> handleGenericException(Exception ex) {
+        logger.error("Unexpected error occurred: {}", ex.getMessage(), ex);
+        
+        MessageResponse response = new MessageResponse("An unexpected error occurred");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+}

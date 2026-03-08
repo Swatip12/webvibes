@@ -1,0 +1,35 @@
+/* Custom styles to complement Bootstrap classes */
+
+/* Tech icon styling */
+.tech-icon {
+  font-size: 3rem;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect for technology cards */
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.hover-card:hover .tech-icon {
+  transform: scale(1.1);
+}
+
+/* Smooth transitions for all interactive elements */
+.card {
+  transition: all 0.3s ease;
+}
+
+/* Ensure consistent spacing on all viewports */
+@media (max-width: 575.98px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

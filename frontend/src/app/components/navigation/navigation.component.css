@@ -1,0 +1,148 @@
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+.navbar-toggler {
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.navbar-toggler:hover {
+  transform: rotate(90deg);
+}
+
+.navbar-collapse {
+  transition: all 0.35s ease-in-out;
+}
+
+.nav-link {
+  margin: 0 0.5rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #fff;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 80%;
+  left: 10%;
+}
+
+.nav-link:hover {
+  color: #fff !important;
+  transform: translateY(-2px);
+}
+
+.nav-link.active {
+  color: #fff !important;
+  font-weight: 500;
+}
+
+/* Mobile viewport styles (< 768px) */
+@media (max-width: 767px) {
+  .navbar-collapse {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .navbar-collapse.show {
+    max-height: 500px;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navbar-nav {
+    margin-top: 1rem;
+    padding: 0.5rem 0;
+  }
+  
+  .nav-link {
+    margin: 0.5rem 0;
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease, padding-left 0.3s ease;
+  }
+
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding-left: 1.5rem;
+    transform: none;
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+}
+
+/* Tablet viewport styles (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .navbar-collapse {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .navbar-collapse.show {
+    max-height: 500px;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navbar-nav {
+    margin-top: 1rem;
+  }
+  
+  .nav-link {
+    margin: 0.25rem 0.3rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Desktop viewport styles (>= 992px) */
+@media (min-width: 992px) {
+  .navbar-collapse {
+    display: flex !important;
+    max-height: none;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navbar-nav {
+    align-items: center;
+  }
+  
+  .nav-link {
+    padding: 0.5rem 1rem;
+  }
+}

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * REST controller for handling contact form submissions.
- * Provides endpoints for students to send contact messages.
+ * Provides endpoints for students to contact the company.
  */
 @RestController
 @RequestMapping("/api/contact")
