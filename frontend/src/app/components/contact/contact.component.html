@@ -1,4 +1,122 @@
-<div class="contact">
-  <h1>Contact Page</h1>
-  <p>Get in touch with us</p>
+<div class="contact-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
+        <div class="contact-header text-center mb-5">
+          <h1 class="display-4 mb-3">Contact Us</h1>
+          <p class="lead text-muted">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+        </div>
+
+        <!-- Success Message -->
+        <div class="alert alert-success alert-dismissible fade show" *ngIf="successMessage" role="alert">
+          <i class="bi bi-check-circle-fill me-2"></i>{{ successMessage }}
+          <button type="button" class="btn-close" (click)="successMessage = ''" aria-label="Close"></button>
+        </div>
+
+        <!-- Error Message -->
+        <div class="alert alert-danger alert-dismissible fade show" *ngIf="errorMessage" role="alert">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ errorMessage }}
+          <button type="button" class="btn-close" (click)="errorMessage = ''" aria-label="Close"></button>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-card card shadow-sm mb-4">
+          <div class="card-body p-4">
+            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+              <!-- Name Field -->
+              <div class="mb-4">
+                <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="name" 
+                  formControlName="name"
+                  placeholder="Enter your full name"
+                  [class.is-invalid]="name?.invalid && name?.touched"
+                  [class.is-valid]="name?.valid && name?.touched">
+                <div class="invalid-feedback" *ngIf="name?.invalid && name?.touched">
+                  <div *ngIf="name?.errors?.['required']">Name is required</div>
+                  <div *ngIf="name?.errors?.['minlength']">Name must be at least 2 characters</div>
+                  <div *ngIf="name?.errors?.['maxlength']">Name cannot exceed 100 characters</div>
+                </div>
+              </div>
+
+              <!-- Email Field -->
+              <div class="mb-4">
+                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                <input 
+                  type="email" 
+                  class="form-control" 
+                  id="email" 
+                  formControlName="email"
+                  placeholder="Enter your email address"
+                  [class.is-invalid]="email?.invalid && email?.touched"
+                  [class.is-valid]="email?.valid && email?.touched">
+                <div class="invalid-feedback" *ngIf="email?.invalid && email?.touched">
+                  <div *ngIf="email?.errors?.['required']">Email is required</div>
+                  <div *ngIf="email?.errors?.['email']">Please enter a valid email address</div>
+                </div>
+              </div>
+
+              <!-- Message Field -->
+              <div class="mb-4">
+                <label for="message" class="form-label">Message <span class="text-danger">*</span></label>
+                <textarea 
+                  class="form-control" 
+                  id="message" 
+                  formControlName="message"
+                  rows="6"
+                  placeholder="Tell us what you'd like to know..."
+                  [class.is-invalid]="message?.invalid && message?.touched"
+                  [class.is-valid]="message?.valid && message?.touched"></textarea>
+                <div class="invalid-feedback" *ngIf="message?.invalid && message?.touched">
+                  <div *ngIf="message?.errors?.['required']">Message is required</div>
+                  <div *ngIf="message?.errors?.['minlength']">Message must be at least 10 characters</div>
+                  <div *ngIf="message?.errors?.['maxlength']">Message cannot exceed 1000 characters</div>
+                </div>
+                <div class="form-text" *ngIf="message?.value">
+                  {{ message?.value.length }} / 1000 characters
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="d-grid">
+                <button 
+                  type="submit" 
+                  class="btn btn-primary btn-lg"
+                  [disabled]="contactForm.invalid || isSubmitting">
+                  <span *ngIf="!isSubmitting">
+                    <i class="bi bi-send-fill me-2"></i>Send Message
+                  </span>
+                  <span *ngIf="isSubmitting">
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Sending...
+                  </span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Alternative Contact Methods -->
+        <div class="alternative-contact">
+          <div class="text-center mb-3">
+            <p class="text-muted">Or reach us directly via:</p>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <a [href]="getWhatsAppLink()" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-lg w-100">
+                <i class="bi bi-whatsapp me-2"></i>WhatsApp
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a [href]="getMailtoLink()" class="btn btn-outline-primary btn-lg w-100">
+                <i class="bi bi-envelope-fill me-2"></i>Email
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

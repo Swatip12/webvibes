@@ -65,7 +65,7 @@ export class InternshipComponent {
       this.errorMessage = '';
       
       this.internshipService.submitApplication(this.applicationForm.value).subscribe({
-        next: (response) => {
+        next: () => {
           this.successMessage = 'Application submitted successfully! We will contact you soon.';
           this.applicationForm.reset();
           // Optionally hide the form after a delay

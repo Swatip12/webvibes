@@ -1,4 +1,144 @@
-<div class="courses">
-  <h1>Courses Page</h1>
-  <p>Browse available courses</p>
+<div class="courses-container">
+  <div class="container">
+    <h1 class="text-center mb-4">Our Courses</h1>
+    <p class="text-center text-muted mb-5">Explore our comprehensive courses and advance your technology skills</p>
+
+    <!-- Course Cards -->
+    <div class="row" *ngIf="!showEnrollmentForm">
+      <div class="col-12 col-md-6 mb-4" *ngFor="let course of courses">
+        <div class="card h-100 course-card">
+          <div class="card-body">
+            <h3 class="card-title">{{ course.name }}</h3>
+            <p class="card-text">{{ course.description }}</p>
+            
+            <div class="course-details">
+              <p><strong>Duration:</strong> {{ course.duration }}</p>
+              <p><strong>Technologies Covered:</strong></p>
+              <ul class="technologies-list">
+                <li *ngFor="let tech of course.technologies">{{ tech }}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer bg-transparent">
+            <button class="btn btn-primary w-100" (click)="onEnroll(course.name)">
+              Enroll Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enrollment Form -->
+    <div *ngIf="showEnrollmentForm" class="enrollment-form-section">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title mb-4">Enroll in {{ selectedCourse }}</h3>
+          
+          <!-- Success Message -->
+          <div class="alert alert-success" *ngIf="successMessage">
+            {{ successMessage }}
+          </div>
+
+          <!-- Error Message -->
+          <div class="alert alert-danger" *ngIf="errorMessage">
+            {{ errorMessage }}
+          </div>
+          
+          <form [formGroup]="enrollmentForm" (ngSubmit)="onSubmit()">
+            <!-- Student Name -->
+            <div class="mb-3">
+              <label for="studentName" class="form-label">Full Name <span class="text-danger">*</span></label>
+              <input 
+                type="text" 
+                id="studentName"
+                class="form-control" 
+                formControlName="studentName"
+                [class.is-invalid]="studentName?.invalid && studentName?.touched"
+                placeholder="Enter your full name">
+              <div class="invalid-feedback" *ngIf="studentName?.invalid && studentName?.touched">
+                <div *ngIf="studentName?.errors?.['required']">Name is required</div>
+                <div *ngIf="studentName?.errors?.['minlength']">Name must be at least 2 characters</div>
+                <div *ngIf="studentName?.errors?.['maxlength']">Name cannot exceed 100 characters</div>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
+              <input 
+                type="email" 
+                id="email"
+                class="form-control" 
+                formControlName="email"
+                [class.is-invalid]="email?.invalid && email?.touched"
+                placeholder="Enter your email">
+              <div class="invalid-feedback" *ngIf="email?.invalid && email?.touched">
+                <div *ngIf="email?.errors?.['required']">Email is required</div>
+                <div *ngIf="email?.errors?.['email']">Please enter a valid email address</div>
+              </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+              <input 
+                type="tel" 
+                id="phone"
+                class="form-control" 
+                formControlName="phone"
+                [class.is-invalid]="phone?.invalid && phone?.touched"
+                placeholder="Enter 10-15 digit phone number">
+              <div class="invalid-feedback" *ngIf="phone?.invalid && phone?.touched">
+                <div *ngIf="phone?.errors?.['required']">Phone number is required</div>
+                <div *ngIf="phone?.errors?.['pattern']">Phone number must be 10-15 digits</div>
+              </div>
+            </div>
+
+            <!-- Course Name (Pre-filled, read-only) -->
+            <div class="mb-3">
+              <label for="courseName" class="form-label">Course Name <span class="text-danger">*</span></label>
+              <input 
+                type="text" 
+                id="courseName"
+                class="form-control" 
+                formControlName="courseName"
+                readonly>
+            </div>
+
+            <!-- Message -->
+            <div class="mb-3">
+              <label for="message" class="form-label">Message (Optional)</label>
+              <textarea 
+                id="message"
+                class="form-control" 
+                formControlName="message"
+                [class.is-invalid]="message?.invalid && message?.touched"
+                rows="4"
+                placeholder="Tell us about your learning goals or any questions you have"></textarea>
+              <div class="invalid-feedback" *ngIf="message?.invalid && message?.touched">
+                <div *ngIf="message?.errors?.['maxlength']">Message cannot exceed 500 characters</div>
+              </div>
+              <small class="form-text text-muted">Maximum 500 characters</small>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="d-flex gap-2">
+              <button 
+                type="submit" 
+                class="btn btn-primary"
+                [disabled]="enrollmentForm.invalid">
+                Submit Enrollment
+              </button>
+              <button 
+                type="button" 
+                class="btn btn-secondary"
+                (click)="onCancel()">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
