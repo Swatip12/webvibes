@@ -18,63 +18,63 @@ This implementation plan breaks down the WebVibes Technology full-stack website 
     - Set up server port and context path
     - _Requirements: 12.2, 12.3, 13.1-13.6_
   
-  - [-] 1.3 Configure CORS for Angular frontend
+  - [x] 1.3 Configure CORS for Angular frontend
     - Create CorsConfig class to allow requests from Angular dev server (http://localhost:4200)
     - Configure allowed methods (GET, POST, PUT, DELETE) and headers
     - _Requirements: 12.5_
 
 - [ ] 2. Database schema and JPA entities
-  - [~] 2.1 Create InternshipApplication entity and table
+  - [x] 2.1 Create InternshipApplication entity and table
     - Define InternshipApplication entity with fields: id, studentName, email, phone, internshipType, message, submittedAt
     - Add JPA annotations (@Entity, @Table, @Id, @GeneratedValue, @Column)
     - Create indexes on email and submittedAt fields
     - _Requirements: 13.2, 8.2_
   
-  - [~] 2.2 Create CourseEnrollment entity and table
+  - [x] 2.2 Create CourseEnrollment entity and table
     - Define CourseEnrollment entity with fields: id, studentName, email, phone, courseName, message, submittedAt
     - Add JPA annotations and column constraints
     - Create indexes on email, courseName, and submittedAt fields
     - _Requirements: 13.3, 9.2_
   
-  - [~] 2.3 Create ContactMessage entity and table
+  - [x] 2.3 Create ContactMessage entity and table
     - Define ContactMessage entity with fields: id, name, email, message, submittedAt, isRead
     - Add JPA annotations and column constraints
     - Create indexes on email, submittedAt, and isRead fields
     - _Requirements: 13.5, 10.2_
   
-  - [~] 2.4 Create Project entity and table
+  - [x] 2.4 Create Project entity and table
     - Define Project entity with fields: id, title, description, githubLink, imageUrl, createdAt
     - Add JPA annotations and column constraints
     - Create index on createdAt field
     - _Requirements: 13.4, 11.2_
 
 - [ ] 3. Backend DTOs and validation
-  - [~] 3.1 Create InternshipApplicationDTO with validation
+  - [x] 3.1 Create InternshipApplicationDTO with validation
     - Define DTO with fields: studentName, email, phone, internshipType, message
     - Add Bean Validation annotations (@NotBlank, @Email, @Pattern, @Size)
     - _Requirements: 12.4, 8.1_
   
-  - [~] 3.2 Create CourseEnrollmentDTO with validation
+  - [x] 3.2 Create CourseEnrollmentDTO with validation
     - Define DTO with fields: studentName, email, phone, courseName, message
     - Add Bean Validation annotations
     - _Requirements: 12.4, 9.1_
   
-  - [~] 3.3 Create ContactMessageDTO with validation
+  - [x] 3.3 Create ContactMessageDTO with validation
     - Define DTO with fields: name, email, message
     - Add Bean Validation annotations
     - _Requirements: 12.4, 10.1_
   
-  - [~] 3.4 Create ProjectDTO with validation
+  - [x] 3.4 Create ProjectDTO with validation
     - Define DTO with fields: id, title, description, githubLink, imageUrl
     - Add Bean Validation annotations including GitHub URL pattern validation
     - _Requirements: 12.4, 11.1_
   
-  - [~] 3.5 Create MessageResponse DTO
+  - [x] 3.5 Create MessageResponse DTO
     - Define simple response DTO with message field for success responses
     - _Requirements: 12.4_
 
 - [ ] 4. Backend repositories
-  - [~] 4.1 Create Spring Data JPA repositories
+  - [x] 4.1 Create Spring Data JPA repositories
     - Create InternshipRepository extending JpaRepository<InternshipApplication, Long>
     - Create CourseRepository extending JpaRepository<CourseEnrollment, Long>
     - Create ContactRepository extending JpaRepository<ContactMessage, Long>
@@ -82,41 +82,41 @@ This implementation plan breaks down the WebVibes Technology full-stack website 
     - _Requirements: 12.1, 12.2_
 
 - [ ] 5. Backend services
-  - [~] 5.1 Implement InternshipService
+  - [x] 5.1 Implement InternshipService
     - Create saveApplication method to convert DTO to entity, set timestamp, and save to repository
     - Add error handling and logging
     - _Requirements: 12.1, 8.2_
   
-  - [~] 5.2 Implement CourseService
+  - [x] 5.2 Implement CourseService
     - Create saveEnrollment method to convert DTO to entity, set timestamp, and save to repository
     - Add error handling and logging
     - _Requirements: 12.1, 9.2_
   
-  - [~] 5.3 Implement ContactService
+  - [x] 5.3 Implement ContactService
     - Create saveMessage method to convert DTO to entity, set timestamp, and save to repository
     - Add error handling and logging
     - _Requirements: 12.1, 10.2_
   
-  - [~] 5.4 Implement ProjectService
+  - [x] 5.4 Implement ProjectService
     - Create saveProject method to convert DTO to entity, set timestamp, and save to repository
     - Create getAllProjects method to retrieve all projects and convert to DTOs
     - Add error handling and logging
     - _Requirements: 12.1, 11.2, 11.5_
 
 - [ ] 6. Backend controllers and REST endpoints
-  - [~] 6.1 Create InternshipController
+  - [x] 6.1 Create InternshipController
     - Implement POST /api/internships/apply endpoint
     - Add @Valid annotation for DTO validation
     - Return HTTP 201 with MessageResponse on success
     - _Requirements: 12.5, 8.1, 8.3_
   
-  - [~] 6.2 Create CourseController
+  - [x] 6.2 Create CourseController
     - Implement POST /api/courses/enroll endpoint
     - Add @Valid annotation for DTO validation
     - Return HTTP 201 with MessageResponse on success
     - _Requirements: 12.5, 9.1, 9.3_
   
-  - [~] 6.3 Create ContactController
+  - [ ] 6.3 Create ContactController
     - Implement POST /api/contact endpoint
     - Add @Valid annotation for DTO validation
     - Return HTTP 201 with MessageResponse on success
