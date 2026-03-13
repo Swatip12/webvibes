@@ -5,7 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDateTime;
+
 public class InternshipApplicationDTO {
+    
+    private Long id;
     
     @NotBlank(message = "Student name is required")
     @Size(min = 2, max = 100, message = "Student name must be between 2 and 100 characters")
@@ -25,6 +29,8 @@ public class InternshipApplicationDTO {
     @Size(max = 500, message = "Message must not exceed 500 characters")
     private String message;
     
+    private LocalDateTime submittedAt;
+    
     // Constructors
     public InternshipApplicationDTO() {
     }
@@ -39,6 +45,14 @@ public class InternshipApplicationDTO {
     }
     
     // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getStudentName() {
         return studentName;
     }
@@ -77,5 +91,13 @@ public class InternshipApplicationDTO {
     
     public void setMessage(String message) {
         this.message = message;
+    }
+    
+    public LocalDateTime getSubmittedAt() {
+        return submittedAt;
+    }
+    
+    public void setSubmittedAt(LocalDateTime submittedAt) {
+        this.submittedAt = submittedAt;
     }
 }

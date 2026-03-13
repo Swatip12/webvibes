@@ -1,5 +1,6 @@
 package com.webvibes.controller;
 
+import com.webvibes.dto.CourseDTO;
 import com.webvibes.dto.CourseEnrollmentDTO;
 import com.webvibes.dto.MessageResponse;
 import com.webvibes.service.CourseService;
@@ -10,9 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
- * REST controller for handling course enrollment requests.
- * Provides endpoints for students to enroll in courses.
+ * REST controller for handling course-related requests.
+ * Provides public endpoints for fetching courses and enrolling in courses.
  */
 @RestController
 @RequestMapping("/api/courses")
@@ -24,6 +27,22 @@ public class CourseController {
     
     public CourseController(CourseService courseService) {
         this.courseService = courseService;
+    }
+    
+    /**
+     * Gets all courses from the database.
+     * Public endpoint - no authentication required.
+     * 
+     * @return ResponseEntity with HTTP 200 and list of all courses sorted by createdAt descending
+     */
+    @GetMapping
+    public ResponseEntity<List<CourseDTO>> getAllCourses() {
+        logger.info("Received request to fetch all courses");
+        
+        List<CourseDTO> courses = courseService.getAllCourses();
+        
+        logger.info("Returning {} courses", courses.size());
+        return ResponseEntity.ok(courses);
     }
     
     /**

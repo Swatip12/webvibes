@@ -4,7 +4,11 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDateTime;
+
 public class ContactMessageDTO {
+    
+    private Long id;
     
     @NotBlank(message = "Name is required")
     @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
@@ -18,6 +22,8 @@ public class ContactMessageDTO {
     @Size(min = 10, max = 1000, message = "Message must be between 10 and 1000 characters")
     private String message;
     
+    private LocalDateTime submittedAt;
+    
     // Constructors
     public ContactMessageDTO() {
     }
@@ -29,6 +35,14 @@ public class ContactMessageDTO {
     }
     
     // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return name;
     }
@@ -51,5 +65,13 @@ public class ContactMessageDTO {
     
     public void setMessage(String message) {
         this.message = message;
+    }
+    
+    public LocalDateTime getSubmittedAt() {
+        return submittedAt;
+    }
+    
+    public void setSubmittedAt(LocalDateTime submittedAt) {
+        this.submittedAt = submittedAt;
     }
 }

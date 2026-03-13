@@ -1,16 +1,25 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HTTP_INTERCEPTORS, HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { ErrorInterceptor } from './error.interceptor';
+import { AuthService } from '../services/auth.service';
 
 describe('ErrorInterceptor', () => {
   let httpMock: HttpTestingController;
   let httpClient: HttpClient;
+  let authService: jasmine.SpyObj<AuthService>;
+  let router: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
+    const authServiceSpy = jasmine.createSpyObj('AuthService', ['logout']);
+    const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
+        { provide: AuthService, useValue: authServiceSpy },
+        { provide: Router, useValue: routerSpy },
         {
           provide: HTTP_INTERCEPTORS,
           useClass: ErrorInterceptor,
@@ -21,6 +30,8 @@ describe('ErrorInterceptor', () => {
 
     httpMock = TestBed.inject(HttpTestingController);
     httpClient = TestBed.inject(HttpClient);
+    authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
+    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
   });
 
   afterEach(() => {
@@ -28,7 +39,7 @@ describe('ErrorInterceptor', () => {
   });
 
   it('should be created', () => {
-    const interceptor = new ErrorInterceptor();
+    const interceptor = TestBed.inject(ErrorInterceptor);
     expect(interceptor).toBeTruthy();
   });
 
@@ -83,6 +94,40 @@ describe('ErrorInterceptor', () => {
 
     const req = httpMock.expectOne(testUrl);
     req.flush(validationErrors, { status: 400, statusText: 'Bad Request' });
+  });
+
+  it('should handle HTTP status 401 (unauthorized) by clearing auth and redirecting to login', (done) => {
+    const testUrl = '/api/admin/courses';
+
+    httpClient.get(testUrl).subscribe({
+      next: () => fail('should have failed with error'),
+      error: (error: Error) => {
+        expect(error.message).toBe('Your session has expired. Please log in again.');
+        expect(authService.logout).toHaveBeenCalled();
+        expect(router.navigate).toHaveBeenCalledWith(['/login']);
+        done();
+      }
+    });
+
+    const req = httpMock.expectOne(testUrl);
+    req.flush(null, { status: 401, statusText: 'Unauthorized' });
+  });
+
+  it('should handle HTTP status 403 (forbidden) with appropriate message', (done) => {
+    const testUrl = '/api/admin/courses';
+
+    httpClient.get(testUrl).subscribe({
+      next: () => fail('should have failed with error'),
+      error: (error: Error) => {
+        expect(error.message).toBe('Access denied. You do not have permission to perform this action.');
+        expect(authService.logout).not.toHaveBeenCalled();
+        expect(router.navigate).not.toHaveBeenCalled();
+        done();
+      }
+    });
+
+    const req = httpMock.expectOne(testUrl);
+    req.flush(null, { status: 403, statusText: 'Forbidden' });
   });
 
   it('should handle HTTP status 400 with message property', (done) => {
@@ -153,13 +198,13 @@ describe('ErrorInterceptor', () => {
     httpClient.get(testUrl).subscribe({
       next: () => fail('should have failed with error'),
       error: (error: Error) => {
-        expect(error.message).toBe('Error: 403');
+        expect(error.message).toBe('Error: 404');
         done();
       }
     });
 
     const req = httpMock.expectOne(testUrl);
-    req.flush(null, { status: 403, statusText: 'Forbidden' });
+    req.flush(null, { status: 404, statusText: 'Not Found' });
   });
 
   it('should format multiple validation errors correctly', (done) => {

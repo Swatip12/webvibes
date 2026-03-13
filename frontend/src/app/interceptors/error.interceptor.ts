@@ -8,6 +8,8 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 /**
  * HTTP Interceptor for global error handling.
@@ -20,13 +22,20 @@ import { catchError } from 'rxjs/operators';
  * - Client-side errors (ErrorEvent): Network failures, client exceptions
  * - HTTP 0: Connection errors (server unreachable)
  * - HTTP 400: Validation errors (formats field errors from backend)
+ * - HTTP 401: Unauthorized - clears auth state and redirects to login
+ * - HTTP 403: Forbidden - displays access denied message
  * - HTTP 500: Server errors (generic server error message)
  * - Other HTTP errors: Uses error message from response or status code
  * 
- * Validates: Requirements 17.3, 17.4
+ * Validates: Requirements 10.1, 10.6, 17.3, 17.4
  */
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
@@ -42,6 +51,14 @@ export class ErrorInterceptor implements HttpInterceptor {
             errorMessage = 'Unable to connect to server. Please check your connection.';
           } else if (error.status === 400) {
             errorMessage = this.formatValidationErrors(error.error);
+          } else if (error.status === 401) {
+            // Unauthorized - clear authentication state and redirect to login
+            errorMessage = 'Your session has expired. Please log in again.';
+            this.authService.logout();
+            this.router.navigate(['/login']);
+          } else if (error.status === 403) {
+            // Forbidden - user doesn't have permission
+            errorMessage = 'Access denied. You do not have permission to perform this action.';
           } else if (error.status === 500) {
             errorMessage = 'Server error. Please try again later.';
           } else {

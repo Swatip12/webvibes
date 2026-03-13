@@ -1,11 +1,14 @@
 package com.webvibes.exception;
 
 import com.webvibes.dto.MessageResponse;
+import io.jsonwebtoken.JwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -52,6 +55,30 @@ public class GlobalExceptionHandler {
         
         MessageResponse response = new MessageResponse(ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+    
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<MessageResponse> handleAuthenticationException(AuthenticationException ex) {
+        logger.error("Authentication failed: {}", ex.getMessage());
+        
+        MessageResponse response = new MessageResponse("Authentication failed: " + ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+    }
+    
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<MessageResponse> handleAccessDeniedException(AccessDeniedException ex) {
+        logger.error("Access denied: {}", ex.getMessage());
+        
+        MessageResponse response = new MessageResponse("Access denied: You do not have permission to access this resource");
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+    }
+    
+    @ExceptionHandler(JwtException.class)
+    public ResponseEntity<MessageResponse> handleJwtException(JwtException ex) {
+        logger.error("JWT token error: {}", ex.getMessage());
+        
+        MessageResponse response = new MessageResponse("Invalid or expired token");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
     
     @ExceptionHandler(Exception.class)

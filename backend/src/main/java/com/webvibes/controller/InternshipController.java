@@ -1,6 +1,7 @@
 package com.webvibes.controller;
 
 import com.webvibes.dto.InternshipApplicationDTO;
+import com.webvibes.dto.InternshipDTO;
 import com.webvibes.dto.MessageResponse;
 import com.webvibes.service.InternshipService;
 import jakarta.validation.Valid;
@@ -10,9 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
- * REST controller for handling internship application requests.
- * Provides endpoints for students to apply for internship programs.
+ * REST controller for handling internship-related requests.
+ * Provides public endpoints for fetching internships and applying for internships.
  */
 @RestController
 @RequestMapping("/api/internships")
@@ -24,6 +27,22 @@ public class InternshipController {
     
     public InternshipController(InternshipService internshipService) {
         this.internshipService = internshipService;
+    }
+    
+    /**
+     * Gets all internships from the database.
+     * Public endpoint - no authentication required.
+     * 
+     * @return ResponseEntity with HTTP 200 and list of all internships sorted by createdAt descending
+     */
+    @GetMapping
+    public ResponseEntity<List<InternshipDTO>> getAllInternships() {
+        logger.info("Received request to fetch all internships");
+        
+        List<InternshipDTO> internships = internshipService.getAllInternships();
+        
+        logger.info("Returning {} internships", internships.size());
+        return ResponseEntity.ok(internships);
     }
     
     /**

@@ -13,6 +13,9 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { LoginComponent } from './components/login/login.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { CourseManagementComponent } from './components/course-management/course-management.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 @NgModule({
@@ -25,7 +28,10 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     ProjectsComponent,
     ContactComponent,
     NavigationComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent,
+    AdminDashboardComponent,
+    CourseManagementComponent
   ],
   imports: [
     BrowserModule,
