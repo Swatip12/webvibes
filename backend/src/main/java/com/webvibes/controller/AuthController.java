@@ -4,6 +4,8 @@ import com.webvibes.dto.LoginRequest;
 import com.webvibes.dto.MessageResponse;
 import com.webvibes.security.JwtTokenProvider;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,8 +18,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")
 public class AuthController {
+
+    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
     
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -56,8 +59,9 @@ public class AuthController {
             return ResponseEntity.status(401)
                 .body(new MessageResponse("Invalid username or password"));
         } catch (Exception e) {
+            log.error("Login error for user '{}': {}", loginRequest.getUsername(), e.getMessage(), e);
             return ResponseEntity.status(500)
-                .body(new MessageResponse("An error occurred during authentication"));
+                .body(new MessageResponse("Error: " + e.getClass().getSimpleName() + ": " + e.getMessage()));
         }
     }
     

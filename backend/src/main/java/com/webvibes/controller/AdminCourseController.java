@@ -17,7 +17,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/admin/courses")
 @PreAuthorize("hasRole('ADMIN')")
-@CrossOrigin(origins = "*")
 public class AdminCourseController {
     
     private static final Logger logger = LoggerFactory.getLogger(AdminCourseController.class);
