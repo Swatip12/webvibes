@@ -1,42 +1,141 @@
-<div class="projects-container">
-  <div class="container">
-    <h1 class="text-center mb-4">Student Projects</h1>
-    <p class="text-center text-muted mb-5">Explore amazing projects created by our students</p>
+<div class="pp-page">
 
-    <!-- Loading State -->
-    <div *ngIf="loading" class="text-center">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
+  <!-- Hero Section -->
+  <section class="pp-hero">
+    <div class="pp-hero-particles">
+      <span class="pp-particle"></span>
+      <span class="pp-particle"></span>
+      <span class="pp-particle"></span>
+      <span class="pp-particle"></span>
+      <span class="pp-particle"></span>
+    </div>
+    <div class="pp-hero-content">
+      <div class="pp-hero-badge">
+        <i class="bi bi-code-slash"></i> Student Work
       </div>
-      <p class="mt-3">Loading projects...</p>
-    </div>
-
-    <!-- Error State -->
-    <div *ngIf="error && !loading" class="alert alert-danger text-center" role="alert">
-      {{ error }}
-    </div>
-
-    <!-- No Projects Message -->
-    <div *ngIf="!loading && !error && projects.length === 0" class="text-center">
-      <p class="text-muted">No projects available</p>
-    </div>
-
-    <!-- Project Cards -->
-    <div *ngIf="!loading && !error && projects.length > 0" class="row">
-      <div class="col-12 col-md-6 col-lg-4 mb-4" *ngFor="let project of projects">
-        <div class="card h-100 project-card">
-          <img [src]="project.imageUrl" [alt]="project.title" class="card-img-top project-image">
-          <div class="card-body">
-            <h3 class="card-title">{{ project.title }}</h3>
-            <p class="card-text">{{ project.description }}</p>
-          </div>
-          <div class="card-footer bg-transparent">
-            <a [href]="project.githubLink" target="_blank" rel="noopener noreferrer" class="btn btn-primary w-100">
-              <i class="bi bi-github"></i> View on GitHub
-            </a>
-          </div>
+      <h1 class="pp-hero-title">Student <span class="pp-hero-highlight">Projects</span></h1>
+      <p class="pp-hero-subtitle">Real-world projects built by our students — from web apps to data science solutions</p>
+      <div class="pp-hero-stats">
+        <div class="pp-stat-item">
+          <span class="pp-stat-number">{{ projects.length }}+</span>
+          <span class="pp-stat-label">Projects</span>
+        </div>
+        <div class="pp-stat-divider"></div>
+        <div class="pp-stat-item">
+          <span class="pp-stat-number">100%</span>
+          <span class="pp-stat-label">Open Source</span>
+        </div>
+        <div class="pp-stat-divider"></div>
+        <div class="pp-stat-item">
+          <span class="pp-stat-number">Live</span>
+          <span class="pp-stat-label">On GitHub</span>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Filter Bar -->
+  <section class="pp-filter-bar">
+    <div class="pp-filter-inner">
+      <div class="pp-search-wrap">
+        <i class="bi bi-search pp-search-icon"></i>
+        <input
+          type="text"
+          class="pp-search-input"
+          placeholder="Search projects..."
+          [(ngModel)]="searchQuery"
+          (input)="applyFilters()"
+        />
+        <button *ngIf="searchQuery" class="pp-search-clear" (click)="clearSearch()">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="pp-filter-tabs">
+        <button
+          *ngFor="let cat of categories"
+          class="pp-filter-tab"
+          [class.pp-filter-tab-active]="selectedCategory === cat"
+          (click)="selectCategory(cat)"
+        >{{ cat }}</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="pp-content">
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="pp-loading">
+      <div class="pp-spinner"></div>
+      <p>Loading projects...</p>
+    </div>
+
+    <!-- Error -->
+    <div *ngIf="error && !loading" class="pp-error">
+      <i class="bi bi-exclamation-triangle-fill"></i>
+      <h3>Oops, something went wrong</h3>
+      <p>{{ error }}</p>
+      <button class="pp-retry-btn" (click)="loadProjects()">Try Again</button>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!loading && !error && filteredProjects.length === 0" class="pp-empty">
+      <i class="bi bi-folder2-open"></i>
+      <h3>No projects found</h3>
+      <p *ngIf="searchQuery || selectedCategory !== 'All'">Try adjusting your search or filter.</p>
+      <p *ngIf="!searchQuery && selectedCategory === 'All'">No projects have been added yet. Check back soon!</p>
+      <button *ngIf="searchQuery || selectedCategory !== 'All'" class="pp-retry-btn" (click)="clearFilters()">Clear Filters</button>
+    </div>
+
+    <!-- Project Grid -->
+    <div *ngIf="!loading && !error && filteredProjects.length > 0" class="pp-grid">
+      <div class="pp-card" *ngFor="let project of filteredProjects; let i = index">
+        <div class="pp-card-image-wrap">
+          <img
+            [src]="project.imageUrl || getPlaceholderImage(i)"
+            [alt]="project.title"
+            class="pp-card-image"
+            (error)="onImageError($event, i)"
+          />
+          <div class="pp-card-overlay">
+            <a [href]="project.githubLink" target="_blank" rel="noopener noreferrer" class="pp-overlay-btn">
+              <i class="bi bi-github"></i> View Code
+            </a>
+          </div>
+          <div class="pp-card-badge" [style.background]="getAccentColor(i)">
+            <i class="bi bi-code-square"></i>
+          </div>
+        </div>
+        <div class="pp-card-body">
+          <h3 class="pp-card-title">{{ project.title }}</h3>
+          <p class="pp-card-desc">{{ project.description }}</p>
+          <div class="pp-card-tags" *ngIf="getTags(project).length > 0">
+            <span class="pp-tag" *ngFor="let tag of getTags(project)" [style.color]="getAccentColor(i)">
+              {{ tag }}
+            </span>
+          </div>
+        </div>
+        <div class="pp-card-footer">
+          <a [href]="project.githubLink" target="_blank" rel="noopener noreferrer" class="pp-github-btn" [style.background]="getAccentColor(i)">
+            <i class="bi bi-github"></i> View on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CTA Section -->
+  <section class="pp-cta">
+    <div class="pp-cta-inner">
+      <div class="pp-cta-icon"><i class="bi bi-rocket-takeoff-fill"></i></div>
+      <h2 class="pp-cta-title">Want to build your own project?</h2>
+      <p class="pp-cta-text">Join our courses or internship programs and start building real-world projects with expert guidance.</p>
+      <div class="pp-cta-actions">
+        <a routerLink="/courses" class="pp-cta-btn-primary">Explore Courses</a>
+        <a routerLink="/internship" class="pp-cta-btn-secondary">View Internships</a>
+      </div>
+    </div>
+  </section>
+
 </div>

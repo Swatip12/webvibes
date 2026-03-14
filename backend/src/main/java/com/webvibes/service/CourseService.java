@@ -8,11 +8,19 @@ import com.webvibes.repository.CourseEnrollmentRepository;
 import com.webvibes.repository.CourseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +30,12 @@ public class CourseService {
     
     private final CourseRepository courseRepository;
     private final CourseEnrollmentRepository courseEnrollmentRepository;
+
+    @Value("${app.upload.dir:uploads/syllabi}")
+    private String uploadDir;
+
+    @Value("${app.base-url:http://localhost:8080}")
+    private String baseUrl;
     
     public CourseService(CourseRepository courseRepository, CourseEnrollmentRepository courseEnrollmentRepository) {
         this.courseRepository = courseRepository;
@@ -168,9 +182,6 @@ public class CourseService {
     
     /**
      * Converts Course entity to CourseDTO.
-     * 
-     * @param course the Course entity
-     * @return the CourseDTO
      */
     private CourseDTO convertEntityToDto(Course course) {
         CourseDTO dto = new CourseDTO();
@@ -181,6 +192,9 @@ public class CourseService {
         dto.setTechnologies(course.getTechnologies());
         dto.setCreatedAt(course.getCreatedAt());
         dto.setUpdatedAt(course.getUpdatedAt());
+        if (course.getSyllabusPath() != null) {
+            dto.setSyllabusUrl(baseUrl + "/api/courses/" + course.getId() + "/syllabus");
+        }
         return dto;
     }
     
@@ -199,6 +213,66 @@ public class CourseService {
         return course;
     }
     
+    // ==================== Syllabus Operations ====================
+
+    /**
+     * Uploads a syllabus PDF for a course.
+     */
+    public CourseDTO uploadSyllabus(Long courseId, MultipartFile file) {
+        try {
+            logger.info("Uploading syllabus for course ID: {}", courseId);
+
+            Course course = courseRepository.findById(courseId)
+                    .orElseThrow(() -> new RuntimeException("Course with ID " + courseId + " not found"));
+
+            // Validate file type
+            String contentType = file.getContentType();
+            if (contentType == null || !contentType.equals("application/pdf")) {
+                throw new RuntimeException("Only PDF files are allowed");
+            }
+
+            // Create upload directory if it doesn't exist
+            Path uploadPath = Paths.get(uploadDir);
+            Files.createDirectories(uploadPath);
+
+            // Delete old syllabus if exists
+            if (course.getSyllabusPath() != null) {
+                Path oldFile = Paths.get(course.getSyllabusPath());
+                Files.deleteIfExists(oldFile);
+            }
+
+            // Save new file with unique name
+            String filename = "syllabus_" + courseId + "_" + UUID.randomUUID() + ".pdf";
+            Path filePath = uploadPath.resolve(filename);
+            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+            course.setSyllabusPath(filePath.toString());
+            Course saved = courseRepository.save(course);
+
+            logger.info("Syllabus uploaded successfully for course ID: {}", courseId);
+            return convertEntityToDto(saved);
+
+        } catch (IOException ex) {
+            logger.error("IO error uploading syllabus for course ID: {}", courseId, ex);
+            throw new RuntimeException("Failed to store syllabus file", ex);
+        } catch (Exception ex) {
+            logger.error("Error uploading syllabus for course ID: {}", courseId, ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Returns the filesystem path of the syllabus for a course.
+     */
+    public String getSyllabusPath(Long courseId) {
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new RuntimeException("Course with ID " + courseId + " not found"));
+        if (course.getSyllabusPath() == null) {
+            throw new RuntimeException("No syllabus found for course ID " + courseId);
+        }
+        return course.getSyllabusPath();
+    }
+
     // ==================== Enrollment Operations ====================
     
     /**

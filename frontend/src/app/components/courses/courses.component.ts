@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CourseService } from '../../services/course.service';
 
 interface Course {
+  id?: number;
   name: string;
   description: string;
   duration: string;
@@ -14,6 +15,7 @@ interface Course {
   logoUrl: string;
   logoBg: string;
   durationMonths: number;
+  syllabusUrl?: string;
 }
 
 @Component({
@@ -249,6 +251,15 @@ export class CoursesComponent implements OnInit {
     this.selectedLevel = 'All';
     this.sortBy = 'popular';
     this.applyFilters();
+  }
+
+  downloadSyllabus(course: Course): void {
+    if (!course.syllabusUrl) return;
+    if (course.id) {
+      this.courseService.downloadSyllabus(course.id);
+    } else {
+      window.open(course.syllabusUrl, '_blank');
+    }
   }
 
 }

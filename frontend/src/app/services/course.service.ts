@@ -15,4 +15,14 @@ export class CourseService {
   submitEnrollment(enrollment: CourseEnrollmentDTO): Observable<any> {
     return this.http.post(`${this.apiUrl}/api/courses/enroll`, enrollment);
   }
+
+  uploadSyllabus(courseId: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.apiUrl}/api/admin/courses/${courseId}/syllabus`, formData);
+  }
+
+  downloadSyllabus(courseId: number): void {
+    window.open(`${this.apiUrl}/api/courses/${courseId}/syllabus`, '_blank');
+  }
 }

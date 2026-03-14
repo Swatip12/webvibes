@@ -1,0 +1,37 @@
+<div class="adm-page">
+  <button class="adm-back" routerLink="/admin/dashboard">
+    <i class="bi bi-arrow-left"></i> Back to Dashboard
+  </button>
+  <div class="adm-header">
+    <div>
+      <h2 class="adm-title">Contact Messages</h2>
+      <p class="adm-subtitle">Messages sent via the contact form</p>
+    </div>
+    <button class="adm-btn adm-btn-secondary" (click)="load()">
+      <i class="bi bi-arrow-clockwise"></i> Refresh
+    </button>
+  </div>
+  <div class="adm-alert adm-alert-danger" *ngIf="errorMessage">
+    <i class="bi bi-exclamation-circle"></i> {{ errorMessage }}
+  </div>
+  <div class="adm-card">
+    <div class="adm-card-header">Total: {{ messages.length }} messages</div>
+    <div class="adm-card-body">
+      <div class="adm-loading" *ngIf="loading"><span class="adm-spinner"></span> Loading...</div>
+      <div class="adm-empty" *ngIf="!loading && messages.length === 0">No messages yet.</div>
+      <div class="adm-msg-list" *ngIf="messages.length > 0">
+        <div class="adm-msg-card" *ngFor="let m of messages">
+          <div class="adm-msg-top">
+            <div class="adm-msg-avatar">{{ m.name.charAt(0).toUpperCase() }}</div>
+            <div class="adm-msg-info">
+              <strong>{{ m.name }}</strong>
+              <span><a [href]="'mailto:' + m.email">{{ m.email }}</a></span>
+            </div>
+            <span class="adm-date">{{ m.submittedAt | date:'dd MMM yyyy, h:mm a' }}</span>
+          </div>
+          <p class="adm-msg-body">{{ m.message }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

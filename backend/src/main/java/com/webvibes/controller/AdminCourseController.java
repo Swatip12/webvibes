@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -116,9 +117,6 @@ public class AdminCourseController {
     
     /**
      * Get a course by ID.
-     * 
-     * @param id the course ID
-     * @return the course with 200 status
      */
     @GetMapping("/{id}")
     public ResponseEntity<CourseDTO> getCourseById(@PathVariable Long id) {
@@ -133,6 +131,32 @@ public class AdminCourseController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
             logger.error("Error fetching course", ex);
+            throw ex;
+        }
+    }
+
+    /**
+     * Upload syllabus PDF for a course.
+     */
+    @PostMapping("/{id}/syllabus")
+    public ResponseEntity<?> uploadSyllabus(
+            @PathVariable Long id,
+            @RequestParam("file") MultipartFile file) {
+        logger.info("Admin uploading syllabus for course ID: {}", id);
+
+        try {
+            CourseDTO updated = courseService.uploadSyllabus(id, file);
+            return ResponseEntity.ok(updated);
+        } catch (RuntimeException ex) {
+            if (ex.getMessage().contains("not found")) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new MessageResponse(ex.getMessage()));
+            }
+            if (ex.getMessage().contains("Only PDF")) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new MessageResponse(ex.getMessage()));
+            }
+            logger.error("Error uploading syllabus", ex);
             throw ex;
         }
     }

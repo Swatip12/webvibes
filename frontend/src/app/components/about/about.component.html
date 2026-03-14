@@ -1,174 +1,176 @@
-<!-- Page Header with Breadcrumb -->
-<section class="page-header">
-  <div class="container">
-    <nav aria-label="breadcrumb" class="breadcrumb-nav">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">About Us</li>
-      </ol>
-    </nav>
-    <h1 class="page-title">About WebVibes Technology</h1>
-    <p class="page-subtitle">Empowering the next generation of software developers with world-class training and real-world experience</p>
-  </div>
-</section>
+<div class="ab-page">
 
-<!-- Institute Image Section -->
-<section class="institute-image-section">
-  <div class="container">
-    <div class="institute-image-wrapper">
-      <img 
-        [src]="instituteImage" 
-        alt="WebVibes Technology Institute - Modern learning environment with students"
-        loading="eager"
-        (error)="handleImageError($event)"
-        class="institute-image"
-      />
+  <!-- ── Hero ── -->
+  <div class="ab-hero">
+    <div class="ab-hero-bg">
+      <img [src]="heroImage" alt="WebVibes Technology students learning" (error)="handleImageError($event)" class="ab-hero-img" />
+      <div class="ab-hero-overlay"></div>
+    </div>
+    <div class="ab-particles">
+      <span class="ab-p ab-p1"></span><span class="ab-p ab-p2"></span>
+      <span class="ab-p ab-p3"></span><span class="ab-p ab-p4"></span>
+      <span class="ab-p ab-p5"></span>
+    </div>
+    <div class="ab-hero-inner">
+      <span class="ab-hero-badge"><i class="fas fa-building"></i> About Us</span>
+      <h1>About <span class="ab-grad">WebVibes Technology</span></h1>
+      <p>Empowering the next generation of software developers with world-class training and real-world experience</p>
+      <div class="ab-stats">
+        <div class="ab-stat"><span class="ab-stat-num">2000+</span><span class="ab-stat-lbl">Students Trained</span></div>
+        <div class="ab-stat-div"></div>
+        <div class="ab-stat"><span class="ab-stat-num">95%</span><span class="ab-stat-lbl">Placement Rate</span></div>
+        <div class="ab-stat-div"></div>
+        <div class="ab-stat"><span class="ab-stat-num">50+</span><span class="ab-stat-lbl">Hiring Partners</span></div>
+        <div class="ab-stat-div"></div>
+        <div class="ab-stat"><span class="ab-stat-num">5+</span><span class="ab-stat-lbl">Years Experience</span></div>
+      </div>
     </div>
   </div>
-</section>
 
-<!-- Mission & Vision Section -->
-<section class="mission-vision-section">
-  <div class="container">
-    <div class="mission-vision-grid">
-      <div class="mission-card">
-        <div class="icon-wrapper">
-          <i class="fas fa-bullseye" aria-hidden="true"></i>
+  <div class="ab-wrap">
+
+    <!-- ── Mission & Vision ── -->
+    <section class="ab-section">
+      <div class="ab-mv-grid">
+        <div class="ab-mv-card ab-mv-mission">
+          <div class="ab-mv-icon"><i class="fas fa-bullseye"></i></div>
+          <h2>Our Mission</h2>
+          <p>To provide high-quality, practical IT training that equips students with the skills and confidence needed to excel in the technology industry. We create a supportive learning environment where every student reaches their full potential.</p>
         </div>
-        <h2>Our Mission</h2>
-        <p>To provide high-quality, practical IT training that equips students with the skills and confidence needed to excel in the technology industry. We are committed to creating a supportive learning environment where every student can reach their full potential.</p>
-      </div>
-      <div class="vision-card">
-        <div class="icon-wrapper">
-          <i class="fas fa-eye" aria-hidden="true"></i>
+        <div class="ab-mv-card ab-mv-vision">
+          <div class="ab-mv-icon"><i class="fas fa-eye"></i></div>
+          <h2>Our Vision</h2>
+          <p>To be the premier destination for aspiring developers seeking world-class training and career opportunities — a future where our graduates are recognized as skilled, innovative professionals driving technological advancement.</p>
         </div>
-        <h2>Our Vision</h2>
-        <p>To be the premier destination for aspiring developers seeking world-class training and career opportunities. We envision a future where our graduates are recognized as skilled, innovative professionals who drive technological advancement.</p>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- Team Section -->
-<section class="team-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-badge">Our Team</span>
-      <h2 class="section-title">Meet Our <span class="highlight">Expert Instructors</span></h2>
-      <p class="section-subtitle">Learn from industry professionals with 10+ years of real-world experience</p>
-    </div>
-    
-    <div class="team-grid">
-      <div class="team-member-card" *ngFor="let member of teamMembers">
-        <div class="team-member-image-wrapper">
-          <img 
-            [src]="member.image" 
-            [alt]="member.name + ' - ' + member.role"
-            loading="lazy"
-            (error)="handleImageError($event)"
-            class="team-member-image"
-          />
+    <!-- ── Why WebVibes Started ── -->
+    <section class="ab-section">
+      <div class="ab-section-head">
+        <span class="ab-badge"><i class="fas fa-lightbulb"></i> Our Story</span>
+        <h2>Why <span class="ab-grad">WebVibes Technology</span> Started?</h2>
+        <p class="ab-section-sub">Born from a simple observation — freshers with degrees but no job-ready skills</p>
+      </div>
+      <div class="ab-why-grid">
+        <div class="ab-why-left">
+          <div class="ab-why-img-wrap">
+            <img [src]="whyImage" alt="Students learning to code at WebVibes Technology"
+                 (error)="handleImageError($event)" class="ab-why-img" loading="lazy" />
+            <div class="ab-why-img-badge">
+              <i class="fas fa-graduation-cap"></i>
+              <span>2000+ Students Placed</span>
+            </div>
+          </div>
+          <p class="ab-why-lead">Every year, thousands of engineering graduates step out of college with degrees in hand but struggle to land their first job. Not because they aren't smart — but because the gap between academic learning and industry expectations is massive.</p>
+          <p class="ab-why-body">Our founder witnessed this firsthand. Brilliant students were being rejected not for lack of intelligence, but for lack of practical, hands-on skills that companies actually need on day one.</p>
+          <p class="ab-why-body">WebVibes Technology was built to bridge that gap — to turn freshers into job-ready professionals through real project experience, mentorship, and industry-aligned curriculum.</p>
         </div>
-        <h3 class="team-member-name">{{ member.name }}</h3>
-        <p class="team-member-role">{{ member.role }}</p>
-        <p class="team-member-bio">{{ member.bio }}</p>
+        <div class="ab-why-points">
+          <div class="ab-why-point" *ngFor="let point of whyPoints">
+            <div class="ab-why-icon"><i [class]="point.icon"></i></div>
+            <div class="ab-why-text">
+              <h4>{{ point.title }}</h4>
+              <p>{{ point.desc }}</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- Achievements Section -->
-<section class="achievements-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-badge">Our Impact</span>
-      <h2 class="section-title">Achievements & <span class="highlight">Recognition</span></h2>
-    </div>
-    
-    <div class="statistics-grid">
-      <div class="stat-card" *ngFor="let stat of statistics">
-        <div class="stat-value">{{ stat.value }}</div>
-        <div class="stat-label">{{ stat.label }}</div>
+    <!-- ── Founder Section ── -->
+    <section class="ab-section">
+      <div class="ab-section-head">
+        <span class="ab-badge"><i class="fas fa-user-tie"></i> Leadership</span>
+        <h2>Meet Our <span class="ab-grad">Founder</span></h2>
+        <p class="ab-section-sub">The vision behind WebVibes Technology</p>
       </div>
-    </div>
+      <div class="ab-founder-card">
+        <div class="ab-founder-photo-wrap">
+          <div class="ab-founder-photo-ring"></div>
+          <img [src]="founderImage" alt="WebVibes Technology Founder"
+               (error)="handleFounderImgError($event)" class="ab-founder-photo" loading="lazy" />
+        </div>
+        <div class="ab-founder-info">
+          <div class="ab-founder-name-row">
+            <h3>WebVibes Founder</h3>
+            <span class="ab-founder-tag"><i class="fas fa-star"></i> Founder & CEO</span>
+          </div>
+          <p class="ab-founder-quote">"I started WebVibes because I saw too many talented freshers getting rejected simply because they lacked real-world exposure. Our goal is simple — make every student job-ready before they even step into an interview room."</p>
+          <div class="ab-founder-highlights">
+            <div class="ab-fh-item"><i class="fas fa-code"></i> 10+ Years in Software Industry</div>
+            <div class="ab-fh-item"><i class="fas fa-users"></i> Mentored 2000+ Students</div>
+            <div class="ab-fh-item"><i class="fas fa-briefcase"></i> Ex-Industry Professional</div>
+            <div class="ab-fh-item"><i class="fas fa-trophy"></i> Placement Expert</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="certifications-section">
-      <h3 class="certifications-title">Certifications & Partnerships</h3>
-      <div class="certifications-grid">
-        <div class="certification-card">
-          <i class="fas fa-certificate" aria-hidden="true"></i>
+    <!-- ── Achievements & Certifications ── -->
+    <section class="ab-section">
+      <div class="ab-section-head">
+        <span class="ab-badge"><i class="fas fa-trophy"></i> Recognition</span>
+        <h2>Achievements &amp; <span class="ab-grad">Certifications</span></h2>
+      </div>
+      <div class="ab-cert-grid">
+        <div class="ab-cert-card">
+          <div class="ab-cert-icon ab-cert-blue"><i class="fas fa-certificate"></i></div>
           <p>ISO 9001:2015 Certified</p>
         </div>
-        <div class="certification-card">
-          <i class="fas fa-award" aria-hidden="true"></i>
+        <div class="ab-cert-card">
+          <div class="ab-cert-icon ab-cert-orange"><i class="fas fa-award"></i></div>
           <p>NASSCOM Member</p>
         </div>
-        <div class="certification-card">
-          <i class="fas fa-handshake" aria-hidden="true"></i>
+        <div class="ab-cert-card">
+          <div class="ab-cert-icon ab-cert-green"><i class="fas fa-medal"></i></div>
+          <p>MSME Certified</p>
+        </div>
+        <div class="ab-cert-card">
+          <div class="ab-cert-icon ab-cert-purple"><i class="fas fa-handshake"></i></div>
           <p>Industry Partner Network</p>
         </div>
-        <div class="certification-card">
-          <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+        <div class="ab-cert-card">
+          <div class="ab-cert-icon ab-cert-red"><i class="fas fa-graduation-cap"></i></div>
           <p>Accredited Training Provider</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- Facilities Section -->
-<section class="facilities-section">
-  <div class="container">
-    <div class="facilities-content">
-      <div class="facilities-text">
-        <h2>World-Class <span class="highlight">Learning Facilities</span></h2>
-        <p>Our state-of-the-art training center is equipped with modern infrastructure and technology to provide the best learning experience.</p>
-        <ul class="facilities-list">
-          <li>
-            <i class="fas fa-check-circle" aria-hidden="true"></i>
-            <span>Modern computer labs with latest hardware</span>
-          </li>
-          <li>
-            <i class="fas fa-check-circle" aria-hidden="true"></i>
-            <span>High-speed internet connectivity</span>
-          </li>
-          <li>
-            <i class="fas fa-check-circle" aria-hidden="true"></i>
-            <span>Comfortable learning spaces</span>
-          </li>
-          <li>
-            <i class="fas fa-check-circle" aria-hidden="true"></i>
-            <span>24/7 lab access for students</span>
-          </li>
-          <li>
-            <i class="fas fa-check-circle" aria-hidden="true"></i>
-            <span>Library with technical resources</span>
-          </li>
-        </ul>
+    <!-- ── Facilities ── -->
+    <section class="ab-section">
+      <div class="ab-section-head">
+        <span class="ab-badge"><i class="fas fa-building"></i> Infrastructure</span>
+        <h2>World-Class <span class="ab-grad">Learning Facilities</span></h2>
       </div>
-      <div class="facilities-image-wrapper">
-        <img 
-          [src]="facilitiesImage" 
-          alt="Modern training facilities at WebVibes Technology"
-          loading="lazy"
-          (error)="handleImageError($event)"
-          class="facilities-image"
-        />
+      <!-- Facilities banner image -->
+      <div class="ab-facilities-banner">
+        <img [src]="facilitiesImage" alt="Modern learning facilities at WebVibes Technology"
+             (error)="handleImageError($event)" class="ab-facilities-img" loading="lazy" />
+        <div class="ab-facilities-banner-overlay">
+          <span><i class="fas fa-map-marker-alt"></i> State-of-the-Art Training Center</span>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+      <div class="ab-facilities-grid">
+        <div class="ab-facility-card" *ngFor="let f of facilities">
+          <div class="ab-facility-icon"><i [class]="f.icon"></i></div>
+          <h4>{{ f.title }}</h4>
+          <p>{{ f.desc }}</p>
+        </div>
+      </div>
+    </section>
 
-<!-- Call to Action Section -->
-<section class="cta-section">
-  <div class="container">
-    <div class="cta-content">
-      <h2>Ready to Start Your Journey?</h2>
-      <p>Join thousands of successful graduates who have transformed their careers with WebVibes Technology</p>
-      <div class="cta-buttons">
-        <a routerLink="/courses" class="btn btn-primary btn-lg">Explore Courses</a>
-        <a routerLink="/contact" class="btn btn-secondary btn-lg">Contact Us</a>
+    <!-- ── CTA ── -->
+    <section class="ab-cta">
+      <div class="ab-cta-inner">
+        <h2>Ready to Start Your <span class="ab-grad">Journey?</span></h2>
+        <p>Join thousands of successful graduates who transformed their careers with WebVibes Technology</p>
+        <div class="ab-cta-btns">
+          <a routerLink="/courses" class="ab-btn-primary"><i class="fas fa-book-open"></i> Explore Courses</a>
+          <a routerLink="/contact" class="ab-btn-outline"><i class="fas fa-envelope"></i> Contact Us</a>
+        </div>
       </div>
-    </div>
+    </section>
+
   </div>
-</section>
+</div>

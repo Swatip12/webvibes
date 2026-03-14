@@ -1,23 +1,29 @@
 export interface InternshipApplicationDTO {
+  id?: number;
   studentName: string;
   email: string;
   phone: string;
   internshipType: string;
   message?: string;
+  submittedAt?: string;
 }
 
 export interface CourseEnrollmentDTO {
+  id?: number;
   studentName: string;
   email: string;
   phone: string;
   courseName: string;
   message?: string;
+  submittedAt?: string;
 }
 
 export interface ContactMessageDTO {
+  id?: number;
   name: string;
   email: string;
   message: string;
+  submittedAt?: string;
 }
 
 export interface ProjectDTO {
@@ -54,6 +60,7 @@ export interface CourseDTO {
   description: string;
   duration: number;
   technologies?: string;
+  syllabusUrl?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

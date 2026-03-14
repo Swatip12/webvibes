@@ -16,6 +16,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { CourseManagementComponent } from './components/course-management/course-management.component';
+import { InternshipManagementComponent } from './components/internship-management/internship-management.component';
+import { AdminApplicationsComponent } from './components/admin-applications/admin-applications.component';
+import { AdminEnrollmentsComponent } from './components/admin-enrollments/admin-enrollments.component';
+import { AdminMessagesComponent } from './components/admin-messages/admin-messages.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { HeroSectionComponent } from './components/hero-section/hero-section.component';
 import { LazyImageComponent } from './components/lazy-image/lazy-image.component';
@@ -34,6 +38,10 @@ import { LazyImageComponent } from './components/lazy-image/lazy-image.component
     LoginComponent,
     AdminDashboardComponent,
     CourseManagementComponent,
+    InternshipManagementComponent,
+    AdminApplicationsComponent,
+    AdminEnrollmentsComponent,
+    AdminMessagesComponent,
     HeroSectionComponent,
     LazyImageComponent
   ],

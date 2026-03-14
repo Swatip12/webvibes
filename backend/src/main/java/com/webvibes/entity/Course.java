@@ -24,6 +24,9 @@ public class Course {
     
     @Column(columnDefinition = "TEXT")
     private String technologies;
+
+    @Column(name = "syllabus_path")
+    private String syllabusPath;
     
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -101,5 +104,13 @@ public class Course {
     
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getSyllabusPath() {
+        return syllabusPath;
+    }
+
+    public void setSyllabusPath(String syllabusPath) {
+        this.syllabusPath = syllabusPath;
     }
 }

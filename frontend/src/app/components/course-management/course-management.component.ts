@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
+import { CourseService } from '../../services/course.service';
 import { CourseDTO } from '../../models/dtos';
 
 @Component({
@@ -20,6 +21,7 @@ export class CourseManagementComponent implements OnInit {
 
   constructor(
     private adminService: AdminService,
+    private courseService: CourseService,
     private formBuilder: FormBuilder
   ) {
     this.courseForm = this.formBuilder.group({
@@ -142,5 +144,25 @@ export class CourseManagementComponent implements OnInit {
   private clearMessages(): void {
     this.successMessage = '';
     this.errorMessage = '';
+  }
+
+  onSyllabusFileSelected(event: Event, courseId: number | undefined): void {
+    if (!courseId) return;
+    const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) return;
+    const file = input.files[0];
+
+    this.loading = true;
+    this.courseService.uploadSyllabus(courseId, file).subscribe({
+      next: () => {
+        this.successMessage = 'Syllabus uploaded successfully';
+        this.loading = false;
+        this.loadCourses();
+      },
+      error: (error) => {
+        this.errorMessage = error?.error?.message || 'Failed to upload syllabus';
+        this.loading = false;
+      }
+    });
   }
 }

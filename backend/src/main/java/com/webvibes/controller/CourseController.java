@@ -7,10 +7,17 @@ import com.webvibes.service.CourseService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -47,9 +54,6 @@ public class CourseController {
     
     /**
      * Handles course enrollment submissions.
-     * 
-     * @param dto the course enrollment data with validation
-     * @return ResponseEntity with HTTP 201 and success message on success
      */
     @PostMapping("/enroll")
     public ResponseEntity<MessageResponse> enrollInCourse(@Valid @RequestBody CourseEnrollmentDTO dto) {
@@ -60,5 +64,38 @@ public class CourseController {
         logger.info("Course enrollment processed successfully for student: {}", dto.getStudentName());
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new MessageResponse("Enrollment submitted successfully"));
+    }
+
+    /**
+     * Download syllabus PDF for a course.
+     */
+    @GetMapping("/{id}/syllabus")
+    public ResponseEntity<Resource> downloadSyllabus(@PathVariable Long id) {
+        logger.info("Received request to download syllabus for course ID: {}", id);
+
+        try {
+            String syllabusPath = courseService.getSyllabusPath(id);
+            Path filePath = Paths.get(syllabusPath);
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (!resource.exists() || !resource.isReadable()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            "attachment; filename=\"syllabus_course_" + id + ".pdf\"")
+                    .body(resource);
+
+        } catch (RuntimeException ex) {
+            if (ex.getMessage().contains("not found") || ex.getMessage().contains("No syllabus")) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+            throw ex;
+        } catch (MalformedURLException ex) {
+            logger.error("Malformed URL for syllabus path", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

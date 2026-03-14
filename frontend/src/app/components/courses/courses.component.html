@@ -1,35 +1,42 @@
-<div class="courses-page">
-  <div class="courses-wrap">
+<div class="cp-page">
+  <div class="cp-wrap">
 
-    <!-- Hero Banner -->
-    <div class="courses-hero">
-      <div class="hero-orb orb1"></div>
-      <div class="hero-orb orb2"></div>
-      <div class="hero-inner">
-        <span class="hero-badge">
-          <i class="fas fa-graduation-cap" aria-hidden="true"></i>&nbsp; Learn &amp; Grow
+    <!-- ── Hero ── -->
+    <div class="cp-hero">
+      <div class="cp-particles">
+        <span class="cp-p cp-p1"></span><span class="cp-p cp-p2"></span>
+        <span class="cp-p cp-p3"></span><span class="cp-p cp-p4"></span>
+        <span class="cp-p cp-p5"></span><span class="cp-p cp-p6"></span>
+      </div>
+      <div class="cp-hero-inner">
+        <span class="cp-badge cp-anim-badge">
+          <i class="fas fa-graduation-cap"></i> Learn &amp; Grow
         </span>
-        <h1>Our <span class="grad">Courses</span></h1>
-        <p>Master in-demand technologies with expert-led training programs</p>
+        <h1 class="cp-anim-title">Our <span class="cp-grad">Courses</span></h1>
+        <p class="cp-anim-sub">Master in-demand technologies with expert-led training programs</p>
+        <div class="cp-stats cp-anim-stats">
+          <div class="cp-stat"><span class="cp-stat-num">6+</span><span class="cp-stat-lbl">Courses</span></div>
+          <div class="cp-stat-div"></div>
+          <div class="cp-stat"><span class="cp-stat-num">7K+</span><span class="cp-stat-lbl">Students</span></div>
+          <div class="cp-stat-div"></div>
+          <div class="cp-stat"><span class="cp-stat-num">100%</span><span class="cp-stat-lbl">Job Support</span></div>
+        </div>
       </div>
     </div>
 
-    <!-- Search & Filters -->
-    <div class="filters-wrap" *ngIf="!showEnrollmentForm">
-      <div class="search-row">
-        <i class="fas fa-search search-icon" aria-hidden="true"></i>
-        <input
-          type="text"
-          class="search-input"
-          placeholder="Search courses..."
-          [(ngModel)]="searchQuery"
-          (input)="applyFilters()"
-          aria-label="Search courses"
-        />
+    <!-- ── Filters ── -->
+    <div class="cp-filters cp-anim-filters" *ngIf="!showEnrollmentForm">
+      <div class="cp-search-row">
+        <i class="fas fa-search cp-search-icon"></i>
+        <input type="text" class="cp-search-input" placeholder="Search courses..."
+          [(ngModel)]="searchQuery" (input)="applyFilters()" aria-label="Search courses" />
+        <span class="cp-search-clear" *ngIf="searchQuery" (click)="searchQuery=''; applyFilters()">
+          <i class="fas fa-times"></i>
+        </span>
       </div>
-      <div class="filter-row">
-        <div class="fgroup">
-          <label for="cat">Category</label>
+      <div class="cp-filter-row">
+        <div class="cp-fgroup">
+          <label for="cat"><i class="fas fa-th-large"></i> Category</label>
           <select id="cat" [(ngModel)]="selectedCategory" (change)="applyFilters()">
             <option value="All">All Categories</option>
             <option value="Web Development">Web Development</option>
@@ -37,17 +44,17 @@
             <option value="Mobile">Mobile</option>
           </select>
         </div>
-        <div class="fgroup">
-          <label for="dur">Duration</label>
+        <div class="cp-fgroup">
+          <label for="dur"><i class="far fa-clock"></i> Duration</label>
           <select id="dur" [(ngModel)]="selectedDuration" (change)="applyFilters()">
             <option value="All">All Durations</option>
             <option value="< 2 months">Under 2 months</option>
-            <option value="2-4 months">2–4 months</option>
+            <option value="2-4 months">2-4 months</option>
             <option value="4+ months">4+ months</option>
           </select>
         </div>
-        <div class="fgroup">
-          <label for="lvl">Level</label>
+        <div class="cp-fgroup">
+          <label for="lvl"><i class="fas fa-layer-group"></i> Level</label>
           <select id="lvl" [(ngModel)]="selectedLevel" (change)="applyFilters()">
             <option value="All">All Levels</option>
             <option value="Beginner">Beginner</option>
@@ -55,131 +62,157 @@
             <option value="Advanced">Advanced</option>
           </select>
         </div>
-        <div class="fgroup">
-          <label for="srt">Sort By</label>
+        <div class="cp-fgroup">
+          <label for="srt"><i class="fas fa-sort"></i> Sort By</label>
           <select id="srt" [(ngModel)]="sortBy" (change)="applyFilters()">
             <option value="popular">Most Popular</option>
             <option value="newest">Newest</option>
             <option value="duration">Duration</option>
-            <option value="alphabetical">A–Z</option>
+            <option value="alphabetical">A-Z</option>
           </select>
         </div>
       </div>
     </div>
 
-    <!-- Results count -->
-    <p class="results-count" *ngIf="!showEnrollmentForm && filteredCourses.length > 0">
-      Showing {{ filteredCourses.length }} course{{ filteredCourses.length !== 1 ? 's' : '' }}
-    </p>
+    <!-- ── Count ── -->
+    <div class="cp-count-row" *ngIf="!showEnrollmentForm && filteredCourses.length > 0">
+      <p class="cp-count"><i class="fas fa-list"></i> {{ filteredCourses.length }} course{{ filteredCourses.length !== 1 ? 's' : '' }} found</p>
+    </div>
 
-    <!-- Course Grid -->
-    <div class="grid" *ngIf="!showEnrollmentForm && filteredCourses.length > 0">
-      <div class="card" *ngFor="let course of filteredCourses">
+    <!-- ── Grid ── -->
+    <div class="cp-grid" *ngIf="!showEnrollmentForm && filteredCourses.length > 0">
+      <div class="cp-card" *ngFor="let course of filteredCourses; let i = index"
+           [style.animation-delay]="(i * 0.08) + 's'">
 
-        <!-- Coloured logo panel -->
-        <div class="card-top" [style.background]="course.logoBg">
-          <div class="logo-circle">
-            <img
-              [src]="course.logoUrl"
-              [alt]="course.name"
-              width="64"
-              height="64"
-            />
+        <div class="cp-card-top" [style.background]="course.logoBg">
+          <div class="cp-card-top-shine"></div>
+          <div class="cp-logo-circle">
+            <img [src]="course.logoUrl" [alt]="course.name" width="44" height="44" />
           </div>
-          <span class="cbadge" [ngClass]="course.badgeType" *ngIf="course.badge">
+          <span class="cp-cbadge cp-cbadge--{{ course.badgeType }}" *ngIf="course.badge">
+            <i class="fas fa-star" *ngIf="course.badgeType === 'bestseller'"></i>
+            <i class="fas fa-fire" *ngIf="course.badgeType === 'trending'"></i>
+            <i class="fas fa-bolt" *ngIf="course.badgeType === 'new'"></i>
             {{ course.badge }}
           </span>
+          <div class="cp-card-top-overlay"></div>
         </div>
 
-        <!-- Card body -->
-        <div class="card-body">
-          <span class="level-tag">{{ course.level }}</span>
+        <div class="cp-card-body">
+          <div class="cp-card-meta-top">
+            <span class="cp-level cp-level--{{ course.level | lowercase }}">{{ course.level }}</span>
+            <span class="cp-students"><i class="fas fa-users"></i> {{ course.studentsCount }}+</span>
+          </div>
           <h3>{{ course.name }}</h3>
           <p>{{ course.description }}</p>
-          <div class="meta">
-            <span><i class="far fa-clock" aria-hidden="true"></i> {{ course.duration }}</span>
-            <span><i class="fas fa-users" aria-hidden="true"></i> {{ course.studentsCount }}+</span>
+          <div class="cp-meta">
+            <span class="cp-meta-item"><i class="far fa-clock"></i> {{ course.duration }}</span>
+            <span class="cp-meta-item cp-meta-cat"><i class="fas fa-tag"></i> {{ course.category }}</span>
           </div>
-          <button class="enroll-btn" (click)="onEnroll(course.name)"
+          <button class="cp-enroll-btn" (click)="onEnroll(course.name)"
                   [attr.aria-label]="'Enroll in ' + course.name">
-            Enroll Now &nbsp;<i class="fas fa-arrow-right" aria-hidden="true"></i>
+            <span>Enroll Now</span>
+            <span class="cp-btn-arrow"><i class="fas fa-arrow-right"></i></span>
+          </button>
+          <button class="cp-syllabus-btn" (click)="downloadSyllabus(course)"
+                  [class.cp-syllabus-disabled]="!course.syllabusUrl"
+                  [attr.aria-label]="course.syllabusUrl ? 'Download syllabus for ' + course.name : 'Syllabus coming soon for ' + course.name">
+            <i class="fas fa-file-pdf"></i>
+            {{ course.syllabusUrl ? 'Download Syllabus' : 'Syllabus Coming Soon' }}
           </button>
         </div>
 
       </div>
     </div>
 
-    <!-- Empty state -->
-    <div class="empty" *ngIf="!showEnrollmentForm && filteredCourses.length === 0">
-      <i class="fas fa-search" aria-hidden="true"></i>
+    <!-- ── Empty ── -->
+    <div class="cp-empty" *ngIf="!showEnrollmentForm && filteredCourses.length === 0">
+      <div class="cp-empty-icon"><i class="fas fa-search"></i></div>
       <h3>No courses found</h3>
-      <p>Try adjusting your filters</p>
-      <button class="enroll-btn" style="width:auto;padding:10px 28px" (click)="clearFilters()">
-        Clear Filters
+      <p>Try adjusting your search or filters</p>
+      <button class="cp-enroll-btn cp-enroll-btn--auto" (click)="clearFilters()">
+        <i class="fas fa-redo"></i> Clear Filters
       </button>
     </div>
 
-    <!-- Enrollment Form -->
-    <div class="form-wrap" *ngIf="showEnrollmentForm">
-      <div class="form-card">
-        <div class="form-head">
-          <h2>Enroll in <span class="grad">{{ selectedCourse }}</span></h2>
+    <!-- ── Enrollment Form ── -->
+    <div class="cp-form-wrap" *ngIf="showEnrollmentForm">
+      <div class="cp-form-card">
+        <div class="cp-form-head">
+          <div class="cp-form-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h2>Enroll in <span class="cp-grad">{{ selectedCourse }}</span></h2>
           <p>Fill in your details and we'll reach out shortly</p>
         </div>
 
-        <div class="alert success" *ngIf="successMessage" role="alert">
-          <i class="fas fa-check-circle" aria-hidden="true"></i> {{ successMessage }}
+        <div class="cp-alert cp-alert--success" *ngIf="successMessage" role="alert">
+          <i class="fas fa-check-circle"></i> {{ successMessage }}
         </div>
-        <div class="alert danger" *ngIf="errorMessage" role="alert">
-          <i class="fas fa-exclamation-circle" aria-hidden="true"></i> {{ errorMessage }}
+        <div class="cp-alert cp-alert--danger" *ngIf="errorMessage" role="alert">
+          <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
         </div>
 
         <form [formGroup]="enrollmentForm" (ngSubmit)="onSubmit()">
-          <div class="frow">
-            <div class="fg">
-              <label for="sName">Full Name <span class="req">*</span></label>
-              <input id="sName" type="text" formControlName="studentName"
-                [class.err]="studentName?.invalid && studentName?.touched"
-                placeholder="Your full name" />
-              <span class="errmsg" *ngIf="studentName?.invalid && studentName?.touched">
+          <div class="cp-frow">
+            <div class="cp-fg">
+              <label for="sName">Full Name <span class="cp-req">*</span></label>
+              <div class="cp-input-wrap">
+                <i class="fas fa-user cp-input-icon"></i>
+                <input id="sName" type="text" formControlName="studentName"
+                  [class.cp-err]="studentName?.invalid && studentName?.touched"
+                  placeholder="Your full name" />
+              </div>
+              <span class="cp-errmsg" *ngIf="studentName?.invalid && studentName?.touched">
                 {{ studentName?.errors?.['required'] ? 'Required' : 'Min 2 characters' }}
               </span>
             </div>
-            <div class="fg">
-              <label for="sEmail">Email <span class="req">*</span></label>
-              <input id="sEmail" type="email" formControlName="email"
-                [class.err]="email?.invalid && email?.touched"
-                placeholder="your@email.com" />
-              <span class="errmsg" *ngIf="email?.invalid && email?.touched">
+            <div class="cp-fg">
+              <label for="sEmail">Email <span class="cp-req">*</span></label>
+              <div class="cp-input-wrap">
+                <i class="fas fa-envelope cp-input-icon"></i>
+                <input id="sEmail" type="email" formControlName="email"
+                  [class.cp-err]="email?.invalid && email?.touched"
+                  placeholder="your@email.com" />
+              </div>
+              <span class="cp-errmsg" *ngIf="email?.invalid && email?.touched">
                 {{ email?.errors?.['required'] ? 'Required' : 'Invalid email' }}
               </span>
             </div>
           </div>
-          <div class="frow">
-            <div class="fg">
-              <label for="sPhone">Phone <span class="req">*</span></label>
-              <input id="sPhone" type="tel" formControlName="phone"
-                [class.err]="phone?.invalid && phone?.touched"
-                placeholder="10–15 digit number" />
-              <span class="errmsg" *ngIf="phone?.invalid && phone?.touched">
-                {{ phone?.errors?.['required'] ? 'Required' : '10–15 digits only' }}
+          <div class="cp-frow">
+            <div class="cp-fg">
+              <label for="sPhone">Phone <span class="cp-req">*</span></label>
+              <div class="cp-input-wrap">
+                <i class="fas fa-phone cp-input-icon"></i>
+                <input id="sPhone" type="tel" formControlName="phone"
+                  [class.cp-err]="phone?.invalid && phone?.touched"
+                  placeholder="10-15 digit number" />
+              </div>
+              <span class="cp-errmsg" *ngIf="phone?.invalid && phone?.touched">
+                {{ phone?.errors?.['required'] ? 'Required' : '10-15 digits only' }}
               </span>
             </div>
-            <div class="fg">
+            <div class="cp-fg">
               <label for="sCourse">Course</label>
-              <input id="sCourse" type="text" formControlName="courseName" readonly />
+              <div class="cp-input-wrap">
+                <i class="fas fa-book cp-input-icon"></i>
+                <input id="sCourse" type="text" formControlName="courseName" readonly />
+              </div>
             </div>
           </div>
-          <div class="fg full">
+          <div class="cp-fg cp-fg--full">
             <label for="sMsg">Message (optional)</label>
             <textarea id="sMsg" formControlName="message" rows="4"
               placeholder="Tell us your learning goals"></textarea>
-            <span class="errmsg" *ngIf="message?.invalid && message?.touched">Max 500 characters</span>
+            <span class="cp-errmsg" *ngIf="message?.invalid && message?.touched">Max 500 characters</span>
           </div>
-          <div class="form-actions">
-            <button type="submit" class="enroll-btn" style="width:auto;padding:12px 32px"
-              [disabled]="enrollmentForm.invalid">Submit</button>
-            <button type="button" class="outline-btn" (click)="onCancel()">Cancel</button>
+          <div class="cp-form-actions">
+            <button type="submit" class="cp-enroll-btn cp-enroll-btn--auto"
+              [disabled]="enrollmentForm.invalid">
+              <i class="fas fa-paper-plane"></i> Submit
+            </button>
+            <button type="button" class="cp-outline-btn" (click)="onCancel()">
+              <i class="fas fa-times"></i> Cancel
+            </button>
           </div>
         </form>
       </div>

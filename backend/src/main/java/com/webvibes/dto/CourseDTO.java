@@ -22,6 +22,8 @@ public class CourseDTO {
     private Integer duration;
     
     private String technologies;
+
+    private String syllabusUrl;
     
     private LocalDateTime createdAt;
     
@@ -97,5 +99,13 @@ public class CourseDTO {
     
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getSyllabusUrl() {
+        return syllabusUrl;
+    }
+
+    public void setSyllabusUrl(String syllabusUrl) {
+        this.syllabusUrl = syllabusUrl;
     }
 }

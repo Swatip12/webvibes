@@ -1,0 +1,105 @@
+<div class="adm-page">
+  <button class="adm-back" routerLink="/admin/dashboard">
+    <i class="bi bi-arrow-left"></i> Back to Dashboard
+  </button>
+  <div class="adm-header">
+    <div>
+      <h2 class="adm-title">Internship Management</h2>
+      <p class="adm-subtitle">Add, edit and remove internship listings</p>
+    </div>
+    <button class="adm-btn adm-btn-primary" (click)="onCreate()" *ngIf="!showForm">
+      <i class="bi bi-plus-circle"></i> Add Internship
+    </button>
+  </div>
+
+  <div class="adm-alert adm-alert-success" *ngIf="successMessage">
+    <i class="bi bi-check-circle"></i> {{ successMessage }}
+    <button class="adm-alert-close" (click)="successMessage=''">×</button>
+  </div>
+  <div class="adm-alert adm-alert-danger" *ngIf="errorMessage">
+    <i class="bi bi-exclamation-circle"></i> {{ errorMessage }}
+    <button class="adm-alert-close" (click)="errorMessage=''">×</button>
+  </div>
+
+  <!-- Form -->
+  <div class="adm-card" *ngIf="showForm">
+    <div class="adm-card-header">{{ isEditMode ? 'Edit Internship' : 'New Internship' }}</div>
+    <div class="adm-card-body">
+      <form [formGroup]="form" (ngSubmit)="onSave()">
+        <div class="adm-form-row">
+          <div class="adm-form-group">
+            <label>Internship Type <span class="adm-required">*</span></label>
+            <input type="text" formControlName="type" placeholder="e.g. Full Stack Development"
+              [class.adm-invalid]="form.get('type')?.invalid && form.get('type')?.touched">
+            <span class="adm-error" *ngIf="form.get('type')?.invalid && form.get('type')?.touched">Type is required</span>
+          </div>
+          <div class="adm-form-group">
+            <label>Duration (weeks) <span class="adm-required">*</span></label>
+            <input type="number" formControlName="duration" min="1"
+              [class.adm-invalid]="form.get('duration')?.invalid && form.get('duration')?.touched">
+            <span class="adm-error" *ngIf="form.get('duration')?.invalid && form.get('duration')?.touched">Min 1 week</span>
+          </div>
+        </div>
+        <div class="adm-form-group">
+          <label>Description <span class="adm-required">*</span></label>
+          <textarea formControlName="description" rows="3" placeholder="Describe the internship..."
+            [class.adm-invalid]="form.get('description')?.invalid && form.get('description')?.touched"></textarea>
+          <span class="adm-error" *ngIf="form.get('description')?.invalid && form.get('description')?.touched">Description is required</span>
+        </div>
+        <div class="adm-form-group">
+          <label>Skills (comma-separated)</label>
+          <input type="text" formControlName="skills" placeholder="e.g. React, Node.js, MongoDB">
+        </div>
+        <div class="adm-form-actions">
+          <button type="submit" class="adm-btn adm-btn-success" [disabled]="loading">
+            <span *ngIf="loading" class="adm-spinner"></span>
+            {{ isEditMode ? 'Update' : 'Create' }}
+          </button>
+          <button type="button" class="adm-btn adm-btn-secondary" (click)="onCancel()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="adm-card">
+    <div class="adm-card-header">All Internships ({{ internships.length }})</div>
+    <div class="adm-card-body">
+      <div class="adm-loading" *ngIf="loading && internships.length === 0">
+        <span class="adm-spinner"></span> Loading...
+      </div>
+      <div class="adm-empty" *ngIf="!loading && internships.length === 0">
+        No internships yet. Click "Add Internship" to create one.
+      </div>
+      <div class="adm-table-wrap" *ngIf="internships.length > 0">
+        <table class="adm-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Duration</th>
+              <th>Skills</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of internships">
+              <td><strong>{{ item.type }}</strong></td>
+              <td>{{ item.description.length > 80 ? (item.description | slice:0:80) + '...' : item.description }}</td>
+              <td>{{ item.duration }} wks</td>
+              <td>{{ item.skills || '—' }}</td>
+              <td class="adm-actions">
+                <button class="adm-btn adm-btn-sm adm-btn-warning" (click)="onEdit(item)">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="adm-btn adm-btn-sm adm-btn-danger" (click)="onDelete(item.id)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

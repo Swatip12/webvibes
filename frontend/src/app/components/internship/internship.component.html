@@ -1,243 +1,208 @@
-<div class="internship-container">
-  <div class="container">
-    <!-- Page Header -->
-    <div class="page-header text-center mb-16">
-      <span class="badge badge-primary mb-4">CAREER OPPORTUNITIES</span>
-      <h1 class="mb-4">Internship Opportunities at WebVibes Technology</h1>
-      <p class="subtitle">Join our internship programs and kickstart your career in technology</p>
+<div class="ip-page">
+  <div class="ip-wrap">
+
+    <!-- ── Hero ── -->
+    <div class="ip-hero">
+      <div class="ip-particles">
+        <span class="ip-p ip-p1"></span><span class="ip-p ip-p2"></span>
+        <span class="ip-p ip-p3"></span><span class="ip-p ip-p4"></span>
+        <span class="ip-p ip-p5"></span><span class="ip-p ip-p6"></span>
+      </div>
+      <div class="ip-hero-inner">
+        <span class="ip-hero-badge"><i class="fas fa-briefcase"></i> Career Opportunities</span>
+        <h1>Internship <span class="ip-grad">Programs</span></h1>
+        <p>Kickstart your tech career with hands-on internships at WebVibes Technology</p>
+        <div class="ip-stats">
+          <div class="ip-stat"><span class="ip-stat-num">6+</span><span class="ip-stat-lbl">Openings</span></div>
+          <div class="ip-stat-div"></div>
+          <div class="ip-stat"><span class="ip-stat-num">500+</span><span class="ip-stat-lbl">Placed</span></div>
+          <div class="ip-stat-div"></div>
+          <div class="ip-stat"><span class="ip-stat-num">100%</span><span class="ip-stat-lbl">Mentorship</span></div>
+          <div class="ip-stat-div"></div>
+          <div class="ip-stat"><span class="ip-stat-num">50+</span><span class="ip-stat-lbl">Partners</span></div>
+        </div>
+      </div>
     </div>
 
-    <!-- Search and Filters Section -->
-    <div class="search-filter-section mb-8" *ngIf="!showApplicationForm">
-      <!-- Search Bar -->
-      <div class="search-bar mb-4">
-        <i class="fas fa-search search-icon"></i>
-        <input 
-          type="text" 
-          class="form-control search-input" 
-          placeholder="Search by title or skills..."
-          [(ngModel)]="searchQuery"
-          (input)="onSearchChange()">
+    <!-- ── Filters ── -->
+    <div class="ip-filters" *ngIf="!showApplicationForm">
+      <div class="ip-search-row">
+        <i class="fas fa-search ip-search-icon"></i>
+        <input type="text" class="ip-search-input" placeholder="Search by title or skills..."
+          [(ngModel)]="searchQuery" (input)="onSearchChange()" aria-label="Search internships" />
+        <span class="ip-search-clear" *ngIf="searchQuery" (click)="searchQuery=''; onSearchChange()">
+          <i class="fas fa-times"></i>
+        </span>
       </div>
-
-      <!-- Filters Row -->
-      <div class="filters-row">
-        <!-- Location Filter -->
-        <div class="filter-group">
-          <label class="filter-label">
-            <i class="fas fa-map-marker-alt"></i> Location
-          </label>
-          <select 
-            class="form-control filter-select" 
-            [(ngModel)]="selectedLocation"
-            (change)="onLocationChange()">
+      <div class="ip-filter-row">
+        <div class="ip-fgroup">
+          <label><i class="fas fa-map-marker-alt"></i> Location</label>
+          <select [(ngModel)]="selectedLocation" (change)="onLocationChange()">
             <option value="">All Locations</option>
             <option value="Remote">Remote</option>
             <option value="On-site">On-site</option>
             <option value="Hybrid">Hybrid</option>
           </select>
         </div>
-
-        <!-- Duration Filter -->
-        <div class="filter-group">
-          <label class="filter-label">
-            <i class="fas fa-clock"></i> Duration
-          </label>
-          <select 
-            class="form-control filter-select" 
-            [(ngModel)]="selectedDuration"
-            (change)="onDurationChange()">
+        <div class="ip-fgroup">
+          <label><i class="far fa-clock"></i> Duration</label>
+          <select [(ngModel)]="selectedDuration" (change)="onDurationChange()">
             <option value="">All Durations</option>
             <option value="1-3 months">1-3 months</option>
             <option value="3-6 months">3-6 months</option>
             <option value="6+ months">6+ months</option>
           </select>
         </div>
-
-        <!-- Clear Filters Button -->
-        <button 
-          class="btn btn-outline clear-filters-btn" 
-          (click)="clearFilters()"
+        <button class="ip-clear-btn" (click)="clearFilters()"
           *ngIf="searchQuery || selectedLocation || selectedDuration">
-          <i class="fas fa-times"></i> Clear Filters
+          <i class="fas fa-redo"></i> Clear
         </button>
       </div>
     </div>
 
-    <!-- Results Count -->
-    <div class="results-count mb-4" *ngIf="!showApplicationForm">
-      <p>Showing <strong>{{ filteredInternships.length }}</strong> internship{{ filteredInternships.length !== 1 ? 's' : '' }}</p>
+    <!-- ── Count ── -->
+    <div class="ip-count-row" *ngIf="!showApplicationForm && filteredInternships.length > 0">
+      <p class="ip-count"><i class="fas fa-list"></i> {{ filteredInternships.length }} internship{{ filteredInternships.length !== 1 ? 's' : '' }} found</p>
     </div>
 
-    <!-- Internship Cards Grid -->
-    <div class="internships-grid" *ngIf="!showApplicationForm">
-      <div class="internship-card" *ngFor="let internship of filteredInternships">
-        <!-- Card Content -->
-        <div class="card-content">
-          <!-- Title -->
-          <h3 class="internship-title">{{ internship.title }}</h3>
-          
-          <!-- Company Name -->
-          <p class="company-name">
-            <i class="fas fa-building"></i> WebVibes Technology
-          </p>
+    <!-- ── Cards Grid ── -->
+    <div class="ip-grid" *ngIf="!showApplicationForm && filteredInternships.length > 0">
+      <div class="ip-card" *ngFor="let internship of filteredInternships; let i = index"
+           [style.animation-delay]="(i * 0.08) + 's'">
 
-          <!-- Details List -->
-          <div class="details-list">
-            <div class="detail-item">
-              <i class="fas fa-clock"></i>
-              <span><strong>Duration:</strong> {{ internship.duration }}</span>
-            </div>
-            <div class="detail-item">
-              <i class="fas fa-map-marker-alt"></i>
-              <span><strong>Location:</strong> {{ internship.location }}</span>
-            </div>
+        <!-- Card top colour band -->
+        <div class="ip-card-top" [class]="'ip-top-' + (i % 5)">
+          <div class="ip-card-top-shine"></div>
+          <div class="ip-card-icon">
+            <i [class]="internship.icon"></i>
           </div>
-
-          <!-- Requirements -->
-          <div class="requirements-section">
-            <p class="requirements-label"><strong>Requirements:</strong></p>
-            <ul class="requirements-list">
-              <li *ngFor="let req of internship.requirements">{{ req }}</li>
-            </ul>
-          </div>
-
-          <!-- Skills Tags -->
-          <div class="skills-tags">
-            <span class="skill-tag" *ngFor="let skill of internship.skills">{{ skill }}</span>
-          </div>
+          <span class="ip-loc-badge">
+            <i class="fas fa-map-marker-alt"></i> {{ internship.location }}
+          </span>
         </div>
 
-        <!-- Apply Button -->
-        <div class="card-footer">
-          <button class="btn btn-primary w-100" (click)="onApply(internship)">
-            <i class="fas fa-paper-plane"></i> Apply Now
+        <div class="ip-card-body">
+          <h3>{{ internship.title }}</h3>
+          <p class="ip-company"><i class="fas fa-building"></i> WebVibes Technology</p>
+
+          <div class="ip-card-meta">
+            <span><i class="far fa-clock"></i> {{ internship.duration }}</span>
+            <span><i class="fas fa-layer-group"></i> {{ internship.level }}</span>
+          </div>
+
+          <p class="ip-desc">{{ internship.description }}</p>
+
+          <div class="ip-skills">
+            <span class="ip-skill" *ngFor="let skill of internship.skills.slice(0,4)">{{ skill }}</span>
+          </div>
+
+          <div class="ip-perks">
+            <span class="ip-perk" *ngFor="let perk of internship.perks">
+              <i class="fas fa-check-circle"></i> {{ perk }}
+            </span>
+          </div>
+
+          <button class="ip-apply-btn" (click)="onApply(internship)"
+                  [attr.aria-label]="'Apply for ' + internship.title">
+            <span>Apply Now</span>
+            <span class="ip-btn-arrow"><i class="fas fa-arrow-right"></i></span>
           </button>
         </div>
       </div>
-
-      <!-- Empty State -->
-      <div class="empty-state" *ngIf="filteredInternships.length === 0">
-        <i class="fas fa-search empty-icon"></i>
-        <h3>No internships found</h3>
-        <p>Try adjusting your search or filters to find more opportunities</p>
-        <button class="btn btn-primary" (click)="clearFilters()">
-          Clear All Filters
-        </button>
-      </div>
     </div>
 
-    <!-- Application Form -->
-    <div *ngIf="showApplicationForm" class="application-form-section">
-      <div class="card">
-        <div class="card-body">
-          <h3 class="card-title mb-4">Apply for {{ selectedInternship }}</h3>
-          
-          <!-- Success Message -->
-          <div class="alert alert-success" *ngIf="successMessage">
-            <i class="fas fa-check-circle"></i> {{ successMessage }}
-          </div>
+    <!-- ── Empty ── -->
+    <div class="ip-empty" *ngIf="!showApplicationForm && filteredInternships.length === 0">
+      <div class="ip-empty-icon"><i class="fas fa-search"></i></div>
+      <h3>No internships found</h3>
+      <p>Try adjusting your search or filters</p>
+      <button class="ip-apply-btn ip-apply-btn--auto" (click)="clearFilters()">
+        <i class="fas fa-redo"></i> Clear Filters
+      </button>
+    </div>
 
-          <!-- Error Message -->
-          <div class="alert alert-danger" *ngIf="errorMessage">
-            <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
-          </div>
-          
-          <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
-            <!-- Student Name -->
-            <div class="mb-3">
-              <label for="studentName" class="form-label required">Full Name</label>
-              <input 
-                type="text" 
-                id="studentName"
-                class="form-control" 
-                formControlName="studentName"
-                [class.is-invalid]="studentName?.invalid && studentName?.touched"
-                placeholder="Enter your full name">
-              <div class="invalid-feedback" *ngIf="studentName?.invalid && studentName?.touched">
-                <div *ngIf="studentName?.errors?.['required']">Name is required</div>
-                <div *ngIf="studentName?.errors?.['minlength']">Name must be at least 2 characters</div>
-                <div *ngIf="studentName?.errors?.['maxlength']">Name cannot exceed 100 characters</div>
-              </div>
-            </div>
-
-            <!-- Email -->
-            <div class="mb-3">
-              <label for="email" class="form-label required">Email Address</label>
-              <input 
-                type="email" 
-                id="email"
-                class="form-control" 
-                formControlName="email"
-                [class.is-invalid]="email?.invalid && email?.touched"
-                placeholder="Enter your email">
-              <div class="invalid-feedback" *ngIf="email?.invalid && email?.touched">
-                <div *ngIf="email?.errors?.['required']">Email is required</div>
-                <div *ngIf="email?.errors?.['email']">Please enter a valid email address</div>
-              </div>
-            </div>
-
-            <!-- Phone -->
-            <div class="mb-3">
-              <label for="phone" class="form-label required">Phone Number</label>
-              <input 
-                type="tel" 
-                id="phone"
-                class="form-control" 
-                formControlName="phone"
-                [class.is-invalid]="phone?.invalid && phone?.touched"
-                placeholder="Enter 10-15 digit phone number">
-              <div class="invalid-feedback" *ngIf="phone?.invalid && phone?.touched">
-                <div *ngIf="phone?.errors?.['required']">Phone number is required</div>
-                <div *ngIf="phone?.errors?.['pattern']">Phone number must be 10-15 digits</div>
-              </div>
-            </div>
-
-            <!-- Internship Type (Pre-filled, read-only) -->
-            <div class="mb-3">
-              <label for="internshipType" class="form-label required">Internship Type</label>
-              <input 
-                type="text" 
-                id="internshipType"
-                class="form-control" 
-                formControlName="internshipType"
-                readonly>
-            </div>
-
-            <!-- Message -->
-            <div class="mb-3">
-              <label for="message" class="form-label">Cover Letter / Message (Optional)</label>
-              <textarea 
-                id="message"
-                class="form-control" 
-                formControlName="message"
-                [class.is-invalid]="message?.invalid && message?.touched"
-                rows="4"
-                placeholder="Tell us why you're interested in this internship"></textarea>
-              <div class="invalid-feedback" *ngIf="message?.invalid && message?.touched">
-                <div *ngIf="message?.errors?.['maxlength']">Message cannot exceed 500 characters</div>
-              </div>
-              <small class="form-text text-muted">Maximum 500 characters</small>
-            </div>
-
-            <!-- Form Actions -->
-            <div class="d-flex gap-2">
-              <button 
-                type="submit" 
-                class="btn btn-primary"
-                [disabled]="applicationForm.invalid">
-                <i class="fas fa-paper-plane"></i> Submit Application
-              </button>
-              <button 
-                type="button" 
-                class="btn btn-secondary"
-                (click)="onCancel()">
-                <i class="fas fa-times"></i> Cancel
-              </button>
-            </div>
-          </form>
+    <!-- ── Application Form ── -->
+    <div class="ip-form-wrap" *ngIf="showApplicationForm">
+      <div class="ip-form-card">
+        <div class="ip-form-head">
+          <div class="ip-form-icon"><i class="fas fa-briefcase"></i></div>
+          <h2>Apply for <span class="ip-grad">{{ selectedInternship }}</span></h2>
+          <p>Fill in your details and we'll get back to you shortly</p>
         </div>
+
+        <div class="ip-alert ip-alert--success" *ngIf="successMessage" role="alert">
+          <i class="fas fa-check-circle"></i> {{ successMessage }}
+        </div>
+        <div class="ip-alert ip-alert--danger" *ngIf="errorMessage" role="alert">
+          <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
+        </div>
+
+        <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+          <div class="ip-frow">
+            <div class="ip-fg">
+              <label for="iName">Full Name <span class="ip-req">*</span></label>
+              <div class="ip-input-wrap">
+                <i class="fas fa-user ip-input-icon"></i>
+                <input id="iName" type="text" formControlName="studentName"
+                  [class.ip-err]="studentName?.invalid && studentName?.touched"
+                  placeholder="Your full name" />
+              </div>
+              <span class="ip-errmsg" *ngIf="studentName?.invalid && studentName?.touched">
+                {{ studentName?.errors?.['required'] ? 'Required' : 'Min 2 characters' }}
+              </span>
+            </div>
+            <div class="ip-fg">
+              <label for="iEmail">Email <span class="ip-req">*</span></label>
+              <div class="ip-input-wrap">
+                <i class="fas fa-envelope ip-input-icon"></i>
+                <input id="iEmail" type="email" formControlName="email"
+                  [class.ip-err]="email?.invalid && email?.touched"
+                  placeholder="your@email.com" />
+              </div>
+              <span class="ip-errmsg" *ngIf="email?.invalid && email?.touched">
+                {{ email?.errors?.['required'] ? 'Required' : 'Invalid email' }}
+              </span>
+            </div>
+          </div>
+          <div class="ip-frow">
+            <div class="ip-fg">
+              <label for="iPhone">Phone <span class="ip-req">*</span></label>
+              <div class="ip-input-wrap">
+                <i class="fas fa-phone ip-input-icon"></i>
+                <input id="iPhone" type="tel" formControlName="phone"
+                  [class.ip-err]="phone?.invalid && phone?.touched"
+                  placeholder="10-15 digit number" />
+              </div>
+              <span class="ip-errmsg" *ngIf="phone?.invalid && phone?.touched">
+                {{ phone?.errors?.['required'] ? 'Required' : '10-15 digits only' }}
+              </span>
+            </div>
+            <div class="ip-fg">
+              <label for="iType">Internship</label>
+              <div class="ip-input-wrap">
+                <i class="fas fa-briefcase ip-input-icon"></i>
+                <input id="iType" type="text" formControlName="internshipType" readonly />
+              </div>
+            </div>
+          </div>
+          <div class="ip-fg ip-fg--full">
+            <label for="iMsg">Cover Letter (optional)</label>
+            <textarea id="iMsg" formControlName="message" rows="4"
+              placeholder="Tell us why you're interested in this internship..."></textarea>
+            <span class="ip-errmsg" *ngIf="message?.invalid && message?.touched">Max 500 characters</span>
+          </div>
+          <div class="ip-form-actions">
+            <button type="submit" class="ip-apply-btn ip-apply-btn--auto"
+              [disabled]="applicationForm.invalid">
+              <i class="fas fa-paper-plane"></i> Submit Application
+            </button>
+            <button type="button" class="ip-outline-btn" (click)="onCancel()">
+              <i class="fas fa-times"></i> Cancel
+            </button>
+          </div>
+        </form>
       </div>
     </div>
+
   </div>
 </div>

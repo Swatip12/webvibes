@@ -1,122 +1,242 @@
-<div class="contact-container">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8 col-md-10">
-        <div class="contact-header text-center mb-5">
-          <h1 class="display-4 mb-3">Contact Us</h1>
-          <p class="lead text-muted">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
-        </div>
+<div class="ct-page">
 
-        <!-- Success Message -->
-        <div class="alert alert-success alert-dismissible fade show" *ngIf="successMessage" role="alert">
-          <i class="bi bi-check-circle-fill me-2"></i>{{ successMessage }}
-          <button type="button" class="btn-close" (click)="successMessage = ''" aria-label="Close"></button>
-        </div>
+  <!-- Hero Section -->
+  <section class="ct-hero">
+    <div class="ct-hero-particles">
+      <span class="ct-particle"></span>
+      <span class="ct-particle"></span>
+      <span class="ct-particle"></span>
+      <span class="ct-particle"></span>
+    </div>
+    <div class="ct-hero-content">
+      <div class="ct-hero-badge">
+        <i class="bi bi-chat-dots-fill"></i> Get In Touch
+      </div>
+      <h1 class="ct-hero-title">Contact <span class="ct-hero-highlight">Us</span></h1>
+      <p class="ct-hero-subtitle">Have a question or want to enroll? We're here to help — reach out and we'll get back to you quickly.</p>
+    </div>
+  </section>
 
-        <!-- Error Message -->
-        <div class="alert alert-danger alert-dismissible fade show" *ngIf="errorMessage" role="alert">
-          <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ errorMessage }}
-          <button type="button" class="btn-close" (click)="errorMessage = ''" aria-label="Close"></button>
-        </div>
+  <!-- Main Content -->
+  <section class="ct-main">
+    <div class="ct-inner">
 
-        <!-- Contact Form -->
-        <div class="contact-form-card card shadow-sm mb-4">
-          <div class="card-body p-4">
-            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-              <!-- Name Field -->
-              <div class="mb-4">
-                <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
-                <input 
-                  type="text" 
-                  class="form-control" 
-                  id="name" 
-                  formControlName="name"
-                  placeholder="Enter your full name"
-                  [class.is-invalid]="name?.invalid && name?.touched"
-                  [class.is-valid]="name?.valid && name?.touched">
-                <div class="invalid-feedback" *ngIf="name?.invalid && name?.touched">
-                  <div *ngIf="name?.errors?.['required']">Name is required</div>
-                  <div *ngIf="name?.errors?.['minlength']">Name must be at least 2 characters</div>
-                  <div *ngIf="name?.errors?.['maxlength']">Name cannot exceed 100 characters</div>
-                </div>
-              </div>
+      <!-- Left: Info Cards -->
+      <div class="ct-info-col">
 
-              <!-- Email Field -->
-              <div class="mb-4">
-                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                <input 
-                  type="email" 
-                  class="form-control" 
-                  id="email" 
-                  formControlName="email"
-                  placeholder="Enter your email address"
-                  [class.is-invalid]="email?.invalid && email?.touched"
-                  [class.is-valid]="email?.valid && email?.touched">
-                <div class="invalid-feedback" *ngIf="email?.invalid && email?.touched">
-                  <div *ngIf="email?.errors?.['required']">Email is required</div>
-                  <div *ngIf="email?.errors?.['email']">Please enter a valid email address</div>
-                </div>
-              </div>
-
-              <!-- Message Field -->
-              <div class="mb-4">
-                <label for="message" class="form-label">Message <span class="text-danger">*</span></label>
-                <textarea 
-                  class="form-control" 
-                  id="message" 
-                  formControlName="message"
-                  rows="6"
-                  placeholder="Tell us what you'd like to know..."
-                  [class.is-invalid]="message?.invalid && message?.touched"
-                  [class.is-valid]="message?.valid && message?.touched"></textarea>
-                <div class="invalid-feedback" *ngIf="message?.invalid && message?.touched">
-                  <div *ngIf="message?.errors?.['required']">Message is required</div>
-                  <div *ngIf="message?.errors?.['minlength']">Message must be at least 10 characters</div>
-                  <div *ngIf="message?.errors?.['maxlength']">Message cannot exceed 1000 characters</div>
-                </div>
-                <div class="form-text" *ngIf="message?.value">
-                  {{ message?.value.length }} / 1000 characters
-                </div>
-              </div>
-
-              <!-- Submit Button -->
-              <div class="d-grid">
-                <button 
-                  type="submit" 
-                  class="btn btn-primary btn-lg"
-                  [disabled]="contactForm.invalid || isSubmitting">
-                  <span *ngIf="!isSubmitting">
-                    <i class="bi bi-send-fill me-2"></i>Send Message
-                  </span>
-                  <span *ngIf="isSubmitting">
-                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                    Sending...
-                  </span>
-                </button>
-              </div>
-            </form>
+        <div class="ct-info-card">
+          <div class="ct-info-icon" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">
+            <i class="bi bi-geo-alt-fill"></i>
+          </div>
+          <div class="ct-info-text">
+            <h4>Our Location</h4>
+            <p>WebVibes Technology<br>India</p>
           </div>
         </div>
 
-        <!-- Alternative Contact Methods -->
-        <div class="alternative-contact">
-          <div class="text-center mb-3">
-            <p class="text-muted">Or reach us directly via:</p>
+        <div class="ct-info-card">
+          <div class="ct-info-icon" style="background: linear-gradient(135deg, #059669, #047857);">
+            <i class="bi bi-whatsapp"></i>
           </div>
-          <div class="row g-3">
-            <div class="col-md-6">
-              <a [href]="getWhatsAppLink()" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-lg w-100">
-                <i class="bi bi-whatsapp me-2"></i>WhatsApp
+          <div class="ct-info-text">
+            <h4>WhatsApp Us</h4>
+            <p>
+              <a [href]="getWhatsAppLink()" target="_blank" rel="noopener noreferrer" class="ct-info-link">
+                {{ whatsappNumber }}
               </a>
-            </div>
-            <div class="col-md-6">
-              <a [href]="getMailtoLink()" class="btn btn-outline-primary btn-lg w-100">
-                <i class="bi bi-envelope-fill me-2"></i>Email
-              </a>
-            </div>
+            </p>
           </div>
+        </div>
+
+        <div class="ct-info-card">
+          <div class="ct-info-icon" style="background: linear-gradient(135deg, #7c3aed, #6d28d9);">
+            <i class="bi bi-envelope-fill"></i>
+          </div>
+          <div class="ct-info-text">
+            <h4>Email Us</h4>
+            <p>
+              <a [href]="getMailtoLink()" class="ct-info-link">{{ companyEmail }}</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="ct-info-card">
+          <div class="ct-info-icon" style="background: linear-gradient(135deg, #d97706, #b45309);">
+            <i class="bi bi-clock-fill"></i>
+          </div>
+          <div class="ct-info-text">
+            <h4>Working Hours</h4>
+            <p>Mon – Sat: 9:00 AM – 6:00 PM</p>
+          </div>
+        </div>
+
+        <!-- Quick Contact Buttons -->
+        <div class="ct-quick-btns">
+          <a [href]="getWhatsAppLink()" target="_blank" rel="noopener noreferrer" class="ct-quick-btn ct-whatsapp-btn">
+            <i class="bi bi-whatsapp"></i> Chat on WhatsApp
+          </a>
+          <a [href]="getMailtoLink()" class="ct-quick-btn ct-email-btn">
+            <i class="bi bi-envelope-fill"></i> Send Email
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right: Contact Form -->
+      <div class="ct-form-col">
+        <div class="ct-form-card">
+          <div class="ct-form-header">
+            <h2>Send Us a Message</h2>
+            <p>Fill in the form below and we'll respond within 24 hours.</p>
+          </div>
+
+          <!-- Success -->
+          <div class="ct-alert ct-alert-success" *ngIf="successMessage">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>{{ successMessage }}</span>
+            <button class="ct-alert-close" (click)="successMessage = ''"><i class="bi bi-x"></i></button>
+          </div>
+
+          <!-- Error -->
+          <div class="ct-alert ct-alert-error" *ngIf="errorMessage">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <span>{{ errorMessage }}</span>
+            <button class="ct-alert-close" (click)="errorMessage = ''"><i class="bi bi-x"></i></button>
+          </div>
+
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="ct-form">
+
+            <!-- Name -->
+            <div class="ct-field">
+              <label class="ct-label" for="ct-name">
+                <i class="bi bi-person-fill"></i> Full Name <span class="ct-required">*</span>
+              </label>
+              <input
+                id="ct-name"
+                type="text"
+                class="ct-input"
+                [class.ct-input-error]="name?.invalid && name?.touched"
+                [class.ct-input-valid]="name?.valid && name?.touched"
+                formControlName="name"
+                placeholder="Enter your full name"
+              />
+              <div class="ct-field-error" *ngIf="name?.invalid && name?.touched">
+                <span *ngIf="name?.errors?.['required']">Name is required</span>
+                <span *ngIf="name?.errors?.['minlength']">At least 2 characters required</span>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="ct-field">
+              <label class="ct-label" for="ct-email">
+                <i class="bi bi-envelope-fill"></i> Email Address <span class="ct-required">*</span>
+              </label>
+              <input
+                id="ct-email"
+                type="email"
+                class="ct-input"
+                [class.ct-input-error]="email?.invalid && email?.touched"
+                [class.ct-input-valid]="email?.valid && email?.touched"
+                formControlName="email"
+                placeholder="Enter your email address"
+              />
+              <div class="ct-field-error" *ngIf="email?.invalid && email?.touched">
+                <span *ngIf="email?.errors?.['required']">Email is required</span>
+                <span *ngIf="email?.errors?.['email']">Enter a valid email address</span>
+              </div>
+            </div>
+
+            <!-- Message -->
+            <div class="ct-field">
+              <label class="ct-label" for="ct-message">
+                <i class="bi bi-chat-text-fill"></i> Message <span class="ct-required">*</span>
+              </label>
+              <textarea
+                id="ct-message"
+                class="ct-input ct-textarea"
+                [class.ct-input-error]="message?.invalid && message?.touched"
+                [class.ct-input-valid]="message?.valid && message?.touched"
+                formControlName="message"
+                rows="5"
+                placeholder="Tell us what you'd like to know..."
+              ></textarea>
+              <div class="ct-char-count" *ngIf="message?.value">
+                {{ message?.value.length }} / 1000
+              </div>
+              <div class="ct-field-error" *ngIf="message?.invalid && message?.touched">
+                <span *ngIf="message?.errors?.['required']">Message is required</span>
+                <span *ngIf="message?.errors?.['minlength']">At least 10 characters required</span>
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <button
+              type="submit"
+              class="ct-submit-btn"
+              [disabled]="contactForm.invalid || isSubmitting"
+            >
+              <span *ngIf="!isSubmitting">
+                <i class="bi bi-send-fill"></i> Send Message
+              </span>
+              <span *ngIf="isSubmitting" class="ct-submitting">
+                <span class="ct-btn-spinner"></span> Sending...
+              </span>
+            </button>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ Strip -->
+  <section class="ct-faq">
+    <div class="ct-faq-inner">
+      <h2 class="ct-faq-title">Frequently Asked Questions</h2>
+      <div class="ct-faq-grid">
+        <div class="ct-faq-item">
+          <i class="bi bi-question-circle-fill"></i>
+          <h4>How soon will you reply?</h4>
+          <p>We typically respond within 24 hours on working days.</p>
+        </div>
+        <div class="ct-faq-item">
+          <i class="bi bi-mortarboard-fill"></i>
+          <h4>Can I enroll via WhatsApp?</h4>
+          <p>Yes! Just message us on WhatsApp and we'll guide you through enrollment.</p>
+        </div>
+        <div class="ct-faq-item">
+          <i class="bi bi-laptop-fill"></i>
+          <h4>Are courses online or offline?</h4>
+          <p>We offer both online and offline modes — choose what works for you.</p>
+        </div>
+        <div class="ct-faq-item">
+          <i class="bi bi-award-fill"></i>
+          <h4>Do you provide certificates?</h4>
+          <p>Yes, all our courses come with industry-recognized certificates.</p>
+        </div>
+        <div class="ct-faq-item">
+          <i class="bi bi-building-fill"></i>
+          <h4>Are projects client-level?</h4>
+          <p>Yes! You work on real client-level projects, giving you genuine industry exposure from day one.</p>
+        </div>
+        <div class="ct-faq-item">
+          <i class="bi bi-diagram-3-fill"></i>
+          <h4>Are projects industry-ready?</h4>
+          <p>All projects follow industry-standard architecture and best practices — exactly how they're built in real companies.</p>
+        </div>
+        <div class="ct-faq-item">
+          <i class="bi bi-person-lines-fill"></i>
+          <h4>Is mentorship provided?</h4>
+          <p>Absolutely. Every student gets dedicated mentorship throughout their project to ensure quality and learning.</p>
+        </div>
+        <div class="ct-faq-item">
+          <i class="bi bi-cash-coin"></i>
+          <h4>Is an offer letter & stipend provided?</h4>
+          <p>Yes! Eligible interns receive an official offer letter and a stipend during their internship period.</p>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
 </div>
