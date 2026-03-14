@@ -67,6 +67,11 @@
       </div>
     </div>
 
+    <!-- Results count -->
+    <p class="results-count" *ngIf="!showEnrollmentForm && filteredCourses.length > 0">
+      Showing {{ filteredCourses.length }} course{{ filteredCourses.length !== 1 ? 's' : '' }}
+    </p>
+
     <!-- Course Grid -->
     <div class="grid" *ngIf="!showEnrollmentForm && filteredCourses.length > 0">
       <div class="card" *ngFor="let course of filteredCourses">
