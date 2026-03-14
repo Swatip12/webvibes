@@ -1,0 +1,26 @@
+<div class="lazy-image-container" [attr.data-state]="displayState">
+  <!-- Main image element with lazy loading -->
+  <img 
+    [src]="src" 
+    [alt]="alt"
+    [loading]="loading"
+    [class]="imageClass"
+    [class.loaded]="isLoaded"
+    (load)="onLoad()"
+    (error)="handleError($event)"
+    *ngIf="!hasError"
+  />
+
+  <!-- Loading placeholder -->
+  <div class="image-placeholder" *ngIf="!isLoaded && !hasError">
+    <div class="spinner"></div>
+    <span class="sr-only">Loading image...</span>
+  </div>
+
+  <!-- Error fallback -->
+  <div class="image-error" *ngIf="hasError">
+    <i class="fas fa-image" aria-hidden="true"></i>
+    <span *ngIf="showFallbackText">Image unavailable</span>
+    <span class="sr-only">Failed to load image: {{ alt }}</span>
+  </div>
+</div>

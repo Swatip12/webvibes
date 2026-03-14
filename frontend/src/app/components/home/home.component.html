@@ -1,18 +1,112 @@
-<div class="home">
+<div class="home-page">
   <!-- Hero Section -->
-  <section class="hero-section">
+  <app-hero-section></app-hero-section>
+
+  <!-- Features Section with 4-column Grid -->
+  <section class="features-section">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-10">
-          <h1 class="hero-title mb-4">Welcome to WebVibes Technology</h1>
-          <p class="hero-subtitle mb-5 px-3 px-md-0">
-            Empowering the next generation of IT professionals through comprehensive training and hands-on internship programs.
-            Join us to master cutting-edge technologies and launch your career in software development.
-          </p>
-          <div class="cta-buttons d-flex flex-column flex-sm-row justify-content-center gap-3">
-            <button class="btn btn-primary btn-lg" routerLink="/courses">View Courses</button>
-            <button class="btn btn-secondary btn-lg" routerLink="/internship">Apply for Internship</button>
+      <div class="section-header">
+        <span class="section-badge">Why Choose Us</span>
+        <h2>Everything You Need to <span class="gradient-text">Succeed</span></h2>
+        <p>Comprehensive training designed to launch your tech career</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card" *ngFor="let feature of features; let i = index" 
+             [style.animation-delay]="(i * 100) + 'ms'">
+          <div class="feature-icon-wrapper">
+            <div class="feature-icon">
+              <i class="fas" [ngClass]="feature.icon" aria-hidden="true"></i>
+            </div>
           </div>
+          <h3>{{ feature.title }}</h3>
+          <p>{{ feature.description }}</p>
+          <div class="feature-glow"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses Preview Section with Unsplash Images -->
+  <section class="courses-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge gradient-badge">Popular Courses</span>
+        <h2>Start Your <span class="gradient-text">Learning Journey</span></h2>
+        <p>Choose from our most sought-after programs</p>
+      </div>
+      
+      <div class="courses-grid">
+        <div class="course-card" *ngFor="let course of courses">
+          <div class="course-image" [style.background]="course.logoBg">
+            <img
+              [src]="course.logoUrl"
+              [alt]="course.title + ' logo'"
+              class="course-lang-logo"
+            />
+            <div class="course-overlay">
+              <span class="course-badge" [ngClass]="'badge-' + course.badge.type">
+                {{ course.badge.text }}
+              </span>
+            </div>
+          </div>
+          <div class="course-content">
+            <h3>{{ course.title }}</h3>
+            <p>{{ course.description }}</p>
+            <div class="course-meta">
+              <span><i class="far fa-clock" aria-hidden="true"></i> {{ course.duration }}</span>
+              <span><i class="fas fa-users" aria-hidden="true"></i> {{ course.studentsCount }}+ Students</span>
+            </div>
+            <a routerLink="/courses" class="btn btn-primary" [attr.aria-label]="'Learn more about ' + course.title">
+              Learn More <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section-cta">
+        <a routerLink="/courses" class="btn btn-outline btn-lg">View All Courses</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Companies Section with Clearbit Logo API -->
+  <section class="companies-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Our Alumni Work At</span>
+        <h2>Join Graduates at <span class="gradient-text">Top Companies</span></h2>
+      </div>
+      
+      <div class="companies-grid">
+        <div class="company-logo" *ngFor="let company of companies">
+          <img 
+            [src]="getCompanyLogo(company.domain)" 
+            [alt]="company.name + ' logo'"
+            (error)="handleImageError($event, company.name)"
+            loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section with Gradient Background -->
+  <section class="cta-section">
+    <div class="cta-bg">
+      <div class="cta-orb orb-1" aria-hidden="true"></div>
+      <div class="cta-orb orb-2" aria-hidden="true"></div>
+    </div>
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Transform Your Career?</h2>
+        <p>Join 500+ successful students and start your journey today</p>
+        <div class="cta-buttons">
+          <a routerLink="/courses" class="btn btn-primary btn-lg" aria-label="Explore our courses">
+            Explore Courses
+          </a>
+          <a routerLink="/contact" class="btn btn-outline btn-lg" aria-label="Contact us for more information">
+            Contact Us
+          </a>
         </div>
       </div>
     </div>

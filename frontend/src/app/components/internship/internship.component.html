@@ -1,30 +1,129 @@
 <div class="internship-container">
   <div class="container">
-    <h1 class="text-center mb-4">Internship Opportunities</h1>
-    <p class="text-center text-muted mb-5">Join our internship programs and kickstart your career in technology</p>
+    <!-- Page Header -->
+    <div class="page-header text-center mb-16">
+      <span class="badge badge-primary mb-4">CAREER OPPORTUNITIES</span>
+      <h1 class="mb-4">Internship Opportunities at WebVibes Technology</h1>
+      <p class="subtitle">Join our internship programs and kickstart your career in technology</p>
+    </div>
 
-    <!-- Internship Cards -->
-    <div class="row" *ngIf="!showApplicationForm">
-      <div class="col-12 col-md-6 mb-4" *ngFor="let internship of internships">
-        <div class="card h-100 internship-card">
-          <div class="card-body">
-            <h3 class="card-title">{{ internship.type }}</h3>
-            <p class="card-text">{{ internship.description }}</p>
-            
-            <div class="internship-details">
-              <p><strong>Duration:</strong> {{ internship.duration }}</p>
-              <p><strong>Skills You'll Learn:</strong></p>
-              <ul class="skills-list">
-                <li *ngFor="let skill of internship.skills">{{ skill }}</li>
-              </ul>
+    <!-- Search and Filters Section -->
+    <div class="search-filter-section mb-8" *ngIf="!showApplicationForm">
+      <!-- Search Bar -->
+      <div class="search-bar mb-4">
+        <i class="fas fa-search search-icon"></i>
+        <input 
+          type="text" 
+          class="form-control search-input" 
+          placeholder="Search by title or skills..."
+          [(ngModel)]="searchQuery"
+          (input)="onSearchChange()">
+      </div>
+
+      <!-- Filters Row -->
+      <div class="filters-row">
+        <!-- Location Filter -->
+        <div class="filter-group">
+          <label class="filter-label">
+            <i class="fas fa-map-marker-alt"></i> Location
+          </label>
+          <select 
+            class="form-control filter-select" 
+            [(ngModel)]="selectedLocation"
+            (change)="onLocationChange()">
+            <option value="">All Locations</option>
+            <option value="Remote">Remote</option>
+            <option value="On-site">On-site</option>
+            <option value="Hybrid">Hybrid</option>
+          </select>
+        </div>
+
+        <!-- Duration Filter -->
+        <div class="filter-group">
+          <label class="filter-label">
+            <i class="fas fa-clock"></i> Duration
+          </label>
+          <select 
+            class="form-control filter-select" 
+            [(ngModel)]="selectedDuration"
+            (change)="onDurationChange()">
+            <option value="">All Durations</option>
+            <option value="1-3 months">1-3 months</option>
+            <option value="3-6 months">3-6 months</option>
+            <option value="6+ months">6+ months</option>
+          </select>
+        </div>
+
+        <!-- Clear Filters Button -->
+        <button 
+          class="btn btn-outline clear-filters-btn" 
+          (click)="clearFilters()"
+          *ngIf="searchQuery || selectedLocation || selectedDuration">
+          <i class="fas fa-times"></i> Clear Filters
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Count -->
+    <div class="results-count mb-4" *ngIf="!showApplicationForm">
+      <p>Showing <strong>{{ filteredInternships.length }}</strong> internship{{ filteredInternships.length !== 1 ? 's' : '' }}</p>
+    </div>
+
+    <!-- Internship Cards Grid -->
+    <div class="internships-grid" *ngIf="!showApplicationForm">
+      <div class="internship-card" *ngFor="let internship of filteredInternships">
+        <!-- Card Content -->
+        <div class="card-content">
+          <!-- Title -->
+          <h3 class="internship-title">{{ internship.title }}</h3>
+          
+          <!-- Company Name -->
+          <p class="company-name">
+            <i class="fas fa-building"></i> WebVibes Technology
+          </p>
+
+          <!-- Details List -->
+          <div class="details-list">
+            <div class="detail-item">
+              <i class="fas fa-clock"></i>
+              <span><strong>Duration:</strong> {{ internship.duration }}</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span><strong>Location:</strong> {{ internship.location }}</span>
             </div>
           </div>
-          <div class="card-footer bg-transparent">
-            <button class="btn btn-primary w-100" (click)="onApply(internship.type)">
-              Apply Now
-            </button>
+
+          <!-- Requirements -->
+          <div class="requirements-section">
+            <p class="requirements-label"><strong>Requirements:</strong></p>
+            <ul class="requirements-list">
+              <li *ngFor="let req of internship.requirements">{{ req }}</li>
+            </ul>
+          </div>
+
+          <!-- Skills Tags -->
+          <div class="skills-tags">
+            <span class="skill-tag" *ngFor="let skill of internship.skills">{{ skill }}</span>
           </div>
         </div>
+
+        <!-- Apply Button -->
+        <div class="card-footer">
+          <button class="btn btn-primary w-100" (click)="onApply(internship)">
+            <i class="fas fa-paper-plane"></i> Apply Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="filteredInternships.length === 0">
+        <i class="fas fa-search empty-icon"></i>
+        <h3>No internships found</h3>
+        <p>Try adjusting your search or filters to find more opportunities</p>
+        <button class="btn btn-primary" (click)="clearFilters()">
+          Clear All Filters
+        </button>
       </div>
     </div>
 
@@ -36,18 +135,18 @@
           
           <!-- Success Message -->
           <div class="alert alert-success" *ngIf="successMessage">
-            {{ successMessage }}
+            <i class="fas fa-check-circle"></i> {{ successMessage }}
           </div>
 
           <!-- Error Message -->
           <div class="alert alert-danger" *ngIf="errorMessage">
-            {{ errorMessage }}
+            <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
           </div>
           
           <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
             <!-- Student Name -->
             <div class="mb-3">
-              <label for="studentName" class="form-label">Full Name <span class="text-danger">*</span></label>
+              <label for="studentName" class="form-label required">Full Name</label>
               <input 
                 type="text" 
                 id="studentName"
@@ -64,7 +163,7 @@
 
             <!-- Email -->
             <div class="mb-3">
-              <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
+              <label for="email" class="form-label required">Email Address</label>
               <input 
                 type="email" 
                 id="email"
@@ -80,7 +179,7 @@
 
             <!-- Phone -->
             <div class="mb-3">
-              <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+              <label for="phone" class="form-label required">Phone Number</label>
               <input 
                 type="tel" 
                 id="phone"
@@ -96,7 +195,7 @@
 
             <!-- Internship Type (Pre-filled, read-only) -->
             <div class="mb-3">
-              <label for="internshipType" class="form-label">Internship Type <span class="text-danger">*</span></label>
+              <label for="internshipType" class="form-label required">Internship Type</label>
               <input 
                 type="text" 
                 id="internshipType"
@@ -127,13 +226,13 @@
                 type="submit" 
                 class="btn btn-primary"
                 [disabled]="applicationForm.invalid">
-                Submit Application
+                <i class="fas fa-paper-plane"></i> Submit Application
               </button>
               <button 
                 type="button" 
                 class="btn btn-secondary"
                 (click)="onCancel()">
-                Cancel
+                <i class="fas fa-times"></i> Cancel
               </button>
             </div>
           </form>

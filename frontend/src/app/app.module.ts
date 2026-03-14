@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { CourseManagementComponent } from './components/course-management/course-management.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { HeroSectionComponent } from './components/hero-section/hero-section.component';
+import { LazyImageComponent } from './components/lazy-image/lazy-image.component';
 
 @NgModule({
   declarations: [
@@ -31,13 +33,16 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     FooterComponent,
     LoginComponent,
     AdminDashboardComponent,
-    CourseManagementComponent
+    CourseManagementComponent,
+    HeroSectionComponent,
+    LazyImageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {

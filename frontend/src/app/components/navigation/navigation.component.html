@@ -1,32 +1,78 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/home">WebVibes Technology</a>
-    <button class="navbar-toggler" type="button" (click)="toggleMenu()" 
-            [attr.aria-expanded]="!isMenuCollapsed" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <div class="navbar-container">
+    <!-- Logo and Brand -->
+    <a class="navbar-brand" routerLink="/home">
+      <div class="brand-logo">
+        <img src="assets/logo.png" alt="WebVibes Technologies Logo" class="logo-img">
+      </div>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active" 
+           [routerLinkActiveOptions]="{exact: true}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/internship" routerLinkActive="active">Internships</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/courses" routerLinkActive="active">Courses</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/projects" routerLinkActive="active">Projects</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/contact" routerLinkActive="active">Contact</a>
+      </li>
+    </ul>
+
+    <!-- Mobile Hamburger Menu Button -->
+    <button class="hamburger-menu" 
+            type="button" 
+            (click)="toggleMenu()" 
+            [attr.aria-expanded]="!isMenuCollapsed" 
+            [attr.aria-label]="isMenuCollapsed ? 'Open navigation menu' : 'Close navigation menu'"
+            [class.active]="!isMenuCollapsed">
+      <span class="hamburger-icon">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </span>
     </button>
-    <div class="navbar-collapse" [class.show]="!isMenuCollapsed" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active" 
-             [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/about" routerLinkActive="active" (click)="closeMenu()">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/internship" routerLinkActive="active" (click)="closeMenu()">Internship</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/courses" routerLinkActive="active" (click)="closeMenu()">Courses</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/projects" routerLinkActive="active" (click)="closeMenu()">Projects</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a>
-        </li>
-      </ul>
-    </div>
   </div>
 </nav>
+
+<!-- Mobile Menu Drawer -->
+<div class="mobile-menu-drawer" [class.open]="!isMenuCollapsed">
+  <ul class="mobile-nav">
+    <li class="mobile-nav-item">
+      <a class="mobile-nav-link" routerLink="/home" routerLinkActive="active" 
+         [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">Home</a>
+    </li>
+    <li class="mobile-nav-item">
+      <a class="mobile-nav-link" routerLink="/about" routerLinkActive="active" (click)="closeMenu()">About</a>
+    </li>
+    <li class="mobile-nav-item">
+      <a class="mobile-nav-link" routerLink="/internship" routerLinkActive="active" (click)="closeMenu()">Internships</a>
+    </li>
+    <li class="mobile-nav-item">
+      <a class="mobile-nav-link" routerLink="/courses" routerLinkActive="active" (click)="closeMenu()">Courses</a>
+    </li>
+    <li class="mobile-nav-item">
+      <a class="mobile-nav-link" routerLink="/projects" routerLinkActive="active" (click)="closeMenu()">Projects</a>
+    </li>
+    <li class="mobile-nav-item">
+      <a class="mobile-nav-link" routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a>
+    </li>
+  </ul>
+</div>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" 
+     [class.show]="!isMenuCollapsed" 
+     (click)="closeMenu()"
+     aria-hidden="true"></div>

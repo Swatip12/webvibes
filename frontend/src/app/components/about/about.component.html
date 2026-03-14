@@ -1,158 +1,174 @@
-<div class="container py-5">
-  <!-- Company Description Section -->
-  <section class="mb-5">
-    <h1 class="text-center mb-4 fw-bold">About WebVibes Technology</h1>
-    <p class="lead text-center px-lg-5">
-      WebVibes Technology is a leading IT training and internship company dedicated to empowering the next generation of software developers. 
-      We provide comprehensive, hands-on training programs that bridge the gap between academic learning and real-world industry requirements. 
-      Our expert instructors bring years of industry experience to help students master modern technologies and build successful careers in software development.
-    </p>
-  </section>
+<!-- Page Header with Breadcrumb -->
+<section class="page-header">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">About Us</li>
+      </ol>
+    </nav>
+    <h1 class="page-title">About WebVibes Technology</h1>
+    <p class="page-subtitle">Empowering the next generation of software developers with world-class training and real-world experience</p>
+  </div>
+</section>
 
-  <!-- Mission and Vision Section -->
-  <section class="mb-5 bg-light rounded p-4 p-md-5">
-    <div class="row g-4">
-      <div class="col-12 col-md-6">
-        <h2 class="h3 mb-3 fw-semibold">Our Mission</h2>
-        <p class="text-muted">
-          To provide high-quality, practical IT training that equips students with the skills and confidence needed to excel in the technology industry. 
-          We are committed to creating a supportive learning environment where every student can reach their full potential.
-        </p>
+<!-- Institute Image Section -->
+<section class="institute-image-section">
+  <div class="container">
+    <div class="institute-image-wrapper">
+      <img 
+        [src]="instituteImage" 
+        alt="WebVibes Technology Institute - Modern learning environment with students"
+        loading="eager"
+        (error)="handleImageError($event)"
+        class="institute-image"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- Mission & Vision Section -->
+<section class="mission-vision-section">
+  <div class="container">
+    <div class="mission-vision-grid">
+      <div class="mission-card">
+        <div class="icon-wrapper">
+          <i class="fas fa-bullseye" aria-hidden="true"></i>
+        </div>
+        <h2>Our Mission</h2>
+        <p>To provide high-quality, practical IT training that equips students with the skills and confidence needed to excel in the technology industry. We are committed to creating a supportive learning environment where every student can reach their full potential.</p>
       </div>
-      <div class="col-12 col-md-6">
-        <h2 class="h3 mb-3 fw-semibold">Our Vision</h2>
-        <p class="text-muted">
-          To be the premier destination for aspiring developers seeking world-class training and career opportunities. 
-          We envision a future where our graduates are recognized as skilled, innovative professionals who drive technological advancement.
-        </p>
+      <div class="vision-card">
+        <div class="icon-wrapper">
+          <i class="fas fa-eye" aria-hidden="true"></i>
+        </div>
+        <h2>Our Vision</h2>
+        <p>To be the premier destination for aspiring developers seeking world-class training and career opportunities. We envision a future where our graduates are recognized as skilled, innovative professionals who drive technological advancement.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- What You'll Learn Section -->
-  <section class="mb-5">
-    <h2 class="h3 mb-4 fw-semibold text-center">What You'll Learn</h2>
-    <div class="row g-3">
-      <div class="col-12 col-md-6">
-        <ul class="list-unstyled">
-          <li class="mb-3 d-flex align-items-start">
-            <span class="text-success me-2 fs-5">✓</span>
-            <span>Full-stack web development from frontend to backend</span>
+<!-- Team Section -->
+<section class="team-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Our Team</span>
+      <h2 class="section-title">Meet Our <span class="highlight">Expert Instructors</span></h2>
+      <p class="section-subtitle">Learn from industry professionals with 10+ years of real-world experience</p>
+    </div>
+    
+    <div class="team-grid">
+      <div class="team-member-card" *ngFor="let member of teamMembers">
+        <div class="team-member-image-wrapper">
+          <img 
+            [src]="member.image" 
+            [alt]="member.name + ' - ' + member.role"
+            loading="lazy"
+            (error)="handleImageError($event)"
+            class="team-member-image"
+          />
+        </div>
+        <h3 class="team-member-name">{{ member.name }}</h3>
+        <p class="team-member-role">{{ member.role }}</p>
+        <p class="team-member-bio">{{ member.bio }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Achievements Section -->
+<section class="achievements-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Our Impact</span>
+      <h2 class="section-title">Achievements & <span class="highlight">Recognition</span></h2>
+    </div>
+    
+    <div class="statistics-grid">
+      <div class="stat-card" *ngFor="let stat of statistics">
+        <div class="stat-value">{{ stat.value }}</div>
+        <div class="stat-label">{{ stat.label }}</div>
+      </div>
+    </div>
+
+    <div class="certifications-section">
+      <h3 class="certifications-title">Certifications & Partnerships</h3>
+      <div class="certifications-grid">
+        <div class="certification-card">
+          <i class="fas fa-certificate" aria-hidden="true"></i>
+          <p>ISO 9001:2015 Certified</p>
+        </div>
+        <div class="certification-card">
+          <i class="fas fa-award" aria-hidden="true"></i>
+          <p>NASSCOM Member</p>
+        </div>
+        <div class="certification-card">
+          <i class="fas fa-handshake" aria-hidden="true"></i>
+          <p>Industry Partner Network</p>
+        </div>
+        <div class="certification-card">
+          <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+          <p>Accredited Training Provider</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Facilities Section -->
+<section class="facilities-section">
+  <div class="container">
+    <div class="facilities-content">
+      <div class="facilities-text">
+        <h2>World-Class <span class="highlight">Learning Facilities</span></h2>
+        <p>Our state-of-the-art training center is equipped with modern infrastructure and technology to provide the best learning experience.</p>
+        <ul class="facilities-list">
+          <li>
+            <i class="fas fa-check-circle" aria-hidden="true"></i>
+            <span>Modern computer labs with latest hardware</span>
           </li>
-          <li class="mb-3 d-flex align-items-start">
-            <span class="text-success me-2 fs-5">✓</span>
-            <span>Modern software architecture and design patterns</span>
+          <li>
+            <i class="fas fa-check-circle" aria-hidden="true"></i>
+            <span>High-speed internet connectivity</span>
           </li>
-          <li class="mb-3 d-flex align-items-start">
-            <span class="text-success me-2 fs-5">✓</span>
-            <span>Database design and management</span>
+          <li>
+            <i class="fas fa-check-circle" aria-hidden="true"></i>
+            <span>Comfortable learning spaces</span>
           </li>
-          <li class="mb-3 d-flex align-items-start">
-            <span class="text-success me-2 fs-5">✓</span>
-            <span>RESTful API development and integration</span>
+          <li>
+            <i class="fas fa-check-circle" aria-hidden="true"></i>
+            <span>24/7 lab access for students</span>
+          </li>
+          <li>
+            <i class="fas fa-check-circle" aria-hidden="true"></i>
+            <span>Library with technical resources</span>
           </li>
         </ul>
       </div>
-      <div class="col-12 col-md-6">
-        <ul class="list-unstyled">
-          <li class="mb-3 d-flex align-items-start">
-            <span class="text-success me-2 fs-5">✓</span>
-            <span>Version control with Git and GitHub</span>
-          </li>
-          <li class="mb-3 d-flex align-items-start">
-            <span class="text-success me-2 fs-5">✓</span>
-            <span>Agile development methodologies</span>
-          </li>
-          <li class="mb-3 d-flex align-items-start">
-            <span class="text-success me-2 fs-5">✓</span>
-            <span>Testing and debugging best practices</span>
-          </li>
-          <li class="mb-3 d-flex align-items-start">
-            <span class="text-success me-2 fs-5">✓</span>
-            <span>Real-world project development experience</span>
-          </li>
-        </ul>
+      <div class="facilities-image-wrapper">
+        <img 
+          [src]="facilitiesImage" 
+          alt="Modern training facilities at WebVibes Technology"
+          loading="lazy"
+          (error)="handleImageError($event)"
+          class="facilities-image"
+        />
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Technologies Section -->
-  <section class="mb-5">
-    <h2 class="h3 mb-3 fw-semibold text-center">Technologies We Teach</h2>
-    <p class="text-center text-muted mb-4">Master the most in-demand technologies used by leading companies worldwide:</p>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3 g-md-4">
-      <div class="col">
-        <div class="card h-100 text-center border-0 shadow-sm hover-card">
-          <div class="card-body p-4">
-            <div class="tech-icon mb-3">☕</div>
-            <h3 class="h5 fw-semibold mb-2">Java</h3>
-            <p class="text-muted small mb-0">Core Java, OOP, Collections</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 text-center border-0 shadow-sm hover-card">
-          <div class="card-body p-4">
-            <div class="tech-icon mb-3">🍃</div>
-            <h3 class="h5 fw-semibold mb-2">Spring Boot</h3>
-            <p class="text-muted small mb-0">REST APIs, Spring Data JPA</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 text-center border-0 shadow-sm hover-card">
-          <div class="card-body p-4">
-            <div class="tech-icon mb-3">🅰️</div>
-            <h3 class="h5 fw-semibold mb-2">Angular</h3>
-            <p class="text-muted small mb-0">TypeScript, Components, Services</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 text-center border-0 shadow-sm hover-card">
-          <div class="card-body p-4">
-            <div class="tech-icon mb-3">🗄️</div>
-            <h3 class="h5 fw-semibold mb-2">MySQL</h3>
-            <p class="text-muted small mb-0">Database Design, SQL Queries</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 text-center border-0 shadow-sm hover-card">
-          <div class="card-body p-4">
-            <div class="tech-icon mb-3">🔧</div>
-            <h3 class="h5 fw-semibold mb-2">Git & GitHub</h3>
-            <p class="text-muted small mb-0">Version Control, Collaboration</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 text-center border-0 shadow-sm hover-card">
-          <div class="card-body p-4">
-            <div class="tech-icon mb-3">🎨</div>
-            <h3 class="h5 fw-semibold mb-2">HTML & CSS</h3>
-            <p class="text-muted small mb-0">Responsive Design, Bootstrap</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 text-center border-0 shadow-sm hover-card">
-          <div class="card-body p-4">
-            <div class="tech-icon mb-3">📦</div>
-            <h3 class="h5 fw-semibold mb-2">Maven</h3>
-            <p class="text-muted small mb-0">Build Tools, Dependencies</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 text-center border-0 shadow-sm hover-card">
-          <div class="card-body p-4">
-            <div class="tech-icon mb-3">🚀</div>
-            <h3 class="h5 fw-semibold mb-2">Deployment</h3>
-            <p class="text-muted small mb-0">Cloud Hosting, CI/CD</p>
-          </div>
-        </div>
+<!-- Call to Action Section -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Ready to Start Your Journey?</h2>
+      <p>Join thousands of successful graduates who have transformed their careers with WebVibes Technology</p>
+      <div class="cta-buttons">
+        <a routerLink="/courses" class="btn btn-primary btn-lg">Explore Courses</a>
+        <a routerLink="/contact" class="btn btn-secondary btn-lg">Contact Us</a>
       </div>
     </div>
-  </section>
-</div>
+  </div>
+</section>

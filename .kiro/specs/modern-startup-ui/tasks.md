@@ -67,14 +67,14 @@ Set up base styles, CSS reset, and global typography styles.
 Update the navigation component with modern styling, fixed positioning, and mobile hamburger menu.
 
 **Sub-tasks:**
-- [ ] 4.1: Update navigation component SCSS with fixed positioning and backdrop blur
-- [ ] 4.2: Implement scroll-based shadow enhancement
-- [ ] 4.3: Style navigation links with hover and active states
-- [ ] 4.4: Implement hamburger menu icon for mobile (< 768px)
-- [ ] 4.5: Create slide-in mobile menu with overlay
-- [ ] 4.6: Add smooth transitions for menu open/close
-- [ ] 4.7: Ensure active route highlighting works correctly
-- [ ] 4.8: Test keyboard navigation and accessibility
+- [x] 4.1: Update navigation component SCSS with fixed positioning and backdrop blur
+- [x] 4.2: Implement scroll-based shadow enhancement
+- [x] 4.3: Style navigation links with hover and active states
+- [x] 4.4: Implement hamburger menu icon for mobile (< 768px)
+- [x] 4.5: Create slide-in mobile menu with overlay
+- [x] 4.6: Add smooth transitions for menu open/close
+- [x] 4.7: Ensure active route highlighting works correctly
+- [x] 4.8: Test keyboard navigation and accessibility
 
 **Acceptance Criteria:**
 - Navigation bar is fixed at top with 64px height
@@ -96,12 +96,12 @@ Update the navigation component with modern styling, fixed positioning, and mobi
 Create a new hero section component for the home page with gradient background and animations.
 
 **Sub-tasks:**
-- [ ] 5.1: Generate hero section component using Angular CLI
-- [ ] 5.2: Implement hero section HTML structure
-- [ ] 5.3: Style hero section with gradient background
-- [ ] 5.4: Add headline, subtitle, and CTA buttons
-- [ ] 5.5: Implement fadeInUp animation on page load
-- [ ] 5.6: Make hero section responsive across breakpoints
+- [x] 5.1: Generate hero section component using Angular CLI
+- [x] 5.2: Implement hero section HTML structure
+- [x] 5.3: Style hero section with gradient background
+- [x] 5.4: Add headline, subtitle, and CTA buttons
+- [x] 5.5: Implement fadeInUp animation on page load
+- [x] 5.6: Make hero section responsive across breakpoints
 - [ ] 5.7: Ensure minimum viewport height of 600px
 - [ ] 5.8: Test content centering and spacing
 

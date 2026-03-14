@@ -1,0 +1,88 @@
+<div class="hero-section">
+  <div class="container">
+    <!-- Left Column: Content -->
+    <div class="hero-content">
+      <!-- Badge with primary-50 background and primary-700 text -->
+      <div class="hero-badge badge-primary">
+        <span class="badge-icon">⚡</span>
+        <span>Launch Your Tech Career in 2024</span>
+      </div>
+
+      <!-- Headline with font-size-5xl, font-weight-extrabold, highlight words in primary-600 -->
+      <h1 class="hero-title">
+        Where <span class="highlight-primary">Vibes</span> Meets<br>
+        <span class="highlight-primary">Innovation</span>
+      </h1>
+
+      <!-- Subtitle with font-size-lg, max-width 540px -->
+      <p class="hero-subtitle">
+        Transform your passion into a thriving tech career. Learn from industry experts, build real-world projects, and land your dream job with 100% placement support.
+      </p>
+
+      <!-- Primary and Secondary CTA Buttons -->
+      <div class="hero-cta">
+        <a routerLink="/courses" class="btn btn-primary btn-lg">
+          <span>Explore Courses</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a routerLink="/contact" class="btn btn-secondary btn-lg">
+          <span>Talk to Expert</span>
+        </a>
+      </div>
+
+      <!-- Statistics Bar with three columns -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Students Trained</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-number">95%</div>
+          <div class="stat-label">Placement Rate</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Hiring Partners</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Hero Image -->
+    <div class="hero-image">
+      <div class="image-wrapper">
+        <img
+          [src]="heroImageUrl"
+          alt="Developer coding on a laptop"
+          class="hero-img"
+          loading="eager"
+        />
+        <!-- Floating Feature Cards - positioned inside image wrapper -->
+        <div class="floating-card card-1">
+          <i class="fas fa-laptop-code card-icon" aria-hidden="true"></i>
+          <div class="card-text">
+            <div class="card-title">Live Classes</div>
+            <div class="card-subtitle">Interactive Sessions</div>
+          </div>
+        </div>
+        <div class="floating-card card-2">
+          <i class="fas fa-project-diagram card-icon" aria-hidden="true"></i>
+          <div class="card-text">
+            <div class="card-title">Real Projects</div>
+            <div class="card-subtitle">Build Portfolio</div>
+          </div>
+        </div>
+        <div class="floating-card card-3">
+          <i class="fas fa-trophy card-icon" aria-hidden="true"></i>
+          <div class="card-text">
+            <div class="card-title">Job Ready</div>
+            <div class="card-subtitle">100% Support</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

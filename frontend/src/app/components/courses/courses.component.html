@@ -1,144 +1,184 @@
-<div class="courses-container">
-  <div class="container">
-    <h1 class="text-center mb-4">Our Courses</h1>
-    <p class="text-center text-muted mb-5">Explore our comprehensive courses and advance your technology skills</p>
+<div class="courses-page">
+  <div class="courses-wrap">
 
-    <!-- Course Cards -->
-    <div class="row" *ngIf="!showEnrollmentForm">
-      <div class="col-12 col-md-6 mb-4" *ngFor="let course of courses">
-        <div class="card h-100 course-card">
-          <div class="card-body">
-            <h3 class="card-title">{{ course.name }}</h3>
-            <p class="card-text">{{ course.description }}</p>
-            
-            <div class="course-details">
-              <p><strong>Duration:</strong> {{ course.duration }}</p>
-              <p><strong>Technologies Covered:</strong></p>
-              <ul class="technologies-list">
-                <li *ngFor="let tech of course.technologies">{{ tech }}</li>
-              </ul>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent">
-            <button class="btn btn-primary w-100" (click)="onEnroll(course.name)">
-              Enroll Now
-            </button>
-          </div>
+    <!-- Hero Banner -->
+    <div class="courses-hero">
+      <div class="hero-orb orb1"></div>
+      <div class="hero-orb orb2"></div>
+      <div class="hero-inner">
+        <span class="hero-badge">
+          <i class="fas fa-graduation-cap" aria-hidden="true"></i>&nbsp; Learn &amp; Grow
+        </span>
+        <h1>Our <span class="grad">Courses</span></h1>
+        <p>Master in-demand technologies with expert-led training programs</p>
+      </div>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="filters-wrap" *ngIf="!showEnrollmentForm">
+      <div class="search-row">
+        <i class="fas fa-search search-icon" aria-hidden="true"></i>
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search courses..."
+          [(ngModel)]="searchQuery"
+          (input)="applyFilters()"
+          aria-label="Search courses"
+        />
+      </div>
+      <div class="filter-row">
+        <div class="fgroup">
+          <label for="cat">Category</label>
+          <select id="cat" [(ngModel)]="selectedCategory" (change)="applyFilters()">
+            <option value="All">All Categories</option>
+            <option value="Web Development">Web Development</option>
+            <option value="Data Science">Data Science</option>
+            <option value="Mobile">Mobile</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <label for="dur">Duration</label>
+          <select id="dur" [(ngModel)]="selectedDuration" (change)="applyFilters()">
+            <option value="All">All Durations</option>
+            <option value="< 2 months">Under 2 months</option>
+            <option value="2-4 months">2–4 months</option>
+            <option value="4+ months">4+ months</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <label for="lvl">Level</label>
+          <select id="lvl" [(ngModel)]="selectedLevel" (change)="applyFilters()">
+            <option value="All">All Levels</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <label for="srt">Sort By</label>
+          <select id="srt" [(ngModel)]="sortBy" (change)="applyFilters()">
+            <option value="popular">Most Popular</option>
+            <option value="newest">Newest</option>
+            <option value="duration">Duration</option>
+            <option value="alphabetical">A–Z</option>
+          </select>
         </div>
       </div>
+    </div>
+
+    <!-- Course Grid -->
+    <div class="grid" *ngIf="!showEnrollmentForm && filteredCourses.length > 0">
+      <div class="card" *ngFor="let course of filteredCourses">
+
+        <!-- Coloured logo panel -->
+        <div class="card-top" [style.background]="course.logoBg">
+          <div class="logo-circle">
+            <img
+              [src]="course.logoUrl"
+              [alt]="course.name"
+              width="64"
+              height="64"
+            />
+          </div>
+          <span class="cbadge" [ngClass]="course.badgeType" *ngIf="course.badge">
+            {{ course.badge }}
+          </span>
+        </div>
+
+        <!-- Card body -->
+        <div class="card-body">
+          <span class="level-tag">{{ course.level }}</span>
+          <h3>{{ course.name }}</h3>
+          <p>{{ course.description }}</p>
+          <div class="meta">
+            <span><i class="far fa-clock" aria-hidden="true"></i> {{ course.duration }}</span>
+            <span><i class="fas fa-users" aria-hidden="true"></i> {{ course.studentsCount }}+</span>
+          </div>
+          <button class="enroll-btn" (click)="onEnroll(course.name)"
+                  [attr.aria-label]="'Enroll in ' + course.name">
+            Enroll Now &nbsp;<i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty" *ngIf="!showEnrollmentForm && filteredCourses.length === 0">
+      <i class="fas fa-search" aria-hidden="true"></i>
+      <h3>No courses found</h3>
+      <p>Try adjusting your filters</p>
+      <button class="enroll-btn" style="width:auto;padding:10px 28px" (click)="clearFilters()">
+        Clear Filters
+      </button>
     </div>
 
     <!-- Enrollment Form -->
-    <div *ngIf="showEnrollmentForm" class="enrollment-form-section">
-      <div class="card">
-        <div class="card-body">
-          <h3 class="card-title mb-4">Enroll in {{ selectedCourse }}</h3>
-          
-          <!-- Success Message -->
-          <div class="alert alert-success" *ngIf="successMessage">
-            {{ successMessage }}
-          </div>
-
-          <!-- Error Message -->
-          <div class="alert alert-danger" *ngIf="errorMessage">
-            {{ errorMessage }}
-          </div>
-          
-          <form [formGroup]="enrollmentForm" (ngSubmit)="onSubmit()">
-            <!-- Student Name -->
-            <div class="mb-3">
-              <label for="studentName" class="form-label">Full Name <span class="text-danger">*</span></label>
-              <input 
-                type="text" 
-                id="studentName"
-                class="form-control" 
-                formControlName="studentName"
-                [class.is-invalid]="studentName?.invalid && studentName?.touched"
-                placeholder="Enter your full name">
-              <div class="invalid-feedback" *ngIf="studentName?.invalid && studentName?.touched">
-                <div *ngIf="studentName?.errors?.['required']">Name is required</div>
-                <div *ngIf="studentName?.errors?.['minlength']">Name must be at least 2 characters</div>
-                <div *ngIf="studentName?.errors?.['maxlength']">Name cannot exceed 100 characters</div>
-              </div>
-            </div>
-
-            <!-- Email -->
-            <div class="mb-3">
-              <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
-              <input 
-                type="email" 
-                id="email"
-                class="form-control" 
-                formControlName="email"
-                [class.is-invalid]="email?.invalid && email?.touched"
-                placeholder="Enter your email">
-              <div class="invalid-feedback" *ngIf="email?.invalid && email?.touched">
-                <div *ngIf="email?.errors?.['required']">Email is required</div>
-                <div *ngIf="email?.errors?.['email']">Please enter a valid email address</div>
-              </div>
-            </div>
-
-            <!-- Phone -->
-            <div class="mb-3">
-              <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
-              <input 
-                type="tel" 
-                id="phone"
-                class="form-control" 
-                formControlName="phone"
-                [class.is-invalid]="phone?.invalid && phone?.touched"
-                placeholder="Enter 10-15 digit phone number">
-              <div class="invalid-feedback" *ngIf="phone?.invalid && phone?.touched">
-                <div *ngIf="phone?.errors?.['required']">Phone number is required</div>
-                <div *ngIf="phone?.errors?.['pattern']">Phone number must be 10-15 digits</div>
-              </div>
-            </div>
-
-            <!-- Course Name (Pre-filled, read-only) -->
-            <div class="mb-3">
-              <label for="courseName" class="form-label">Course Name <span class="text-danger">*</span></label>
-              <input 
-                type="text" 
-                id="courseName"
-                class="form-control" 
-                formControlName="courseName"
-                readonly>
-            </div>
-
-            <!-- Message -->
-            <div class="mb-3">
-              <label for="message" class="form-label">Message (Optional)</label>
-              <textarea 
-                id="message"
-                class="form-control" 
-                formControlName="message"
-                [class.is-invalid]="message?.invalid && message?.touched"
-                rows="4"
-                placeholder="Tell us about your learning goals or any questions you have"></textarea>
-              <div class="invalid-feedback" *ngIf="message?.invalid && message?.touched">
-                <div *ngIf="message?.errors?.['maxlength']">Message cannot exceed 500 characters</div>
-              </div>
-              <small class="form-text text-muted">Maximum 500 characters</small>
-            </div>
-
-            <!-- Form Actions -->
-            <div class="d-flex gap-2">
-              <button 
-                type="submit" 
-                class="btn btn-primary"
-                [disabled]="enrollmentForm.invalid">
-                Submit Enrollment
-              </button>
-              <button 
-                type="button" 
-                class="btn btn-secondary"
-                (click)="onCancel()">
-                Cancel
-              </button>
-            </div>
-          </form>
+    <div class="form-wrap" *ngIf="showEnrollmentForm">
+      <div class="form-card">
+        <div class="form-head">
+          <h2>Enroll in <span class="grad">{{ selectedCourse }}</span></h2>
+          <p>Fill in your details and we'll reach out shortly</p>
         </div>
+
+        <div class="alert success" *ngIf="successMessage" role="alert">
+          <i class="fas fa-check-circle" aria-hidden="true"></i> {{ successMessage }}
+        </div>
+        <div class="alert danger" *ngIf="errorMessage" role="alert">
+          <i class="fas fa-exclamation-circle" aria-hidden="true"></i> {{ errorMessage }}
+        </div>
+
+        <form [formGroup]="enrollmentForm" (ngSubmit)="onSubmit()">
+          <div class="frow">
+            <div class="fg">
+              <label for="sName">Full Name <span class="req">*</span></label>
+              <input id="sName" type="text" formControlName="studentName"
+                [class.err]="studentName?.invalid && studentName?.touched"
+                placeholder="Your full name" />
+              <span class="errmsg" *ngIf="studentName?.invalid && studentName?.touched">
+                {{ studentName?.errors?.['required'] ? 'Required' : 'Min 2 characters' }}
+              </span>
+            </div>
+            <div class="fg">
+              <label for="sEmail">Email <span class="req">*</span></label>
+              <input id="sEmail" type="email" formControlName="email"
+                [class.err]="email?.invalid && email?.touched"
+                placeholder="your@email.com" />
+              <span class="errmsg" *ngIf="email?.invalid && email?.touched">
+                {{ email?.errors?.['required'] ? 'Required' : 'Invalid email' }}
+              </span>
+            </div>
+          </div>
+          <div class="frow">
+            <div class="fg">
+              <label for="sPhone">Phone <span class="req">*</span></label>
+              <input id="sPhone" type="tel" formControlName="phone"
+                [class.err]="phone?.invalid && phone?.touched"
+                placeholder="10–15 digit number" />
+              <span class="errmsg" *ngIf="phone?.invalid && phone?.touched">
+                {{ phone?.errors?.['required'] ? 'Required' : '10–15 digits only' }}
+              </span>
+            </div>
+            <div class="fg">
+              <label for="sCourse">Course</label>
+              <input id="sCourse" type="text" formControlName="courseName" readonly />
+            </div>
+          </div>
+          <div class="fg full">
+            <label for="sMsg">Message (optional)</label>
+            <textarea id="sMsg" formControlName="message" rows="4"
+              placeholder="Tell us your learning goals"></textarea>
+            <span class="errmsg" *ngIf="message?.invalid && message?.touched">Max 500 characters</span>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="enroll-btn" style="width:auto;padding:12px 32px"
+              [disabled]="enrollmentForm.invalid">Submit</button>
+            <button type="button" class="outline-btn" (click)="onCancel()">Cancel</button>
+          </div>
+        </form>
       </div>
     </div>
+
   </div>
 </div>
