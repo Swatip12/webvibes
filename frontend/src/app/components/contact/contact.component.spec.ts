@@ -4,7 +4,6 @@ import { of, throwError } from 'rxjs';
 import { ContactComponent } from './contact.component';
 import { ContactService } from '../../services/contact.service';
 import { ContactMessageDTO } from '../../models/dtos';
-
 describe('ContactComponent', () => {
   let component: ContactComponent;
   let fixture: ComponentFixture<ContactComponent>;
@@ -12,7 +11,6 @@ describe('ContactComponent', () => {
 
   beforeEach(async () => {
     const contactServiceSpy = jasmine.createSpyObj('ContactService', ['submitContactForm']);
-
     await TestBed.configureTestingModule({
       declarations: [ ContactComponent ],
       imports: [ ReactiveFormsModule ],
@@ -21,7 +19,6 @@ describe('ContactComponent', () => {
       ]
     })
     .compileComponents();
-
     fixture = TestBed.createComponent(ContactComponent);
     component = fixture.componentInstance;
     contactService = TestBed.inject(ContactService) as jasmine.SpyObj<ContactService>;
@@ -31,7 +28,7 @@ describe('ContactComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
+  
   it('should initialize form with empty values', () => {
     expect(component.contactForm).toBeDefined();
     expect(component.contactForm.get('name')?.value).toBe('');
