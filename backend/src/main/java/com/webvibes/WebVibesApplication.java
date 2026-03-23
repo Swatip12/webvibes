@@ -18,11 +18,18 @@ public class WebVibesApplication {
     @Bean
     public CommandLineRunner resetAdminPassword(AdminUserRepository repo, PasswordEncoder encoder) {
         return args -> {
-            repo.findByUsername("admin").ifPresent(user -> {
-                user.setPassword(encoder.encode("admin123"));
-                repo.save(user);
-                System.out.println(">>> Admin password reset to 'admin123' successfully.");
-            });
+            try {
+                repo.findByUsername("admin").ifPresent(user -> {
+                    user.setPassword(encoder.encode("admin123"));
+                    repo.save(user);
+                    System.out.println(">>> Admin password reset to 'admin123' successfully.");
+                });
+                if (repo.findByUsername("admin").isEmpty()) {
+                    System.out.println(">>> No admin user found — skipping password reset.");
+                }
+            } catch (Exception e) {
+                System.out.println(">>> Admin password reset skipped: " + e.getMessage());
+            }
         };
     }
 }
