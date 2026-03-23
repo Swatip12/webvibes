@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.webvibestechnology.in'
+  apiUrl: 'https://webvibes.onrender.com'
 };
