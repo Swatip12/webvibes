@@ -106,7 +106,7 @@ export class InternshipComponent implements OnInit {
     }
   ];
 
-  filteredInternships: InternshipCard[] = [];
+  filteredInternships: InternshipCard[] = [...this.internships];
 
   constructor(private fb: FormBuilder, private internshipService: InternshipService) {
     this.applicationForm = this.fb.group({

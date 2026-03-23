@@ -118,7 +118,7 @@ export class CoursesComponent implements OnInit {
     }
   ];
 
-  filteredCourses: Course[] = [];
+  filteredCourses: Course[] = [...this.courses];
 
   constructor(
     private fb: FormBuilder,
