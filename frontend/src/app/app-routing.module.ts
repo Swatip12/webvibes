@@ -14,6 +14,7 @@ import { AdminApplicationsComponent } from './components/admin-applications/admi
 import { AdminEnrollmentsComponent } from './components/admin-enrollments/admin-enrollments.component';
 import { AdminMessagesComponent } from './components/admin-messages/admin-messages.component';
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
+import { ServicesComponent } from './components/services/services.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'courses', component: CoursesComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'services', component: ServicesComponent },
   { path: 'login', component: LoginComponent },
   { path: 'admin', redirectTo: '/admin/dashboard', pathMatch: 'full' },
   { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },

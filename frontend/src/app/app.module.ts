@@ -25,6 +25,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HeroSectionComponent } from './components/hero-section/hero-section.component';
 import { LazyImageComponent } from './components/lazy-image/lazy-image.component';
+import { ServicesComponent } from './components/services/services.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { LazyImageComponent } from './components/lazy-image/lazy-image.component
     AdminMessagesComponent,
     ProjectManagementComponent,
     HeroSectionComponent,
-    LazyImageComponent
+    LazyImageComponent,
+    ServicesComponent
   ],
   imports: [
     BrowserModule,
