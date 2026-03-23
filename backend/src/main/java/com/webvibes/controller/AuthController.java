@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -28,6 +29,14 @@ public class AuthController {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
     
+    @GetMapping("/me")
+    public ResponseEntity<?> me(Authentication authentication) {
+        if (authentication == null) {
+            return ResponseEntity.status(401).body("Not authenticated");
+        }
+        return ResponseEntity.ok("User: " + authentication.getName() + ", Authorities: " + authentication.getAuthorities());
+    }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
         try {
