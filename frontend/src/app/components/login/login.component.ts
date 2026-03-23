@@ -20,16 +20,16 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Redirect to dashboard if already authenticated
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/admin/dashboard']);
-      return;
-    }
-
+    // Initialize form first to avoid NG01052 during navigation
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
+
+    // Redirect to dashboard if already authenticated
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/admin/dashboard']);
+    }
   }
 
   onSubmit(): void {
