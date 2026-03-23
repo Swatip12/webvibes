@@ -1,5 +1,4 @@
 package com.webvibes;
-
 import com.webvibes.repository.AdminUserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

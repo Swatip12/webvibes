@@ -87,6 +87,22 @@ public class ProjectService {
     }
     
     /**
+     * Deletes a project by ID.
+     */
+    public void deleteProject(Long id) {
+        try {
+            if (!projectRepository.existsById(id)) {
+                throw new RuntimeException("Project not found with id: " + id);
+            }
+            projectRepository.deleteById(id);
+            logger.info("Project deleted with ID: {}", id);
+        } catch (DataAccessException ex) {
+            logger.error("Database error while deleting project: {}", id, ex);
+            throw new RuntimeException("Failed to delete project", ex);
+        }
+    }
+
+    /**
      * Converts a Project entity to a ProjectDTO.
      * 
      * @param project the Project entity

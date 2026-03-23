@@ -43,6 +43,17 @@ export class AdminService {
     return this.http.delete<MessageResponse>(`${this.apiUrl}/internships/${id}`);
   }
 
+  // ── Projects ──────────────────────────────────────────────────
+  getProjects(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/projects`);
+  }
+  createProject(project: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/projects`, project);
+  }
+  deleteProject(id: number): Observable<MessageResponse> {
+    return this.http.delete<MessageResponse>(`${this.apiUrl}/projects/${id}`);
+  }
+
   // ── View data ─────────────────────────────────────────────────
   getApplications(): Observable<InternshipApplicationDTO[]> {
     return this.http.get<InternshipApplicationDTO[]>(`${this.apiUrl}/applications`);

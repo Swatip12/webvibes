@@ -1,0 +1,86 @@
+<div class="adm-page">
+  <div class="adm-header">
+    <div>
+      <button class="adm-btn adm-btn-outline" (click)="goBack()">
+        <i class="bi bi-arrow-left"></i> Back
+      </button>
+      <h2 class="adm-title" style="margin-top:0.5rem">Project Management</h2>
+    </div>
+    <button class="adm-btn adm-btn-primary" (click)="showForm = !showForm">
+      <i class="bi bi-plus-lg"></i> Add Project
+    </button>
+  </div>
+
+  <div *ngIf="successMessage" class="adm-alert adm-alert-success">{{ successMessage }}</div>
+  <div *ngIf="error" class="adm-alert adm-alert-error">{{ error }}</div>
+
+  <!-- Add Form -->
+  <div *ngIf="showForm" class="adm-form-card">
+    <h3 class="adm-form-title">New Project</h3>
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+      <div class="adm-form-grid">
+        <div class="adm-form-group">
+          <label>Title *</label>
+          <input formControlName="title" class="adm-input" placeholder="Project title" />
+          <span class="adm-error" *ngIf="projectForm.get('title')?.invalid && projectForm.get('title')?.touched">Title is required</span>
+        </div>
+        <div class="adm-form-group">
+          <label>GitHub Link *</label>
+          <input formControlName="githubLink" class="adm-input" placeholder="https://github.com/..." />
+          <span class="adm-error" *ngIf="projectForm.get('githubLink')?.invalid && projectForm.get('githubLink')?.touched">GitHub link is required</span>
+        </div>
+        <div class="adm-form-group adm-form-full">
+          <label>Description *</label>
+          <textarea formControlName="description" class="adm-input adm-textarea" rows="3" placeholder="Project description"></textarea>
+          <span class="adm-error" *ngIf="projectForm.get('description')?.invalid && projectForm.get('description')?.touched">Description is required</span>
+        </div>
+        <div class="adm-form-group adm-form-full">
+          <label>Image URL (optional)</label>
+          <input formControlName="imageUrl" class="adm-input" placeholder="https://..." />
+        </div>
+      </div>
+      <div class="adm-form-actions">
+        <button type="button" class="adm-btn adm-btn-outline" (click)="showForm = false">Cancel</button>
+        <button type="submit" class="adm-btn adm-btn-primary" [disabled]="submitting">
+          {{ submitting ? 'Saving...' : 'Save Project' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="adm-loading">Loading projects...</div>
+
+  <!-- Projects Table -->
+  <div *ngIf="!loading" class="adm-table-wrap">
+    <div *ngIf="projects.length === 0" class="adm-empty">No projects yet. Add your first project above.</div>
+    <table *ngIf="projects.length > 0" class="adm-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>GitHub</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of projects; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td><strong>{{ p.title }}</strong></td>
+          <td class="adm-td-desc">{{ p.description | slice:0:80 }}{{ p.description?.length > 80 ? '...' : '' }}</td>
+          <td>
+            <a [href]="p.githubLink" target="_blank" class="adm-link">
+              <i class="bi bi-github"></i> View
+            </a>
+          </td>
+          <td>
+            <button class="adm-btn adm-btn-danger adm-btn-sm" (click)="deleteProject(p.id)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

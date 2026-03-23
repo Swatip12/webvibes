@@ -118,7 +118,38 @@ export class InternshipComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { this.filteredInternships = [...this.internships]; }
+  ngOnInit(): void {
+    this.internshipService.getInternships().subscribe({
+      next: (apiInternships) => {
+        if (apiInternships && apiInternships.length > 0) {
+          const dbInternships: InternshipCard[] = apiInternships.map((i: any) => {
+            const months = i.duration || 3;
+            const skillList = i.skills ? i.skills.split(',').map((s: string) => s.trim()).filter((s: string) => s) : [];
+            return {
+              id: String(i.id),
+              title: i.type,
+              duration: `${months} month${months !== 1 ? 's' : ''}`,
+              location: 'Remote',
+              level: 'Beginner',
+              description: i.description,
+              icon: 'fas fa-laptop-code',
+              requirements: skillList.slice(0, 4),
+              skills: skillList,
+              perks: ['Certificate', 'Letter of Recommendation']
+            };
+          });
+          // Merge: DB internships first, then hardcoded ones not already in DB
+          const dbTitles = new Set(dbInternships.map(i => i.title.toLowerCase()));
+          const uniqueHardcoded = this.internships.filter(i => !dbTitles.has(i.title.toLowerCase()));
+          this.internships = [...dbInternships, ...uniqueHardcoded];
+        }
+        this.filteredInternships = [...this.internships];
+      },
+      error: () => {
+        this.filteredInternships = [...this.internships];
+      }
+    });
+  }
 
   get studentName() { return this.applicationForm.get('studentName'); }
   get email()       { return this.applicationForm.get('email'); }

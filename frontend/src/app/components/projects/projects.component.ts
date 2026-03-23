@@ -37,17 +37,71 @@ export class ProjectsComponent implements OnInit {
     this.loadProjects();
   }
 
+  private hardcodedProjects: ProjectDTO[] = [
+    {
+      id: undefined,
+      title: 'E-Commerce Platform',
+      description: 'Full-stack e-commerce application built with Spring Boot, Angular, and MySQL. Features product catalog, cart, order management, and payment integration.',
+      githubLink: 'https://github.com/webvibestechnology',
+      imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80'
+    },
+    {
+      id: undefined,
+      title: 'Student Management System',
+      description: 'Java Spring Boot REST API with Angular frontend for managing student records, attendance, grades, and course enrollment with role-based access control.',
+      githubLink: 'https://github.com/webvibestechnology',
+      imageUrl: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80'
+    },
+    {
+      id: undefined,
+      title: 'Real-Time Chat App',
+      description: 'WebSocket-based real-time chat application using Spring Boot and Angular. Supports multiple rooms, private messaging, and file sharing.',
+      githubLink: 'https://github.com/webvibestechnology',
+      imageUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80'
+    },
+    {
+      id: undefined,
+      title: 'Task Management Dashboard',
+      description: 'Kanban-style project management tool built with Angular and Node.js. Features drag-and-drop, team collaboration, deadlines, and progress tracking.',
+      githubLink: 'https://github.com/webvibestechnology',
+      imageUrl: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80'
+    },
+    {
+      id: undefined,
+      title: 'Android Expense Tracker',
+      description: 'Mobile app built with Kotlin and Firebase for tracking personal expenses. Includes charts, budget alerts, category management, and cloud sync.',
+      githubLink: 'https://github.com/webvibestechnology',
+      imageUrl: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&q=80'
+    },
+    {
+      id: undefined,
+      title: 'ML Price Predictor',
+      description: 'Python machine learning project using scikit-learn and pandas to predict house prices. Includes data preprocessing, model training, and a Flask REST API.',
+      githubLink: 'https://github.com/webvibestechnology',
+      imageUrl: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600&q=80'
+    }
+  ];
+
   loadProjects(): void {
     this.loading = true;
     this.error = null;
     this.projectService.getAllProjects().subscribe({
       next: (data) => {
-        this.projects = data;
-        this.filteredProjects = data;
+        if (data && data.length > 0) {
+          // Merge: DB projects first, then hardcoded ones not already in DB
+          const dbTitles = new Set(data.map((p: ProjectDTO) => p.title.toLowerCase()));
+          const uniqueHardcoded = this.hardcodedProjects.filter(p => !dbTitles.has(p.title.toLowerCase()));
+          this.projects = [...data, ...uniqueHardcoded];
+        } else {
+          this.projects = [...this.hardcodedProjects];
+        }
+        this.filteredProjects = [...this.projects];
         this.loading = false;
       },
       error: () => {
-        this.error = 'Failed to load projects. Please check your connection.';
+        // API failed — show hardcoded data
+        this.projects = [...this.hardcodedProjects];
+        this.filteredProjects = [...this.projects];
         this.loading = false;
       }
     });

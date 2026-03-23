@@ -13,6 +13,7 @@ import { InternshipManagementComponent } from './components/internship-managemen
 import { AdminApplicationsComponent } from './components/admin-applications/admin-applications.component';
 import { AdminEnrollmentsComponent } from './components/admin-enrollments/admin-enrollments.component';
 import { AdminMessagesComponent } from './components/admin-messages/admin-messages.component';
+import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -30,7 +31,8 @@ const routes: Routes = [
   { path: 'admin/internships', component: InternshipManagementComponent, canActivate: [AuthGuard] },
   { path: 'admin/applications', component: AdminApplicationsComponent, canActivate: [AuthGuard] },
   { path: 'admin/enrollments', component: AdminEnrollmentsComponent, canActivate: [AuthGuard] },
-  { path: 'admin/messages', component: AdminMessagesComponent, canActivate: [AuthGuard] }
+  { path: 'admin/messages', component: AdminMessagesComponent, canActivate: [AuthGuard] },
+  { path: 'admin/projects', component: ProjectManagementComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

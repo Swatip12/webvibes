@@ -20,6 +20,7 @@ import { InternshipManagementComponent } from './components/internship-managemen
 import { AdminApplicationsComponent } from './components/admin-applications/admin-applications.component';
 import { AdminEnrollmentsComponent } from './components/admin-enrollments/admin-enrollments.component';
 import { AdminMessagesComponent } from './components/admin-messages/admin-messages.component';
+import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HeroSectionComponent } from './components/hero-section/hero-section.component';
@@ -43,6 +44,7 @@ import { LazyImageComponent } from './components/lazy-image/lazy-image.component
     AdminApplicationsComponent,
     AdminEnrollmentsComponent,
     AdminMessagesComponent,
+    ProjectManagementComponent,
     HeroSectionComponent,
     LazyImageComponent
   ],

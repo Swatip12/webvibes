@@ -12,6 +12,10 @@ export class CourseService {
 
   constructor(private http: HttpClient) { }
 
+  getCourses(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/courses`);
+  }
+
   submitEnrollment(enrollment: CourseEnrollmentDTO): Observable<any> {
     return this.http.post(`${this.apiUrl}/api/courses/enroll`, enrollment);
   }

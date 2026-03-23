@@ -134,7 +134,37 @@ export class CoursesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.applyFilters();
+    this.courseService.getCourses().subscribe({
+      next: (apiCourses) => {
+        if (apiCourses && apiCourses.length > 0) {
+          const weeks = (c: any) => c.duration || 8;
+          const dbCourses: Course[] = apiCourses.map((c: any) => {
+            const m = Math.round(weeks(c) / 4) || 1;
+            return {
+              id: c.id,
+              name: c.name,
+              description: c.description,
+              duration: `${m} month${m !== 1 ? 's' : ''}`,
+              durationMonths: m,
+              studentsCount: 0,
+              category: 'Web Development',
+              level: 'Beginner',
+              logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+              logoBg: '#f89820',
+              syllabusUrl: c.syllabusUrl
+            };
+          });
+          // Merge: DB courses first, then hardcoded ones not already in DB
+          const dbNames = new Set(dbCourses.map(c => c.name.toLowerCase()));
+          const uniqueHardcoded = this.courses.filter(c => !dbNames.has(c.name.toLowerCase()));
+          this.courses = [...dbCourses, ...uniqueHardcoded];
+        }
+        this.applyFilters();
+      },
+      error: () => {
+        this.applyFilters();
+      }
+    });
   }
 
   get studentName() { return this.enrollmentForm.get('studentName'); }
@@ -262,4 +292,9 @@ export class CoursesComponent implements OnInit {
     }
   }
 
+  private parseDurationMonths(duration: string): number {
+    if (!duration) return 2;
+    const match = duration.match(/(\d+)/);
+    return match ? parseInt(match[1], 10) : 2;
+  }
 }

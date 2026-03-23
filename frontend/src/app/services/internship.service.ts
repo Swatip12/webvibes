@@ -12,6 +12,10 @@ export class InternshipService {
 
   constructor(private http: HttpClient) { }
 
+  getInternships(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/internships`);
+  }
+
   submitApplication(application: InternshipApplicationDTO): Observable<any> {
     return this.http.post(`${this.apiUrl}/api/internships/apply`, application);
   }
