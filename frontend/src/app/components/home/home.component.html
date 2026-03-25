@@ -90,6 +90,30 @@
     </div>
   </section>
 
+  <!-- Testimonials Section -->
+  <section class="tm-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Student Reviews</span>
+        <h2>What Our <span class="gradient-text">Students Say!</span></h2>
+        <p>Real experiences from students across all our services</p>
+      </div>
+      <div class="tm-grid">
+        <div class="tm-card" *ngFor="let t of testimonials">
+          <div class="tm-avatar">
+            <img [src]="t.avatar" [alt]="t.name" (error)="handleAvatarError($event)" />
+          </div>
+          <h4 class="tm-name">{{ t.name }}</h4>
+          <span class="tm-role">{{ t.role }}</span>
+          <p class="tm-text">" {{ t.text }} "</p>
+          <div class="tm-quote-icon">
+            <i class="fas fa-quote-right"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA Section with Gradient Background -->
   <section class="cta-section">
     <div class="cta-bg">
