@@ -100,14 +100,21 @@
       </div>
       <div class="tm-grid">
         <div class="tm-card" *ngFor="let t of testimonials">
-          <div class="tm-avatar">
-            <img [src]="t.avatar" [alt]="t.name" (error)="handleAvatarError($event)" />
+          <div class="tm-top">
+            <div class="tm-avatar-initials" [style.background]="t.color">
+              {{ t.initials }}
+            </div>
+            <div class="tm-stars">
+              <i class="fas fa-star" *ngFor="let s of [1,2,3,4,5]"></i>
+            </div>
           </div>
-          <h4 class="tm-name">{{ t.name }}</h4>
-          <span class="tm-role">{{ t.role }}</span>
-          <p class="tm-text">" {{ t.text }} "</p>
-          <div class="tm-quote-icon">
-            <i class="fas fa-quote-right"></i>
+          <p class="tm-text">"{{ t.text }}"</p>
+          <div class="tm-footer">
+            <div>
+              <span class="tm-name">{{ t.name }}</span>
+              <span class="tm-role">{{ t.role }}</span>
+            </div>
+            <i class="fas fa-quote-right tm-quote-icon"></i>
           </div>
         </div>
       </div>

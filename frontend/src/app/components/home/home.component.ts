@@ -28,7 +28,8 @@ interface Testimonial {
   name: string;
   role: string;
   text: string;
-  avatar: string;
+  initials: string;
+  color: string;
 }
 
 @Component({
@@ -103,50 +104,58 @@ export class HomeComponent implements OnInit {
     {
       name: 'Priya S.',
       role: 'Full Stack Developer',
-      text: 'After completing the Full Stack Java course at WebVibes, I landed my first job within 2 months. The real project experience made all the difference in interviews.',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Priya&backgroundColor=b6e3f4'
+      initials: 'PS',
+      color: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+      text: 'After completing the Full Stack Java course at WebVibes, I landed my first job within 2 months. The real project experience made all the difference in interviews.'
     },
     {
       name: 'Rahul M.',
       role: 'Internship Graduate',
-      text: 'The internship program was exactly what I needed. I worked on live client projects, got a certificate and a letter of recommendation. Highly recommend!',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul&backgroundColor=ffd5dc'
+      initials: 'RM',
+      color: 'linear-gradient(135deg, #e63946, #c1121f)',
+      text: 'The internship program was exactly what I needed. I worked on live client projects, got a certificate and a letter of recommendation. Highly recommend!'
     },
     {
       name: 'Sneha K.',
       role: 'Angular Developer',
-      text: 'WebVibes gave me hands-on Angular training that no college course could. The mentors are industry professionals who know exactly what companies look for.',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sneha&backgroundColor=c0aede'
+      initials: 'SK',
+      color: 'linear-gradient(135deg, #0ea5e9, #0891b2)',
+      text: 'WebVibes gave me hands-on Angular training that no college course could. The mentors are industry professionals who know exactly what companies look for.'
     },
     {
       name: 'Amit B.',
       role: 'Industrial Training',
-      text: 'I came from a non-technical background and wanted to switch to IT. The industrial training program at WebVibes made that transition smooth and practical.',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Amit&backgroundColor=d1f4e0'
+      initials: 'AB',
+      color: 'linear-gradient(135deg, #10b981, #059669)',
+      text: 'I came from a non-technical background and wanted to switch to IT. The industrial training program at WebVibes made that transition smooth and practical.'
     },
     {
       name: 'Mohini G.',
       role: 'Android Developer',
-      text: 'The mobile app development course was brilliant. I built 3 real Android apps during training and deployed one to the Play Store. Amazing experience!',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mohini&backgroundColor=ffdfbf'
+      initials: 'MG',
+      color: 'linear-gradient(135deg, #f59e0b, #d97706)',
+      text: 'The mobile app development course was brilliant. I built 3 real Android apps during training and deployed one to the Play Store. Amazing experience!'
     },
     {
       name: 'Shalini P.',
       role: 'Spring Boot Developer',
-      text: 'WebVibes Technology helped me crack interviews at top MNCs. The placement assistance and mock interviews were incredibly helpful. Got placed in 45 days!',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Shalini&backgroundColor=b6e3f4'
+      initials: 'SP',
+      color: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+      text: 'WebVibes Technology helped me crack interviews at top MNCs. The placement assistance and mock interviews were incredibly helpful. Got placed in 45 days!'
     },
     {
       name: 'Vikram T.',
       role: 'SEO & Web Client',
-      text: 'We hired WebVibes for our company website and SEO. Within 3 months our Google ranking improved significantly. Professional team, great results.',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Vikram&backgroundColor=ffd5dc'
+      initials: 'VT',
+      color: 'linear-gradient(135deg, #e63946, #6366f1)',
+      text: 'We hired WebVibes for our company website and SEO. Within 3 months our Google ranking improved significantly. Professional team, great results.'
     },
     {
       name: 'Neha R.',
       role: 'Custom Website Client',
-      text: 'They built our business website from scratch — responsive, fast, and exactly what we envisioned. Delivered on time and within budget. Very satisfied!',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Neha&backgroundColor=c0aede'
+      initials: 'NR',
+      color: 'linear-gradient(135deg, #0891b2, #0ea5e9)',
+      text: 'They built our business website from scratch — responsive, fast, and exactly what we envisioned. Delivered on time and within budget. Very satisfied!'
     }
   ];
 
@@ -169,10 +178,5 @@ export class HomeComponent implements OnInit {
     if (parent) {
       parent.innerHTML = `<span class="company-name-fallback">${companyName}</span>`;
     }
-  }
-
-  handleAvatarError(event: Event): void {
-    const img = event.target as HTMLImageElement;
-    img.src = 'https://api.dicebear.com/7.x/avataaars/svg?seed=default&backgroundColor=b6e3f4';
   }
 }
