@@ -1,38 +1,61 @@
 <div class="hero-section">
+  <!-- Background decoration -->
+  <div class="hero-bg-grid" aria-hidden="true"></div>
+
   <div class="container">
     <!-- Left Column: Content -->
     <div class="hero-content">
-      <!-- Badge with primary-50 background and primary-700 text -->
-      <div class="hero-badge badge-primary">
-        <span class="badge-icon">⚡</span>
-        <span>Launch Your Tech Career in 2024</span>
+
+      <!-- Trust badge -->
+      <div class="hero-trust-row">
+        <div class="hero-badge badge-primary">
+          <span class="badge-icon">⚡</span>
+          <span>India's #1 Job-Oriented IT Training</span>
+        </div>
       </div>
 
-      <!-- Headline with font-size-5xl, font-weight-extrabold, highlight words in primary-600 -->
+      <!-- Headline -->
       <h1 class="hero-title">
         Where <span class="highlight-primary">Vibes</span> Meets<br>
         <span class="highlight-primary">Innovation</span>
       </h1>
 
-      <!-- Subtitle with font-size-lg, max-width 540px -->
+      <!-- Subtitle -->
       <p class="hero-subtitle">
         Transform your passion into a thriving tech career. Learn from industry experts, build real-world projects, and land your dream job with 100% placement support.
       </p>
 
-      <!-- Primary and Secondary CTA Buttons -->
+      <!-- CTA Buttons -->
       <div class="hero-cta">
         <a routerLink="/courses" class="btn btn-primary btn-lg">
           <span>Explore Courses</span>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
         <a routerLink="/contact" class="btn btn-secondary btn-lg">
+          <i class="fas fa-phone-alt" aria-hidden="true"></i>
           <span>Talk to Expert</span>
         </a>
       </div>
 
-      <!-- Statistics Bar with three columns -->
+      <!-- Trust indicators -->
+      <div class="hero-trust-badges">
+        <div class="hero-trust-item">
+          <i class="fas fa-certificate"></i>
+          <span>MSME Certified</span>
+        </div>
+        <div class="hero-trust-item">
+          <i class="fas fa-award"></i>
+          <span>ISO 9001:2015</span>
+        </div>
+        <div class="hero-trust-item">
+          <i class="fas fa-star"></i>
+          <span>4.9★ Rated</span>
+        </div>
+      </div>
+
+      <!-- Statistics Bar -->
       <div class="hero-stats">
         <div class="stat-item">
           <div class="stat-number">500+</div>
@@ -56,27 +79,33 @@
       <div class="image-wrapper">
         <img
           [src]="heroImageUrl"
-          alt="Developer coding on a laptop"
+          alt="Students learning to code at WebVibes Technology"
           class="hero-img"
           loading="eager"
         />
-        <!-- Floating Feature Cards - positioned inside image wrapper -->
+        <!-- Floating Feature Cards -->
         <div class="floating-card card-1">
-          <i class="fas fa-laptop-code card-icon" aria-hidden="true"></i>
+          <div class="floating-card-icon" style="background: linear-gradient(135deg,#6366f1,#8b5cf6)">
+            <i class="fas fa-laptop-code" aria-hidden="true"></i>
+          </div>
           <div class="card-text">
             <div class="card-title">Live Classes</div>
             <div class="card-subtitle">Interactive Sessions</div>
           </div>
         </div>
         <div class="floating-card card-2">
-          <i class="fas fa-project-diagram card-icon" aria-hidden="true"></i>
+          <div class="floating-card-icon" style="background: linear-gradient(135deg,#10b981,#059669)">
+            <i class="fas fa-project-diagram" aria-hidden="true"></i>
+          </div>
           <div class="card-text">
             <div class="card-title">Real Projects</div>
             <div class="card-subtitle">Build Portfolio</div>
           </div>
         </div>
         <div class="floating-card card-3">
-          <i class="fas fa-trophy card-icon" aria-hidden="true"></i>
+          <div class="floating-card-icon" style="background: linear-gradient(135deg,#f59e0b,#d97706)">
+            <i class="fas fa-trophy" aria-hidden="true"></i>
+          </div>
           <div class="card-text">
             <div class="card-title">Job Ready</div>
             <div class="card-subtitle">100% Support</div>

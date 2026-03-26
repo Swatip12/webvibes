@@ -4141,3 +4141,65 @@ textarea.form-control {
   color: var(--primary-400);
   font-size: 0.7rem;
 }
+
+/* ============================================================
+   MOBILE NAV CTA BUTTON
+   ============================================================ */
+
+.mobile-cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
+  color: #fff !important;
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  text-decoration: none;
+  margin-top: var(--spacing-6);
+  box-shadow: 0 4px 14px rgba(33,150,243,0.3);
+  transition: all 0.2s ease;
+}
+.mobile-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(33,150,243,0.4);
+  color: #fff !important;
+}
+
+/* ============================================================
+   PAGE HERO UPGRADE — shared styles for all inner page heroes
+   ============================================================ */
+
+/* Upgrade cp-hero, ip-hero, pp-hero, ct-hero, sv-hero, ab-hero
+   to use consistent breadcrumb + image overlay pattern */
+
+.cp-hero-inner,
+.ip-hero-inner,
+.pp-hero-content,
+.ct-hero-content,
+.sv-hero-inner,
+.ab-hero-inner {
+  position: relative;
+  z-index: 2;
+}
+
+/* Breadcrumb for inner pages */
+.page-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--font-size-sm);
+  color: rgba(255,255,255,0.7);
+  margin-bottom: var(--spacing-4);
+  justify-content: center;
+}
+.page-breadcrumb a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.page-breadcrumb a:hover { color: #fff; }
+.page-breadcrumb i { font-size: 0.6rem; }
+.page-breadcrumb span { color: #fff; font-weight: 600; }
