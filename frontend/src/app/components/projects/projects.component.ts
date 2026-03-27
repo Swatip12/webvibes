@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
 import { ProjectDTO } from '../../models/dtos';
+import { SeoService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-projects',
@@ -31,9 +32,15 @@ export class ProjectsComponent implements OnInit {
     'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600&q=80',
   ];
 
-  constructor(private projectService: ProjectService) {}
+  constructor(private projectService: ProjectService, private seo: SeoService) {}
 
   ngOnInit(): void {
+    this.seo.setPage({
+      title: 'Student Projects — Real-World Web, Mobile & Data Science Projects',
+      description: 'Explore real-world projects built by WebVibes Technology students — e-commerce platforms, student management systems, chat apps, Android apps, and ML projects using Java, Angular, Python, and more.',
+      keywords: 'student projects portfolio, Java Spring Boot projects, Angular projects, Android app projects, Python machine learning projects, full stack projects, web development portfolio India',
+      canonical: 'https://webvibestechnology.vercel.app/projects'
+    });
     this.loadProjects();
   }
 

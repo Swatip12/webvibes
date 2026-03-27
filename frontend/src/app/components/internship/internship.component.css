@@ -1,0 +1,579 @@
+/* INTERNSHIPS PAGE - PROFESSIONAL DESIGN */
+
+.internship-container {
+  min-height: 100vh;
+  background: var(--color-background);
+  padding: var(--spacing-24) 0 var(--spacing-16);
+}
+
+/* PAGE HEADER */
+.page-header {
+  margin-bottom: var(--spacing-16);
+}
+
+.page-header .badge {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: var(--font-size-sm);
+}
+
+.page-header h1 {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--spacing-4);
+}
+
+.page-header .subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* SEARCH AND FILTERS */
+.search-filter-section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-6);
+  box-shadow: var(--shadow-sm);
+}
+
+.search-bar {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: var(--spacing-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--neutral-500);
+  font-size: var(--font-size-lg);
+  pointer-events: none;
+}
+
+.search-input {
+  padding-left: var(--spacing-12);
+  font-size: var(--font-size-base);
+  height: 56px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: var(--transition-fast);
+}
+
+.search-input:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.filters-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-4);
+  align-items: end;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-2);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.filter-label i {
+  color: var(--primary-500);
+}
+
+.filter-select {
+  height: 48px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  transition: var(--transition-fast);
+}
+
+.filter-select:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.clear-filters-btn {
+  height: 48px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* RESULTS COUNT */
+.results-count {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+}
+
+.results-count strong {
+  color: var(--primary-600);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* INTERNSHIPS GRID */
+.internships-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-8);
+}
+
+/* INTERNSHIP CARD */
+.internship-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-8);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.internship-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-300);
+}
+
+.company-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-3);
+  background: var(--neutral-50);
+}
+
+.company-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.internship-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+  margin: 0;
+}
+
+.company-name {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--primary-600);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.company-name i {
+  font-size: var(--font-size-sm);
+}
+
+.details-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.detail-item i {
+  color: var(--primary-500);
+  font-size: var(--font-size-base);
+  width: 16px;
+  text-align: center;
+}
+
+.detail-item strong {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.requirements-section {
+  margin-top: var(--spacing-2);
+}
+
+.requirements-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.requirements-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.requirements-list li {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  padding: var(--spacing-1) var(--spacing-3);
+  background: var(--neutral-100);
+  border-radius: var(--radius-full);
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-2);
+}
+
+.skill-tag {
+  display: inline-block;
+  padding: var(--spacing-1) var(--spacing-3);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--neutral-700);
+  background: var(--neutral-100);
+  border-radius: var(--radius-full);
+  transition: var(--transition-fast);
+}
+
+.skill-tag:hover {
+  background: var(--primary-50);
+  color: var(--primary-700);
+}
+
+.card-footer {
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--color-divider);
+}
+
+.card-footer .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  height: 48px;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--spacing-16) var(--spacing-8);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  color: var(--neutral-400);
+  margin-bottom: var(--spacing-6);
+}
+
+.empty-state h3 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-3);
+}
+
+.empty-state p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-6);
+}
+
+/* APPLICATION FORM */
+.application-form-section {
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease;
+}
+
+.application-form-section .card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.application-form-section .card-body {
+  padding: var(--spacing-10);
+}
+
+.application-form-section .card-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-8);
+  text-align: center;
+}
+
+.form-label {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-2);
+  font-size: var(--font-size-sm);
+}
+
+.form-label.required::after {
+  content: ' *';
+  color: var(--accent-error);
+}
+
+.form-control {
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-border);
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-base);
+  min-height: 48px;
+  transition: var(--transition-fast);
+  background: var(--color-surface);
+}
+
+.form-control:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+  outline: none;
+}
+
+.form-control.is-invalid {
+  border-color: var(--accent-error);
+}
+
+.form-control.is-invalid:focus {
+  border-color: var(--accent-error);
+  box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1);
+}
+
+.invalid-feedback {
+  display: block;
+  margin-top: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--accent-error);
+  font-weight: var(--font-weight-medium);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.alert {
+  border-radius: var(--radius-md);
+  padding: var(--spacing-4) var(--spacing-5);
+  margin-bottom: var(--spacing-6);
+  border: none;
+  font-weight: var(--font-weight-medium);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  animation: slideDown 0.3s ease;
+}
+
+.alert i {
+  font-size: var(--font-size-lg);
+}
+
+.alert-success {
+  background: rgba(76, 175, 80, 0.1);
+  color: var(--accent-success);
+  border-left: 4px solid var(--accent-success);
+}
+
+.alert-danger {
+  background: rgba(244, 67, 54, 0.1);
+  color: var(--accent-error);
+  border-left: 4px solid var(--accent-error);
+}
+
+.d-flex.gap-2 {
+  display: flex;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-8);
+}
+
+.d-flex.gap-2 .btn {
+  flex: 1;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 991px) {
+  .internship-container {
+    padding: var(--spacing-20) 0 var(--spacing-12);
+  }
+
+  .page-header h1 {
+    font-size: var(--font-size-4xl);
+  }
+
+  .page-header .subtitle {
+    font-size: var(--font-size-base);
+  }
+
+  .filters-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .clear-filters-btn {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 767px) {
+  .internship-container {
+    padding: var(--spacing-16) 0 var(--spacing-8);
+  }
+
+  .page-header h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .search-filter-section {
+    padding: var(--spacing-4);
+  }
+
+  .filters-row {
+    grid-template-columns: 1fr;
+  }
+
+  .clear-filters-btn {
+    width: 100%;
+  }
+
+  .internships-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-6);
+  }
+
+  .internship-card {
+    padding: var(--spacing-6);
+  }
+
+  .internship-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .application-form-section .card-body {
+    padding: var(--spacing-6);
+  }
+
+  .application-form-section .card-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .d-flex.gap-2 {
+    flex-direction: column;
+  }
+
+  .d-flex.gap-2 .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 479px) {
+  .page-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .search-input {
+    height: 48px;
+    font-size: var(--font-size-sm);
+  }
+
+  .filter-select {
+    height: 44px;
+    font-size: var(--font-size-sm);
+  }
+
+  .company-logo-container {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+/* ACCESSIBILITY */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.btn:focus-visible,
+.form-control:focus-visible,
+.filter-select:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}
+
+@media (prefers-contrast: high) {
+  .internship-card {
+    border-width: 2px;
+  }
+
+  .btn {
+    border-width: 2px;
+  }
+}

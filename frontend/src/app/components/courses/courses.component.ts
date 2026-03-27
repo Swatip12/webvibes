@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CourseService } from '../../services/course.service';
+import { SeoService } from '../../services/seo.service';
 
 interface Course {
   id?: number;
@@ -122,7 +123,8 @@ export class CoursesComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private seo: SeoService
   ) {
     this.enrollmentForm = this.fb.group({
       studentName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
@@ -134,6 +136,12 @@ export class CoursesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.seo.setPage({
+      title: 'IT Courses — Java, Spring Boot, Angular, Python, Full Stack',
+      description: 'Enroll in job-oriented IT courses at WebVibes Technology. Learn Java, Spring Boot, Angular, Python for Data Science, Full Stack Development, React Native. 2-4 month programs with placement support.',
+      keywords: 'Java programming course, Spring Boot training, Angular development course, Python data science, full stack development course, React Native course, IT courses India, job oriented courses, software development training',
+      canonical: 'https://webvibestechnology.vercel.app/courses'
+    });
     this.courseService.getCourses().subscribe({
       next: (apiCourses) => {
         if (apiCourses && apiCourses.length > 0) {

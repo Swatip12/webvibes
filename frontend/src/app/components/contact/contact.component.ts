@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactService } from '../../services/contact.service';
 import { ContactMessageDTO } from '../../models/dtos';
+import { SeoService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-contact',
@@ -17,9 +18,15 @@ export class ContactComponent implements OnInit {
   whatsappNumber = '+91 74478 39781';
   companyEmail = 'webvibestechnology@gmail.com';
 
-  constructor(private fb: FormBuilder, private contactService: ContactService) {}
+  constructor(private fb: FormBuilder, private contactService: ContactService, private seo: SeoService) {}
 
   ngOnInit(): void {
+    this.seo.setPage({
+      title: 'Contact Us — Enquire About Courses, Internships & Services',
+      description: 'Contact WebVibes Technology for IT course enrollment, internship applications, web development projects, or SEO services. WhatsApp: +91 74478 39781. Email: webvibestechnology@gmail.com',
+      keywords: 'contact WebVibes Technology, IT training enquiry, course enrollment, internship application, web development enquiry, SEO services contact, software training contact India',
+      canonical: 'https://webvibestechnology.vercel.app/contact'
+    });
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       email: ['', [Validators.required, Validators.email]],

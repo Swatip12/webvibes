@@ -1,11 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SeoService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
-export class AboutComponent {
+export class AboutComponent implements OnInit {
+
+  constructor(private seo: SeoService) {}
+
+  ngOnInit(): void {
+    this.seo.setPage({
+      title: 'About Us — MSME Certified IT Training Institute India',
+      description: 'WebVibes Technology is an MSME certified IT training institute. Learn about our mission, founder, facilities, and why 500+ students chose us for job-oriented IT training, internships, and web development services.',
+      keywords: 'about WebVibes Technology, IT training institute India, MSME certified training, ISO 9001 training institute, software training company India, IT institute about us',
+      canonical: 'https://webvibestechnology.vercel.app/about'
+    });
+  }
 
   // Images — direct Unsplash URLs with relevant IT/coding content
   heroImage       = 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1400&h=600&fit=crop&q=80';

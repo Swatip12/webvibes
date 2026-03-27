@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SeoService } from '../../services/seo.service';
 
 interface FeatureCard {
   icon: string;
@@ -159,10 +160,15 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private seo: SeoService) { }
 
   ngOnInit(): void {
-    // Component initialization
+    this.seo.setPage({
+      title: 'IT Training, Internships & Web Development in India',
+      description: 'WebVibes Technology — MSME certified IT training institute. Job-oriented courses in Java, Spring Boot, Angular, Python. Internships, industrial training, web development & SEO services. 500+ students placed, 95% placement rate.',
+      keywords: 'IT training institute India, Java Spring Boot course, Angular training, internship program India, industrial training, web development company, full stack developer course, job oriented IT courses, software training institute',
+      canonical: 'https://webvibestechnology.vercel.app/home'
+    });
   }
 
   getCompanyLogo(domain: string): string {

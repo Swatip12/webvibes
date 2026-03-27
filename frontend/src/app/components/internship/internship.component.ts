@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InternshipService } from '../../services/internship.service';
+import { SeoService } from '../../services/seo.service';
 
 interface InternshipCard {
   id: string;
@@ -108,7 +109,7 @@ export class InternshipComponent implements OnInit {
 
   filteredInternships: InternshipCard[] = [...this.internships];
 
-  constructor(private fb: FormBuilder, private internshipService: InternshipService) {
+  constructor(private fb: FormBuilder, private internshipService: InternshipService, private seo: SeoService) {
     this.applicationForm = this.fb.group({
       studentName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       email: ['', [Validators.required, Validators.email]],
@@ -119,6 +120,12 @@ export class InternshipComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.seo.setPage({
+      title: 'IT Internship Programs — Java, Angular, Android, DevOps, Data Science',
+      description: 'Apply for IT internships at WebVibes Technology. Hands-on programs in Full Stack Java, Frontend Angular, Backend, Mobile App, DevOps, and Data Science. Get certificate, LOR, and job referral.',
+      keywords: 'IT internship India, Java internship, Angular internship, software developer internship, industrial training program, internship with certificate, paid internship India, web development internship',
+      canonical: 'https://webvibestechnology.vercel.app/internship'
+    });
     this.internshipService.getInternships().subscribe({
       next: (apiInternships) => {
         if (apiInternships && apiInternships.length > 0) {
