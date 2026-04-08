@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "internship_applications", indexes = {
-    @Index(name = "idx_email", columnList = "email"),
-    @Index(name = "idx_submitted_at", columnList = "submitted_at")
+    @Index(name = "idx_iapp_email", columnList = "email"),
+    @Index(name = "idx_iapp_submitted_at", columnList = "submitted_at")
 })
 public class InternshipApplication {
     

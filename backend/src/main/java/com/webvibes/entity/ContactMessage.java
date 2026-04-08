@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "contact_messages", indexes = {
-    @Index(name = "idx_email", columnList = "email"),
-    @Index(name = "idx_submitted_at", columnList = "submitted_at"),
-    @Index(name = "idx_is_read", columnList = "is_read")
+    @Index(name = "idx_contact_email", columnList = "email"),
+    @Index(name = "idx_contact_submitted_at", columnList = "submitted_at"),
+    @Index(name = "idx_contact_is_read", columnList = "is_read")
 })
 public class ContactMessage {
     

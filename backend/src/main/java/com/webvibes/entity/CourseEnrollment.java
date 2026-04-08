@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "course_enrollments", indexes = {
-    @Index(name = "idx_email", columnList = "email"),
-    @Index(name = "idx_course_name", columnList = "course_name"),
-    @Index(name = "idx_submitted_at", columnList = "submitted_at")
+    @Index(name = "idx_cenroll_email", columnList = "email"),
+    @Index(name = "idx_cenroll_course_name", columnList = "course_name"),
+    @Index(name = "idx_cenroll_submitted_at", columnList = "submitted_at")
 })
 public class CourseEnrollment {
     

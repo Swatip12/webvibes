@@ -1,9 +1,6 @@
 package com.webvibes.exception;
 
 import com.webvibes.dto.MessageResponse;
-import com.webvibes.exception.EmailAlreadyExistsException;
-import com.webvibes.exception.OverpaymentException;
-import com.webvibes.exception.PaymentVerificationException;
 import io.jsonwebtoken.JwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

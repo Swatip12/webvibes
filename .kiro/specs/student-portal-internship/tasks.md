@@ -164,13 +164,13 @@ Implement the student self-service internship portal on top of the existing Spri
     - **Validates: Requirements 9.1, 9.2, 9.3**
     - For any successfully verified payment, assert receipt file exists at stored path and GET returns non-empty PDF bytes
 
-- [ ] 9. Implement admin student management backend
-  - [ ] 9.1 Create `AdminStudentDTO` and `AdminPaymentUpdateRequest` DTOs in `com.webvibes.dto`
+- [x] 9. Implement admin student management backend
+  - [x] 9.1 Create `AdminStudentDTO` and `AdminPaymentUpdateRequest` DTOs in `com.webvibes.dto`
     - `AdminStudentDTO`: id, name, email, mobile, planName, totalFee, paidAmount, remainingAmount, paymentStatus
     - `AdminPaymentUpdateRequest`: paidAmount, paymentStatus
     - _Requirements: 10.1, 10.3_
 
-  - [ ] 9.2 Create `AdminStudentController` at `/api/admin/students` in `com.webvibes.controller`
+  - [x] 9.2 Create `AdminStudentController` at `/api/admin/students` in `com.webvibes.controller`
     - `GET /` — requires `ROLE_ADMIN`, paginated, optional `paymentStatus` filter query param
     - `PUT /{studentId}/payment` — requires `ROLE_ADMIN`, calls `StudentInternshipService.updatePayment`, recalculates remainingAmount
     - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5_
@@ -186,12 +186,12 @@ Implement the student self-service internship portal on top of the existing Spri
     - **Validates: Requirements 10.4**
     - Generate random admin update requests; assert remainingAmount == totalFee - paidAmount after update
 
-- [ ] 10. Add custom exception types and extend `GlobalExceptionHandler`
+- [x] 10. Add custom exception types and extend `GlobalExceptionHandler`
   - Create `EmailAlreadyExistsException` (409), `StudentInternshipNotFoundException` (404), `PaymentVerificationException` (400), `OverpaymentException` (400) in `com.webvibes.exception`
   - Add `@ExceptionHandler` methods in `GlobalExceptionHandler` for each new exception
   - _Requirements: 1.3, 3.6, 8.3, 11.3_
 
-- [ ] 11. Checkpoint — Ensure all backend tests pass
+- [x] 11. Checkpoint — Ensure all backend tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 12. Implement Angular student auth frontend

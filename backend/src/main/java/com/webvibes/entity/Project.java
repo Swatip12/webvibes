@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "projects", indexes = {
-    @Index(name = "idx_created_at", columnList = "created_at")
+    @Index(name = "idx_projects_created_at", columnList = "created_at")
 })
 public class Project {
     
