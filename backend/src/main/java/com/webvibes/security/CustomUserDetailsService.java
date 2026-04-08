@@ -5,6 +5,7 @@ import com.webvibes.entity.Student;
 import com.webvibes.repository.AdminUserRepository;
 import com.webvibes.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -18,6 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
+@Primary
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired

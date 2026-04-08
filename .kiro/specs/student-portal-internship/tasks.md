@@ -74,24 +74,24 @@ Implement the student self-service internship portal on top of the existing Spri
     - **Validates: Requirements 2.3**
     - Generate random email/password pairs not matching any student; assert HTTP 401
 
-- [ ] 4. Update `SecurityConfig` for student routes
+- [x] 4. Update `SecurityConfig` for student routes
   - Permit `/api/student/auth/**` (public)
   - Restrict `/api/student/**` and `/api/payment/**` to `ROLE_STUDENT`
   - Register `DaoAuthenticationProvider` for `StudentUserDetailsService` if using separate provider approach
   - _Requirements: 2.1, 2.5, 3.1, 5.4, 6.6, 8.4_
 
-- [ ] 5. Implement student dashboard backend
-  - [ ] 5.1 Create `DashboardResponse` DTO in `com.webvibes.dto`
+- [x] 5. Implement student dashboard backend
+  - [x] 5.1 Create `DashboardResponse` DTO in `com.webvibes.dto`
     - Fields: name, planName, totalFee, paidAmount, remainingAmount, paymentStatus
     - _Requirements: 3.2, 3.3, 3.4, 3.5_
 
-  - [ ] 5.2 Create `StudentInternshipService` in `com.webvibes.service`
+  - [x] 5.2 Create `StudentInternshipService` in `com.webvibes.service`
     - `getDashboard(String email)`: fetch StudentInternship by student email, map to DashboardResponse
     - Throw `StudentInternshipNotFoundException` if no record found
     - `updatePayment(Long studentId, AdminPaymentUpdateRequest)`: recalculate remainingAmount, persist
     - _Requirements: 3.5, 3.6, 10.4, 11.1_
 
-  - [ ] 5.3 Create `StudentDashboardController` at `/api/student` in `com.webvibes.controller`
+  - [x] 5.3 Create `StudentDashboardController` at `/api/student` in `com.webvibes.controller`
     - `GET /dashboard` — requires `ROLE_STUDENT`, resolves email from JWT principal, returns `DashboardResponse`
     - `GET /receipt/{paymentType}` — requires `ROLE_STUDENT`, streams PDF file as `application/pdf`
     - _Requirements: 3.1, 3.5, 3.6, 9.3, 9.6_
@@ -101,7 +101,7 @@ Implement the student self-service internship portal on top of the existing Spri
     - Test: 404 when no plan assigned
     - _Requirements: 3.5, 3.6_
 
-- [ ] 6. Checkpoint — Ensure all tests pass
+- [x] 6. Checkpoint — Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 7. Implement payment backend

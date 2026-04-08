@@ -48,6 +48,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
     }
 
+    @ExceptionHandler(StudentInternshipNotFoundException.class)
+    public ResponseEntity<MessageResponse> handleStudentInternshipNotFound(StudentInternshipNotFoundException ex) {
+        logger.error("Student internship not found: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse(ex.getMessage()));
+    }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<MessageResponse> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
         logger.error("Data integrity violation: {}", ex.getMessage());

@@ -49,6 +49,8 @@ public class SecurityConfig {
                 .requestMatchers("/api/internships/apply").permitAll()
                 .requestMatchers("/api/courses/enroll").permitAll()
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/student/**").hasRole("STUDENT")
+                .requestMatchers("/api/payment/**").hasRole("STUDENT")
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
