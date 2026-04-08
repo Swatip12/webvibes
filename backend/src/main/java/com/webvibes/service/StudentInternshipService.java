@@ -2,9 +2,11 @@ package com.webvibes.service;
 
 import com.webvibes.dto.AdminPaymentUpdateRequest;
 import com.webvibes.dto.DashboardResponse;
+import com.webvibes.entity.Student;
 import com.webvibes.entity.StudentInternship;
 import com.webvibes.exception.StudentInternshipNotFoundException;
 import com.webvibes.repository.StudentInternshipRepository;
+import com.webvibes.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,18 +18,25 @@ public class StudentInternshipService {
     @Autowired
     private StudentInternshipRepository studentInternshipRepository;
 
-    public DashboardResponse getDashboard(String email) {
-        StudentInternship si = studentInternshipRepository.findByStudentEmail(email)
-                .orElseThrow(() -> new StudentInternshipNotFoundException("No internship plan assigned"));
+    @Autowired
+    private StudentRepository studentRepository;
 
-        return new DashboardResponse(
-                si.getStudent().getName(),
-                si.getPlanName(),
-                si.getTotalFee(),
-                si.getPaidAmount(),
-                si.getRemainingAmount(),
-                si.getPaymentStatus()
-        );
+    public DashboardResponse getDashboard(String email) {
+        // Always return student info; plan details only if assigned
+        Student student = studentRepository.findByEmail(email)
+                .orElseThrow(() -> new StudentInternshipNotFoundException("Student not found"));
+
+        return studentInternshipRepository.findByStudentEmail(email)
+                .map(si -> new DashboardResponse(
+                        si.getStudent().getName(),
+                        si.getStudent().getEmail(),
+                        si.getPlanName(),
+                        si.getTotalFee(),
+                        si.getPaidAmount(),
+                        si.getRemainingAmount(),
+                        si.getPaymentStatus()
+                ))
+                .orElse(new DashboardResponse(student.getName(), student.getEmail()));
     }
 
     public StudentInternship updatePayment(Long studentId, AdminPaymentUpdateRequest request) {

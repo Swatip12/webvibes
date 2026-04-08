@@ -42,11 +42,7 @@ export class StudentDashboardComponent implements OnInit {
       },
       error: (err) => {
         this.isLoading = false;
-        if (err.status === 404) {
-          this.errorMessage = 'No internship plan assigned to your account yet. Please contact the admin.';
-        } else {
-          this.errorMessage = 'Failed to load dashboard. Please try again.';
-        }
+        this.errorMessage = 'Failed to load dashboard. Please try again.';
       }
     });
   }

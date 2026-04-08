@@ -96,11 +96,13 @@ export interface StudentAuthResponse {
 
 export interface DashboardResponse {
   name: string;
-  planName: string;
-  totalFee: number;
-  paidAmount: number;
-  remainingAmount: number;
-  paymentStatus: 'NOT_PAID' | 'PARTIAL' | 'FULL';
+  email: string;
+  planAssigned: boolean;
+  planName?: string;
+  totalFee?: number;
+  paidAmount?: number;
+  remainingAmount?: number;
+  paymentStatus?: 'NOT_PAID' | 'PARTIAL' | 'FULL';
 }
 
 export interface RazorpayOrderResponse {

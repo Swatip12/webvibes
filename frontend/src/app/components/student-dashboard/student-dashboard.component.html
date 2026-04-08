@@ -18,8 +18,25 @@
   <!-- Error -->
   <div class="alert alert-error" *ngIf="errorMessage && !isLoading">{{ errorMessage }}</div>
 
-  <!-- Dashboard Content -->
-  <main class="dashboard-content" *ngIf="dashboard && !isLoading">
+  <!-- No Plan Assigned State -->
+  <main class="dashboard-content" *ngIf="dashboard && !dashboard.planAssigned && !isLoading">
+    <div class="card plan-card">
+      <div class="profile-section">
+        <div class="profile-avatar">{{ dashboard.name?.charAt(0)?.toUpperCase() }}</div>
+        <h2>{{ dashboard.name }}</h2>
+        <p class="profile-email">{{ dashboard.email }}</p>
+      </div>
+      <div class="pending-notice">
+        <span class="pending-icon">⏳</span>
+        <h3>Internship Plan Pending</h3>
+        <p>Your account is registered. An internship plan will be assigned to you by the admin shortly.</p>
+        <p>Once assigned, you will be able to view your plan details and make payments here.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Dashboard Content (plan assigned) -->
+  <main class="dashboard-content" *ngIf="dashboard && dashboard.planAssigned && !isLoading">
 
     <!-- Plan Info Card -->
     <div class="card plan-card">

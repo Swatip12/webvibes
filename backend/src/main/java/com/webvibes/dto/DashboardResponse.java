@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 public class DashboardResponse {
 
     private String name;
+    private String email;
+    private boolean planAssigned;
     private String planName;
     private BigDecimal totalFee;
     private BigDecimal paidAmount;
@@ -15,10 +17,19 @@ public class DashboardResponse {
 
     public DashboardResponse() {}
 
-    public DashboardResponse(String name, String planName, BigDecimal totalFee,
+    // Constructor for when no plan is assigned
+    public DashboardResponse(String name, String email) {
+        this.name = name;
+        this.email = email;
+        this.planAssigned = false;
+    }
+
+    public DashboardResponse(String name, String email, String planName, BigDecimal totalFee,
                               BigDecimal paidAmount, BigDecimal remainingAmount,
                               PaymentStatus paymentStatus) {
         this.name = name;
+        this.email = email;
+        this.planAssigned = true;
         this.planName = planName;
         this.totalFee = totalFee;
         this.paidAmount = paidAmount;
@@ -28,6 +39,12 @@ public class DashboardResponse {
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public boolean isPlanAssigned() { return planAssigned; }
+    public void setPlanAssigned(boolean planAssigned) { this.planAssigned = planAssigned; }
 
     public String getPlanName() { return planName; }
     public void setPlanName(String planName) { this.planName = planName; }
