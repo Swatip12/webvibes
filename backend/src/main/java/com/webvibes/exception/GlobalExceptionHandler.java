@@ -2,6 +2,8 @@ package com.webvibes.exception;
 
 import com.webvibes.dto.MessageResponse;
 import com.webvibes.exception.EmailAlreadyExistsException;
+import com.webvibes.exception.OverpaymentException;
+import com.webvibes.exception.PaymentVerificationException;
 import io.jsonwebtoken.JwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,6 +54,18 @@ public class GlobalExceptionHandler {
     public ResponseEntity<MessageResponse> handleStudentInternshipNotFound(StudentInternshipNotFoundException ex) {
         logger.error("Student internship not found: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(PaymentVerificationException.class)
+    public ResponseEntity<MessageResponse> handlePaymentVerification(PaymentVerificationException ex) {
+        logger.error("Payment verification failed: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(OverpaymentException.class)
+    public ResponseEntity<MessageResponse> handleOverpayment(OverpaymentException ex) {
+        logger.error("Overpayment attempt: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse(ex.getMessage()));
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)

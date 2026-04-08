@@ -104,20 +104,20 @@ Implement the student self-service internship portal on top of the existing Spri
 - [x] 6. Checkpoint — Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 7. Implement payment backend
-  - [ ] 7.1 Create payment DTOs in `com.webvibes.dto`
+- [x] 7. Implement payment backend
+  - [x] 7.1 Create payment DTOs in `com.webvibes.dto`
     - `RazorpayOrderResponse`: orderId, amount (paise), currency, keyId
     - `PaymentVerifyRequest`: razorpayPaymentId, razorpayOrderId, razorpaySignature, paymentType
     - `PaymentVerifyResponse`: success, paymentStatus
     - _Requirements: 5.4, 6.6, 8.4, 8.5_
 
-  - [ ] 7.2 Create `PaymentService` in `com.webvibes.service`
+  - [x] 7.2 Create `PaymentService` in `com.webvibes.service`
     - `createRegistrationOrder(String email)`: validate status is `NOT_PAID`, create Razorpay order for ₹1000 (100000 paise)
     - `createRemainingOrder(String email)`: validate status is `PARTIAL`, create Razorpay order for remainingAmount
     - `verifyAndRecord(PaymentVerifyRequest, String email)`: HMAC-SHA256 verify signature; on success update StudentInternship amounts and status; call ReceiptService; throw `PaymentVerificationException` on bad signature; throw `OverpaymentException` if amount exceeds totalFee
     - _Requirements: 5.2, 5.3, 6.4, 6.5, 8.1, 8.2, 8.3, 11.1, 11.2, 11.3_
 
-  - [ ] 7.3 Create `PaymentController` at `/api/payment` in `com.webvibes.controller`
+  - [x] 7.3 Create `PaymentController` at `/api/payment` in `com.webvibes.controller`
     - `POST /register` — requires `ROLE_STUDENT`
     - `POST /remaining` — requires `ROLE_STUDENT`
     - `POST /verify` — requires `ROLE_STUDENT`
@@ -149,8 +149,8 @@ Implement the student self-service internship portal on top of the existing Spri
     - **Validates: Requirements 8.2, 8.3**
     - Generate random tampered signatures; assert HTTP 400 and DB unchanged
 
-- [ ] 8. Implement receipt service
-  - [ ] 8.1 Create `ReceiptService` in `com.webvibes.service`
+- [x] 8. Implement receipt service
+  - [x] 8.1 Create `ReceiptService` in `com.webvibes.service`
     - `generateReceipt(Student, StudentInternship, String paymentType, String transactionId)`: generate PDF with iText containing student name, amount, date, transaction ID; write to `app.receipt.dir`; return file path; persist path on StudentInternship
     - _Requirements: 9.1, 9.2_
 
