@@ -1,0 +1,92 @@
+<div class="adm-page">
+  <div class="adm-header">
+    <div>
+      <h2 class="adm-title">Student Management</h2>
+      <p class="adm-subtitle">View and manage student internship payment records</p>
+    </div>
+    <a routerLink="/admin/dashboard" class="adm-btn adm-btn-secondary">
+      <i class="bi bi-arrow-left"></i> Back to Dashboard
+    </a>
+  </div>
+
+  <!-- Filter -->
+  <div class="adm-filter-bar">
+    <label for="statusFilter" class="adm-filter-label">Filter by Payment Status:</label>
+    <select id="statusFilter" class="adm-select" [(ngModel)]="selectedFilter" (change)="onFilterChange()">
+      <option *ngFor="let opt of filterOptions" [value]="opt">{{ opt === 'ALL' ? 'All Students' : opt }}</option>
+    </select>
+  </div>
+
+  <!-- Alerts -->
+  <div *ngIf="successMsg" class="adm-alert adm-alert-success">{{ successMsg }}</div>
+  <div *ngIf="error" class="adm-alert adm-alert-error">{{ error }}</div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="adm-loading">Loading students...</div>
+
+  <!-- Table -->
+  <div *ngIf="!loading" class="adm-table-wrap">
+    <table class="adm-table" *ngIf="students.length > 0; else noStudents">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Plan</th>
+          <th>Total Fee</th>
+          <th>Paid</th>
+          <th>Remaining</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <ng-container *ngIf="editingId !== student.id">
+            <td>{{ student.name }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.mobile }}</td>
+            <td>{{ student.planName || '—' }}</td>
+            <td>₹{{ student.totalFee }}</td>
+            <td>₹{{ student.paidAmount }}</td>
+            <td>₹{{ student.remainingAmount }}</td>
+            <td><span class="adm-badge" [ngClass]="getStatusClass(student.paymentStatus)">{{ student.paymentStatus }}</span></td>
+            <td>
+              <button class="adm-btn adm-btn-sm adm-btn-primary" (click)="startEdit(student)">
+                <i class="bi bi-pencil"></i> Edit
+              </button>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="editingId === student.id">
+            <td>{{ student.name }}</td>
+            <td colspan="2">{{ student.email }}</td>
+            <td>{{ student.planName || '—' }}</td>
+            <td>₹{{ student.totalFee }}</td>
+            <td>
+              <input type="number" class="adm-input-sm" [(ngModel)]="editForm.paidAmount" min="0" />
+            </td>
+            <td>—</td>
+            <td>
+              <select class="adm-select-sm" [(ngModel)]="editForm.paymentStatus">
+                <option value="NOT_PAID">NOT_PAID</option>
+                <option value="PARTIAL">PARTIAL</option>
+                <option value="FULL">FULL</option>
+              </select>
+            </td>
+            <td>
+              <button class="adm-btn adm-btn-sm adm-btn-success" (click)="saveEdit(student)">
+                <i class="bi bi-check-lg"></i> Save
+              </button>
+              <button class="adm-btn adm-btn-sm adm-btn-secondary" (click)="cancelEdit()">
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noStudents>
+      <div class="adm-empty">No students found for the selected filter.</div>
+    </ng-template>
+  </div>
+</div>

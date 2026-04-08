@@ -64,4 +64,14 @@ export class AdminService {
   getMessages(): Observable<ContactMessageDTO[]> {
     return this.http.get<ContactMessageDTO[]>(`${this.apiUrl}/messages`);
   }
+
+  // ── Students ──────────────────────────────────────────────────
+  getStudents(paymentStatus?: string): Observable<any> {
+    const params = paymentStatus && paymentStatus !== 'ALL' ? `?paymentStatus=${paymentStatus}` : '';
+    return this.http.get<any>(`${this.apiUrl}/students${params}`);
+  }
+
+  updateStudentPayment(studentId: number, data: { paidAmount: number; paymentStatus: string }): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/students/${studentId}/payment`, data);
+  }
 }

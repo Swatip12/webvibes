@@ -31,6 +31,9 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/contact" routerLinkActive="active">Contact</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/student/login" routerLinkActive="active">Student Login</a>
+      </li>
     </ul>
 
     <a routerLink="/contact" class="navbar-cta-btn">Enquire Now</a>
@@ -75,6 +78,12 @@
     </li>
     <li class="mobile-nav-item">
       <a class="mobile-nav-link" routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a>
+    </li>
+    <li class="mobile-nav-item">
+      <a class="mobile-nav-link" routerLink="/student/login" routerLinkActive="active" (click)="closeMenu()">Student Login</a>
+    </li>
+    <li class="mobile-nav-item">
+      <a class="mobile-nav-link" routerLink="/student/register" routerLinkActive="active" (click)="closeMenu()">Student Register</a>
     </li>
   </ul>
   <a routerLink="/contact" class="mobile-cta-btn" (click)="closeMenu()">

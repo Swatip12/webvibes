@@ -74,3 +74,57 @@ export interface InternshipDTO {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+// Student portal DTOs
+export interface StudentRegisterRequest {
+  name: string;
+  email: string;
+  password: string;
+  mobile: string;
+}
+
+export interface StudentLoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface StudentAuthResponse {
+  token: string;
+  name: string;
+  role: string;
+}
+
+export interface DashboardResponse {
+  name: string;
+  planName: string;
+  totalFee: number;
+  paidAmount: number;
+  remainingAmount: number;
+  paymentStatus: 'NOT_PAID' | 'PARTIAL' | 'FULL';
+}
+
+export interface RazorpayOrderResponse {
+  orderId: string;
+  amount: number;
+  currency: string;
+  keyId: string;
+}
+
+export interface PaymentVerifyRequest {
+  razorpayPaymentId: string;
+  razorpayOrderId: string;
+  razorpaySignature: string;
+  paymentType: string;
+}
+
+export interface AdminStudentDTO {
+  id: number;
+  name: string;
+  email: string;
+  mobile: string;
+  planName: string;
+  totalFee: number;
+  paidAmount: number;
+  remainingAmount: number;
+  paymentStatus: 'NOT_PAID' | 'PARTIAL' | 'FULL';
+}

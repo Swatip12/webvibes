@@ -16,6 +16,11 @@ import { AdminMessagesComponent } from './components/admin-messages/admin-messag
 import { ProjectManagementComponent } from './components/project-management/project-management.component';
 import { ServicesComponent } from './components/services/services.component';
 import { AuthGuard } from './guards/auth.guard';
+import { StudentRegisterComponent } from './components/student-register/student-register.component';
+import { StudentLoginComponent } from './components/student-login/student-login.component';
+import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
+import { StudentGuard } from './guards/student.guard';
+import { AdminStudentsComponent } from './components/admin-students/admin-students.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -34,7 +39,11 @@ const routes: Routes = [
   { path: 'admin/applications', component: AdminApplicationsComponent, canActivate: [AuthGuard] },
   { path: 'admin/enrollments', component: AdminEnrollmentsComponent, canActivate: [AuthGuard] },
   { path: 'admin/messages', component: AdminMessagesComponent, canActivate: [AuthGuard] },
-  { path: 'admin/projects', component: ProjectManagementComponent, canActivate: [AuthGuard] }
+  { path: 'admin/projects', component: ProjectManagementComponent, canActivate: [AuthGuard] },
+  { path: 'admin/students', component: AdminStudentsComponent, canActivate: [AuthGuard] },
+  { path: 'student/register', component: StudentRegisterComponent },
+  { path: 'student/login', component: StudentLoginComponent },
+  { path: 'student/dashboard', component: StudentDashboardComponent, canActivate: [StudentGuard] }
 ];
 
 @NgModule({

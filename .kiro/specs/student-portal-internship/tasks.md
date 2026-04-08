@@ -194,26 +194,26 @@ Implement the student self-service internship portal on top of the existing Spri
 - [x] 11. Checkpoint — Ensure all backend tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 12. Implement Angular student auth frontend
-  - [ ] 12.1 Create `StudentAuthService` in `frontend/src/app/services/`
+- [x] 12. Implement Angular student auth frontend
+  - [x] 12.1 Create `StudentAuthService` in `frontend/src/app/services/`
     - Separate from existing `AuthService`; uses `student_jwt_token` localStorage key
     - Methods: `register(req)`, `login(req)`, `logout()`, `getToken()`, `isStudentAuthenticated()`
     - _Requirements: 2.4, 2.5, 2.6_
 
-  - [ ] 12.2 Create `StudentGuard` in `frontend/src/app/guards/`
+  - [x] 12.2 Create `StudentGuard` in `frontend/src/app/guards/`
     - Checks `StudentAuthService.isStudentAuthenticated()`; redirects to `/student/login` if not authenticated
     - _Requirements: 2.6, 3.1_
 
-  - [ ] 12.3 Update `JwtInterceptor` to also attach `student_jwt_token` for `/api/student/**` and `/api/payment/**` routes
+  - [x] 12.3 Update `JwtInterceptor` to also attach `student_jwt_token` for `/api/student/**` and `/api/payment/**` routes
     - Keep existing admin token logic intact; add student token branch for student API paths
     - _Requirements: 2.5_
 
-  - [ ] 12.4 Create `StudentRegisterComponent` at route `/student/register`
+  - [x] 12.4 Create `StudentRegisterComponent` at route `/student/register`
     - Reactive form: name, email, password, mobile
     - On success navigate to `/student/login`; on 409 show "Email already registered"
     - _Requirements: 1.1, 1.4, 1.5, 1.6, 1.7_
 
-  - [ ] 12.5 Create `StudentLoginComponent` at route `/student/login`
+  - [x] 12.5 Create `StudentLoginComponent` at route `/student/login`
     - Reactive form: email, password
     - On success store token via `StudentAuthService`, navigate to `/student/dashboard`
     - On 401 show "Invalid email or password"
@@ -228,30 +228,30 @@ Implement the student self-service internship portal on top of the existing Spri
     - Test: redirects to `/student/login` when not authenticated
     - _Requirements: 2.6, 3.1_
 
-- [ ] 13. Implement Angular student dashboard frontend
-  - [ ] 13.1 Create `StudentDashboardComponent` at route `/student/dashboard` (guarded by `StudentGuard`)
+- [x] 13. Implement Angular student dashboard frontend
+  - [x] 13.1 Create `StudentDashboardComponent` at route `/student/dashboard` (guarded by `StudentGuard`)
     - On init call `GET /api/student/dashboard`; display name, planName, totalFee, paidAmount, remainingAmount, paymentStatus
     - _Requirements: 3.1, 3.2, 3.3, 3.4_
 
-  - [ ] 13.2 Add agreement section to `StudentDashboardComponent`
+  - [x] 13.2 Add agreement section to `StudentDashboardComponent`
     - Display full agreement text block
     - Checkbox: "I agree to the internship terms and conditions"
     - Bind payment button `[disabled]` to `!agreementAccepted`
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5_
 
-  - [ ] 13.3 Add payment state rendering to `StudentDashboardComponent`
+  - [x] 13.3 Add payment state rendering to `StudentDashboardComponent`
     - `NOT_PAID`: show "Pay ₹1000 Registration Fee" button
     - `PARTIAL`: show paid/remaining amounts and "Pay Remaining Fees" button
     - `FULL`: show "Payment Completed" text, no payment buttons
     - _Requirements: 5.1, 6.1, 6.2, 6.3, 7.1, 7.2_
 
-  - [ ] 13.4 Integrate Razorpay checkout into `StudentDashboardComponent`
+  - [x] 13.4 Integrate Razorpay checkout into `StudentDashboardComponent`
     - On button click: call `/api/payment/register` or `/api/payment/remaining`; open Razorpay modal with returned order details
     - On payment success: call `POST /api/payment/verify`; refresh dashboard data
     - On modal dismiss without payment: show cancellation message, no state change
     - _Requirements: 8.5, 8.6, 5.2, 6.4_
 
-  - [ ] 13.5 Add receipt download links to `StudentDashboardComponent`
+  - [x] 13.5 Add receipt download links to `StudentDashboardComponent`
     - Show "Download Receipt" link for registration when status is `PARTIAL` or `FULL`
     - Show "Download Receipt" link for remaining payment when status is `FULL`
     - Links call `GET /api/student/receipt/{paymentType}`
@@ -265,26 +265,26 @@ Implement the student self-service internship portal on top of the existing Spri
     - **Validates: Requirements 4.3, 4.4, 4.5**
     - _Requirements: 4.3, 4.4, 4.5, 7.1, 7.2_
 
-- [ ] 14. Implement Angular admin students page
-  - [ ] 14.1 Create `AdminStudentsComponent` at route `/admin/students` (guarded by existing `AuthGuard`)
+- [x] 14. Implement Angular admin students page
+  - [x] 14.1 Create `AdminStudentsComponent` at route `/admin/students` (guarded by existing `AuthGuard`)
     - Table columns: name, email, mobile, plan, total fee, paid amount, remaining amount, paymentStatus
     - Dropdown filter for paymentStatus (`ALL`, `NOT_PAID`, `PARTIAL`, `FULL`)
     - Inline edit form to update paidAmount and paymentStatus; calls `PUT /api/admin/students/{id}/payment`
     - _Requirements: 10.6, 10.7, 10.8_
 
-  - [ ] 14.2 Register `AdminStudentsComponent` in `AppModule` and add route to `AppRoutingModule`
+  - [x] 14.2 Register `AdminStudentsComponent` in `AppModule` and add route to `AppRoutingModule`
     - _Requirements: 10.6_
 
-- [ ] 15. Wire everything together and register new routes
-  - [ ] 15.1 Register `StudentRegisterComponent`, `StudentLoginComponent`, `StudentDashboardComponent` routes in `AppRoutingModule`
+- [x] 15. Wire everything together and register new routes
+  - [x] 15.1 Register `StudentRegisterComponent`, `StudentLoginComponent`, `StudentDashboardComponent` routes in `AppRoutingModule`
     - `/student/register`, `/student/login`, `/student/dashboard` (with `StudentGuard`)
     - _Requirements: 1.1, 2.1, 3.1_
 
-  - [ ] 15.2 Register all new Angular components and services in `AppModule`
+  - [x] 15.2 Register all new Angular components and services in `AppModule`
     - Declare new components; provide `StudentAuthService`, `StudentGuard`
     - _Requirements: 2.4, 2.5, 2.6_
 
-  - [ ] 15.3 Add navigation links to student portal in `NavigationComponent` (register, login)
+  - [x] 15.3 Add navigation links to student portal in `NavigationComponent` (register, login)
     - _Requirements: 1.1, 2.1_
 
 - [ ] 16. Final checkpoint — Ensure all tests pass

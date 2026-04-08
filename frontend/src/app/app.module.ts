@@ -26,6 +26,10 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HeroSectionComponent } from './components/hero-section/hero-section.component';
 import { LazyImageComponent } from './components/lazy-image/lazy-image.component';
 import { ServicesComponent } from './components/services/services.component';
+import { StudentRegisterComponent } from './components/student-register/student-register.component';
+import { StudentLoginComponent } from './components/student-login/student-login.component';
+import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
+import { AdminStudentsComponent } from './components/admin-students/admin-students.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,11 @@ import { ServicesComponent } from './components/services/services.component';
     ProjectManagementComponent,
     HeroSectionComponent,
     LazyImageComponent,
-    ServicesComponent
+    ServicesComponent,
+    StudentRegisterComponent,
+    StudentLoginComponent,
+    StudentDashboardComponent,
+    AdminStudentsComponent
   ],
   imports: [
     BrowserModule,
