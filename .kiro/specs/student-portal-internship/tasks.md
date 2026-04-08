@@ -287,7 +287,7 @@ Implement the student self-service internship portal on top of the existing Spri
   - [x] 15.3 Add navigation links to student portal in `NavigationComponent` (register, login)
     - _Requirements: 1.1, 2.1_
 
-- [ ] 16. Final checkpoint — Ensure all tests pass
+- [x] 16. Final checkpoint — Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes

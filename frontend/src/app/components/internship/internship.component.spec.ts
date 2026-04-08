@@ -1,8 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { InternshipComponent } from './internship.component';
 import { InternshipService } from '../../services/internship.service';
 import { of, throwError } from 'rxjs';
+
+const mockInternshipCard = {
+  id: '1',
+  title: 'Java Internship',
+  duration: '6 months',
+  location: 'Remote',
+  level: 'Intermediate',
+  description: 'Java internship description',
+  icon: 'fab fa-java',
+  requirements: ['Java'],
+  skills: ['Java'],
+  perks: ['Certificate']
+};
 
 describe('InternshipComponent', () => {
   let component: InternshipComponent;
@@ -10,14 +24,16 @@ describe('InternshipComponent', () => {
   let internshipService: jasmine.SpyObj<InternshipService>;
 
   beforeEach(async () => {
-    const internshipServiceSpy = jasmine.createSpyObj('InternshipService', ['submitApplication']);
+    const internshipServiceSpy = jasmine.createSpyObj('InternshipService', ['submitApplication', 'getInternships']);
+    internshipServiceSpy.getInternships.and.returnValue(of([]));
     
     await TestBed.configureTestingModule({
       declarations: [ InternshipComponent ],
-      imports: [ ReactiveFormsModule ],
+      imports: [ ReactiveFormsModule, FormsModule ],
       providers: [
         { provide: InternshipService, useValue: internshipServiceSpy }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
 
@@ -41,18 +57,17 @@ describe('InternshipComponent', () => {
   });
 
   it('should pre-fill internshipType when onApply is called', () => {
-    const internshipType = 'Java Internship';
-    component.onApply(internshipType);
+    component.onApply(mockInternshipCard);
     
-    expect(component.selectedInternship).toBe(internshipType);
+    expect(component.selectedInternship).toBe(mockInternshipCard.title);
     expect(component.showApplicationForm).toBe(true);
-    expect(component.applicationForm.get('internshipType')?.value).toBe(internshipType);
+    expect(component.applicationForm.get('internshipType')?.value).toBe(mockInternshipCard.title);
   });
 
   it('should show application form when onApply is called', () => {
     expect(component.showApplicationForm).toBe(false);
     
-    component.onApply('Java Internship');
+    component.onApply(mockInternshipCard);
     
     expect(component.showApplicationForm).toBe(true);
   });
@@ -119,7 +134,7 @@ describe('InternshipComponent', () => {
   });
 
   it('should reset form and hide it when onCancel is called', () => {
-    component.onApply('Java Internship');
+    component.onApply(mockInternshipCard);
     component.applicationForm.patchValue({
       studentName: 'John Doe',
       email: 'john@example.com'
@@ -151,18 +166,20 @@ describe('InternshipComponent', () => {
   // Task 15.3: Form submission and feedback tests
   it('should call InternshipService.submitApplication on form submit', () => {
     internshipService.submitApplication.and.returnValue(of({ message: 'Success' }));
-    
-    component.applicationForm.patchValue({
+
+    const formValue = {
       studentName: 'John Doe',
       email: 'john@example.com',
       phone: '1234567890',
       internshipType: 'Java Internship',
       message: 'I am interested'
-    });
-    
+    };
+
+    component.applicationForm.patchValue(formValue);
+
     component.onSubmit();
-    
-    expect(internshipService.submitApplication).toHaveBeenCalledWith(component.applicationForm.value);
+
+    expect(internshipService.submitApplication).toHaveBeenCalledWith(formValue);
   });
 
   it('should display success message on successful submission', () => {
@@ -231,7 +248,7 @@ describe('InternshipComponent', () => {
     component.successMessage = 'Previous success';
     component.errorMessage = 'Previous error';
     
-    component.onApply('Java Internship');
+    component.onApply(mockInternshipCard);
     
     expect(component.successMessage).toBe('');
     expect(component.errorMessage).toBe('');

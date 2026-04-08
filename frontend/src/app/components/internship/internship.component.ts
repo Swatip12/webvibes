@@ -199,6 +199,8 @@ export class InternshipComponent implements OnInit {
 
   onSubmit(): void {
     if (this.applicationForm.valid) {
+      this.successMessage = '';
+      this.errorMessage = '';
       this.internshipService.submitApplication(this.applicationForm.value).subscribe({
         next: () => {
           this.successMessage = 'Application submitted successfully! We will contact you soon.';

@@ -18,6 +18,7 @@ describe('ErrorInterceptor', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
+        ErrorInterceptor,
         { provide: AuthService, useValue: authServiceSpy },
         { provide: Router, useValue: routerSpy },
         {

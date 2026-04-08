@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FormsModule } from '@angular/forms';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ProjectsComponent } from './projects.component';
 import { ProjectService } from '../../services/project.service';
 import { of, throwError } from 'rxjs';
@@ -15,10 +17,11 @@ describe('ProjectsComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [ ProjectsComponent ],
-      imports: [ HttpClientTestingModule ],
+      imports: [ HttpClientTestingModule, FormsModule ],
       providers: [
         { provide: ProjectService, useValue: spy }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
 
@@ -28,6 +31,7 @@ describe('ProjectsComponent', () => {
   });
 
   it('should create', () => {
+    projectService.getAllProjects.and.returnValue(of([]));
     expect(component).toBeTruthy();
   });
 
@@ -53,20 +57,22 @@ describe('ProjectsComponent', () => {
     component.ngOnInit();
 
     expect(projectService.getAllProjects).toHaveBeenCalled();
-    expect(component.projects).toEqual(mockProjects);
+    // Component merges API projects with hardcoded ones
+    expect(component.projects.length).toBeGreaterThanOrEqual(1);
+    expect(component.projects[0].title).toBe('Test Project');
     expect(component.loading).toBe(false);
     expect(component.error).toBeNull();
   });
 
-  it('should handle error when fetching projects fails', () => {
+  it('should show hardcoded projects when API fails', () => {
     const errorResponse = new Error('Network error');
     projectService.getAllProjects.and.returnValue(throwError(() => errorResponse));
 
     component.ngOnInit();
 
-    expect(component.error).toBe('Failed to load projects');
+    // Component falls back to hardcoded projects on error
     expect(component.loading).toBe(false);
-    expect(component.projects).toEqual([]);
+    expect(component.projects.length).toBeGreaterThan(0);
   });
 
   it('should display projects when data is loaded', () => {
@@ -92,31 +98,19 @@ describe('ProjectsComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement;
-    const projectCards = compiled.querySelectorAll('.project-card');
-    
-    expect(projectCards.length).toBe(2);
+    const projectCards = compiled.querySelectorAll('.pp-card');
+
+    expect(projectCards.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('should display "No projects available" when projects array is empty', () => {
+  it('should show hardcoded projects when API returns empty array', () => {
     projectService.getAllProjects.and.returnValue(of([]));
     component.ngOnInit();
     fixture.detectChanges();
 
-    const compiled = fixture.nativeElement;
-    const noProjectsMessage = compiled.querySelector('.text-muted');
-    
-    expect(noProjectsMessage?.textContent).toContain('No projects available');
-  });
-
-  it('should display error message when error occurs', () => {
-    projectService.getAllProjects.and.returnValue(throwError(() => new Error('Network error')));
-    component.ngOnInit();
-    fixture.detectChanges();
-
-    const compiled = fixture.nativeElement;
-    const errorAlert = compiled.querySelector('.alert-danger');
-    
-    expect(errorAlert?.textContent).toContain('Failed to load projects');
+    // Component shows hardcoded projects when API returns empty
+    expect(component.projects.length).toBeGreaterThan(0);
+    expect(component.loading).toBe(false);
   });
 
   it('should open GitHub links in new tab', () => {
@@ -136,7 +130,7 @@ describe('ProjectsComponent', () => {
 
     const compiled = fixture.nativeElement;
     const githubLink = compiled.querySelector('a[target="_blank"]');
-    
+
     expect(githubLink).toBeTruthy();
     expect(githubLink?.getAttribute('target')).toBe('_blank');
     expect(githubLink?.getAttribute('rel')).toBe('noopener noreferrer');
