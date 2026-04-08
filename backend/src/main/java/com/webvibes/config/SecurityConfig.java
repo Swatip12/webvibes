@@ -36,16 +36,11 @@ public class SecurityConfig {
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
+    public AuthenticationManager authenticationManager() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(customUserDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
-        return provider;
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager() {
-        return new org.springframework.security.authentication.ProviderManager(authenticationProvider());
+        return new org.springframework.security.authentication.ProviderManager(provider);
     }
 
     @Bean
@@ -71,8 +66,6 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
-        http.authenticationProvider(authenticationProvider());
 
         return http.build();
     }
