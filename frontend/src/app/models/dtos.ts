@@ -130,4 +130,6 @@ export interface AdminStudentDTO {
   paidAmount?: number;
   remainingAmount?: number;
   paymentStatus?: 'NOT_PAID' | 'PARTIAL' | 'FULL';
+  utrNumber?: string;
+  pendingUtrType?: string;
 }

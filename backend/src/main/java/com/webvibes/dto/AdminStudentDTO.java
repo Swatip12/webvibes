@@ -16,6 +16,8 @@ public class AdminStudentDTO {
     private BigDecimal paidAmount;
     private BigDecimal remainingAmount;
     private PaymentStatus paymentStatus;
+    private String utrNumber;
+    private String pendingUtrType;
 
     public AdminStudentDTO() {}
 
@@ -72,4 +74,10 @@ public class AdminStudentDTO {
 
     public PaymentStatus getPaymentStatus() { return paymentStatus; }
     public void setPaymentStatus(PaymentStatus paymentStatus) { this.paymentStatus = paymentStatus; }
+
+    public String getUtrNumber() { return utrNumber; }
+    public void setUtrNumber(String utrNumber) { this.utrNumber = utrNumber; }
+
+    public String getPendingUtrType() { return pendingUtrType; }
+    public void setPendingUtrType(String pendingUtrType) { this.pendingUtrType = pendingUtrType; }
 }

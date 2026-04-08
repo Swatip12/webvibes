@@ -17,6 +17,7 @@
 
   <!-- Error -->
   <div class="alert alert-error" *ngIf="errorMessage && !isLoading">{{ errorMessage }}</div>
+  <div class="alert alert-success" *ngIf="successMessage && !isLoading">{{ successMessage }}</div>
 
   <!-- No Plan Assigned State -->
   <main class="dashboard-content" *ngIf="dashboard && !dashboard.planAssigned && !isLoading">
@@ -113,9 +114,25 @@
 
       <!-- NOT_PAID state -->
       <div class="payment-actions" *ngIf="dashboard.paymentStatus === 'NOT_PAID'">
-        <button class="btn-pay" [disabled]="!agreementAccepted" (click)="initiateRegistrationPayment()">
-          Pay ₹1000 Registration Fee
-        </button>
+        <div class="upi-box" *ngIf="!showUpiForm">
+          <p class="upi-amount">Amount to Pay: <strong>₹1000</strong> (Registration Fee)</p>
+          <div class="upi-details">
+            <p>Pay via UPI to:</p>
+            <p class="upi-id">📱 <strong>webvibestechnology@upi</strong></p>
+            <p class="upi-name">WebVibes Technology</p>
+          </div>
+          <button class="btn-pay" [disabled]="!agreementAccepted" (click)="showUpiForm = true">
+            I've Paid — Submit UTR
+          </button>
+        </div>
+        <div class="utr-form" *ngIf="showUpiForm">
+          <p>Enter the UTR / Transaction ID from your UPI app:</p>
+          <input type="text" class="utr-input" [(ngModel)]="utrNumber" placeholder="e.g. 123456789012" maxlength="22" />
+          <div class="utr-actions">
+            <button class="btn-pay" [disabled]="!utrNumber" (click)="submitUpiPayment('REGISTRATION')">Submit</button>
+            <button class="btn-secondary" (click)="showUpiForm = false">Cancel</button>
+          </div>
+        </div>
       </div>
 
       <!-- PARTIAL state -->
@@ -124,9 +141,25 @@
           <span class="paid-info">Paid: ₹{{ dashboard.paidAmount }}</span>
           <span class="remaining-info">Remaining: ₹{{ dashboard.remainingAmount }}</span>
         </div>
-        <button class="btn-pay" [disabled]="!agreementAccepted" (click)="initiateRemainingPayment()">
-          Pay Remaining Fees
-        </button>
+        <div class="upi-box" *ngIf="!showUpiForm">
+          <p class="upi-amount">Amount to Pay: <strong>₹{{ dashboard.remainingAmount }}</strong> (Remaining Fee)</p>
+          <div class="upi-details">
+            <p>Pay via UPI to:</p>
+            <p class="upi-id">📱 <strong>webvibestechnology@upi</strong></p>
+            <p class="upi-name">WebVibes Technology</p>
+          </div>
+          <button class="btn-pay" [disabled]="!agreementAccepted" (click)="showUpiForm = true">
+            I've Paid — Submit UTR
+          </button>
+        </div>
+        <div class="utr-form" *ngIf="showUpiForm">
+          <p>Enter the UTR / Transaction ID from your UPI app:</p>
+          <input type="text" class="utr-input" [(ngModel)]="utrNumber" placeholder="e.g. 123456789012" maxlength="22" />
+          <div class="utr-actions">
+            <button class="btn-pay" [disabled]="!utrNumber" (click)="submitUpiPayment('REMAINING')">Submit</button>
+            <button class="btn-secondary" (click)="showUpiForm = false">Cancel</button>
+          </div>
+        </div>
       </div>
 
       <!-- FULL state -->

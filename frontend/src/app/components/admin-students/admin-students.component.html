@@ -37,6 +37,7 @@
           <th>Paid</th>
           <th>Remaining</th>
           <th>Status</th>
+          <th>UTR / Pending</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -60,6 +61,12 @@
                 {{ student.paymentStatus }}
               </span>
               <span *ngIf="!student.planAssigned" class="adm-badge badge-pending">PENDING</span>
+            </td>
+            <td>
+              <span *ngIf="student.utrNumber" class="utr-badge">
+                {{ student.pendingUtrType }}: {{ student.utrNumber }}
+              </span>
+              <span *ngIf="!student.utrNumber">—</span>
             </td>
             <td>
               <button *ngIf="!student.planAssigned" class="adm-btn adm-btn-sm adm-btn-assign" (click)="startAssign(student)">

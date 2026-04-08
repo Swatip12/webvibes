@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { StudentAuthService } from '../../services/student-auth.service';
-import { DashboardResponse, RazorpayOrderResponse, PaymentVerifyRequest } from '../../models/dtos';
+import { DashboardResponse } from '../../models/dtos';
 import { environment } from '../../../environments/environment';
-
-declare var Razorpay: any;
 
 @Component({
   selector: 'app-student-dashboard',
@@ -18,7 +16,9 @@ export class StudentDashboardComponent implements OnInit {
   errorMessage = '';
   agreementAccepted = false;
   cancellationMessage = '';
-  currentPaymentType = '';
+  showUpiForm = false;
+  utrNumber = '';
+  successMessage = '';
 
   private readonly apiUrl = environment.apiUrl;
 
@@ -52,60 +52,24 @@ export class StudentDashboardComponent implements OnInit {
     this.router.navigate(['/student/login']);
   }
 
-  initiateRegistrationPayment(): void {
-    this.cancellationMessage = '';
-    this.currentPaymentType = 'REGISTRATION';
-    this.http.post<RazorpayOrderResponse>(`${this.apiUrl}/api/payment/register`, {}).subscribe({
-      next: (orderData) => this.openRazorpayModal(orderData),
-      error: () => { this.errorMessage = 'Failed to initiate payment. Please try again.'; }
-    });
-  }
+  submitUpiPayment(paymentType: string): void {
+    if (!this.utrNumber.trim()) return;
+    this.errorMessage = '';
+    this.successMessage = '';
 
-  initiateRemainingPayment(): void {
-    this.cancellationMessage = '';
-    this.currentPaymentType = 'REMAINING';
-    this.http.post<RazorpayOrderResponse>(`${this.apiUrl}/api/payment/remaining`, {}).subscribe({
-      next: (orderData) => this.openRazorpayModal(orderData),
-      error: () => { this.errorMessage = 'Failed to initiate payment. Please try again.'; }
-    });
-  }
-
-  openRazorpayModal(orderData: RazorpayOrderResponse): void {
-    const student = this.studentAuthService.getCurrentStudent();
-    const options = {
-      key: orderData.keyId,
-      amount: orderData.amount,
-      currency: orderData.currency,
-      order_id: orderData.orderId,
-      name: 'WebVibes Technology',
-      description: this.currentPaymentType === 'REGISTRATION' ? 'Registration Fee' : 'Remaining Fee',
-      prefill: {
-        name: student?.name || ''
+    this.http.post<{message: string}>(`${this.apiUrl}/api/payment/upi-submit`, {
+      paymentType,
+      utrNumber: this.utrNumber.trim()
+    }).subscribe({
+      next: (res) => {
+        this.successMessage = res.message;
+        this.showUpiForm = false;
+        this.utrNumber = '';
       },
-      theme: { color: '#4f46e5' },
-      handler: (response: any) => {
-        const verifyReq: PaymentVerifyRequest = {
-          razorpayPaymentId: response.razorpay_payment_id,
-          razorpayOrderId: response.razorpay_order_id,
-          razorpaySignature: response.razorpay_signature,
-          paymentType: this.currentPaymentType
-        };
-        this.http.post(`${this.apiUrl}/api/payment/verify`, verifyReq).subscribe({
-          next: () => {
-            this.cancellationMessage = '';
-            this.loadDashboard();
-          },
-          error: () => { this.errorMessage = 'Payment verification failed. Please contact support.'; }
-        });
-      },
-      modal: {
-        ondismiss: () => {
-          this.cancellationMessage = 'Payment was cancelled. You can try again.';
-        }
+      error: () => {
+        this.errorMessage = 'Failed to submit payment. Please try again.';
       }
-    };
-    const rzp = new Razorpay(options);
-    rzp.open();
+    });
   }
 
   downloadReceipt(type: string): void {

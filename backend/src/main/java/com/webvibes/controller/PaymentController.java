@@ -1,9 +1,11 @@
 package com.webvibes.controller;
 
-import com.webvibes.dto.PaymentVerifyRequest;
-import com.webvibes.dto.PaymentVerifyResponse;
-import com.webvibes.dto.RazorpayOrderResponse;
-import com.webvibes.service.PaymentService;
+import com.webvibes.dto.MessageResponse;
+import com.webvibes.dto.UpiPaymentRequest;
+import com.webvibes.entity.StudentInternship;
+import com.webvibes.exception.StudentInternshipNotFoundException;
+import com.webvibes.repository.StudentInternshipRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,40 +18,28 @@ import java.security.Principal;
 public class PaymentController {
 
     @Autowired
-    private PaymentService paymentService;
+    private StudentInternshipRepository studentInternshipRepository;
 
     /**
-     * Creates a Razorpay order for the ₹1000 registration fee.
-     * Requires ROLE_STUDENT.
+     * Student submits their UPI UTR number after making a manual UPI payment.
+     * Admin will verify and confirm via the admin panel.
      */
-    @PostMapping("/register")
+    @PostMapping("/upi-submit")
     @PreAuthorize("hasRole('STUDENT')")
-    public ResponseEntity<RazorpayOrderResponse> createRegistrationOrder(Principal principal) {
-        RazorpayOrderResponse response = paymentService.createRegistrationOrder(principal.getName());
-        return ResponseEntity.ok(response);
-    }
-
-    /**
-     * Creates a Razorpay order for the remaining balance.
-     * Requires ROLE_STUDENT.
-     */
-    @PostMapping("/remaining")
-    @PreAuthorize("hasRole('STUDENT')")
-    public ResponseEntity<RazorpayOrderResponse> createRemainingOrder(Principal principal) {
-        RazorpayOrderResponse response = paymentService.createRemainingOrder(principal.getName());
-        return ResponseEntity.ok(response);
-    }
-
-    /**
-     * Verifies the Razorpay signature and records the payment.
-     * Requires ROLE_STUDENT.
-     */
-    @PostMapping("/verify")
-    @PreAuthorize("hasRole('STUDENT')")
-    public ResponseEntity<PaymentVerifyResponse> verifyPayment(
-            @RequestBody PaymentVerifyRequest request,
+    public ResponseEntity<MessageResponse> submitUpiPayment(
+            @Valid @RequestBody UpiPaymentRequest request,
             Principal principal) {
-        PaymentVerifyResponse response = paymentService.verifyAndRecord(request, principal.getName());
-        return ResponseEntity.ok(response);
+
+        StudentInternship si = studentInternshipRepository.findByStudentEmail(principal.getName())
+                .orElseThrow(() -> new StudentInternshipNotFoundException("No internship plan assigned"));
+
+        si.setUtrNumber(request.getUtrNumber());
+        si.setPendingUtrType(request.getPaymentType());
+        studentInternshipRepository.save(si);
+
+        return ResponseEntity.ok(new MessageResponse(
+                "Payment submitted successfully. Your UTR " + request.getUtrNumber() +
+                " has been recorded. Admin will verify and update your status shortly."
+        ));
     }
 }

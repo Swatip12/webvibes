@@ -115,7 +115,7 @@ public class AdminStudentController {
     }
 
     private AdminStudentDTO toDTO(StudentInternship si) {
-        return new AdminStudentDTO(
+        AdminStudentDTO dto = new AdminStudentDTO(
                 si.getStudent().getId(),
                 si.getStudent().getName(),
                 si.getStudent().getEmail(),
@@ -126,5 +126,8 @@ public class AdminStudentController {
                 si.getRemainingAmount(),
                 si.getPaymentStatus()
         );
+        dto.setUtrNumber(si.getUtrNumber());
+        dto.setPendingUtrType(si.getPendingUtrType());
+        return dto;
     }
 }

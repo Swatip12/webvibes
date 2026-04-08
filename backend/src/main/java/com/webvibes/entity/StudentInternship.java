@@ -44,6 +44,12 @@ public class StudentInternship {
     @Column(name = "razorpay_remaining_payment_id")
     private String razorpayRemainingPaymentId;
 
+    @Column(name = "utr_number")
+    private String utrNumber;
+
+    @Column(name = "pending_utr_type")
+    private String pendingUtrType; // REGISTRATION or REMAINING — set when student submits UTR, cleared after admin confirms
+
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
@@ -142,6 +148,12 @@ public class StudentInternship {
     public void setRazorpayRemainingPaymentId(String razorpayRemainingPaymentId) {
         this.razorpayRemainingPaymentId = razorpayRemainingPaymentId;
     }
+
+    public String getUtrNumber() { return utrNumber; }
+    public void setUtrNumber(String utrNumber) { this.utrNumber = utrNumber; }
+
+    public String getPendingUtrType() { return pendingUtrType; }
+    public void setPendingUtrType(String pendingUtrType) { this.pendingUtrType = pendingUtrType; }
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
