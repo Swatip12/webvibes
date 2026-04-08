@@ -118,11 +118,17 @@
           <p class="upi-amount">Amount to Pay: <strong>₹1000</strong> (Registration Fee)</p>
           <div class="upi-details">
             <p>Pay via UPI to:</p>
-            <p class="upi-id">📱 <strong>webvibestechnology@upi</strong></p>
+            <p class="upi-id">📱 <strong>paliwalswati603@oksbi</strong></p>
             <p class="upi-name">WebVibes Technology</p>
           </div>
-          <button class="btn-pay" [disabled]="!agreementAccepted" (click)="showUpiForm = true">
-            I've Paid — Submit UTR
+          <a class="btn-pay upi-deep-link"
+             [attr.href]="agreementAccepted ? 'upi://pay?pa=paliwalswati603@oksbi&pn=WebVibes%20Technology&am=1000&cu=INR&tn=Registration%20Fee' : null"
+             [class.disabled-link]="!agreementAccepted">
+            📲 Pay ₹1000 via UPI App
+          </a>
+          <p class="upi-hint">Tap to open GPay / PhonePe / Paytm with amount pre-filled</p>
+          <button class="btn-secondary mt-1" [disabled]="!agreementAccepted" (click)="showUpiForm = true">
+            Already paid? Submit UTR
           </button>
         </div>
         <div class="utr-form" *ngIf="showUpiForm">
@@ -148,8 +154,14 @@
             <p class="upi-id">📱 <strong>paliwalswati603@oksbi</strong></p>
             <p class="upi-name">WebVibes Technology</p>
           </div>
-          <button class="btn-pay" [disabled]="!agreementAccepted" (click)="showUpiForm = true">
-            I've Paid — Submit UTR
+          <a class="btn-pay upi-deep-link"
+             [attr.href]="agreementAccepted ? 'upi://pay?pa=paliwalswati603@oksbi&pn=WebVibes%20Technology&am=' + dashboard.remainingAmount + '&cu=INR&tn=Remaining%20Fee' : null"
+             [class.disabled-link]="!agreementAccepted">
+            📲 Pay ₹{{ dashboard.remainingAmount }} via UPI App
+          </a>
+          <p class="upi-hint">Tap to open GPay / PhonePe / Paytm with amount pre-filled</p>
+          <button class="btn-secondary mt-1" [disabled]="!agreementAccepted" (click)="showUpiForm = true">
+            Already paid? Submit UTR
           </button>
         </div>
         <div class="utr-form" *ngIf="showUpiForm">
