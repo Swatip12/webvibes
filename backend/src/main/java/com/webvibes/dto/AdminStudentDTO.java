@@ -10,6 +10,7 @@ public class AdminStudentDTO {
     private String name;
     private String email;
     private String mobile;
+    private boolean planAssigned;
     private String planName;
     private BigDecimal totalFee;
     private BigDecimal paidAmount;
@@ -18,6 +19,15 @@ public class AdminStudentDTO {
 
     public AdminStudentDTO() {}
 
+    // Constructor for students without a plan
+    public AdminStudentDTO(Long id, String name, String email, String mobile) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.mobile = mobile;
+        this.planAssigned = false;
+    }
+
     public AdminStudentDTO(Long id, String name, String email, String mobile,
                            String planName, BigDecimal totalFee, BigDecimal paidAmount,
                            BigDecimal remainingAmount, PaymentStatus paymentStatus) {
@@ -25,6 +35,7 @@ public class AdminStudentDTO {
         this.name = name;
         this.email = email;
         this.mobile = mobile;
+        this.planAssigned = true;
         this.planName = planName;
         this.totalFee = totalFee;
         this.paidAmount = paidAmount;
@@ -43,6 +54,9 @@ public class AdminStudentDTO {
 
     public String getMobile() { return mobile; }
     public void setMobile(String mobile) { this.mobile = mobile; }
+
+    public boolean isPlanAssigned() { return planAssigned; }
+    public void setPlanAssigned(boolean planAssigned) { this.planAssigned = planAssigned; }
 
     public String getPlanName() { return planName; }
     public void setPlanName(String planName) { this.planName = planName; }

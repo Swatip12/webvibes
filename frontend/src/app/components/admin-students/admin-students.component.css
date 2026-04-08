@@ -40,3 +40,18 @@
   .adm-page { padding: 1rem; }
   .adm-table th, .adm-table td { padding: 0.5rem 0.6rem; font-size: 0.8rem; }
 }
+
+.badge-pending {
+  background: #e5e7eb;
+  color: #6b7280;
+}
+
+.adm-btn-assign {
+  background: #059669;
+  color: #fff;
+  border: none;
+}
+
+.adm-btn-assign:hover {
+  background: #047857;
+}

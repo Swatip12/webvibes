@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { AdminService } from '../../services/admin.service';
 import { AdminStudentDTO } from '../../models/dtos';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-admin-students',
@@ -15,11 +17,17 @@ export class AdminStudentsComponent implements OnInit {
   selectedFilter = 'ALL';
   filterOptions = ['ALL', 'NOT_PAID', 'PARTIAL', 'FULL'];
 
-  // inline edit state: map of studentId -> edit form data
+  // inline edit state
   editingId: number | null = null;
   editForm: { paidAmount: number; paymentStatus: string } = { paidAmount: 0, paymentStatus: '' };
 
-  constructor(private adminService: AdminService) {}
+  // assign plan state
+  assigningId: number | null = null;
+  assignForm: { planName: string; totalFee: number } = { planName: '', totalFee: 0 };
+
+  private readonly apiUrl = environment.apiUrl;
+
+  constructor(private adminService: AdminService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.loadStudents();
@@ -30,7 +38,7 @@ export class AdminStudentsComponent implements OnInit {
     this.error = '';
     this.adminService.getStudents(this.selectedFilter).subscribe({
       next: (page) => {
-        this.students = page.content || page; // handle both Page and plain array
+        this.students = page.content || page;
         this.loading = false;
       },
       error: () => {
@@ -46,7 +54,8 @@ export class AdminStudentsComponent implements OnInit {
 
   startEdit(student: AdminStudentDTO): void {
     this.editingId = student.id;
-    this.editForm = { paidAmount: student.paidAmount, paymentStatus: student.paymentStatus };
+    this.assigningId = null;
+    this.editForm = { paidAmount: student.paidAmount || 0, paymentStatus: student.paymentStatus || 'NOT_PAID' };
     this.successMsg = '';
     this.error = '';
   }
@@ -69,7 +78,36 @@ export class AdminStudentsComponent implements OnInit {
     });
   }
 
-  getStatusClass(status: string): string {
+  startAssign(student: AdminStudentDTO): void {
+    this.assigningId = student.id;
+    this.editingId = null;
+    this.assignForm = { planName: '', totalFee: 0 };
+    this.successMsg = '';
+    this.error = '';
+  }
+
+  cancelAssign(): void {
+    this.assigningId = null;
+  }
+
+  saveAssign(student: AdminStudentDTO): void {
+    this.http.post<AdminStudentDTO>(
+      `${this.apiUrl}/api/admin/students/${student.id}/assign-plan`,
+      this.assignForm
+    ).subscribe({
+      next: (updated) => {
+        const idx = this.students.findIndex(s => s.id === student.id);
+        if (idx !== -1) this.students[idx] = updated;
+        this.assigningId = null;
+        this.successMsg = `Plan assigned to ${student.name}.`;
+      },
+      error: () => {
+        this.error = 'Failed to assign plan.';
+      }
+    });
+  }
+
+  getStatusClass(status: string | undefined): string {
     switch (status) {
       case 'FULL': return 'badge-full';
       case 'PARTIAL': return 'badge-partial';

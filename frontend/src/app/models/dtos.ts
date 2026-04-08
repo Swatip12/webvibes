@@ -124,9 +124,10 @@ export interface AdminStudentDTO {
   name: string;
   email: string;
   mobile: string;
-  planName: string;
-  totalFee: number;
-  paidAmount: number;
-  remainingAmount: number;
-  paymentStatus: 'NOT_PAID' | 'PARTIAL' | 'FULL';
+  planAssigned: boolean;
+  planName?: string;
+  totalFee?: number;
+  paidAmount?: number;
+  remainingAmount?: number;
+  paymentStatus?: 'NOT_PAID' | 'PARTIAL' | 'FULL';
 }
