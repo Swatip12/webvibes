@@ -44,10 +44,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .authenticationProvider(authenticationProvider())
-                .build();
+    public AuthenticationManager authenticationManager() {
+        return new org.springframework.security.authentication.ProviderManager(authenticationProvider());
     }
 
     @Bean
