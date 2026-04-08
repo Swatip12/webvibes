@@ -3,7 +3,7 @@ services:
     name: webvibes-backend
     runtime: java
     buildCommand: mvn clean package -DskipTests
-    startCommand: java -jar target/webvibes-backend-1.0.0.jar
+    startCommand: java -Dserver.port=$PORT -jar target/webvibes-backend-1.0.0.jar
     plan: free
     envVars:
       - key: DATABASE_URL
