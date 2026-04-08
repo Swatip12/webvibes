@@ -40,6 +40,7 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/student/auth/**").permitAll()
                 .requestMatchers("/api/courses").permitAll()
                 .requestMatchers("/api/courses/*/syllabus").permitAll()
                 .requestMatchers("/api/internships").permitAll()
