@@ -94,4 +94,14 @@ export class AssessmentListComponent implements OnInit {
       default: return type;
     }
   }
+
+  getTypeIcon(type: AssessmentType): string {
+    switch (type) {
+      case 'MOCK_INTERVIEW': return '🎥';
+      case 'APTITUDE_TEST': return '🧠';
+      case 'MACHINE_TEST': return '💻';
+      case 'TECHNICAL_MCQ': return '📝';
+      default: return '📋';
+    }
+  }
 }

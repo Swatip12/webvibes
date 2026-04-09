@@ -1,5 +1,8 @@
 <div class="assessment-list-section">
-  <h2 class="section-title">My Assessments</h2>
+  <div class="section-header">
+    <h2 class="section-title">📝 My Assessments</h2>
+    <span class="assessment-count" *ngIf="assessments.length > 0">{{ assessments.length }} assigned</span>
+  </div>
 
   <!-- Loading -->
   <div class="loading-state" *ngIf="isLoading">
@@ -8,65 +11,81 @@
   </div>
 
   <!-- Error -->
-  <div class="alert alert-error" *ngIf="errorMessage && !isLoading">{{ errorMessage }}</div>
+  <div class="alert alert-error" *ngIf="errorMessage && !isLoading">
+    <span>⚠️</span> {{ errorMessage }}
+  </div>
 
-  <!-- Payment gate message -->
+  <!-- Payment gate -->
   <div class="payment-gate" *ngIf="!isLoading && !errorMessage && paymentGated && assessments.length === 0">
     <span class="gate-icon">🔒</span>
     <p>Complete your payment to unlock assessments</p>
   </div>
 
+  <!-- Empty state (paid, no assessments yet) -->
+  <div class="empty-state" *ngIf="!isLoading && !errorMessage && !paymentGated && assessments.length === 0">
+    <div class="empty-icon">📭</div>
+    <p class="empty-title">No assessments yet</p>
+    <p class="empty-sub">Your assessments will appear here once assigned by the admin.</p>
+  </div>
+
   <!-- Assessment cards -->
   <div class="assessment-cards" *ngIf="!isLoading && !errorMessage && assessments.length > 0">
-    <div class="assessment-card" *ngFor="let a of assessments">
-      <div class="card-header">
-        <div class="card-title-row">
-          <span class="assessment-title">{{ a.title }}</span>
-          <span class="type-label">{{ getTypeLabel(a.type) }}</span>
-        </div>
-        <span class="badge" [ngClass]="getStatusClass(a.status)">{{ a.status }}</span>
+    <div class="assessment-card" *ngFor="let a of assessments" [ngClass]="'card-' + a.status?.toLowerCase()">
+
+      <div class="card-left">
+        <div class="type-icon">{{ getTypeIcon(a.type) }}</div>
       </div>
 
       <div class="card-body">
-        <!-- Score for COMPLETED MCQ/Aptitude -->
-        <div class="card-meta" *ngIf="a.status === 'COMPLETED' && isMcqOrAptitude(a.type)">
-          <span class="meta-label">Score:</span>
-          <span class="meta-value score-value">{{ a.score !== undefined ? a.score : '—' }}</span>
+        <div class="card-top">
+          <div>
+            <p class="assessment-title">{{ a.title }}</p>
+            <p class="type-label">{{ getTypeLabel(a.type) }}</p>
+          </div>
+          <span class="badge" [ngClass]="getStatusClass(a.status)">{{ a.status }}</span>
         </div>
 
-        <!-- Scheduled date for UPCOMING mock interview -->
-        <div class="card-meta" *ngIf="a.status === 'UPCOMING' && isMockInterview(a.type)">
-          <span class="meta-label">Scheduled:</span>
-          <span class="meta-value">{{ formatDate(a.scheduledAt) }}</span>
+        <div class="card-meta-row">
+          <!-- Score for COMPLETED MCQ/Aptitude -->
+          <div class="meta-chip" *ngIf="a.status === 'COMPLETED' && isMcqOrAptitude(a.type)">
+            <span class="meta-icon">🏆</span>
+            <span class="meta-label">Score:</span>
+            <span class="meta-value score-value">{{ a.score !== undefined ? a.score : '—' }}</span>
+          </div>
+
+          <!-- Scheduled date for UPCOMING mock interview -->
+          <div class="meta-chip" *ngIf="a.status === 'UPCOMING' && isMockInterview(a.type)">
+            <span class="meta-icon">📅</span>
+            <span class="meta-label">Scheduled:</span>
+            <span class="meta-value">{{ formatDate(a.scheduledAt) }}</span>
+          </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="card-actions" *ngIf="a.status !== 'COMPLETED'">
+          <button
+            class="btn-action btn-start"
+            *ngIf="a.status === 'PENDING' && isMcqOrAptitude(a.type)"
+            (click)="startTest(a)">
+            ▶ Start Test
+          </button>
+
+          <button
+            class="btn-action btn-problem"
+            *ngIf="a.status === 'PENDING' && isMachineTest(a.type)"
+            (click)="viewProblem(a)">
+            💻 View Problem
+          </button>
+
+          <button
+            class="btn-action btn-join"
+            *ngIf="a.status === 'UPCOMING' && isMockInterview(a.type)"
+            (click)="joinInterview(a)">
+            🎥 Join Interview
+          </button>
         </div>
       </div>
 
-      <!-- Action buttons -->
-      <div class="card-actions" *ngIf="a.status !== 'COMPLETED'">
-        <!-- Start Test: PENDING MCQ/Aptitude -->
-        <button
-          class="btn-action btn-start"
-          *ngIf="a.status === 'PENDING' && isMcqOrAptitude(a.type)"
-          (click)="startTest(a)">
-          Start Test
-        </button>
-
-        <!-- View Problem: PENDING Machine Test -->
-        <button
-          class="btn-action btn-problem"
-          *ngIf="a.status === 'PENDING' && isMachineTest(a.type)"
-          (click)="viewProblem(a)">
-          View Problem
-        </button>
-
-        <!-- Join Interview: UPCOMING Mock Interview -->
-        <button
-          class="btn-action btn-join"
-          *ngIf="a.status === 'UPCOMING' && isMockInterview(a.type)"
-          (click)="joinInterview(a)">
-          Join Interview
-        </button>
-      </div>
     </div>
   </div>
 </div>
