@@ -1,0 +1,128 @@
+<div class="mcq-test-page">
+
+  <!-- Loading -->
+  <div class="loading-state" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading assessment...</p>
+  </div>
+
+  <!-- Error -->
+  <div class="alert alert-error" *ngIf="errorMessage && !isLoading">
+    {{ errorMessage }}
+    <button class="btn-back" (click)="goBack()">Back to Dashboard</button>
+  </div>
+
+  <!-- Already submitted (before loading questions) -->
+  <div class="result-card already-submitted" *ngIf="alreadySubmitted && !submitted">
+    <div class="result-icon">⚠️</div>
+    <h2>Already Submitted</h2>
+    <p>You have already submitted this assessment.</p>
+    <button class="btn-back" (click)="goBack()">Back to Dashboard</button>
+  </div>
+
+  <!-- Test form -->
+  <div class="test-container" *ngIf="!isLoading && !errorMessage && !submitted && !alreadySubmitted && detail">
+
+    <!-- Header with timer -->
+    <div class="test-header">
+      <div class="test-title-block">
+        <h1 class="test-title">{{ detail.title }}</h1>
+        <span class="question-count">{{ questions.length }} Questions</span>
+      </div>
+      <div class="timer-block" *ngIf="timeLimitMinutes > 0">
+        <app-timer [totalMinutes]="timeLimitMinutes" (timerExpired)="onTimerExpired()"></app-timer>
+      </div>
+    </div>
+
+    <!-- Questions -->
+    <div class="questions-list">
+      <div class="question-card" *ngFor="let q of questions; let i = index">
+        <div class="question-prompt">
+          <span class="question-number">Q{{ i + 1 }}.</span>
+          {{ q.prompt }}
+        </div>
+        <div class="options-list">
+          <label class="option-label" [class.selected]="getSelectedAnswer(q.questionId) === 0">
+            <input
+              type="radio"
+              [name]="'q' + q.questionId"
+              [value]="0"
+              [checked]="getSelectedAnswer(q.questionId) === 0"
+              (change)="selectAnswer(q.questionId, 0)"
+            />
+            <span class="option-letter">A</span>
+            <span class="option-text">{{ q.optionA }}</span>
+          </label>
+          <label class="option-label" [class.selected]="getSelectedAnswer(q.questionId) === 1">
+            <input
+              type="radio"
+              [name]="'q' + q.questionId"
+              [value]="1"
+              [checked]="getSelectedAnswer(q.questionId) === 1"
+              (change)="selectAnswer(q.questionId, 1)"
+            />
+            <span class="option-letter">B</span>
+            <span class="option-text">{{ q.optionB }}</span>
+          </label>
+          <label class="option-label" [class.selected]="getSelectedAnswer(q.questionId) === 2">
+            <input
+              type="radio"
+              [name]="'q' + q.questionId"
+              [value]="2"
+              [checked]="getSelectedAnswer(q.questionId) === 2"
+              (change)="selectAnswer(q.questionId, 2)"
+            />
+            <span class="option-letter">C</span>
+            <span class="option-text">{{ q.optionC }}</span>
+          </label>
+          <label class="option-label" [class.selected]="getSelectedAnswer(q.questionId) === 3">
+            <input
+              type="radio"
+              [name]="'q' + q.questionId"
+              [value]="3"
+              [checked]="getSelectedAnswer(q.questionId) === 3"
+              (change)="selectAnswer(q.questionId, 3)"
+            />
+            <span class="option-letter">D</span>
+            <span class="option-text">{{ q.optionD }}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-row">
+      <div class="answered-count">
+        {{ answers.size }} / {{ questions.length }} answered
+      </div>
+      <button
+        class="btn-submit"
+        [disabled]="!canSubmit"
+        (click)="onSubmit()">
+        {{ isSubmitting ? 'Submitting...' : 'Submit Test' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Result card -->
+  <div class="result-card" *ngIf="submitted && !alreadySubmitted && result">
+    <div class="result-icon">🎉</div>
+    <h2>Test Submitted!</h2>
+    <div class="score-display">
+      <span class="score-value">{{ result.score }}</span>
+      <span class="score-sep">/</span>
+      <span class="score-total">{{ result.total }}</span>
+    </div>
+    <p class="score-label">Your Score</p>
+    <button class="btn-back" (click)="goBack()">Back to Dashboard</button>
+  </div>
+
+  <!-- Already submitted result -->
+  <div class="result-card already-submitted" *ngIf="submitted && alreadySubmitted">
+    <div class="result-icon">⚠️</div>
+    <h2>Already Submitted</h2>
+    <p>You have already submitted this assessment.</p>
+    <button class="btn-back" (click)="goBack()">Back to Dashboard</button>
+  </div>
+
+</div>

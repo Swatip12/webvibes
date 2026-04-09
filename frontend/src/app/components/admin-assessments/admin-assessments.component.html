@@ -1,0 +1,131 @@
+<div class="adm-page">
+  <div class="adm-header">
+    <div>
+      <h2 class="adm-title">Assessment Management</h2>
+      <p class="adm-subtitle">Create and manage assessments for students</p>
+    </div>
+    <div class="adm-header-actions">
+      <button class="adm-btn adm-btn-primary" (click)="toggleForm()">
+        <i class="bi" [ngClass]="showForm ? 'bi-x-lg' : 'bi-plus-lg'"></i>
+        {{ showForm ? 'Cancel' : 'New Assessment' }}
+      </button>
+      <a routerLink="/admin/dashboard" class="adm-btn adm-btn-secondary">
+        <i class="bi bi-arrow-left"></i> Back to Dashboard
+      </a>
+    </div>
+  </div>
+
+  <!-- Alerts -->
+  <div *ngIf="successMsg" class="adm-alert adm-alert-success">{{ successMsg }}</div>
+  <div *ngIf="error" class="adm-alert adm-alert-error">{{ error }}</div>
+
+  <!-- Create Assessment Form -->
+  <div *ngIf="showForm" class="adm-form-card">
+    <h3 class="adm-form-title">Create New Assessment</h3>
+
+    <div class="adm-form-row">
+      <div class="adm-form-group">
+        <label class="adm-label">Title <span class="required">*</span></label>
+        <input type="text" class="adm-input" [(ngModel)]="form.title" placeholder="Assessment title" />
+      </div>
+      <div class="adm-form-group">
+        <label class="adm-label">Type <span class="required">*</span></label>
+        <select class="adm-select" [(ngModel)]="form.type" (change)="onTypeChange()">
+          <option *ngFor="let t of assessmentTypes" [value]="t">{{ t | titlecase }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="adm-form-group">
+      <label class="adm-label">Description</label>
+      <textarea class="adm-textarea" [(ngModel)]="form.description" placeholder="Optional description" rows="2"></textarea>
+    </div>
+
+    <!-- MOCK_INTERVIEW fields -->
+    <ng-container *ngIf="isMockInterview()">
+      <div class="adm-form-row">
+        <div class="adm-form-group">
+          <label class="adm-label">Scheduled At <span class="required">*</span></label>
+          <input type="datetime-local" class="adm-input" [(ngModel)]="form.scheduledAt" />
+        </div>
+        <div class="adm-form-group">
+          <label class="adm-label">Video Link <span class="required">*</span></label>
+          <input type="url" class="adm-input" [(ngModel)]="form.videoLink" placeholder="https://meet.google.com/..." />
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- MACHINE_TEST fields -->
+    <ng-container *ngIf="isMachineTest()">
+      <div class="adm-form-group">
+        <label class="adm-label">Problem Statement <span class="required">*</span> <span class="hint">(min 20 chars)</span></label>
+        <textarea class="adm-textarea" [(ngModel)]="form.problemStatement" placeholder="Describe the problem..." rows="4"></textarea>
+      </div>
+    </ng-container>
+
+    <!-- MCQ / APTITUDE fields -->
+    <ng-container *ngIf="isMcqOrAptitude()">
+      <div class="adm-form-group adm-form-group-sm">
+        <label class="adm-label">Time Limit (minutes) <span class="required">*</span> <span class="hint">(1–180)</span></label>
+        <input type="number" class="adm-input" [(ngModel)]="form.timeLimitMinutes" min="1" max="180" placeholder="e.g. 30" />
+      </div>
+    </ng-container>
+
+    <div class="adm-form-actions">
+      <button class="adm-btn adm-btn-success" (click)="createAssessment()" [disabled]="submitting">
+        <i class="bi bi-check-lg"></i> {{ submitting ? 'Creating...' : 'Create Assessment' }}
+      </button>
+      <button class="adm-btn adm-btn-secondary" (click)="toggleForm()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="adm-loading">Loading assessments...</div>
+
+  <!-- Table -->
+  <div *ngIf="!loading" class="adm-table-wrap">
+    <table class="adm-table" *ngIf="assessments.length > 0; else noAssessments">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Type</th>
+          <th>Created</th>
+          <th>Details</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of assessments" class="adm-row-link" (click)="viewDetail(a.id)">
+          <td class="adm-title-cell">{{ a.title }}</td>
+          <td>
+            <span class="adm-badge" [ngClass]="getTypeBadgeClass(a.type)">{{ a.type }}</span>
+          </td>
+          <td>{{ formatDate(a.createdAt) }}</td>
+          <td class="adm-detail-cell">
+            <span *ngIf="a.type === 'MOCK_INTERVIEW' && a.scheduledAt">
+              <i class="bi bi-calendar-event"></i> {{ formatDate(a.scheduledAt) }}
+            </span>
+            <span *ngIf="a.type === 'MACHINE_TEST'">
+              <i class="bi bi-code-slash"></i> Problem set
+            </span>
+            <span *ngIf="a.type === 'TECHNICAL_MCQ' || a.type === 'APTITUDE_TEST'">
+              <i class="bi bi-clock"></i> {{ a.timeLimitMinutes }} min
+            </span>
+          </td>
+          <td>
+            <a [routerLink]="['/admin/assessments', a.id]" class="adm-btn adm-btn-sm adm-btn-primary"
+               (click)="$event.stopPropagation()">
+              <i class="bi bi-eye"></i> View
+            </a>
+            <button class="adm-btn adm-btn-sm adm-btn-danger" (click)="deleteAssessment(a, $event)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noAssessments>
+      <div class="adm-empty">No assessments found. Create one to get started.</div>
+    </ng-template>
+  </div>
+</div>

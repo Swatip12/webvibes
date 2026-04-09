@@ -1,0 +1,73 @@
+<div class="machine-test-page">
+
+  <!-- Loading -->
+  <div class="loading-state" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading assessment...</p>
+  </div>
+
+  <!-- Error -->
+  <div class="alert alert-error" *ngIf="errorMessage && !isLoading">
+    {{ errorMessage }}
+    <button class="btn-back" (click)="goBack()">Back to Dashboard</button>
+  </div>
+
+  <!-- Already submitted (before form) -->
+  <div class="result-card already-submitted" *ngIf="alreadySubmitted && !submitted">
+    <div class="result-icon">⚠️</div>
+    <h2>Already Submitted</h2>
+    <p>You have already submitted this assessment.</p>
+    <button class="btn-back" (click)="goBack()">Back to Dashboard</button>
+  </div>
+
+  <!-- Test form -->
+  <div class="test-container" *ngIf="!isLoading && !errorMessage && !submitted && !alreadySubmitted && detail">
+
+    <div class="test-header">
+      <h1 class="test-title">{{ detail.title }}</h1>
+      <span class="test-type">Machine Test</span>
+    </div>
+
+    <div class="problem-card" *ngIf="detail.problemStatement">
+      <h2 class="section-label">Problem Statement</h2>
+      <p class="problem-text">{{ detail.problemStatement }}</p>
+    </div>
+
+    <div class="solution-card">
+      <h2 class="section-label">Your Solution</h2>
+      <textarea
+        class="solution-textarea"
+        [(ngModel)]="solution"
+        placeholder="Write your solution here..."
+        rows="16"
+        aria-label="Solution input"
+      ></textarea>
+    </div>
+
+    <div class="submit-row">
+      <button
+        class="btn-submit"
+        [disabled]="!canSubmit"
+        (click)="onSubmit()">
+        {{ isSubmitting ? 'Submitting...' : 'Submit Solution' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Success confirmation -->
+  <div class="result-card" *ngIf="submitted && !alreadySubmitted">
+    <div class="result-icon">✅</div>
+    <h2>Solution Submitted!</h2>
+    <p class="confirm-text">Your solution has been received. Results will be reviewed by the admin.</p>
+    <button class="btn-back" (click)="goBack()">Back to Dashboard</button>
+  </div>
+
+  <!-- Already submitted after submit attempt -->
+  <div class="result-card already-submitted" *ngIf="submitted && alreadySubmitted">
+    <div class="result-icon">⚠️</div>
+    <h2>Already Submitted</h2>
+    <p>You have already submitted this assessment.</p>
+    <button class="btn-back" (click)="goBack()">Back to Dashboard</button>
+  </div>
+
+</div>

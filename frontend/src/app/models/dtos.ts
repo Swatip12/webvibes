@@ -133,3 +133,128 @@ export interface AdminStudentDTO {
   utrNumber?: string;
   pendingUtrType?: string;
 }
+
+// Assessment portal DTOs
+export type AssessmentType = 'MOCK_INTERVIEW' | 'APTITUDE_TEST' | 'MACHINE_TEST' | 'TECHNICAL_MCQ';
+export type AssessmentStatus = 'PENDING' | 'UPCOMING' | 'COMPLETED';
+
+export interface StudentAssessmentDTO {
+  studentAssessmentId: number;
+  assessmentId: number;
+  title: string;
+  type: AssessmentType;
+  status: AssessmentStatus;
+  scheduledAt?: string;
+  timeLimitMinutes?: number;
+  score?: number;
+}
+
+export interface AssessmentDetailDTO {
+  studentAssessmentId: number;
+  assessmentId: number;
+  title: string;
+  description?: string;
+  type: AssessmentType;
+  status: AssessmentStatus;
+  scheduledAt?: string;
+  videoLink?: string;
+  problemStatement?: string;
+  timeLimitMinutes?: number;
+}
+
+export interface QuestionStudentDTO {
+  questionId: number;
+  prompt: string;
+  optionA: string;
+  optionB: string;
+  optionC: string;
+  optionD: string;
+}
+
+export interface AnswerDTO {
+  questionId: number;
+  selectedIndex: number;
+}
+
+export interface McqSubmitRequest {
+  answers: AnswerDTO[];
+}
+
+export interface MachineSubmitRequest {
+  solutionText: string;
+}
+
+export interface SubmitResponse {
+  score?: number;
+  total?: number;
+  status: AssessmentStatus;
+}
+
+export interface CreateAssessmentRequest {
+  title: string;
+  description?: string;
+  type: AssessmentType;
+  scheduledAt?: string;
+  videoLink?: string;
+  problemStatement?: string;
+  timeLimitMinutes?: number;
+}
+
+export interface CreateQuestionRequest {
+  prompt: string;
+  optionA: string;
+  optionB: string;
+  optionC: string;
+  optionD: string;
+  correctAnswerIndex: number;
+}
+
+export interface AssignRequest {
+  studentIds?: number[];
+  batchName?: string;
+}
+
+export interface AssignResponse {
+  assigned: number;
+  skippedIds: number[];
+  alreadyAssigned: number[];
+}
+
+export interface AssessmentDTO {
+  id: number;
+  title: string;
+  type: AssessmentType;
+  description?: string;
+  scheduledAt?: string;
+  videoLink?: string;
+  problemStatement?: string;
+  timeLimitMinutes?: number;
+  createdAt: string;
+  questions?: QuestionDTO[];
+}
+
+export interface QuestionDTO {
+  id: number;
+  prompt: string;
+  optionA: string;
+  optionB: string;
+  optionC: string;
+  optionD: string;
+  correctAnswerIndex: number;
+}
+
+export interface ResultDTO {
+  studentAssessmentId: number;
+  studentName: string;
+  studentEmail: string;
+  status: AssessmentStatus;
+  score?: number;
+  total?: number;
+  solutionText?: string;
+  scheduledAt?: string;
+  submittedAt?: string;
+}
+
+export interface UpdateStatusRequest {
+  status: AssessmentStatus;
+}

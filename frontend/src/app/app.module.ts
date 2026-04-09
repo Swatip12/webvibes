@@ -30,6 +30,13 @@ import { StudentRegisterComponent } from './components/student-register/student-
 import { StudentLoginComponent } from './components/student-login/student-login.component';
 import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
 import { AdminStudentsComponent } from './components/admin-students/admin-students.component';
+import { TimerComponent } from './components/timer/timer.component';
+import { AssessmentListComponent } from './components/assessment-list/assessment-list.component';
+import { McqTestComponent } from './components/mcq-test/mcq-test.component';
+import { MachineTestComponent } from './components/machine-test/machine-test.component';
+import { MockInterviewComponent } from './components/mock-interview/mock-interview.component';
+import { AdminAssessmentsComponent } from './components/admin-assessments/admin-assessments.component';
+import { AdminAssessmentDetailComponent } from './components/admin-assessment-detail/admin-assessment-detail.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +63,14 @@ import { AdminStudentsComponent } from './components/admin-students/admin-studen
     StudentRegisterComponent,
     StudentLoginComponent,
     StudentDashboardComponent,
-    AdminStudentsComponent
+    AdminStudentsComponent,
+    TimerComponent,
+    AssessmentListComponent,
+    McqTestComponent,
+    MachineTestComponent,
+    MockInterviewComponent,
+    AdminAssessmentsComponent,
+    AdminAssessmentDetailComponent
   ],
   imports: [
     BrowserModule,

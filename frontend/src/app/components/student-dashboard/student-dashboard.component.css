@@ -492,3 +492,14 @@
 .mt-1 {
   margin-top: 0.5rem;
 }
+
+/* Assessment gate message (non-FULL payment) */
+.payment-gate-msg {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #92400e;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
+}

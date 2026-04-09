@@ -41,6 +41,30 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
     
+    @ExceptionHandler(AssessmentNotFoundException.class)
+    public ResponseEntity<MessageResponse> handleAssessmentNotFound(AssessmentNotFoundException ex) {
+        logger.error("Assessment not found: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(AssessmentAlreadySubmittedException.class)
+    public ResponseEntity<MessageResponse> handleAssessmentAlreadySubmitted(AssessmentAlreadySubmittedException ex) {
+        logger.error("Assessment already submitted: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(AssessmentAccessDeniedException.class)
+    public ResponseEntity<MessageResponse> handleAssessmentAccessDenied(AssessmentAccessDeniedException ex) {
+        logger.error("Assessment access denied: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new MessageResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(InvalidAssessmentTypeOperationException.class)
+    public ResponseEntity<MessageResponse> handleInvalidAssessmentTypeOperation(InvalidAssessmentTypeOperationException ex) {
+        logger.error("Invalid assessment type operation: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse(ex.getMessage()));
+    }
+
     @ExceptionHandler(EmailAlreadyExistsException.class)
     public ResponseEntity<MessageResponse> handleEmailAlreadyExists(EmailAlreadyExistsException ex) {
         logger.error("Email already exists: {}", ex.getMessage());

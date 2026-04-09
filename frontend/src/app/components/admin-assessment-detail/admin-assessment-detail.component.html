@@ -1,0 +1,237 @@
+<div class="adm-page">
+
+  <!-- Header -->
+  <div class="adm-header">
+    <div>
+      <h2 class="adm-title">
+        <span *ngIf="assessment">{{ assessment.title }}</span>
+        <span *ngIf="!assessment && !loading">Assessment Detail</span>
+        <span *ngIf="loading">Loading...</span>
+      </h2>
+      <p class="adm-subtitle" *ngIf="assessment">
+        <span class="adm-badge" [ngClass]="getTypeBadgeClass(assessment.type)">{{ assessment.type }}</span>
+        <span *ngIf="assessment.description" class="adm-desc-text"> &mdash; {{ assessment.description }}</span>
+      </p>
+    </div>
+    <div class="adm-header-actions">
+      <button class="adm-btn adm-btn-secondary" (click)="goBack()">
+        <i class="bi bi-arrow-left"></i> Back to Assessments
+      </button>
+    </div>
+  </div>
+
+  <!-- Global alerts -->
+  <div *ngIf="successMsg" class="adm-alert adm-alert-success">{{ successMsg }}</div>
+  <div *ngIf="error" class="adm-alert adm-alert-error">{{ error }}</div>
+
+  <div *ngIf="loading" class="adm-loading">Loading assessment...</div>
+
+  <ng-container *ngIf="assessment && !loading">
+
+    <!-- Assessment Info Card -->
+    <div class="adm-form-card">
+      <h3 class="adm-form-title">Assessment Details</h3>
+      <div class="adm-info-grid">
+        <div class="adm-info-item">
+          <span class="adm-info-label">Type</span>
+          <span class="adm-badge" [ngClass]="getTypeBadgeClass(assessment.type)">{{ assessment.type }}</span>
+        </div>
+        <div class="adm-info-item">
+          <span class="adm-info-label">Created</span>
+          <span>{{ formatDate(assessment.createdAt) }}</span>
+        </div>
+        <div class="adm-info-item" *ngIf="isMcqOrAptitude()">
+          <span class="adm-info-label">Time Limit</span>
+          <span>{{ assessment.timeLimitMinutes }} minutes</span>
+        </div>
+        <div class="adm-info-item" *ngIf="isMockInterview() && assessment.scheduledAt">
+          <span class="adm-info-label">Scheduled At</span>
+          <span>{{ formatDate(assessment.scheduledAt) }}</span>
+        </div>
+        <div class="adm-info-item" *ngIf="isMockInterview() && assessment.videoLink">
+          <span class="adm-info-label">Video Link</span>
+          <a [href]="assessment.videoLink" target="_blank" class="adm-link">{{ assessment.videoLink }}</a>
+        </div>
+      </div>
+      <div *ngIf="isMachineTest() && assessment.problemStatement" class="adm-problem-statement">
+        <span class="adm-info-label">Problem Statement</span>
+        <pre class="adm-pre">{{ assessment.problemStatement }}</pre>
+      </div>
+    </div>
+
+    <!-- Questions Section (MCQ / APTITUDE only) -->
+    <ng-container *ngIf="isMcqOrAptitude()">
+      <div class="adm-form-card">
+        <h3 class="adm-form-title">Questions ({{ assessment.questions?.length || 0 }})</h3>
+
+        <!-- Question alerts -->
+        <div *ngIf="questionSuccess" class="adm-alert adm-alert-success">{{ questionSuccess }}</div>
+        <div *ngIf="questionError" class="adm-alert adm-alert-error">{{ questionError }}</div>
+
+        <!-- Add Question Form -->
+        <div class="adm-question-form">
+          <h4 class="adm-section-subtitle">Add New Question</h4>
+          <div class="adm-form-group">
+            <label class="adm-label">Prompt <span class="required">*</span></label>
+            <textarea class="adm-textarea" [(ngModel)]="questionForm.prompt" rows="2" placeholder="Enter question prompt..."></textarea>
+          </div>
+          <div class="adm-form-row">
+            <div class="adm-form-group">
+              <label class="adm-label">Option A <span class="required">*</span></label>
+              <input type="text" class="adm-input" [(ngModel)]="questionForm.optionA" placeholder="Option A" />
+            </div>
+            <div class="adm-form-group">
+              <label class="adm-label">Option B <span class="required">*</span></label>
+              <input type="text" class="adm-input" [(ngModel)]="questionForm.optionB" placeholder="Option B" />
+            </div>
+          </div>
+          <div class="adm-form-row">
+            <div class="adm-form-group">
+              <label class="adm-label">Option C <span class="required">*</span></label>
+              <input type="text" class="adm-input" [(ngModel)]="questionForm.optionC" placeholder="Option C" />
+            </div>
+            <div class="adm-form-group">
+              <label class="adm-label">Option D <span class="required">*</span></label>
+              <input type="text" class="adm-input" [(ngModel)]="questionForm.optionD" placeholder="Option D" />
+            </div>
+          </div>
+          <div class="adm-form-group adm-form-group-sm">
+            <label class="adm-label">Correct Answer <span class="required">*</span></label>
+            <select class="adm-select" [(ngModel)]="questionForm.correctAnswerIndex">
+              <option [value]="0">A</option>
+              <option [value]="1">B</option>
+              <option [value]="2">C</option>
+              <option [value]="3">D</option>
+            </select>
+          </div>
+          <div class="adm-form-actions">
+            <button class="adm-btn adm-btn-success" (click)="addQuestion()" [disabled]="addingQuestion">
+              <i class="bi bi-plus-lg"></i> {{ addingQuestion ? 'Adding...' : 'Add Question' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Existing Questions List -->
+        <div *ngIf="assessment.questions && assessment.questions.length > 0" class="adm-questions-list">
+          <h4 class="adm-section-subtitle">Existing Questions</h4>
+          <div *ngFor="let q of assessment.questions; let i = index" class="adm-question-item">
+            <div class="adm-question-header">
+              <span class="adm-question-num">Q{{ i + 1 }}</span>
+              <span class="adm-question-prompt">{{ q.prompt }}</span>
+              <button class="adm-btn adm-btn-sm adm-btn-danger" (click)="deleteQuestion(q.id)">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+            </div>
+            <div class="adm-options-grid">
+              <span [class.adm-correct-option]="q.correctAnswerIndex === 0"><strong>A.</strong> {{ q.optionA }}</span>
+              <span [class.adm-correct-option]="q.correctAnswerIndex === 1"><strong>B.</strong> {{ q.optionB }}</span>
+              <span [class.adm-correct-option]="q.correctAnswerIndex === 2"><strong>C.</strong> {{ q.optionC }}</span>
+              <span [class.adm-correct-option]="q.correctAnswerIndex === 3"><strong>D.</strong> {{ q.optionD }}</span>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!assessment.questions || assessment.questions.length === 0" class="adm-empty">
+          No questions yet. Add questions above.
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Assign Section -->
+    <div class="adm-form-card">
+      <h3 class="adm-form-title">Assign Assessment</h3>
+
+      <div *ngIf="assignResponse" class="adm-alert adm-alert-success">
+        Assigned: <strong>{{ assignResponse.assigned }}</strong> student(s).
+        <span *ngIf="assignResponse.alreadyAssigned?.length"> Already assigned: {{ assignResponse.alreadyAssigned.join(', ') }}.</span>
+        <span *ngIf="assignResponse.skippedIds?.length"> Skipped IDs (not found): {{ assignResponse.skippedIds.join(', ') }}.</span>
+      </div>
+      <div *ngIf="assignError" class="adm-alert adm-alert-error">{{ assignError }}</div>
+
+      <div class="adm-form-group">
+        <label class="adm-label">Assign By</label>
+        <div class="adm-radio-group">
+          <label class="adm-radio-label">
+            <input type="radio" [(ngModel)]="assignMode" value="batch" /> Batch Name
+          </label>
+          <label class="adm-radio-label">
+            <input type="radio" [(ngModel)]="assignMode" value="ids" /> Student IDs
+          </label>
+        </div>
+      </div>
+
+      <div *ngIf="assignMode === 'batch'" class="adm-form-group">
+        <label class="adm-label">Batch Name <span class="required">*</span></label>
+        <input type="text" class="adm-input" [(ngModel)]="batchName" placeholder="e.g. Java Batch" />
+      </div>
+
+      <div *ngIf="assignMode === 'ids'" class="adm-form-group">
+        <label class="adm-label">Student IDs <span class="required">*</span> <span class="hint">(comma-separated)</span></label>
+        <input type="text" class="adm-input" [(ngModel)]="studentIdsInput" placeholder="e.g. 1, 2, 3" />
+      </div>
+
+      <div class="adm-form-actions">
+        <button class="adm-btn adm-btn-primary" (click)="assign()" [disabled]="assigning">
+          <i class="bi bi-person-plus"></i> {{ assigning ? 'Assigning...' : 'Assign' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Table -->
+    <div class="adm-form-card">
+      <h3 class="adm-form-title">Results ({{ results.length }})</h3>
+
+      <div *ngIf="resultsLoading" class="adm-loading">Loading results...</div>
+
+      <div *ngIf="!resultsLoading">
+        <div *ngIf="results.length === 0" class="adm-empty">No students assigned yet.</div>
+
+        <div *ngIf="results.length > 0" class="adm-table-wrap">
+          <table class="adm-table">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th *ngIf="isMcqOrAptitude()">Score</th>
+                <th *ngIf="isMachineTest()">Solution</th>
+                <th *ngIf="isMockInterview()">Scheduled At</th>
+                <th>Submitted At</th>
+                <th>Update Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let r of results">
+                <td class="adm-title-cell">{{ r.studentName }}</td>
+                <td class="adm-detail-cell">{{ r.studentEmail }}</td>
+                <td>
+                  <span class="adm-badge" [ngClass]="getStatusBadgeClass(r.status)">{{ r.status }}</span>
+                </td>
+                <td *ngIf="isMcqOrAptitude()">
+                  <span *ngIf="r.score != null">{{ r.score }} / {{ r.total }}</span>
+                  <span *ngIf="r.score == null" class="adm-detail-cell">—</span>
+                </td>
+                <td *ngIf="isMachineTest()">
+                  <span *ngIf="r.solutionText" class="adm-solution-preview" [title]="r.solutionText">
+                    {{ r.solutionText | slice:0:60 }}{{ r.solutionText.length > 60 ? '...' : '' }}
+                  </span>
+                  <span *ngIf="!r.solutionText" class="adm-detail-cell">—</span>
+                </td>
+                <td *ngIf="isMockInterview()">{{ formatDate(r.scheduledAt) }}</td>
+                <td class="adm-detail-cell">{{ formatDate(r.submittedAt) }}</td>
+                <td>
+                  <select class="adm-select adm-select-sm"
+                          [ngModel]="r.status"
+                          (ngModelChange)="updateStatus(r.studentAssessmentId, $event)"
+                          [disabled]="updatingStatusId === r.studentAssessmentId">
+                    <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+</div>

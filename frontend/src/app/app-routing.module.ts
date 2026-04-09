@@ -21,6 +21,11 @@ import { StudentLoginComponent } from './components/student-login/student-login.
 import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
 import { StudentGuard } from './guards/student.guard';
 import { AdminStudentsComponent } from './components/admin-students/admin-students.component';
+import { McqTestComponent } from './components/mcq-test/mcq-test.component';
+import { MachineTestComponent } from './components/machine-test/machine-test.component';
+import { MockInterviewComponent } from './components/mock-interview/mock-interview.component';
+import { AdminAssessmentsComponent } from './components/admin-assessments/admin-assessments.component';
+import { AdminAssessmentDetailComponent } from './components/admin-assessment-detail/admin-assessment-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -43,7 +48,12 @@ const routes: Routes = [
   { path: 'admin/students', component: AdminStudentsComponent, canActivate: [AuthGuard] },
   { path: 'student/register', component: StudentRegisterComponent },
   { path: 'student/login', component: StudentLoginComponent },
-  { path: 'student/dashboard', component: StudentDashboardComponent, canActivate: [StudentGuard] }
+  { path: 'student/dashboard', component: StudentDashboardComponent, canActivate: [StudentGuard] },
+  { path: 'student/assessments/:id/take', component: McqTestComponent, canActivate: [StudentGuard] },
+  { path: 'student/assessments/:id/machine', component: MachineTestComponent, canActivate: [StudentGuard] },
+  { path: 'student/assessments/:id/interview', component: MockInterviewComponent, canActivate: [StudentGuard] },
+  { path: 'admin/assessments', component: AdminAssessmentsComponent, canActivate: [AuthGuard] },
+  { path: 'admin/assessments/:id', component: AdminAssessmentDetailComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

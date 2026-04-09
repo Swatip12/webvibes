@@ -1,0 +1,72 @@
+<div class="assessment-list-section">
+  <h2 class="section-title">My Assessments</h2>
+
+  <!-- Loading -->
+  <div class="loading-state" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading assessments...</p>
+  </div>
+
+  <!-- Error -->
+  <div class="alert alert-error" *ngIf="errorMessage && !isLoading">{{ errorMessage }}</div>
+
+  <!-- Payment gate message -->
+  <div class="payment-gate" *ngIf="!isLoading && !errorMessage && paymentGated && assessments.length === 0">
+    <span class="gate-icon">🔒</span>
+    <p>Complete your payment to unlock assessments</p>
+  </div>
+
+  <!-- Assessment cards -->
+  <div class="assessment-cards" *ngIf="!isLoading && !errorMessage && assessments.length > 0">
+    <div class="assessment-card" *ngFor="let a of assessments">
+      <div class="card-header">
+        <div class="card-title-row">
+          <span class="assessment-title">{{ a.title }}</span>
+          <span class="type-label">{{ getTypeLabel(a.type) }}</span>
+        </div>
+        <span class="badge" [ngClass]="getStatusClass(a.status)">{{ a.status }}</span>
+      </div>
+
+      <div class="card-body">
+        <!-- Score for COMPLETED MCQ/Aptitude -->
+        <div class="card-meta" *ngIf="a.status === 'COMPLETED' && isMcqOrAptitude(a.type)">
+          <span class="meta-label">Score:</span>
+          <span class="meta-value score-value">{{ a.score !== undefined ? a.score : '—' }}</span>
+        </div>
+
+        <!-- Scheduled date for UPCOMING mock interview -->
+        <div class="card-meta" *ngIf="a.status === 'UPCOMING' && isMockInterview(a.type)">
+          <span class="meta-label">Scheduled:</span>
+          <span class="meta-value">{{ formatDate(a.scheduledAt) }}</span>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="card-actions" *ngIf="a.status !== 'COMPLETED'">
+        <!-- Start Test: PENDING MCQ/Aptitude -->
+        <button
+          class="btn-action btn-start"
+          *ngIf="a.status === 'PENDING' && isMcqOrAptitude(a.type)"
+          (click)="startTest(a)">
+          Start Test
+        </button>
+
+        <!-- View Problem: PENDING Machine Test -->
+        <button
+          class="btn-action btn-problem"
+          *ngIf="a.status === 'PENDING' && isMachineTest(a.type)"
+          (click)="viewProblem(a)">
+          View Problem
+        </button>
+
+        <!-- Join Interview: UPCOMING Mock Interview -->
+        <button
+          class="btn-action btn-join"
+          *ngIf="a.status === 'UPCOMING' && isMockInterview(a.type)"
+          (click)="joinInterview(a)">
+          Join Interview
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

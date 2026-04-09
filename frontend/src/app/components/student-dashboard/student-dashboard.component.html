@@ -181,5 +181,13 @@
       </div>
     </div>
 
+    <!-- Assessments Section -->
+    <div class="card assessments-card">
+      <app-assessment-list *ngIf="dashboard.paymentStatus === 'FULL'"></app-assessment-list>
+      <div *ngIf="dashboard.paymentStatus !== 'FULL'" class="payment-gate-msg">
+        <span>🔒</span> Complete your payment to unlock assessments
+      </div>
+    </div>
+
   </main>
 </div>

@@ -1,0 +1,205 @@
+.assessment-list-section {
+  width: 100%;
+}
+
+.section-title {
+  margin: 0 0 1.2rem;
+  font-size: 1.3rem;
+  color: #1a1a2e;
+}
+
+/* Loading */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #4f46e5;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 0.75rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Alert */
+.alert-error {
+  background: #fff5f5;
+  color: #c53030;
+  border: 1px solid #feb2b2;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Payment gate */
+.payment-gate {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  color: #92400e;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.gate-icon {
+  font-size: 1.4rem;
+}
+
+/* Cards grid */
+.assessment-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.assessment-card {
+  background: #fafafa;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.2rem 1.4rem;
+  transition: box-shadow 0.2s;
+}
+
+.assessment-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Card header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-title-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.assessment-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.type-label {
+  font-size: 0.78rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* Status badges */
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.badge-pending {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+
+.badge-upcoming {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #93c5fd;
+}
+
+.badge-completed {
+  background: #f0fff4;
+  color: #276749;
+  border: 1px solid #9ae6b4;
+}
+
+/* Card body */
+.card-body {
+  margin-bottom: 0.75rem;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.meta-label {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.meta-value {
+  color: #1a1a2e;
+  font-weight: 600;
+}
+
+.score-value {
+  color: #276749;
+}
+
+/* Action buttons */
+.card-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-action {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.btn-start {
+  background: #4f46e5;
+  color: #fff;
+}
+
+.btn-start:hover {
+  background: #4338ca;
+}
+
+.btn-problem {
+  background: #0891b2;
+  color: #fff;
+}
+
+.btn-problem:hover {
+  background: #0e7490;
+}
+
+.btn-join {
+  background: #059669;
+  color: #fff;
+}
+
+.btn-join:hover {
+  background: #047857;
+}

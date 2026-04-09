@@ -1,0 +1,89 @@
+<div class="interview-page">
+
+  <!-- Loading -->
+  <div class="loading-state" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading interview details...</p>
+  </div>
+
+  <!-- Error -->
+  <div class="alert-error" *ngIf="errorMessage && !isLoading">
+    {{ errorMessage }}
+    <button class="btn-back" (click)="goBack()">Back to Dashboard</button>
+  </div>
+
+  <!-- Interview details -->
+  <div class="interview-container" *ngIf="!isLoading && !errorMessage && detail">
+
+    <div class="interview-header">
+      <h1 class="interview-title">{{ detail.title }}</h1>
+      <span class="interview-type">Mock Interview</span>
+    </div>
+
+    <!-- Schedule card -->
+    <div class="info-card">
+      <h2 class="section-label">Scheduled Date &amp; Time</h2>
+      <p class="schedule-time">{{ formatDate(detail.scheduledAt) }}</p>
+
+      <!-- Status badge -->
+      <span class="status-badge" [ngClass]="isUpcoming ? 'badge-upcoming' : 'badge-ready'">
+        {{ isUpcoming ? 'UPCOMING' : 'READY TO JOIN' }}
+      </span>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-card" *ngIf="isUpcoming && countdown">
+      <h2 class="section-label">Time Until Interview</h2>
+      <div class="countdown-grid">
+        <div class="countdown-unit">
+          <span class="countdown-value">{{ countdown.days }}</span>
+          <span class="countdown-label">Days</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-unit">
+          <span class="countdown-value">{{ countdown.hours | number:'2.0-0' }}</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-unit">
+          <span class="countdown-value">{{ countdown.minutes | number:'2.0-0' }}</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-unit">
+          <span class="countdown-value">{{ countdown.seconds | number:'2.0-0' }}</span>
+          <span class="countdown-label">Seconds</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Camera/mic notice -->
+    <div class="notice-card">
+      <div class="notice-icon">📷</div>
+      <div class="notice-content">
+        <h3 class="notice-title">Camera &amp; Microphone Required</h3>
+        <p class="notice-text">
+          This mock interview requires access to your camera and microphone.
+          Please ensure your devices are working and grant browser permissions before joining.
+        </p>
+      </div>
+    </div>
+
+    <!-- Join button -->
+    <div class="join-row">
+      <button
+        class="btn-join"
+        (click)="joinInterview()"
+        [disabled]="!detail.videoLink"
+        aria-label="Join Interview in new tab">
+        🎥 Join Interview
+      </button>
+    </div>
+
+    <div class="back-row">
+      <button class="btn-back" (click)="goBack()">Back to Dashboard</button>
+    </div>
+
+  </div>
+
+</div>
