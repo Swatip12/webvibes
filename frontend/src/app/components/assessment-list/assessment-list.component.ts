@@ -29,7 +29,7 @@ export class AssessmentListComponent implements OnInit {
     this.assessmentService.getMyAssessments().subscribe({
       next: (data) => {
         this.assessments = data;
-        this.paymentGated = data.length === 0;
+        this.paymentGated = false;
         this.isLoading = false;
       },
       error: (err) => {
