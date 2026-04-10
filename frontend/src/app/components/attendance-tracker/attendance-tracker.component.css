@@ -544,3 +544,16 @@
   .cal-cell { min-height: 40px; }
   .clock-time { font-size: 1.3rem; }
 }
+
+/* ── Min hours hint ── */
+.min-hours-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: #64748b;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+}

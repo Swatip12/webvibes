@@ -191,6 +191,15 @@ export class AttendanceTrackerComponent implements OnInit, OnDestroy {
 
   // ── Helpers ────────────────────────────────────────────────────────────────
 
+  /** Live elapsed hours since check-in (for internship minimum hours display) */
+  get elapsedHours(): string {
+    if (!this.today?.checkInTime) return '0.0';
+    const checkIn = new Date(this.today.checkInTime).getTime();
+    const now = this.currentTime.getTime();
+    const hours = (now - checkIn) / (1000 * 60 * 60);
+    return hours.toFixed(1);
+  }
+
   formatTime(dt: string | null): string {
     if (!dt) return '—';
     // dt is "2026-04-10T14:07:00" (no Z) — treat as local time directly

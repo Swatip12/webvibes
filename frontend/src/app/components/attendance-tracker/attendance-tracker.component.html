@@ -52,6 +52,10 @@
             <span class="time-label">Hours</span>
             <span class="time-value hours-val">{{ today.hoursWorked }}h</span>
           </div>
+          <div class="time-block" *ngIf="today.checkInTime && today.hoursWorked === null && today.activePhase === 'INTERNSHIP'">
+            <span class="time-label">Elapsed</span>
+            <span class="time-value hours-val">{{ elapsedHours }}h</span>
+          </div>
           <div class="time-block" *ngIf="today.status">
             <span class="time-label">Status</span>
             <span class="status-badge" [ngClass]="statusClass(today.status)">{{ today.status }}</span>
@@ -74,6 +78,11 @@
             <span class="btn-icon">🚪</span>
             {{ actionLoading ? 'Processing...' : 'Check Out' }}
           </button>
+
+          <!-- Internship min-hours hint -->
+          <div class="min-hours-hint" *ngIf="today.canCheckOut && today.activePhase === 'INTERNSHIP'">
+            <span>⏱</span> {{ elapsedHours }}h elapsed · min 4h required
+          </div>
 
           <div class="state-pill state-complete" *ngIf="!today.canCheckIn && !today.canCheckOut && today.checkOutTime">
             <span class="pill-icon">✓</span>

@@ -46,6 +46,9 @@ public class AttendanceService {
     @Value("${attendance.late-threshold:10:00}")
     private String lateThreshold;
 
+    @Value("${attendance.min-internship-hours:4.0}")
+    private double minInternshipHours;
+
     public AttendanceService(AttendanceRepository attendanceRepository,
                              StudentInternshipRepository studentInternshipRepository,
                              StudentRepository studentRepository) {
@@ -155,6 +158,18 @@ public class AttendanceService {
         }
 
         LocalDateTime now = LocalDateTime.now();
+
+        // Enforce minimum hours for INTERNSHIP phase only
+        if (phase == AttendancePhase.INTERNSHIP) {
+            double hoursElapsed = computeHoursWorked(attendance.getCheckInTime(), now);
+            if (hoursElapsed < minInternshipHours) {
+                throw new NoActivePhaseException(
+                    "Cannot check out yet. Internship requires a minimum of " + minInternshipHours + " hours. " +
+                    "You have worked " + String.format("%.1f", hoursElapsed) + " hour(s) so far."
+                );
+            }
+        }
+
         attendance.setCheckOutTime(now);
 
         double hours = computeHoursWorked(attendance.getCheckInTime(), now);
