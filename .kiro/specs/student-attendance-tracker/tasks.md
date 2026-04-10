@@ -157,7 +157,7 @@ Implement the full attendance tracking feature on top of the existing Spring Boo
     - **Property 11: JWT Identity Enforcement**
     - **Validates: Requirements 15.3**
 
-- [ ] 18. Frontend property-based tests (fast-check)
+- [x] 18. Frontend property-based tests (fast-check)
   - [ ]* 18.1 Write fast-check test for `AttendanceService` HTTP mapping: for any `CalendarDayDTO[]` response, the Angular service must return an array of the same length with all `displayStatus` values preserved
     - **Validates: Requirements 7.2**
   - [ ]* 18.2 Write fast-check test for `AttendanceTrackerComponent` button state (see task 13.6)
@@ -165,7 +165,8 @@ Implement the full attendance tracking feature on top of the existing Spring Boo
   - [ ]* 18.3 Write fast-check test for calendar grid completeness (see task 13.7)
     - **Validates: Requirements 7.1, 12.1**
 
-- [ ] 19. Final checkpoint — ensure all tests pass
+
+- [x] 19. Final checkpoint — ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes

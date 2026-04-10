@@ -13,6 +13,7 @@ import com.webvibes.repository.StudentInternshipRepository;
 import com.webvibes.repository.StudentRepository;
 import com.webvibes.service.AttendanceService;
 import net.jqwik.api.*;
+import net.jqwik.api.lifecycle.BeforeProperty;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
