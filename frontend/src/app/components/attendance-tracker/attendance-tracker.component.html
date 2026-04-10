@@ -1,0 +1,178 @@
+<div class="at-container">
+
+  <!-- ── Header: Live Clock + Active Phase ── -->
+  <div class="at-header">
+    <div class="at-clock">
+      <span class="clock-icon">🕐</span>
+      <span class="clock-time">{{ currentTime | date:'HH:mm:ss' }}</span>
+      <span class="clock-date">{{ currentTime | date:'EEEE, d MMM yyyy' }}</span>
+    </div>
+    <div class="at-phase-badge" *ngIf="today?.activePhase">
+      <span class="phase-dot"></span>
+      Active Phase: <strong>{{ today?.activePhase }}</strong>
+    </div>
+    <div class="at-phase-badge phase-none" *ngIf="today && !today.activePhase">
+      No active phase today
+    </div>
+  </div>
+
+  <!-- ── Today's Card ── -->
+  <div class="at-card today-card">
+    <div class="card-title-row">
+      <span class="card-icon">📅</span>
+      <h3>Today's Attendance</h3>
+    </div>
+
+    <div class="today-loading" *ngIf="todayLoading">
+      <div class="mini-spinner"></div> Loading...
+    </div>
+
+    <div class="at-error" *ngIf="todayError && !todayLoading">⚠️ {{ todayError }}</div>
+
+    <div class="today-body" *ngIf="today && !todayLoading">
+      <div class="today-times">
+        <div class="time-item">
+          <span class="time-label">Check-In</span>
+          <span class="time-value">{{ formatTime(today.checkInTime) }}</span>
+        </div>
+        <div class="time-divider">→</div>
+        <div class="time-item">
+          <span class="time-label">Check-Out</span>
+          <span class="time-value">{{ formatTime(today.checkOutTime) }}</span>
+        </div>
+        <div class="time-item" *ngIf="today.hoursWorked !== null">
+          <span class="time-label">Hours</span>
+          <span class="time-value">{{ today.hoursWorked }}h</span>
+        </div>
+        <div class="time-item" *ngIf="today.status">
+          <span class="time-label">Status</span>
+          <span class="status-badge" [ngClass]="statusClass(today.status)">{{ today.status }}</span>
+        </div>
+      </div>
+
+      <!-- Check-In button -->
+      <div class="today-actions">
+        <button class="btn-checkin"
+          *ngIf="today.canCheckIn"
+          [disabled]="actionLoading"
+          (click)="checkIn()">
+          {{ actionLoading ? 'Processing...' : '✅ Check In' }}
+        </button>
+
+        <!-- Check-Out button -->
+        <button class="btn-checkout"
+          *ngIf="today.canCheckOut"
+          [disabled]="actionLoading"
+          (click)="checkOut()">
+          {{ actionLoading ? 'Processing...' : '🚪 Check Out' }}
+        </button>
+
+        <!-- Completed state -->
+        <div class="completed-state" *ngIf="!today.canCheckIn && !today.canCheckOut && today.checkOutTime">
+          <span class="completed-icon">✓</span>
+          <span>Attendance complete for today</span>
+        </div>
+
+        <!-- No active phase -->
+        <div class="no-phase-msg" *ngIf="today.canCheckIn === false && today.canCheckOut === false && !today.checkOutTime && !today.activePhase">
+          <span>🔒</span> No active phase — check-in unavailable
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Phase Tabs ── -->
+  <div class="phase-tabs">
+    <button class="phase-tab" [class.active]="selectedPhase === 'TRAINING'" (click)="selectPhase('TRAINING')">
+      🎓 Training
+    </button>
+    <button class="phase-tab" [class.active]="selectedPhase === 'INTERNSHIP'" (click)="selectPhase('INTERNSHIP')">
+      💼 Internship
+    </button>
+  </div>
+
+  <!-- ── Summary Stats ── -->
+  <div class="at-card summary-card">
+    <div class="card-title-row">
+      <span class="card-icon">📊</span>
+      <h3>{{ selectedPhase | titlecase }} Summary</h3>
+    </div>
+
+    <div class="today-loading" *ngIf="summaryLoading">
+      <div class="mini-spinner"></div> Loading...
+    </div>
+
+    <div class="phase-not-configured" *ngIf="summaryError && !summaryLoading">
+      <span>⚙️</span> Phase not configured by admin yet.
+    </div>
+
+    <div class="summary-body" *ngIf="summary && !summaryLoading">
+      <div class="phase-dates">
+        <span>{{ formatDate(summary.startDate) }}</span>
+        <span class="date-arrow">→</span>
+        <span>{{ formatDate(summary.endDate) }}</span>
+      </div>
+      <div class="summary-stats">
+        <div class="stat-item stat-present">
+          <span class="stat-num">{{ summary.presentDays }}</span>
+          <span class="stat-lbl">Present</span>
+        </div>
+        <div class="stat-item stat-late">
+          <span class="stat-num">{{ summary.lateDays }}</span>
+          <span class="stat-lbl">Late</span>
+        </div>
+        <div class="stat-item stat-absent">
+          <span class="stat-num">{{ summary.absentDays }}</span>
+          <span class="stat-lbl">Absent</span>
+        </div>
+        <div class="stat-item stat-pct">
+          <span class="stat-num">{{ summary.attendancePercentage }}%</span>
+          <span class="stat-lbl">Attendance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Monthly Calendar ── -->
+  <div class="at-card calendar-card">
+    <div class="calendar-header">
+      <button class="cal-nav" (click)="prevMonth()">‹</button>
+      <h3 class="cal-month-label">{{ calendarMonthLabel }}</h3>
+      <button class="cal-nav" (click)="nextMonth()">›</button>
+    </div>
+
+    <div class="today-loading" *ngIf="calendarLoading">
+      <div class="mini-spinner"></div> Loading calendar...
+    </div>
+
+    <div class="phase-not-configured" *ngIf="calendarError && !calendarLoading">
+      <span>⚙️</span> Phase not configured — no calendar data available.
+    </div>
+
+    <div class="calendar-body" *ngIf="!calendarLoading && !calendarError">
+      <!-- Day-of-week headers -->
+      <div class="cal-grid">
+        <div class="cal-dow" *ngFor="let d of ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']">{{ d }}</div>
+
+        <!-- Weeks -->
+        <ng-container *ngFor="let week of calendarGrid">
+          <div class="cal-cell" *ngFor="let day of week" [ngClass]="cellClass(day)">
+            <span class="cell-day-num">{{ dayNumber(day) }}</span>
+            <span class="cell-time" *ngIf="day && (day.displayStatus === 'PRESENT' || day.displayStatus === 'LATE')">
+              {{ formatTime(day.checkInTime) }}
+            </span>
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- Legend -->
+      <div class="cal-legend">
+        <span class="legend-item"><span class="legend-dot dot-present"></span>Present</span>
+        <span class="legend-item"><span class="legend-dot dot-late"></span>Late</span>
+        <span class="legend-item"><span class="legend-dot dot-absent"></span>Absent</span>
+        <span class="legend-item"><span class="legend-dot dot-grey"></span>Weekend / Future / Out of phase</span>
+      </div>
+    </div>
+  </div>
+
+</div>

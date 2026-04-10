@@ -294,6 +294,9 @@
         </div>
       </div>
 
+      <!-- Attendance Tracker (full width, FULL payment only) -->
+      <app-attendance-tracker *ngIf="dashboard.paymentStatus === 'FULL'"></app-attendance-tracker>
+
     </div>
   </div>
 </div>

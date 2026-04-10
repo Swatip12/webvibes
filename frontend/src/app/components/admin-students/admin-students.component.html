@@ -42,10 +42,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let student of students">
+        <ng-container *ngFor="let student of students">
 
           <!-- Normal view row -->
-          <ng-container *ngIf="editingId !== student.id && assigningId !== student.id">
+          <tr *ngIf="editingId !== student.id && assigningId !== student.id">
             <td>{{ student.name }}</td>
             <td>{{ student.email }}</td>
             <td>{{ student.mobile }}</td>
@@ -75,11 +75,145 @@
               <button *ngIf="student.planAssigned" class="adm-btn adm-btn-sm adm-btn-primary" (click)="startEdit(student)">
                 <i class="bi bi-pencil"></i> Edit
               </button>
+              <button class="adm-btn adm-btn-sm adm-btn-secondary" (click)="togglePhaseDates(student)">
+                <i class="bi bi-calendar-range"></i> Phase Dates
+              </button>
+              <button class="adm-btn adm-btn-sm adm-btn-secondary" (click)="toggleAdminCalendar(student)">
+                <i class="bi bi-calendar3"></i> Attendance
+              </button>
             </td>
-          </ng-container>
+          </tr>
+
+          <!-- Phase Dates collapsible section -->
+          <tr *ngIf="editingId !== student.id && assigningId !== student.id && getPhaseDatesState(student.id).open">
+            <td colspan="10" class="phase-dates-cell">
+              <div class="phase-dates-panel">
+                <h4 class="phase-panel-title">📅 Phase Dates — {{ student.name }}</h4>
+
+                <div class="phase-dates-grid">
+                  <!-- Training Start -->
+                  <div class="phase-field">
+                    <label class="phase-label">Training Start Date</label>
+                    <input type="date" class="phase-input"
+                      [(ngModel)]="getPhaseDatesState(student.id).form.trainingStartDate"
+                      (ngModelChange)="getPhaseDatesState(student.id).saveError = ''" />
+                  </div>
+                  <!-- Training End -->
+                  <div class="phase-field">
+                    <label class="phase-label">Training End Date</label>
+                    <input type="date" class="phase-input"
+                      [(ngModel)]="getPhaseDatesState(student.id).form.trainingEndDate"
+                      (ngModelChange)="getPhaseDatesState(student.id).saveError = ''" />
+                  </div>
+                  <!-- Internship Start -->
+                  <div class="phase-field">
+                    <label class="phase-label">Internship Start Date</label>
+                    <input type="date" class="phase-input"
+                      [(ngModel)]="getPhaseDatesState(student.id).form.internshipStartDate"
+                      (ngModelChange)="getPhaseDatesState(student.id).saveError = ''" />
+                  </div>
+                  <!-- Internship End -->
+                  <div class="phase-field">
+                    <label class="phase-label">Internship End Date</label>
+                    <input type="date" class="phase-input"
+                      [(ngModel)]="getPhaseDatesState(student.id).form.internshipEndDate"
+                      (ngModelChange)="getPhaseDatesState(student.id).saveError = ''" />
+                  </div>
+                </div>
+
+                <!-- Inline validation error -->
+                <div *ngIf="phaseDatesValidationError(getPhaseDatesState(student.id))" class="phase-validation-error">
+                  ⚠️ {{ phaseDatesValidationError(getPhaseDatesState(student.id)) }}
+                </div>
+
+                <!-- Save / error / success messages -->
+                <div *ngIf="getPhaseDatesState(student.id).saveError && !phaseDatesValidationError(getPhaseDatesState(student.id))"
+                     class="adm-alert adm-alert-error phase-msg">
+                  {{ getPhaseDatesState(student.id).saveError }}
+                </div>
+                <div *ngIf="getPhaseDatesState(student.id).saveMsg" class="adm-alert adm-alert-success phase-msg">
+                  {{ getPhaseDatesState(student.id).saveMsg }}
+                </div>
+
+                <div class="phase-actions">
+                  <button class="adm-btn adm-btn-success adm-btn-sm"
+                    [disabled]="getPhaseDatesState(student.id).saving || !!phaseDatesValidationError(getPhaseDatesState(student.id))"
+                    (click)="savePhaseDates(student)">
+                    <i class="bi bi-check-lg"></i>
+                    {{ getPhaseDatesState(student.id).saving ? 'Saving...' : 'Save Phase Dates' }}
+                  </button>
+                  <button class="adm-btn adm-btn-secondary adm-btn-sm" (click)="togglePhaseDates(student)">
+                    <i class="bi bi-x-lg"></i> Close
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Admin Attendance Calendar collapsible section -->
+          <tr *ngIf="editingId !== student.id && assigningId !== student.id && getAdminCalendarState(student.id).open">
+            <td colspan="10" class="admin-cal-cell">
+              <div class="admin-cal-panel">
+                <h4 class="phase-panel-title">📊 Attendance Calendar — {{ student.name }}</h4>
+
+                <!-- Phase tabs -->
+                <div class="phase-tabs">
+                  <button class="phase-tab" [class.active]="getAdminCalendarState(student.id).phase === 'TRAINING'"
+                    (click)="adminCalSelectPhase(student.id, 'TRAINING')">🎓 Training</button>
+                  <button class="phase-tab" [class.active]="getAdminCalendarState(student.id).phase === 'INTERNSHIP'"
+                    (click)="adminCalSelectPhase(student.id, 'INTERNSHIP')">💼 Internship</button>
+                </div>
+
+                <!-- Month navigation -->
+                <div class="calendar-header">
+                  <button class="cal-nav" (click)="adminCalPrevMonth(student.id)">‹</button>
+                  <span class="cal-month-label">{{ adminCalMonthLabel(getAdminCalendarState(student.id)) }}</span>
+                  <button class="cal-nav" (click)="adminCalNextMonth(student.id)">›</button>
+                </div>
+
+                <!-- Loading / error -->
+                <div *ngIf="getAdminCalendarState(student.id).loading" class="today-loading">
+                  <div class="mini-spinner"></div> Loading...
+                </div>
+                <div *ngIf="getAdminCalendarState(student.id).error && !getAdminCalendarState(student.id).loading"
+                     class="phase-not-configured">
+                  <span>⚙️</span> {{ getAdminCalendarState(student.id).error }}
+                </div>
+
+                <!-- Calendar grid -->
+                <div *ngIf="!getAdminCalendarState(student.id).loading && !getAdminCalendarState(student.id).error">
+                  <div class="cal-grid">
+                    <div class="cal-dow" *ngFor="let d of ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']">{{ d }}</div>
+                    <ng-container *ngFor="let week of adminCalGrid(getAdminCalendarState(student.id))">
+                      <div class="cal-cell" *ngFor="let day of week" [ngClass]="cellClass(day)">
+                        <span class="cell-day-num">{{ dayNumber(day) }}</span>
+                        <span class="cell-time" *ngIf="day && (day.displayStatus === 'PRESENT' || day.displayStatus === 'LATE')">
+                          {{ formatTime(day.checkInTime) }}
+                        </span>
+                      </div>
+                    </ng-container>
+                  </div>
+
+                  <!-- Legend -->
+                  <div class="cal-legend">
+                    <span class="legend-item"><span class="legend-dot dot-present"></span>Present</span>
+                    <span class="legend-item"><span class="legend-dot dot-late"></span>Late</span>
+                    <span class="legend-item"><span class="legend-dot dot-absent"></span>Absent</span>
+                    <span class="legend-item"><span class="legend-dot dot-grey"></span>Weekend / Future / Out of phase</span>
+                  </div>
+                </div>
+
+                <div class="phase-actions">
+                  <button class="adm-btn adm-btn-secondary adm-btn-sm" (click)="toggleAdminCalendar(student)">
+                    <i class="bi bi-x-lg"></i> Close
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
 
           <!-- Assign Plan inline form -->
-          <ng-container *ngIf="assigningId === student.id">
+          <tr *ngIf="assigningId === student.id">
             <td>{{ student.name }}</td>
             <td colspan="2">{{ student.email }}</td>
             <td>
@@ -91,6 +225,7 @@
             <td>—</td>
             <td>—</td>
             <td>—</td>
+            <td>—</td>
             <td>
               <button class="adm-btn adm-btn-sm adm-btn-success" (click)="saveAssign(student)">
                 <i class="bi bi-check-lg"></i> Save
@@ -99,10 +234,10 @@
                 <i class="bi bi-x-lg"></i>
               </button>
             </td>
-          </ng-container>
+          </tr>
 
           <!-- Edit Payment inline form -->
-          <ng-container *ngIf="editingId === student.id">
+          <tr *ngIf="editingId === student.id">
             <td>{{ student.name }}</td>
             <td colspan="2">{{ student.email }}</td>
             <td>{{ student.planName }}</td>
@@ -118,6 +253,7 @@
                 <option value="FULL">FULL</option>
               </select>
             </td>
+            <td>—</td>
             <td>
               <button class="adm-btn adm-btn-sm adm-btn-success" (click)="saveEdit(student)">
                 <i class="bi bi-check-lg"></i> Save
@@ -126,9 +262,9 @@
                 <i class="bi bi-x-lg"></i>
               </button>
             </td>
-          </ng-container>
+          </tr>
 
-        </tr>
+        </ng-container>
       </tbody>
     </table>
     <ng-template #noStudents>

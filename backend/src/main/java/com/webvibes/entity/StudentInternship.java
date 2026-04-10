@@ -2,6 +2,7 @@ package com.webvibes.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -52,6 +53,18 @@ public class StudentInternship {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @Column(name = "training_start_date")
+    private LocalDate trainingStartDate;
+
+    @Column(name = "training_end_date")
+    private LocalDate trainingEndDate;
+
+    @Column(name = "internship_start_date")
+    private LocalDate internshipStartDate;
+
+    @Column(name = "internship_end_date")
+    private LocalDate internshipEndDate;
 
     public StudentInternship() {
     }
@@ -162,4 +175,16 @@ public class StudentInternship {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public LocalDate getTrainingStartDate() { return trainingStartDate; }
+    public void setTrainingStartDate(LocalDate trainingStartDate) { this.trainingStartDate = trainingStartDate; }
+
+    public LocalDate getTrainingEndDate() { return trainingEndDate; }
+    public void setTrainingEndDate(LocalDate trainingEndDate) { this.trainingEndDate = trainingEndDate; }
+
+    public LocalDate getInternshipStartDate() { return internshipStartDate; }
+    public void setInternshipStartDate(LocalDate internshipStartDate) { this.internshipStartDate = internshipStartDate; }
+
+    public LocalDate getInternshipEndDate() { return internshipEndDate; }
+    public void setInternshipEndDate(LocalDate internshipEndDate) { this.internshipEndDate = internshipEndDate; }
 }

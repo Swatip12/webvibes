@@ -3,6 +3,7 @@ package com.webvibes.dto;
 import com.webvibes.entity.PaymentStatus;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class AdminStudentDTO {
 
@@ -18,6 +19,10 @@ public class AdminStudentDTO {
     private PaymentStatus paymentStatus;
     private String utrNumber;
     private String pendingUtrType;
+    private LocalDate trainingStartDate;
+    private LocalDate trainingEndDate;
+    private LocalDate internshipStartDate;
+    private LocalDate internshipEndDate;
 
     public AdminStudentDTO() {}
 
@@ -80,4 +85,16 @@ public class AdminStudentDTO {
 
     public String getPendingUtrType() { return pendingUtrType; }
     public void setPendingUtrType(String pendingUtrType) { this.pendingUtrType = pendingUtrType; }
+
+    public LocalDate getTrainingStartDate() { return trainingStartDate; }
+    public void setTrainingStartDate(LocalDate trainingStartDate) { this.trainingStartDate = trainingStartDate; }
+
+    public LocalDate getTrainingEndDate() { return trainingEndDate; }
+    public void setTrainingEndDate(LocalDate trainingEndDate) { this.trainingEndDate = trainingEndDate; }
+
+    public LocalDate getInternshipStartDate() { return internshipStartDate; }
+    public void setInternshipStartDate(LocalDate internshipStartDate) { this.internshipStartDate = internshipStartDate; }
+
+    public LocalDate getInternshipEndDate() { return internshipEndDate; }
+    public void setInternshipEndDate(LocalDate internshipEndDate) { this.internshipEndDate = internshipEndDate; }
 }

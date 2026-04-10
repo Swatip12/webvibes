@@ -89,6 +89,36 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse(ex.getMessage()));
     }
 
+    @ExceptionHandler(AttendanceAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleAttendanceAlreadyExists(AttendanceAlreadyExistsException ex) {
+        logger.error("Attendance already exists: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error", ex.getMessage()));
+    }
+
+    @ExceptionHandler(AttendanceNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleAttendanceNotFound(AttendanceNotFoundException ex) {
+        logger.error("Attendance not found: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", ex.getMessage()));
+    }
+
+    @ExceptionHandler(NoActivePhaseException.class)
+    public ResponseEntity<Map<String, String>> handleNoActivePhase(NoActivePhaseException ex) {
+        logger.error("No active phase: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", ex.getMessage()));
+    }
+
+    @ExceptionHandler(PhaseNotConfiguredException.class)
+    public ResponseEntity<Map<String, String>> handlePhaseNotConfigured(PhaseNotConfiguredException ex) {
+        logger.error("Phase not configured: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", ex.getMessage()));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Map<String, String>> handleIllegalArgument(IllegalArgumentException ex) {
+        logger.error("Illegal argument: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", ex.getMessage()));
+    }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<MessageResponse> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
         logger.error("Data integrity violation: {}", ex.getMessage());

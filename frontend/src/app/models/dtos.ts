@@ -132,6 +132,10 @@ export interface AdminStudentDTO {
   paymentStatus?: 'NOT_PAID' | 'PARTIAL' | 'FULL';
   utrNumber?: string;
   pendingUtrType?: string;
+  trainingStartDate?: string | null;
+  trainingEndDate?: string | null;
+  internshipStartDate?: string | null;
+  internshipEndDate?: string | null;
 }
 
 // Assessment portal DTOs

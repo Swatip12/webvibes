@@ -37,6 +37,7 @@ import { MachineTestComponent } from './components/machine-test/machine-test.com
 import { MockInterviewComponent } from './components/mock-interview/mock-interview.component';
 import { AdminAssessmentsComponent } from './components/admin-assessments/admin-assessments.component';
 import { AdminAssessmentDetailComponent } from './components/admin-assessment-detail/admin-assessment-detail.component';
+import { AttendanceTrackerComponent } from './components/attendance-tracker/attendance-tracker.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { AdminAssessmentDetailComponent } from './components/admin-assessment-de
     MachineTestComponent,
     MockInterviewComponent,
     AdminAssessmentsComponent,
-    AdminAssessmentDetailComponent
+    AdminAssessmentDetailComponent,
+    AttendanceTrackerComponent
   ],
   imports: [
     BrowserModule,

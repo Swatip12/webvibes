@@ -3,11 +3,15 @@ package com.webvibes.controller;
 import com.webvibes.dto.AdminPaymentUpdateRequest;
 import com.webvibes.dto.AdminStudentDTO;
 import com.webvibes.dto.AssignPlanRequest;
+import com.webvibes.dto.CalendarDayDTO;
+import com.webvibes.dto.PhaseDatesRequest;
+import com.webvibes.entity.AttendancePhase;
 import com.webvibes.entity.PaymentStatus;
 import com.webvibes.entity.Student;
 import com.webvibes.entity.StudentInternship;
 import com.webvibes.repository.StudentInternshipRepository;
 import com.webvibes.repository.StudentRepository;
+import com.webvibes.service.AttendanceService;
 import com.webvibes.service.StudentInternshipService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -35,13 +39,16 @@ public class AdminStudentController {
     private final StudentInternshipRepository studentInternshipRepository;
     private final StudentInternshipService studentInternshipService;
     private final StudentRepository studentRepository;
+    private final AttendanceService attendanceService;
 
     public AdminStudentController(StudentInternshipRepository studentInternshipRepository,
                                   StudentInternshipService studentInternshipService,
-                                  StudentRepository studentRepository) {
+                                  StudentRepository studentRepository,
+                                  AttendanceService attendanceService) {
         this.studentInternshipRepository = studentInternshipRepository;
         this.studentInternshipService = studentInternshipService;
         this.studentRepository = studentRepository;
+        this.attendanceService = attendanceService;
     }
 
     /**
@@ -114,6 +121,35 @@ public class AdminStudentController {
         return ResponseEntity.ok(toDTO(updated));
     }
 
+    /**
+     * Update phase dates (trainingStartDate, trainingEndDate, internshipStartDate, internshipEndDate)
+     * for a student's StudentInternship record.
+     */
+    @PutMapping("/{id}/phase-dates")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<AdminStudentDTO> updatePhaseDates(
+            @PathVariable Long id,
+            @RequestBody PhaseDatesRequest request) {
+        logger.info("Admin updating phase dates for studentId: {}", id);
+        AdminStudentDTO result = attendanceService.updatePhaseDates(id, request);
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * Get monthly attendance calendar for a specific student (admin view).
+     */
+    @GetMapping("/{id}/attendance")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<CalendarDayDTO>> getStudentAttendance(
+            @PathVariable Long id,
+            @RequestParam AttendancePhase phase,
+            @RequestParam int year,
+            @RequestParam int month) {
+        logger.info("Admin fetching attendance for studentId: {}, phase: {}, year: {}, month: {}", id, phase, year, month);
+        List<CalendarDayDTO> calendar = attendanceService.getMonthlyCalendarForAdmin(id, year, month, phase);
+        return ResponseEntity.ok(calendar);
+    }
+
     private AdminStudentDTO toDTO(StudentInternship si) {
         AdminStudentDTO dto = new AdminStudentDTO(
                 si.getStudent().getId(),
@@ -128,6 +164,10 @@ public class AdminStudentController {
         );
         dto.setUtrNumber(si.getUtrNumber());
         dto.setPendingUtrType(si.getPendingUtrType());
+        dto.setTrainingStartDate(si.getTrainingStartDate());
+        dto.setTrainingEndDate(si.getTrainingEndDate());
+        dto.setInternshipStartDate(si.getInternshipStartDate());
+        dto.setInternshipEndDate(si.getInternshipEndDate());
         return dto;
     }
 }
