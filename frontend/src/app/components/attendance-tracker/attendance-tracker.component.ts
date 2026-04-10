@@ -193,12 +193,16 @@ export class AttendanceTrackerComponent implements OnInit, OnDestroy {
 
   formatTime(dt: string | null): string {
     if (!dt) return '—';
+    // dt is "2026-04-10T14:07:00" (no Z) — treat as local time directly
     return new Date(dt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
 
   formatDate(d: string | null): string {
     if (!d) return '—';
-    return new Date(d).toLocaleDateString([], { day: '2-digit', month: 'short', year: 'numeric' });
+    // Date-only strings like "2026-04-10" are parsed as UTC midnight by browsers.
+    // Append T00:00:00 to force local-time parsing and avoid off-by-one-day issues.
+    const safe = d.includes('T') ? d : d + 'T00:00:00';
+    return new Date(safe).toLocaleDateString([], { day: '2-digit', month: 'short', year: 'numeric' });
   }
 
   statusClass(status: string | null): string {
@@ -225,6 +229,7 @@ export class AttendanceTrackerComponent implements OnInit, OnDestroy {
 
   dayNumber(day: CalendarDayDTO | null): string {
     if (!day) return '';
-    return new Date(day.date).getDate().toString();
+    // Force local-time parsing to avoid UTC midnight shifting the date back by 1 day in IST
+    return new Date(day.date + 'T00:00:00').getDate().toString();
   }
 }
