@@ -1,0 +1,47 @@
+<div class="gate-wrapper">
+
+  <!-- Checking -->
+  <div class="gate-card" *ngIf="checking">
+    <div class="gate-spinner"></div>
+    <h3>Requesting camera access...</h3>
+    <p>Please allow camera access in your browser to continue.</p>
+  </div>
+
+  <!-- Denied -->
+  <div class="gate-card gate-denied" *ngIf="!checking && status === 'denied'">
+    <div class="gate-icon">🚫</div>
+    <h3>Camera Access Denied</h3>
+    <p>Camera access is required to take this assessment. Please allow camera access in your browser settings and try again.</p>
+    <div class="gate-steps">
+      <p class="steps-title">How to enable:</p>
+      <ol>
+        <li>Click the 🔒 lock icon in your browser's address bar</li>
+        <li>Set Camera to <strong>Allow</strong></li>
+        <li>Refresh the page and try again</li>
+      </ol>
+    </div>
+    <button class="btn-retry" (click)="requestAccess()">Try Again</button>
+  </div>
+
+  <!-- Unavailable -->
+  <div class="gate-card gate-denied" *ngIf="!checking && status === 'unavailable'">
+    <div class="gate-icon">📷</div>
+    <h3>Camera Not Available</h3>
+    <p>No camera was detected on your device, or your browser does not support camera access. Please use a device with a working camera.</p>
+  </div>
+
+  <!-- Granted — show preview and proceed button -->
+  <div class="gate-card gate-granted" *ngIf="!checking && status === 'granted'">
+    <div class="gate-icon">✅</div>
+    <h3>Camera Ready</h3>
+    <p>Your camera is active. You will be monitored during this assessment.</p>
+    <div class="preview-wrap">
+      <video #preview autoplay muted playsinline class="cam-preview"></video>
+      <div class="preview-label">📷 Live Preview</div>
+    </div>
+    <button class="btn-proceed" (click)="proceed()">
+      Start Assessment →
+    </button>
+  </div>
+
+</div>

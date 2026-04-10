@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { AssessmentService } from '../../services/assessment.service';
+import { CameraService } from '../../services/camera.service';
 import {
   AssessmentDetailDTO,
   QuestionStudentDTO,
@@ -15,11 +16,13 @@ import {
   templateUrl: './mcq-test.component.html',
   styleUrls: ['./mcq-test.component.css']
 })
-export class McqTestComponent implements OnInit {
+export class McqTestComponent implements OnInit, OnDestroy {
   saId: number = 0;
   detail: AssessmentDetailDTO | null = null;
   questions: QuestionStudentDTO[] = [];
   answers: Map<number, number> = new Map();
+
+  cameraGranted = false;
 
   isLoading = true;
   errorMessage = '';
@@ -31,12 +34,17 @@ export class McqTestComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private assessmentService: AssessmentService
+    private assessmentService: AssessmentService,
+    private cameraService: CameraService
   ) {}
 
   ngOnInit(): void {
     this.saId = Number(this.route.snapshot.paramMap.get('id'));
     this.loadData();
+  }
+
+  ngOnDestroy(): void {
+    this.cameraService.stopCamera();
   }
 
   loadData(): void {
@@ -111,7 +119,7 @@ export class McqTestComponent implements OnInit {
           this.alreadySubmitted = true;
           this.submitted = true;
         } else {
-          this.errorMessage = 'Failed to submit. Please try again.';
+          this.errorMessage = err?.error?.message || err?.error?.error || 'Failed to submit. Please try again.';
         }
       }
     });

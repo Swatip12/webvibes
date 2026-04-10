@@ -1,6 +1,7 @@
 package com.webvibes.dto;
 
 import com.webvibes.entity.AssessmentType;
+import com.webvibes.entity.AssessmentStatus;
 import java.time.LocalDateTime;
 
 public class AssessmentDetailDTO {
@@ -9,6 +10,7 @@ public class AssessmentDetailDTO {
     private String title;
     private String description;
     private AssessmentType type;
+    private AssessmentStatus status;
     private LocalDateTime scheduledAt;
     private String videoLink;
     private String problemStatement;
@@ -42,6 +44,9 @@ public class AssessmentDetailDTO {
 
     public AssessmentType getType() { return type; }
     public void setType(AssessmentType type) { this.type = type; }
+
+    public AssessmentStatus getStatus() { return status; }
+    public void setStatus(AssessmentStatus status) { this.status = status; }
 
     public LocalDateTime getScheduledAt() { return scheduledAt; }
     public void setScheduledAt(LocalDateTime scheduledAt) { this.scheduledAt = scheduledAt; }

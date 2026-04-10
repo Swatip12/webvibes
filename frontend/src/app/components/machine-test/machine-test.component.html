@@ -1,5 +1,13 @@
 <div class="machine-test-page">
 
+  <!-- Camera Gate -->
+  <app-camera-gate *ngIf="!cameraGranted" (permitted)="cameraGranted = true"></app-camera-gate>
+
+  <ng-container *ngIf="cameraGranted">
+
+  <!-- Live camera monitor -->
+  <app-camera-monitor></app-camera-monitor>
+
   <!-- Loading -->
   <div class="loading-state" *ngIf="isLoading">
     <div class="spinner"></div>
@@ -70,4 +78,5 @@
     <button class="btn-back" (click)="goBack()">Back to Dashboard</button>
   </div>
 
+  </ng-container>
 </div>

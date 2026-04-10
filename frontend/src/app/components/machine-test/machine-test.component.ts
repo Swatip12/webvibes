@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssessmentService } from '../../services/assessment.service';
+import { CameraService } from '../../services/camera.service';
 import { AssessmentDetailDTO, MachineSubmitRequest, SubmitResponse } from '../../models/dtos';
 
 @Component({
@@ -8,10 +9,12 @@ import { AssessmentDetailDTO, MachineSubmitRequest, SubmitResponse } from '../..
   templateUrl: './machine-test.component.html',
   styleUrls: ['./machine-test.component.css']
 })
-export class MachineTestComponent implements OnInit {
+export class MachineTestComponent implements OnInit, OnDestroy {
   saId: number = 0;
   detail: AssessmentDetailDTO | null = null;
   solution: string = '';
+
+  cameraGranted = false;
 
   isLoading = true;
   errorMessage = '';
@@ -22,12 +25,17 @@ export class MachineTestComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private assessmentService: AssessmentService
+    private assessmentService: AssessmentService,
+    private cameraService: CameraService
   ) {}
 
   ngOnInit(): void {
     this.saId = Number(this.route.snapshot.paramMap.get('id'));
     this.loadDetail();
+  }
+
+  ngOnDestroy(): void {
+    this.cameraService.stopCamera();
   }
 
   loadDetail(): void {
@@ -71,7 +79,7 @@ export class MachineTestComponent implements OnInit {
           this.alreadySubmitted = true;
           this.submitted = true;
         } else {
-          this.errorMessage = 'Failed to submit. Please try again.';
+          this.errorMessage = err?.error?.message || err?.error?.error || 'Failed to submit. Please try again.';
         }
       }
     });

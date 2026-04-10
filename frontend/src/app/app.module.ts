@@ -38,6 +38,9 @@ import { MockInterviewComponent } from './components/mock-interview/mock-intervi
 import { AdminAssessmentsComponent } from './components/admin-assessments/admin-assessments.component';
 import { AdminAssessmentDetailComponent } from './components/admin-assessment-detail/admin-assessment-detail.component';
 import { AttendanceTrackerComponent } from './components/attendance-tracker/attendance-tracker.component';
+import { StudentProgressComponent } from './components/student-progress/student-progress.component';
+import { CameraGateComponent } from './components/camera-gate/camera-gate.component';
+import { CameraMonitorComponent } from './components/camera-monitor/camera-monitor.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +75,10 @@ import { AttendanceTrackerComponent } from './components/attendance-tracker/atte
     MockInterviewComponent,
     AdminAssessmentsComponent,
     AdminAssessmentDetailComponent,
-    AttendanceTrackerComponent
+    AttendanceTrackerComponent,
+    StudentProgressComponent,
+    CameraGateComponent,
+    CameraMonitorComponent
   ],
   imports: [
     BrowserModule,

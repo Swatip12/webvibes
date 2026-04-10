@@ -172,10 +172,37 @@ public class AssessmentService {
     }
 
     @Transactional(readOnly = true)
+    public StudentProgressDTO getStudentProgress(String studentEmail) {
+        Student student = findStudentByEmailOrThrow(studentEmail);
+        List<StudentAssessment> all = studentAssessmentRepository.findByStudentId(student.getId());
+
+        StudentProgressDTO dto = new StudentProgressDTO();
+        dto.setTotalAssigned(all.size());
+        dto.setTotalCompleted((int) all.stream().filter(sa -> sa.getStatus() == AssessmentStatus.COMPLETED).count());
+
+        for (AssessmentType type : AssessmentType.values()) {
+            List<StudentAssessment> byType = all.stream()
+                    .filter(sa -> sa.getAssessment().getType() == type)
+                    .collect(Collectors.toList());
+            int total = byType.size();
+            int completed = (int) byType.stream().filter(sa -> sa.getStatus() == AssessmentStatus.COMPLETED).count();
+            switch (type) {
+                case MOCK_INTERVIEW   -> { dto.setMockInterviewTotal(total);  dto.setMockInterviewCompleted(completed); }
+                case APTITUDE_TEST    -> { dto.setAptitudeTestTotal(total);   dto.setAptitudeTestCompleted(completed); }
+                case MACHINE_TEST     -> { dto.setMachineTestTotal(total);    dto.setMachineTestCompleted(completed); }
+                case TECHNICAL_MCQ   -> { dto.setTechnicalMcqTotal(total);   dto.setTechnicalMcqCompleted(completed); }
+            }
+        }
+        return dto;
+    }
+
+    @Transactional(readOnly = true)
     public AssessmentDetailDTO getAssessmentForStudent(Long studentAssessmentId, String studentEmail) {
         StudentAssessment sa = findStudentAssessmentOrThrow(studentAssessmentId);
         verifyOwnership(sa, studentEmail);
-        return toAssessmentDetailDTO(sa.getAssessment());
+        AssessmentDetailDTO dto = toAssessmentDetailDTO(sa.getAssessment());
+        dto.setStatus(sa.getStatus());
+        return dto;
     }
 
     @Transactional(readOnly = true)
@@ -242,6 +269,10 @@ public class AssessmentService {
                 throw new InvalidAssessmentTypeOperationException("Solution must be at least 10 characters");
             }
             submission.setSolutionText(solution);
+        } else if (type == AssessmentType.MOCK_INTERVIEW) {
+            // Mock interviews are marked complete when the student joins/confirms attendance.
+            // No answers or solution text required.
+            submission.setAnswersJson("{}");
         }
 
         submissionRepository.save(submission);

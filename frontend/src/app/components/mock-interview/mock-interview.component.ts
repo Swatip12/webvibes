@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssessmentService } from '../../services/assessment.service';
+import { CameraService } from '../../services/camera.service';
 import { AssessmentDetailDTO } from '../../models/dtos';
 
 interface CountdownTime {
@@ -19,8 +20,13 @@ export class MockInterviewComponent implements OnInit, OnDestroy {
   saId: number = 0;
   detail: AssessmentDetailDTO | null = null;
 
+  cameraGranted = false;
+
   isLoading = true;
   errorMessage = '';
+  isSubmitting = false;
+  submitted = false;
+  alreadySubmitted = false;
 
   countdown: CountdownTime | null = null;
   isUpcoming = false;
@@ -30,7 +36,8 @@ export class MockInterviewComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private assessmentService: AssessmentService
+    private assessmentService: AssessmentService,
+    private cameraService: CameraService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +47,7 @@ export class MockInterviewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.clearCountdown();
+    this.cameraService.stopCamera();
   }
 
   loadDetail(): void {
@@ -49,6 +57,9 @@ export class MockInterviewComponent implements OnInit, OnDestroy {
       next: (detail) => {
         this.detail = detail;
         this.isLoading = false;
+        if (detail.status === 'COMPLETED') {
+          this.submitted = true;
+        }
         if (detail.scheduledAt) {
           this.initCountdown(detail.scheduledAt);
         }
@@ -94,6 +105,27 @@ export class MockInterviewComponent implements OnInit, OnDestroy {
     if (this.detail?.videoLink) {
       window.open(this.detail.videoLink, '_blank');
     }
+  }
+
+  markAttended(): void {
+    if (this.isSubmitting || this.submitted) return;
+    this.isSubmitting = true;
+    this.errorMessage = '';
+    this.assessmentService.submitMockInterview(this.saId).subscribe({
+      next: () => {
+        this.submitted = true;
+        this.isSubmitting = false;
+      },
+      error: (err) => {
+        this.isSubmitting = false;
+        if (err.status === 409) {
+          this.alreadySubmitted = true;
+          this.submitted = true;
+        } else {
+          this.errorMessage = err?.error?.message || err?.error?.error || 'Failed to mark attendance. Please try again.';
+        }
+      }
+    });
   }
 
   formatDate(dateStr: string | undefined): string {

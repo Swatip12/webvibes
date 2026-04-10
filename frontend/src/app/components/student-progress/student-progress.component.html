@@ -1,0 +1,77 @@
+<div class="progress-card">
+
+  <!-- Header -->
+  <div class="progress-header">
+    <div class="progress-title">
+      <span class="progress-icon">🏆</span>
+      <div>
+        <h3>My Progress</h3>
+        <p>Track your assessment completion</p>
+      </div>
+    </div>
+    <div class="overall-ring" *ngIf="progress && !loading">
+      <svg viewBox="0 0 44 44" class="ring-svg">
+        <circle cx="22" cy="22" r="18" class="ring-bg"/>
+        <circle cx="22" cy="22" r="18" class="ring-fill"
+          [style.stroke-dasharray]="'113'"
+          [style.stroke-dashoffset]="113 - (113 * overallPct() / 100)"/>
+      </svg>
+      <div class="ring-label">
+        <span class="ring-pct">{{ overallPct() }}%</span>
+        <span class="ring-sub">done</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="prog-loading" *ngIf="loading">
+    <div class="mini-spinner"></div> Loading progress...
+  </div>
+
+  <!-- Error -->
+  <div class="prog-error" *ngIf="error && !loading">⚠️ {{ error }}</div>
+
+  <!-- All done banner -->
+  <div class="all-done-banner" *ngIf="allDone() && !loading">
+    <span class="done-icon">🎉</span>
+    <div>
+      <strong>All assessments completed!</strong>
+      <span>Great work — you've finished everything assigned to you.</span>
+    </div>
+  </div>
+
+  <!-- Overall bar -->
+  <div class="overall-bar-row" *ngIf="progress && !loading">
+    <div class="bar-meta">
+      <span class="bar-label">Overall</span>
+      <span class="bar-count">{{ progress.totalCompleted }} / {{ progress.totalAssigned }}</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill fill-overall" [style.width.%]="overallPct()"></div>
+    </div>
+  </div>
+
+  <!-- Category rows -->
+  <div class="category-list" *ngIf="progress && !loading">
+    <div class="category-row" *ngFor="let cat of categories" [class.row-done]="pct(cat.key) === 100">
+      <div class="cat-icon-wrap" [ngClass]="'icon-' + cat.color">{{ cat.icon }}</div>
+      <div class="cat-body">
+        <div class="cat-meta">
+          <span class="cat-label">{{ cat.label }}</span>
+          <span class="cat-count">
+            <span class="count-done">{{ completed(cat.key) }}</span>
+            <span class="count-sep">/</span>
+            <span class="count-total">{{ total(cat.key) }}</span>
+          </span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" [ngClass]="'fill-' + cat.color"
+               [style.width.%]="pct(cat.key)"></div>
+        </div>
+      </div>
+      <span class="cat-badge" *ngIf="pct(cat.key) === 100 && total(cat.key) > 0">✓</span>
+      <span class="cat-pct" *ngIf="pct(cat.key) < 100 || total(cat.key) === 0">{{ pct(cat.key) }}%</span>
+    </div>
+  </div>
+
+</div>

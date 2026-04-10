@@ -3,8 +3,7 @@ package com.webvibes.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.webvibes.dto.*;
 import com.webvibes.entity.AssessmentType;
-import com.webvibes.entity.StudentAssessment;
-import com.webvibes.exception.AssessmentNotFoundException;
+import com.webvibes.entity.StudentAssessment;import com.webvibes.exception.AssessmentNotFoundException;
 import com.webvibes.repository.StudentAssessmentRepository;
 import com.webvibes.service.AssessmentService;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +34,12 @@ public class StudentAssessmentController {
     public ResponseEntity<List<StudentAssessmentDTO>> getMyAssessments(Authentication authentication) {
         String email = authentication.getName();
         return ResponseEntity.ok(assessmentService.getStudentAssessments(email));
+    }
+
+    @GetMapping("/progress")
+    public ResponseEntity<StudentProgressDTO> getMyProgress(Authentication authentication) {
+        String email = authentication.getName();
+        return ResponseEntity.ok(assessmentService.getStudentProgress(email));
     }
 
     @GetMapping("/{studentAssessmentId}")

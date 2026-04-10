@@ -1,19 +1,13 @@
 <div class="interview-page">
 
-  <!-- Loading -->
-  <div class="loading-state" *ngIf="isLoading">
-    <div class="spinner"></div>
-    <p>Loading interview details...</p>
-  </div>
-
-  <!-- Error -->
-  <div class="alert-error" *ngIf="errorMessage && !isLoading">
-    {{ errorMessage }}
-    <button class="btn-back" (click)="goBack()">Back to Dashboard</button>
-  </div>
+  <!-- Camera Gate -->
+  <app-camera-gate *ngIf="!cameraGranted" (permitted)="cameraGranted = true"></app-camera-gate>
 
   <!-- Interview details -->
-  <div class="interview-container" *ngIf="!isLoading && !errorMessage && detail">
+  <div class="interview-container" *ngIf="cameraGranted && !isLoading && !errorMessage && detail">
+
+    <!-- Live camera monitor -->
+    <app-camera-monitor></app-camera-monitor>
 
     <div class="interview-header">
       <h1 class="interview-title">{{ detail.title }}</h1>
@@ -78,6 +72,22 @@
         aria-label="Join Interview in new tab">
         🎥 Join Interview
       </button>
+    </div>
+
+    <!-- Mark attended / completed state -->
+    <div class="attend-row" *ngIf="!submitted && !isUpcoming">
+      <p class="attend-hint">After attending the interview, click below to mark it as completed.</p>
+      <button class="btn-attend" (click)="markAttended()" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Marking...' : '✅ Mark as Attended' }}
+      </button>
+    </div>
+
+    <div class="completed-banner" *ngIf="submitted">
+      <span class="done-circle">✓</span>
+      <div>
+        <strong>Interview marked as completed</strong>
+        <span>Your attendance has been recorded.</span>
+      </div>
     </div>
 
     <div class="back-row">

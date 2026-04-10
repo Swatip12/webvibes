@@ -1,0 +1,81 @@
+.cam-monitor {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+  width: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  background: #1e1b4b;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  transition: width 0.2s;
+}
+
+.cam-monitor.minimized {
+  width: 140px;
+}
+
+/* Header bar */
+.cam-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.75rem;
+  background: #1e1b4b;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cam-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.cam-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #e0e7ff;
+  flex: 1;
+}
+
+.cam-toggle {
+  font-size: 0.65rem;
+  color: #a5b4fc;
+}
+
+/* Video feed */
+.cam-body {
+  position: relative;
+}
+
+.cam-feed {
+  width: 100%;
+  display: block;
+  background: #000;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+/* REC badge */
+.cam-badge {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  background: rgba(239, 68, 68, 0.85);
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}

@@ -38,4 +38,8 @@ export class AssessmentService {
   submitMachineTest(saId: number, solution: MachineSubmitRequest): Observable<SubmitResponse> {
     return this.http.post<SubmitResponse>(`${this.apiUrl}/${saId}/submit`, solution);
   }
+
+  submitMockInterview(saId: number): Observable<SubmitResponse> {
+    return this.http.post<SubmitResponse>(`${this.apiUrl}/${saId}/submit`, {});
+  }
 }

@@ -1,0 +1,14 @@
+<div class="cam-monitor" [class.minimized]="minimized">
+
+  <div class="cam-header" (click)="toggle()">
+    <span class="cam-dot"></span>
+    <span class="cam-label">{{ minimized ? '📷 Camera' : '📷 Live Monitor' }}</span>
+    <span class="cam-toggle">{{ minimized ? '▲' : '▼' }}</span>
+  </div>
+
+  <div class="cam-body" *ngIf="!minimized">
+    <video #camFeed autoplay muted playsinline class="cam-feed"></video>
+    <div class="cam-badge">● REC</div>
+  </div>
+
+</div>

@@ -294,6 +294,9 @@
         </div>
       </div>
 
+      <!-- Progress Card (full payment only) -->
+      <app-student-progress *ngIf="dashboard.paymentStatus === 'FULL'"></app-student-progress>
+
       <!-- Attendance Tracker (full width, FULL payment only) -->
       <app-attendance-tracker *ngIf="dashboard.paymentStatus === 'FULL'"></app-attendance-tracker>
 
