@@ -3,7 +3,8 @@ package com.webvibes.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.webvibes.dto.*;
 import com.webvibes.entity.AssessmentType;
-import com.webvibes.entity.StudentAssessment;import com.webvibes.exception.AssessmentNotFoundException;
+import com.webvibes.entity.StudentAssessment;
+import com.webvibes.exception.AssessmentNotFoundException;
 import com.webvibes.repository.StudentAssessmentRepository;
 import com.webvibes.service.AssessmentService;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/student/assessments")
@@ -59,17 +61,16 @@ public class StudentAssessmentController {
     }
 
     /**
-     * Unified submit endpoint — dispatches to MCQ or machine test logic based on assessment type.
-     * Accepts either McqSubmitRequest (with "answers" field) or MachineSubmitRequest (with "solutionText" field).
+     * Unified submit endpoint — dispatches based on assessment type.
+     * Accepts MCQ answers, machine test solution, or empty body for mock interview.
      */
     @PostMapping("/{studentAssessmentId}/submit")
     public ResponseEntity<SubmitResponse> submit(
             @PathVariable Long studentAssessmentId,
-            @RequestBody Object body,
+            @RequestBody(required = false) Map<String, Object> body,
             Authentication authentication) {
         String email = authentication.getName();
 
-        // Determine assessment type to route to the correct submit handler
         StudentAssessment sa = studentAssessmentRepository.findById(studentAssessmentId)
                 .orElseThrow(() -> new AssessmentNotFoundException(
                         "StudentAssessment not found with id: " + studentAssessmentId));
@@ -78,9 +79,12 @@ public class StudentAssessmentController {
         Object submitRequest;
 
         if (type == AssessmentType.MACHINE_TEST) {
-            submitRequest = objectMapper.convertValue(body, MachineSubmitRequest.class);
+            submitRequest = objectMapper.convertValue(body != null ? body : Map.of(), MachineSubmitRequest.class);
+        } else if (type == AssessmentType.MOCK_INTERVIEW) {
+            // Mock interview — no body needed, pass empty MCQ request
+            submitRequest = new McqSubmitRequest();
         } else {
-            submitRequest = objectMapper.convertValue(body, McqSubmitRequest.class);
+            submitRequest = objectMapper.convertValue(body != null ? body : Map.of(), McqSubmitRequest.class);
         }
 
         return ResponseEntity.ok(assessmentService.submitAssessment(studentAssessmentId, submitRequest, email));

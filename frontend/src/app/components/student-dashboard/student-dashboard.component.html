@@ -1,57 +1,70 @@
 <div class="dashboard-container">
 
-  <!-- Sidebar -->
+  <!-- ── Sidebar ── -->
   <aside class="sidebar">
     <div class="sidebar-brand">
-      <div class="brand-icon">W</div>
-      <span class="brand-name">WebVibes</span>
+      <div class="brand-logo">W</div>
+      <div class="brand-text">
+        <span class="brand-name">WebVibes</span>
+        <span class="brand-sub">Technology</span>
+      </div>
     </div>
+
     <nav class="sidebar-nav">
       <a class="nav-item active">
         <span class="nav-icon">🏠</span>
-        <span>Dashboard</span>
+        <span class="nav-label">Dashboard</span>
       </a>
       <a class="nav-item">
-        <span class="nav-icon">📋</span>
-        <span>Assessments</span>
+        <span class="nav-icon">�</span>
+        <span class="nav-label">Assessments</span>
       </a>
       <a class="nav-item">
         <span class="nav-icon">💳</span>
-        <span>Payments</span>
+        <span class="nav-label">Payments</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-icon">🕐</span>
+        <span class="nav-label">Attendance</span>
       </a>
     </nav>
-    <button class="sidebar-logout" (click)="logout()">
-      <span>⬅</span> Logout
-    </button>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user" *ngIf="dashboard">
+        <div class="sidebar-avatar">{{ dashboard.name?.charAt(0)?.toUpperCase() }}</div>
+        <div class="sidebar-user-info">
+          <span class="sidebar-user-name">{{ dashboard.name }}</span>
+          <span class="sidebar-user-role">Student</span>
+        </div>
+      </div>
+      <button class="sidebar-logout" (click)="logout()">
+        <span>↩</span> Logout
+      </button>
+    </div>
   </aside>
 
-  <!-- Main Content -->
+  <!-- ── Main Content ── -->
   <div class="main-content">
 
-    <!-- Top Header -->
-    <header class="main-header">
-      <div class="header-left">
-        <h1 class="page-title">Student Dashboard</h1>
-        <p class="page-subtitle" *ngIf="dashboard">Welcome back, <strong>{{ dashboard.name }}</strong> 👋</p>
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 class="topbar-title">Student Portal</h1>
       </div>
-      <div class="header-right" *ngIf="dashboard">
-        <div class="avatar-chip">
-          <div class="avatar">{{ dashboard.name?.charAt(0)?.toUpperCase() }}</div>
-          <div class="avatar-info">
-            <span class="avatar-name">{{ dashboard.name }}</span>
-            <span class="avatar-email">{{ dashboard.email }}</span>
+      <div class="topbar-right" *ngIf="dashboard">
+        <div class="topbar-avatar-chip">
+          <div class="topbar-avatar">{{ dashboard.name?.charAt(0)?.toUpperCase() }}</div>
+          <div class="topbar-info">
+            <span class="topbar-name">{{ dashboard.name }}</span>
+            <span class="topbar-email">{{ dashboard.email }}</span>
           </div>
         </div>
       </div>
     </header>
 
     <!-- Alerts -->
-    <div class="alert alert-error" *ngIf="errorMessage && !isLoading">
-      <span>⚠️</span> {{ errorMessage }}
-    </div>
-    <div class="alert alert-success" *ngIf="successMessage && !isLoading">
-      <span>✅</span> {{ successMessage }}
-    </div>
+    <div class="alert alert-error" *ngIf="errorMessage && !isLoading">⚠️ {{ errorMessage }}</div>
+    <div class="alert alert-success" *ngIf="successMessage && !isLoading">✅ {{ successMessage }}</div>
 
     <!-- Loading -->
     <div class="loading-state" *ngIf="isLoading">
@@ -59,135 +72,140 @@
       <p>Loading your dashboard...</p>
     </div>
 
-    <!-- No Plan Assigned -->
-    <div class="content-grid" *ngIf="dashboard && !dashboard.planAssigned && !isLoading">
-      <div class="card profile-card">
-        <div class="profile-hero">
-          <div class="profile-avatar-lg">{{ dashboard.name?.charAt(0)?.toUpperCase() }}</div>
-          <h2>{{ dashboard.name }}</h2>
-          <p class="profile-email">{{ dashboard.email }}</p>
-        </div>
-        <div class="pending-banner">
-          <div class="pending-icon-wrap">⏳</div>
-          <h3>Internship Plan Pending</h3>
-          <p>Your account is registered. An internship plan will be assigned to you by the admin shortly.</p>
-          <p>Once assigned, you will be able to view your plan details and make payments here.</p>
+    <!-- No Plan -->
+    <div class="page-body" *ngIf="dashboard && !dashboard.planAssigned && !isLoading">
+      <div class="pending-card">
+        <div class="pending-avatar">{{ dashboard.name?.charAt(0)?.toUpperCase() }}</div>
+        <h2>{{ dashboard.name }}</h2>
+        <p class="pending-email">{{ dashboard.email }}</p>
+        <div class="pending-notice">
+          <div class="notice-icon">⏳</div>
+          <div>
+            <h3>Internship Plan Pending</h3>
+            <p>Your account is registered. An admin will assign your internship plan shortly.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Main Dashboard Grid -->
-    <div class="content-grid" *ngIf="dashboard && dashboard.planAssigned && !isLoading">
+    <!-- Main Dashboard -->
+    <div class="page-body" *ngIf="dashboard && dashboard.planAssigned && !isLoading">
+
+      <!-- Welcome Hero -->
+      <div class="welcome-hero">
+        <div class="welcome-text">
+          <h2>Welcome back, {{ dashboard.name?.split(' ')[0] }} 👋</h2>
+          <p>Here's an overview of your internship progress and activities.</p>
+        </div>
+        <div class="welcome-badge" [ngClass]="{
+          'badge-full': dashboard.paymentStatus === 'FULL',
+          'badge-partial': dashboard.paymentStatus === 'PARTIAL',
+          'badge-unpaid': dashboard.paymentStatus === 'NOT_PAID'
+        }">
+          <span class="badge-dot"></span>
+          {{ dashboard.paymentStatus === 'FULL' ? 'Fully Enrolled' : dashboard.paymentStatus === 'PARTIAL' ? 'Partially Paid' : 'Payment Pending' }}
+        </div>
+      </div>
 
       <!-- Stats Row -->
       <div class="stats-row">
-        <div class="stat-card stat-plan">
-          <div class="stat-icon">📦</div>
-          <div class="stat-info">
+        <div class="stat-card" style="--accent: #6366f1">
+          <div class="stat-icon-wrap" style="background: #ede9fe">📦</div>
+          <div class="stat-body">
             <span class="stat-label">Plan</span>
             <span class="stat-value">{{ dashboard.planName }}</span>
           </div>
         </div>
-        <div class="stat-card stat-paid">
-          <div class="stat-icon">✅</div>
-          <div class="stat-info">
+        <div class="stat-card" style="--accent: #22c55e">
+          <div class="stat-icon-wrap" style="background: #dcfce7">💰</div>
+          <div class="stat-body">
             <span class="stat-label">Paid</span>
             <span class="stat-value">₹{{ dashboard.paidAmount }}</span>
           </div>
         </div>
-        <div class="stat-card stat-remaining">
-          <div class="stat-icon">⏳</div>
-          <div class="stat-info">
+        <div class="stat-card" style="--accent: #f59e0b">
+          <div class="stat-icon-wrap" style="background: #fef3c7">⏳</div>
+          <div class="stat-body">
             <span class="stat-label">Remaining</span>
             <span class="stat-value">₹{{ dashboard.remainingAmount }}</span>
           </div>
         </div>
-        <div class="stat-card stat-status">
-          <div class="stat-icon">💳</div>
-          <div class="stat-info">
+        <div class="stat-card" style="--accent: #3b82f6">
+          <div class="stat-icon-wrap" style="background: #dbeafe">💳</div>
+          <div class="stat-body">
             <span class="stat-label">Status</span>
-            <span class="badge"
-              [class.badge-red]="dashboard.paymentStatus === 'NOT_PAID'"
-              [class.badge-orange]="dashboard.paymentStatus === 'PARTIAL'"
-              [class.badge-green]="dashboard.paymentStatus === 'FULL'">
-              {{ dashboard.paymentStatus }}
+            <span class="status-pill"
+              [class.pill-green]="dashboard.paymentStatus === 'FULL'"
+              [class.pill-orange]="dashboard.paymentStatus === 'PARTIAL'"
+              [class.pill-red]="dashboard.paymentStatus === 'NOT_PAID'">
+              {{ dashboard.paymentStatus === 'FULL' ? 'Full' : dashboard.paymentStatus === 'PARTIAL' ? 'Partial' : 'Unpaid' }}
             </span>
           </div>
         </div>
       </div>
 
-      <!-- Two Column Layout -->
+      <!-- Two Column: Plan + Payment -->
       <div class="two-col">
 
-        <!-- Left Column -->
-        <div class="col-left">
-
-          <!-- Plan Details Card -->
+        <!-- Left: Plan + Receipts -->
+        <div class="col-stack">
           <div class="card">
-            <div class="card-header-row">
-              <h2 class="card-title">📋 Internship Plan</h2>
+            <div class="card-head">
+              <span class="card-head-icon">📋</span>
+              <h3>Internship Plan</h3>
             </div>
-            <div class="plan-details">
+            <div class="detail-list">
               <div class="detail-row">
-                <span class="label">Plan Name</span>
-                <span class="value">{{ dashboard.planName }}</span>
+                <span class="dl-label">Plan Name</span>
+                <span class="dl-value">{{ dashboard.planName }}</span>
               </div>
               <div class="detail-row">
-                <span class="label">Total Fee</span>
-                <span class="value">₹{{ dashboard.totalFee }}</span>
+                <span class="dl-label">Total Fee</span>
+                <span class="dl-value">₹{{ dashboard.totalFee }}</span>
               </div>
               <div class="detail-row">
-                <span class="label">Paid Amount</span>
-                <span class="value text-green">₹{{ dashboard.paidAmount }}</span>
+                <span class="dl-label">Paid</span>
+                <span class="dl-value green">₹{{ dashboard.paidAmount }}</span>
               </div>
               <div class="detail-row">
-                <span class="label">Remaining</span>
-                <span class="value text-orange">₹{{ dashboard.remainingAmount }}</span>
-              </div>
-              <div class="detail-row">
-                <span class="label">Payment Status</span>
-                <span class="badge"
-                  [class.badge-red]="dashboard.paymentStatus === 'NOT_PAID'"
-                  [class.badge-orange]="dashboard.paymentStatus === 'PARTIAL'"
-                  [class.badge-green]="dashboard.paymentStatus === 'FULL'">
-                  {{ dashboard.paymentStatus }}
-                </span>
+                <span class="dl-label">Remaining</span>
+                <span class="dl-value orange">₹{{ dashboard.remainingAmount }}</span>
               </div>
             </div>
           </div>
 
-          <!-- Receipts Card -->
           <div class="card" *ngIf="dashboard.paymentStatus === 'PARTIAL' || dashboard.paymentStatus === 'FULL'">
-            <div class="card-header-row">
-              <h2 class="card-title">🧾 Receipts</h2>
+            <div class="card-head">
+              <span class="card-head-icon">🧾</span>
+              <h3>Receipts</h3>
             </div>
-            <div class="receipt-links">
-              <a class="receipt-link" (click)="downloadReceipt('REGISTRATION')" href="javascript:void(0)">
-                <span class="receipt-icon">📄</span>
+            <div class="receipt-list">
+              <button class="receipt-btn" (click)="downloadReceipt('REGISTRATION')">
+                <span class="receipt-btn-icon">�</span>
                 <span>Registration Receipt</span>
-                <span class="receipt-dl">↓ Download</span>
-              </a>
-              <a class="receipt-link" *ngIf="dashboard.paymentStatus === 'FULL'" (click)="downloadReceipt('REMAINING')" href="javascript:void(0)">
-                <span class="receipt-icon">📄</span>
+                <span class="receipt-dl">↓</span>
+              </button>
+              <button class="receipt-btn" *ngIf="dashboard.paymentStatus === 'FULL'" (click)="downloadReceipt('REMAINING')">
+                <span class="receipt-btn-icon">📄</span>
                 <span>Remaining Payment Receipt</span>
-                <span class="receipt-dl">↓ Download</span>
-              </a>
+                <span class="receipt-dl">↓</span>
+              </button>
             </div>
           </div>
-
         </div>
 
-        <!-- Right Column: Payment Card -->
-        <div class="col-right">
-          <div class="card payment-card">
-            <div class="card-header-row">
-              <h2 class="card-title">💳 Payment</h2>
+        <!-- Right: Payment -->
+        <div class="col-stack">
+          <div class="card">
+            <div class="card-head">
+              <span class="card-head-icon">💳</span>
+              <h3>Payment</h3>
             </div>
 
             <!-- Agreement -->
-            <div class="agreement-box" *ngIf="dashboard.paymentStatus !== 'FULL'">
-              <h4>📜 Internship Terms &amp; Conditions</h4>
-              <div class="agreement-text">
+            <div class="terms-box" *ngIf="dashboard.paymentStatus !== 'FULL'">
+              <div class="terms-header">📜 Internship Terms &amp; Conditions</div>
+              <div class="terms-body">
                 <p>By enrolling in the WebVibes Technology Internship Program, you agree to the following terms:</p>
                 <ol>
                   <li>The internship duration and plan details are as assigned by WebVibes Technology and cannot be changed after enrollment.</li>
@@ -199,7 +217,7 @@
                   <li>All intellectual property created during the internship remains the property of WebVibes Technology unless otherwise agreed in writing.</li>
                 </ol>
               </div>
-              <label class="agreement-checkbox">
+              <label class="terms-check">
                 <input type="checkbox" [(ngModel)]="agreementAccepted" />
                 I agree to the internship terms and conditions
               </label>
@@ -208,73 +226,79 @@
             <div class="alert alert-warning" *ngIf="cancellationMessage">{{ cancellationMessage }}</div>
 
             <!-- NOT_PAID -->
-            <div class="payment-actions" *ngIf="dashboard.paymentStatus === 'NOT_PAID'">
-              <div class="upi-box" *ngIf="!showUpiForm">
-                <p class="upi-amount">Amount to Pay: <strong>₹1000</strong> <span class="upi-tag">Registration Fee</span></p>
-                <div class="upi-details">
-                  <p class="upi-label">Pay via UPI to:</p>
-                  <p class="upi-id">📱 paliwalswati603@oksbi</p>
-                  <p class="upi-name">WebVibes Technology</p>
+            <div *ngIf="dashboard.paymentStatus === 'NOT_PAID'">
+              <div class="upi-panel" *ngIf="!showUpiForm">
+                <div class="upi-amount-row">
+                  <span class="upi-amount-label">Amount to Pay</span>
+                  <span class="upi-amount-value">₹1,000 <span class="upi-tag">Registration</span></span>
                 </div>
-                <a class="btn-pay upi-deep-link"
+                <div class="upi-id-box">
+                  <p class="upi-id-label">Pay via UPI</p>
+                  <p class="upi-id-value">📱 paliwalswati603@oksbi</p>
+                  <p class="upi-id-name">WebVibes Technology</p>
+                </div>
+                <a class="btn-upi-pay"
                    [attr.href]="agreementAccepted ? 'upi://pay?pa=paliwalswati603@oksbi&pn=WebVibes%20Technology&am=1000&cu=INR&tn=Registration%20Fee' : null"
-                   [class.disabled-link]="!agreementAccepted">
+                   [class.btn-disabled]="!agreementAccepted">
                   📲 Pay ₹1000 via UPI App
                 </a>
                 <p class="upi-hint">Opens GPay / PhonePe / Paytm with amount pre-filled</p>
-                <button class="btn-secondary mt-1" [disabled]="!agreementAccepted" (click)="showUpiForm = true">
+                <button class="btn-outline" [disabled]="!agreementAccepted" (click)="showUpiForm = true">
                   Already paid? Submit UTR
                 </button>
               </div>
-              <div class="utr-form" *ngIf="showUpiForm">
+              <div class="utr-panel" *ngIf="showUpiForm">
                 <p>Enter the UTR / Transaction ID from your UPI app:</p>
                 <input type="text" class="utr-input" [(ngModel)]="utrNumber" placeholder="e.g. 123456789012" maxlength="22" />
                 <div class="utr-actions">
-                  <button class="btn-pay" [disabled]="!utrNumber" (click)="submitUpiPayment('REGISTRATION')">Submit</button>
-                  <button class="btn-secondary" (click)="showUpiForm = false">Cancel</button>
+                  <button class="btn-primary" [disabled]="!utrNumber" (click)="submitUpiPayment('REGISTRATION')">Submit</button>
+                  <button class="btn-outline" (click)="showUpiForm = false">Cancel</button>
                 </div>
               </div>
             </div>
 
             <!-- PARTIAL -->
-            <div class="payment-actions" *ngIf="dashboard.paymentStatus === 'PARTIAL'">
-              <div class="payment-summary">
-                <span class="paid-info">✅ Paid: ₹{{ dashboard.paidAmount }}</span>
-                <span class="remaining-info">⏳ Remaining: ₹{{ dashboard.remainingAmount }}</span>
+            <div *ngIf="dashboard.paymentStatus === 'PARTIAL'">
+              <div class="payment-summary-row">
+                <span class="ps-paid">✅ Paid: ₹{{ dashboard.paidAmount }}</span>
+                <span class="ps-remaining">⏳ Remaining: ₹{{ dashboard.remainingAmount }}</span>
               </div>
-              <div class="upi-box" *ngIf="!showUpiForm">
-                <p class="upi-amount">Amount to Pay: <strong>₹{{ dashboard.remainingAmount }}</strong> <span class="upi-tag">Remaining Fee</span></p>
-                <div class="upi-details">
-                  <p class="upi-label">Pay via UPI to:</p>
-                  <p class="upi-id">📱 paliwalswati603@oksbi</p>
-                  <p class="upi-name">WebVibes Technology</p>
+              <div class="upi-panel" *ngIf="!showUpiForm">
+                <div class="upi-amount-row">
+                  <span class="upi-amount-label">Amount to Pay</span>
+                  <span class="upi-amount-value">₹{{ dashboard.remainingAmount }} <span class="upi-tag">Remaining</span></span>
                 </div>
-                <a class="btn-pay upi-deep-link"
+                <div class="upi-id-box">
+                  <p class="upi-id-label">Pay via UPI</p>
+                  <p class="upi-id-value">📱 paliwalswati603@oksbi</p>
+                  <p class="upi-id-name">WebVibes Technology</p>
+                </div>
+                <a class="btn-upi-pay"
                    [attr.href]="agreementAccepted ? 'upi://pay?pa=paliwalswati603@oksbi&pn=WebVibes%20Technology&am=' + dashboard.remainingAmount + '&cu=INR&tn=Remaining%20Fee' : null"
-                   [class.disabled-link]="!agreementAccepted">
+                   [class.btn-disabled]="!agreementAccepted">
                   📲 Pay ₹{{ dashboard.remainingAmount }} via UPI App
                 </a>
                 <p class="upi-hint">Opens GPay / PhonePe / Paytm with amount pre-filled</p>
-                <button class="btn-secondary mt-1" [disabled]="!agreementAccepted" (click)="showUpiForm = true">
+                <button class="btn-outline" [disabled]="!agreementAccepted" (click)="showUpiForm = true">
                   Already paid? Submit UTR
                 </button>
               </div>
-              <div class="utr-form" *ngIf="showUpiForm">
+              <div class="utr-panel" *ngIf="showUpiForm">
                 <p>Enter the UTR / Transaction ID from your UPI app:</p>
                 <input type="text" class="utr-input" [(ngModel)]="utrNumber" placeholder="e.g. 123456789012" maxlength="22" />
                 <div class="utr-actions">
-                  <button class="btn-pay" [disabled]="!utrNumber" (click)="submitUpiPayment('REMAINING')">Submit</button>
-                  <button class="btn-secondary" (click)="showUpiForm = false">Cancel</button>
+                  <button class="btn-primary" [disabled]="!utrNumber" (click)="submitUpiPayment('REMAINING')">Submit</button>
+                  <button class="btn-outline" (click)="showUpiForm = false">Cancel</button>
                 </div>
               </div>
             </div>
 
             <!-- FULL -->
-            <div class="payment-complete" *ngIf="dashboard.paymentStatus === 'FULL'">
-              <div class="complete-circle">✓</div>
+            <div class="payment-done" *ngIf="dashboard.paymentStatus === 'FULL'">
+              <div class="done-check">✓</div>
               <div>
-                <p class="complete-title">Payment Completed</p>
-                <p class="complete-sub">You have full access to all assessments</p>
+                <p class="done-title">Payment Complete</p>
+                <p class="done-sub">You have full access to all features</p>
               </div>
             </div>
           </div>
@@ -282,22 +306,51 @@
 
       </div>
 
-      <!-- Assessments Section (full width) -->
-      <div class="card assessments-card">
+      <!-- Assessments -->
+      <div class="card section-card">
+        <div class="card-head">
+          <span class="card-head-icon">📝</span>
+          <h3>Assessments</h3>
+        </div>
         <app-assessment-list *ngIf="dashboard.paymentStatus === 'FULL'"></app-assessment-list>
-        <div *ngIf="dashboard.paymentStatus !== 'FULL'" class="payment-gate-msg">
-          <div class="gate-lock">🔒</div>
+        <div class="locked-msg" *ngIf="dashboard.paymentStatus !== 'FULL'">
+          <span class="locked-icon">🔒</span>
           <div>
-            <p class="gate-title">Assessments Locked</p>
-            <p class="gate-sub">Complete your payment to unlock all assessments</p>
+            <p class="locked-title">Assessments Locked</p>
+            <p class="locked-sub">Complete your payment to unlock all assessments</p>
           </div>
         </div>
       </div>
 
-      <!-- Progress Card (full payment only) -->
-      <app-student-progress *ngIf="dashboard.paymentStatus === 'FULL'"></app-student-progress>
+      <!-- Progress + Attendance side by side when FULL -->
+      <div class="two-col" *ngIf="dashboard.paymentStatus === 'FULL'">
+        <app-student-progress></app-student-progress>
+        <div class="card section-card">
+          <div class="card-head">
+            <span class="card-head-icon">📊</span>
+            <h3>Quick Stats</h3>
+          </div>
+          <div class="quick-stats">
+            <div class="qs-item">
+              <span class="qs-icon">🎯</span>
+              <span class="qs-label">Plan</span>
+              <span class="qs-value">{{ dashboard.planName }}</span>
+            </div>
+            <div class="qs-item">
+              <span class="qs-icon">💰</span>
+              <span class="qs-label">Total Fee</span>
+              <span class="qs-value">₹{{ dashboard.totalFee }}</span>
+            </div>
+            <div class="qs-item">
+              <span class="qs-icon">✅</span>
+              <span class="qs-label">Paid</span>
+              <span class="qs-value green">₹{{ dashboard.paidAmount }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <!-- Attendance Tracker (full width, FULL payment only) -->
+      <!-- Attendance Tracker -->
       <app-attendance-tracker *ngIf="dashboard.paymentStatus === 'FULL'"></app-attendance-tracker>
 
     </div>
