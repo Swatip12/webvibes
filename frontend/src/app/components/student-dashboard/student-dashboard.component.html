@@ -94,7 +94,7 @@
       <!-- Welcome Hero -->
       <div class="welcome-hero">
         <div class="welcome-text">
-          <h2>Welcome back, {{ dashboard.name?.split(' ')[0] }} 👋</h2>
+          <h2>Welcome back, {{ (dashboard.name || '').split(' ')[0] }} 👋</h2>
           <p>Here's an overview of your internship progress and activities.</p>
         </div>
         <div class="welcome-badge" [ngClass]="{
