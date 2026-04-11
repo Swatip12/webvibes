@@ -4,9 +4,14 @@
       <h2 class="adm-title">Student Management</h2>
       <p class="adm-subtitle">View and manage student internship payment records</p>
     </div>
-    <a routerLink="/admin/dashboard" class="adm-btn adm-btn-secondary">
-      <i class="bi bi-arrow-left"></i> Back to Dashboard
-    </a>
+    <div style="display:flex;gap:0.75rem;align-items:center">
+      <button class="adm-btn adm-btn-secondary" (click)="loadStudents()" style="gap:0.4rem">
+        🔄 Refresh
+      </button>
+      <a routerLink="/admin/dashboard" class="adm-btn adm-btn-secondary">
+        ← Back to Dashboard
+      </a>
+    </div>
   </div>
 
   <!-- Filter -->

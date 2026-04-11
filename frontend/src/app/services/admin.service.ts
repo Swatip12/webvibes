@@ -67,8 +67,11 @@ export class AdminService {
 
   // ── Students ──────────────────────────────────────────────────
   getStudents(paymentStatus?: string): Observable<any> {
-    const params = paymentStatus && paymentStatus !== 'ALL' ? `?paymentStatus=${paymentStatus}` : '';
-    return this.http.get<any>(`${this.apiUrl}/students${params}`);
+    let params = 'size=500&sort=id,desc';
+    if (paymentStatus && paymentStatus !== 'ALL') {
+      params += `&paymentStatus=${paymentStatus}`;
+    }
+    return this.http.get<any>(`${this.apiUrl}/students?${params}`);
   }
 
   updateStudentPayment(studentId: number, data: { paidAmount: number; paymentStatus: string }): Observable<any> {
