@@ -1,9 +1,9 @@
 /* ============================================
-   HOME PAGE - PROFESSIONAL IT INSTITUTE UI
+   HOME PAGE - DARK FUTURISTIC UI
    ============================================ */
 
 .home-page {
-  background: var(--color-background);
+  background: #050816;
 }
 
 /* ============================================
@@ -31,33 +31,35 @@ section {
 .section-badge {
   display: inline-block;
   padding: var(--spacing-2) var(--spacing-6);
-  background: var(--primary-50);
-  color: var(--primary-700);
+  background: rgba(99,102,241,0.12);
+  color: #a5b4fc;
   border-radius: var(--radius-full);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   margin-bottom: var(--spacing-4);
-  border: 2px solid var(--primary-100);
+  border: 1px solid rgba(99,102,241,0.3);
+  backdrop-filter: blur(8px);
 }
 
 .gradient-badge {
-  background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
-  color: var(--neutral-white);
+  background: linear-gradient(135deg, rgba(99,102,241,0.8), rgba(139,92,246,0.8));
+  color: #fff;
   border: none;
+  box-shadow: 0 0 20px rgba(99,102,241,0.4);
 }
 
 .section-header h2 {
   font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-extrabold);
-  color: var(--color-text-primary);
+  color: #f1f5f9;
   margin-bottom: var(--spacing-4);
   line-height: var(--line-height-tight);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
+  background: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #38bdf8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -65,18 +67,29 @@ section {
 
 .section-header p {
   font-size: var(--font-size-lg);
-  color: var(--color-text-secondary);
+  color: #64748b;
   max-width: 600px;
   margin: 0 auto;
   line-height: var(--line-height-relaxed);
 }
 
 /* ============================================
-   FEATURES SECTION (Task 5.1)
+   FEATURES SECTION
    ============================================ */
 
 .features-section {
-  background: linear-gradient(180deg, var(--color-background) 0%, var(--color-surface) 100%);
+  background: linear-gradient(180deg, #050816 0%, #0a0f2e 100%);
+  position: relative;
+  overflow: hidden;
+}
+.features-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 400px;
+  background: radial-gradient(ellipse, rgba(99,102,241,0.08) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 /* 4-column grid (desktop), 2 (tablet), 1 (mobile) */
@@ -88,22 +101,33 @@ section {
 
 .feature-card {
   position: relative;
-  background: var(--color-surface);
+  background: rgba(255,255,255,0.03);
   padding: var(--spacing-12) var(--spacing-8);
   border-radius: var(--radius-2xl);
   text-align: center;
   transition: var(--transition-base);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
   overflow: hidden;
+  backdrop-filter: blur(8px);
 }
 
-/* Hover effects: translateY -8px, shadow-lg */
-.feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--primary-300);
+.feature-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-2xl);
+  background: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(99,102,241,0.3), 0 0 40px rgba(99,102,241,0.1);
+  border-color: rgba(99,102,241,0.4);
+}
+.feature-card:hover::before { opacity: 1; }
 
 /* Icon container with gradient background */
 .feature-icon-wrapper {
@@ -111,19 +135,19 @@ section {
   width: 80px;
   height: 80px;
   margin: 0 auto var(--spacing-8);
-  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
   border-radius: var(--radius-xl);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 8px 24px rgba(99,102,241,0.4), 0 0 0 1px rgba(99,102,241,0.2);
   transition: var(--transition-base);
   z-index: 1;
 }
 
 .feature-card:hover .feature-icon-wrapper {
   transform: scale(1.1) rotate(5deg);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 12px 32px rgba(99,102,241,0.6), 0 0 0 1px rgba(99,102,241,0.4);
 }
 
 .feature-icon {
@@ -135,7 +159,7 @@ section {
 .feature-card h3 {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
+  color: #f1f5f9;
   margin-bottom: var(--spacing-3);
   position: relative;
   z-index: 1;
@@ -143,7 +167,7 @@ section {
 
 .feature-card p {
   font-size: var(--font-size-base);
-  color: var(--color-text-secondary);
+  color: #64748b;
   line-height: var(--line-height-relaxed);
   position: relative;
   z-index: 1;
@@ -156,28 +180,35 @@ section {
   transform: translateX(-50%);
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(33, 150, 243, 0.3) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%);
   opacity: 0;
   transition: var(--transition-base);
   z-index: 0;
 }
 
-.feature-card:hover .feature-glow {
-  opacity: 1;
-}
+.feature-card:hover .feature-glow { opacity: 1; }
 
-/* Stagger animation on scroll (100ms delay between cards) */
 .feature-card:nth-child(1) { animation-delay: 0ms; }
 .feature-card:nth-child(2) { animation-delay: 100ms; }
 .feature-card:nth-child(3) { animation-delay: 200ms; }
 .feature-card:nth-child(4) { animation-delay: 300ms; }
 
 /* ============================================
-   COURSES PREVIEW SECTION (Task 5.2)
+   COURSES PREVIEW SECTION
    ============================================ */
 
 .courses-section {
-  background: var(--color-surface);
+  background: #0a0f2e;
+  position: relative;
+  overflow: hidden;
+}
+.courses-section::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 /* 3 featured courses in grid layout */
@@ -189,19 +220,18 @@ section {
 }
 
 .course-card {
-  background: var(--color-surface);
+  background: rgba(255,255,255,0.03);
   border-radius: var(--radius-2xl);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
   transition: var(--transition-base);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(255,255,255,0.07);
 }
 
-/* Hover effects: translateY -8px */
 .course-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--primary-300);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(139,92,246,0.4), 0 0 40px rgba(139,92,246,0.1);
+  border-color: rgba(139,92,246,0.4);
 }
 
 .course-image {
@@ -211,14 +241,14 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #1a1a2e;
+  background: #0d1117;
 }
 
 .course-lang-logo {
   width: 110px;
   height: 110px;
   object-fit: contain;
-  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.4));
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6));
   transition: transform 0.4s ease;
   position: relative;
   z-index: 2;
@@ -230,34 +260,32 @@ section {
 
 .course-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 100%);
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
   padding: var(--spacing-6);
 }
 
-/* Badges for Bestseller/Trending/New */
 .course-badge {
   padding: var(--spacing-2) var(--spacing-5);
-  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
-  color: var(--neutral-white);
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
   border-radius: var(--radius-full);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 16px rgba(99,102,241,0.5);
 }
 
 .course-badge.badge-trending {
-  background: linear-gradient(135deg, var(--secondary-500), var(--secondary-600));
+  background: linear-gradient(135deg, #8b5cf6, #c084fc);
+  box-shadow: 0 4px 16px rgba(139,92,246,0.5);
 }
 
 .course-badge.badge-new {
-  background: linear-gradient(135deg, var(--accent-info), var(--primary-400));
+  background: linear-gradient(135deg, #06b6d4, #3b82f6);
+  box-shadow: 0 4px 16px rgba(6,182,212,0.5);
 }
 
 .course-content {
@@ -267,39 +295,36 @@ section {
 .course-content h3 {
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
+  color: #f1f5f9;
   margin-bottom: var(--spacing-3);
   line-height: var(--line-height-tight);
 }
 
 .course-content p {
   font-size: var(--font-size-lg);
-  color: var(--color-text-secondary);
+  color: #64748b;
   line-height: var(--line-height-relaxed);
   margin-bottom: var(--spacing-6);
 }
 
-/* Course metadata: duration, student count */
 .course-meta {
   display: flex;
   gap: var(--spacing-8);
   margin-bottom: var(--spacing-8);
   padding-top: var(--spacing-6);
-  border-top: 1px solid var(--color-divider);
+  border-top: 1px solid rgba(255,255,255,0.07);
 }
 
 .course-meta span {
   font-size: var(--font-size-base);
-  color: var(--color-text-secondary);
+  color: #64748b;
   font-weight: var(--font-weight-semibold);
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
 }
 
-.course-meta i {
-  color: var(--primary-500);
-}
+.course-meta i { color: #818cf8; }
 
 .section-cta {
   text-align: center;
@@ -307,14 +332,13 @@ section {
 }
 
 /* ============================================
-   COMPANIES SECTION (Task 5.3)
+   COMPANIES SECTION
    ============================================ */
 
 .companies-section {
-  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-background) 100%);
+  background: linear-gradient(180deg, #0a0f2e 0%, #050816 100%);
 }
 
-/* 6 logos, 3 columns desktop */
 .companies-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -327,17 +351,18 @@ section {
   align-items: center;
   justify-content: center;
   padding: var(--spacing-10);
-  background: var(--color-surface);
+  background: rgba(255,255,255,0.03);
   border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(255,255,255,0.07);
   transition: var(--transition-base);
   min-height: 120px;
 }
 
 .company-logo:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--primary-300);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(99,102,241,0.3);
+  border-color: rgba(99,102,241,0.3);
+  background: rgba(99,102,241,0.05);
 }
 
 .company-logo img {
@@ -346,69 +371,62 @@ section {
   width: auto;
   height: auto;
   object-fit: contain;
-  filter: grayscale(100%);
-  opacity: 0.6;
+  filter: grayscale(100%) brightness(0.6);
+  opacity: 0.7;
   transition: var(--transition-base);
 }
 
-/* Grayscale filter with color on hover */
 .company-logo:hover img {
-  filter: grayscale(0%);
+  filter: grayscale(0%) brightness(1);
   opacity: 1;
   transform: scale(1.1);
 }
 
-/* Fallback for company name when logo fails */
 .company-name-fallback {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-text-secondary);
+  color: #64748b;
   text-align: center;
 }
 
 /* ============================================
-   CTA SECTION (Task 5.4)
+   CTA SECTION
    ============================================ */
 
 .cta-section {
   position: relative;
-  background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
-  color: var(--neutral-white);
+  background: linear-gradient(135deg, #0d1117 0%, #0d2137 40%, #1a1035 100%);
+  color: #fff;
   text-align: center;
   overflow: hidden;
   padding: var(--spacing-24) 0;
+  border-top: 1px solid rgba(99,102,241,0.2);
 }
 
 .cta-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   overflow: hidden;
 }
 
 .cta-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.4;
+  filter: blur(100px);
+  opacity: 0.5;
 }
 
 .cta-orb.orb-1 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, var(--secondary-400) 0%, transparent 70%);
-  top: -20%;
-  left: -10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+  top: -20%; left: -10%;
 }
 
 .cta-orb.orb-2 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, var(--accent-info) 0%, transparent 70%);
-  bottom: -20%;
-  right: -10%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+  bottom: -20%; right: -10%;
 }
 
 .cta-content {
@@ -420,15 +438,15 @@ section {
   font-size: var(--font-size-5xl);
   font-weight: var(--font-weight-extrabold);
   margin-bottom: var(--spacing-6);
-  color: var(--neutral-white);
+  color: #f1f5f9;
   line-height: var(--line-height-tight);
 }
 
 .cta-content p {
   font-size: var(--font-size-xl);
   margin-bottom: var(--spacing-12);
-  opacity: 0.95;
-  color: var(--neutral-white);
+  opacity: 0.75;
+  color: #94a3b8;
   line-height: var(--line-height-relaxed);
 }
 
@@ -440,22 +458,27 @@ section {
 }
 
 .cta-buttons .btn-primary {
-  background: var(--neutral-white);
-  color: var(--primary-600);
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(99,102,241,0.5);
+  border: none;
 }
 
 .cta-buttons .btn-primary:hover {
-  background: var(--neutral-50);
   transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(99,102,241,0.7);
 }
 
 .cta-buttons .btn-outline {
-  border-color: var(--neutral-white);
-  color: var(--neutral-white);
+  border-color: rgba(255,255,255,0.3);
+  color: #f1f5f9;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(8px);
 }
 
 .cta-buttons .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.5);
 }
 
 /* ============================================
@@ -646,18 +669,20 @@ section {
 
 /* ── Dark Stats Section ── */
 .dark-stats-section {
-  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  background: linear-gradient(135deg, #0d1117 0%, #0a0f2e 50%, #0d1117 100%);
   padding: 4rem 0;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid rgba(99,102,241,0.15);
+  border-bottom: 1px solid rgba(99,102,241,0.15);
 }
 
 .dark-stats-section::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.15) 0%, transparent 60%),
-              radial-gradient(ellipse at 80% 50%, rgba(139,92,246,0.12) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 50%, rgba(56,189,248,0.08) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -682,17 +707,18 @@ section {
   font-family: var(--font-family-heading);
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 800;
-  background: linear-gradient(135deg, #a5b4fc, #e0e7ff);
+  background: linear-gradient(135deg, #818cf8, #c084fc, #38bdf8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1;
   margin-bottom: 0.5rem;
+  filter: drop-shadow(0 0 20px rgba(129,140,248,0.4));
 }
 
 .dark-stat-lbl {
   font-size: 0.9rem;
-  color: #94a3b8;
+  color: #475569;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -701,7 +727,7 @@ section {
 .dark-stat-divider {
   width: 1px;
   height: 60px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(99,102,241,0.2);
   flex-shrink: 0;
 }
 
