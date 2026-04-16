@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './floating-widgets.component.html',
   styleUrls: ['./floating-widgets.component.css']
 })
-export class FloatingWidgetsComponent {
+export class FloatingWidgetsComponent implements OnInit {
 
   showPopup = false;
   submitted = false;
@@ -26,6 +26,13 @@ export class FloatingWidgetsComponent {
   readonly waLink = `https://wa.me/917447839781?text=Hi%20WebVibes%20Technology%2C%20I%20am%20interested%20in%20the%20internship%20program.%20Please%20share%20details.`;
 
   constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    // Auto-open the internship popup after 8 seconds
+    setTimeout(() => {
+      if (!this.showPopup) this.showPopup = true;
+    }, 8000);
+  }
 
   openPopup(): void  { this.showPopup = true; }
   closePopup(): void { this.showPopup = false; this.submitted = false; this.errorMsg = ''; }
