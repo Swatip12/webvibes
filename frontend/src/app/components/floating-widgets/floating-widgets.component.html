@@ -1,0 +1,106 @@
+<!-- ── WhatsApp Floating Button ── -->
+<div class="wa-float">
+  <a [href]="waLink" target="_blank" rel="noopener noreferrer" class="wa-btn" aria-label="Chat on WhatsApp">
+    <svg class="wa-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.47 2.027 7.773L0 32l8.476-2.001A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.77-1.853l-.485-.288-5.03 1.187 1.21-4.898-.317-.503A13.267 13.267 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333z" fill="#fff"/>
+      <path d="M23.2 19.467c-.4-.2-2.36-1.165-2.727-1.298-.366-.133-.633-.2-.9.2-.266.4-1.033 1.298-1.266 1.565-.233.266-.467.3-.867.1-.4-.2-1.688-.622-3.215-1.983-1.188-1.06-1.99-2.37-2.223-2.77-.233-.4-.025-.616.175-.815.18-.18.4-.467.6-.7.2-.233.266-.4.4-.666.133-.267.066-.5-.033-.7-.1-.2-.9-2.167-1.233-2.967-.325-.78-.655-.674-.9-.686l-.766-.013c-.267 0-.7.1-1.067.5-.366.4-1.4 1.367-1.4 3.333s1.433 3.867 1.633 4.133c.2.267 2.82 4.3 6.833 6.033.955.413 1.7.66 2.28.845.958.306 1.83.263 2.52.16.768-.115 2.36-.965 2.693-1.898.333-.933.333-1.733.233-1.9-.1-.166-.366-.266-.766-.466z" fill="#fff"/>
+    </svg>
+    <span class="wa-label">7447839781</span>
+  </a>
+
+  <!-- Apply Now trigger -->
+  <button class="apply-trigger" (click)="openPopup()" aria-label="Apply for Internship">
+    <span class="apply-icon">🎓</span>
+    <span class="apply-label">Apply Now</span>
+  </button>
+</div>
+
+<!-- ── Internship Application Popup ── -->
+<div class="popup-overlay" *ngIf="showPopup" (click)="closePopup()">
+  <div class="popup-card" (click)="$event.stopPropagation()">
+
+    <button class="popup-close" (click)="closePopup()" aria-label="Close">✕</button>
+
+    <!-- Success state -->
+    <div class="popup-success" *ngIf="submitted">
+      <div class="success-icon">🎉</div>
+      <h3>Application Sent!</h3>
+      <p>Your internship application has been sent via WhatsApp. Our team will contact you shortly.</p>
+      <button class="btn-done" (click)="closePopup()">Done</button>
+    </div>
+
+    <!-- Form state -->
+    <div *ngIf="!submitted">
+      <div class="popup-header">
+        <div class="popup-badge">🎓 Internship Program 2025</div>
+        <h2>Apply for Internship</h2>
+        <p>Fill in your details and we'll get back to you within 24 hours</p>
+      </div>
+
+      <form class="popup-form" (ngSubmit)="submitForm()" #f="ngForm">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" [(ngModel)]="form.name" name="name" placeholder="Your full name" required />
+          </div>
+          <div class="form-group">
+            <label>Mobile Number *</label>
+            <input type="tel" [(ngModel)]="form.mobile" name="mobile" placeholder="10-digit mobile" required maxlength="10" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" [(ngModel)]="form.email" name="email" placeholder="your@email.com" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Interested Course *</label>
+            <select [(ngModel)]="form.course" name="course" required>
+              <option value="">Select a course</option>
+              <option>Full Stack Java Development</option>
+              <option>Python & Data Science</option>
+              <option>Web Development (MERN/MEAN)</option>
+              <option>Digital Marketing & SEO</option>
+              <option>Mobile App Development</option>
+              <option>Cloud Computing & DevOps</option>
+              <option>Not sure — need guidance</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Qualification</label>
+            <select [(ngModel)]="form.qualification" name="qualification">
+              <option value="">Select</option>
+              <option>BCA</option>
+              <option>MCA</option>
+              <option>B.Tech / B.E. (CSE/IT)</option>
+              <option>BSc Computer Science</option>
+              <option>Diploma (CS/IT)</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Message (optional)</label>
+          <textarea [(ngModel)]="form.message" name="message" rows="2" placeholder="Any specific questions or requirements..."></textarea>
+        </div>
+
+        <div class="error-msg" *ngIf="errorMsg">{{ errorMsg }}</div>
+
+        <button type="submit" class="btn-submit"
+          [disabled]="submitting || !form.name || !form.email || !form.mobile || !form.course">
+          {{ submitting ? 'Sending...' : '📲 Send via WhatsApp' }}
+        </button>
+
+        <p class="popup-note">
+          <svg width="14" height="14" viewBox="0 0 32 32" fill="#25D366"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.47 2.027 7.773L0 32l8.476-2.001A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0z"/></svg>
+          Your details will be sent directly to our WhatsApp for quick response
+        </p>
+      </form>
+    </div>
+
+  </div>
+</div>

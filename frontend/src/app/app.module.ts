@@ -41,6 +41,7 @@ import { AttendanceTrackerComponent } from './components/attendance-tracker/atte
 import { StudentProgressComponent } from './components/student-progress/student-progress.component';
 import { CameraGateComponent } from './components/camera-gate/camera-gate.component';
 import { CameraMonitorComponent } from './components/camera-monitor/camera-monitor.component';
+import { FloatingWidgetsComponent } from './components/floating-widgets/floating-widgets.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { CameraMonitorComponent } from './components/camera-monitor/camera-monit
     AttendanceTrackerComponent,
     StudentProgressComponent,
     CameraGateComponent,
-    CameraMonitorComponent
+    CameraMonitorComponent,
+    FloatingWidgetsComponent
   ],
   imports: [
     BrowserModule,
