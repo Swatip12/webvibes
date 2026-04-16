@@ -1,88 +1,68 @@
 <div class="hero-section">
-  <!-- Animated background layers -->
   <div class="hero-bg-grid" aria-hidden="true"></div>
-  <div class="hero-noise" aria-hidden="true"></div>
 
-  <div class="hero-inner">
-
-    <!-- Top pill badge -->
-    <div class="hero-pill-wrap" aria-label="Announcement">
-      <div class="hero-pill">
-        <span class="hero-pill-dot" aria-hidden="true"></span>
-        <span>India's #1 Job-Oriented IT Training</span>
-        <span class="hero-pill-arrow" aria-hidden="true">→</span>
-      </div>
+  <!-- Left content -->
+  <div class="hero-left">
+    <div class="hero-pill">
+      <span class="hero-pill-dot" aria-hidden="true"></span>
+      <span>India's #1 Job-Oriented IT Training</span>
+      <span aria-hidden="true">→</span>
     </div>
 
-    <!-- Main headline -->
-    <h1 class="hero-headline">
-      <span class="hero-headline-line">Launch Your</span>
-      <span class="hero-headline-gradient">Tech Career</span>
-      <span class="hero-headline-line">With Confidence</span>
+    <h1 class="hero-title">
+      Launch Your<br>
+      <span class="hero-title-gradient">Tech Career</span><br>
+      With Confidence
     </h1>
 
-    <!-- Subheadline -->
     <p class="hero-sub">
       Learn from industry experts, build real-world projects, and land your dream job.
       <strong>100% placement support</strong> — from day one to offer letter.
     </p>
 
-    <!-- CTA row -->
-    <div class="hero-cta-row">
+    <div class="hero-cta">
       <a routerLink="/courses" class="hero-btn-primary">
-        <span>Explore Courses</span>
+        Explore Courses
         <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
           <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
       <a routerLink="/contact" class="hero-btn-secondary">
         <i class="fas fa-phone-alt" aria-hidden="true"></i>
-        <span>Talk to Expert</span>
+        Talk to Expert
       </a>
     </div>
 
-    <!-- Trust row -->
-    <div class="hero-trust-row">
-      <div class="hero-trust-item">
-        <i class="fas fa-certificate" aria-hidden="true"></i>
-        <span>MSME Certified</span>
-      </div>
-      <div class="hero-trust-sep" aria-hidden="true">·</div>
-      <div class="hero-trust-item">
-        <i class="fas fa-award" aria-hidden="true"></i>
-        <span>ISO 9001:2015</span>
-      </div>
-      <div class="hero-trust-sep" aria-hidden="true">·</div>
-      <div class="hero-trust-item">
-        <i class="fas fa-star" aria-hidden="true"></i>
-        <span>4.9★ Rated</span>
-      </div>
+    <div class="hero-trust">
+      <span class="hero-trust-item"><i class="fas fa-certificate"></i> MSME Certified</span>
+      <span class="hero-trust-sep">·</span>
+      <span class="hero-trust-item"><i class="fas fa-award"></i> ISO 9001:2015</span>
+      <span class="hero-trust-sep">·</span>
+      <span class="hero-trust-item"><i class="fas fa-star"></i> 4.9★ Rated</span>
     </div>
 
-    <!-- Stats row -->
-    <div class="hero-stats-row">
+    <div class="hero-stats">
       <div class="hero-stat">
         <span class="hero-stat-num" [appCounter]="500" counterSuffix="+">500+</span>
         <span class="hero-stat-lbl">Students Trained</span>
       </div>
-      <div class="hero-stat-div" aria-hidden="true"></div>
+      <div class="hero-stat-div"></div>
       <div class="hero-stat">
         <span class="hero-stat-num" [appCounter]="95" counterSuffix="%">95%</span>
         <span class="hero-stat-lbl">Placement Rate</span>
       </div>
-      <div class="hero-stat-div" aria-hidden="true"></div>
+      <div class="hero-stat-div"></div>
       <div class="hero-stat">
         <span class="hero-stat-num" [appCounter]="50" counterSuffix="+">50+</span>
         <span class="hero-stat-lbl">Hiring Partners</span>
       </div>
-      <div class="hero-stat-div" aria-hidden="true"></div>
+      <div class="hero-stat-div"></div>
       <div class="hero-stat">
         <span class="hero-stat-num" [appCounter]="6" counterSuffix="+">6+</span>
         <span class="hero-stat-lbl">Expert Courses</span>
       </div>
     </div>
 
-    <!-- Tech stack logos -->
     <div class="hero-stack">
       <span class="hero-stack-label">Technologies you'll master:</span>
       <div class="hero-stack-logos">
@@ -94,53 +74,31 @@
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" title="MySQL" />
       </div>
     </div>
-
   </div>
 
-  <!-- Right: Hero visual card -->
-  <div class="hero-visual">
+  <!-- Right visual -->
+  <div class="hero-right">
     <div class="hero-card">
-      <div class="hero-card-header">
-        <span class="hero-card-dot red" aria-hidden="true"></span>
-        <span class="hero-card-dot yellow" aria-hidden="true"></span>
-        <span class="hero-card-dot green" aria-hidden="true"></span>
-        <span class="hero-card-title">WebVibes Learning Portal</span>
+      <div class="hero-card-bar">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="hero-card-url">webvibestechnology.com</span>
       </div>
-      <img
-        [src]="heroImageUrl"
-        alt="Students learning to code at WebVibes Technology"
-        class="hero-card-img"
-        loading="eager"
-      />
-      <!-- Floating chips -->
+      <img [src]="heroImageUrl" alt="Students learning at WebVibes Technology" class="hero-card-img" loading="eager" />
+
       <div class="hero-chip chip-1">
-        <div class="hero-chip-icon" style="background: linear-gradient(135deg,#6366f1,#8b5cf6)">
-          <i class="fas fa-laptop-code" aria-hidden="true"></i>
-        </div>
-        <div>
-          <div class="hero-chip-title">Live Classes</div>
-          <div class="hero-chip-sub">Interactive Sessions</div>
-        </div>
+        <div class="chip-icon" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)"><i class="fas fa-laptop-code"></i></div>
+        <div><div class="chip-title">Live Classes</div><div class="chip-sub">Interactive Sessions</div></div>
       </div>
       <div class="hero-chip chip-2">
-        <div class="hero-chip-icon" style="background: linear-gradient(135deg,#10b981,#059669)">
-          <i class="fas fa-briefcase" aria-hidden="true"></i>
-        </div>
-        <div>
-          <div class="hero-chip-title">Job Ready</div>
-          <div class="hero-chip-sub">100% Support</div>
-        </div>
+        <div class="chip-icon" style="background:linear-gradient(135deg,#10b981,#059669)"><i class="fas fa-briefcase"></i></div>
+        <div><div class="chip-title">Job Ready</div><div class="chip-sub">100% Support</div></div>
       </div>
       <div class="hero-chip chip-3">
-        <div class="hero-chip-icon" style="background: linear-gradient(135deg,#f59e0b,#d97706)">
-          <i class="fas fa-trophy" aria-hidden="true"></i>
-        </div>
-        <div>
-          <div class="hero-chip-title">95% Placed</div>
-          <div class="hero-chip-sub">Top Companies</div>
-        </div>
+        <div class="chip-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><i class="fas fa-trophy"></i></div>
+        <div><div class="chip-title">95% Placed</div><div class="chip-sub">Top Companies</div></div>
       </div>
     </div>
   </div>
-
 </div>
