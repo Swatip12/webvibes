@@ -43,6 +43,7 @@ import { CameraGateComponent } from './components/camera-gate/camera-gate.compon
 import { CameraMonitorComponent } from './components/camera-monitor/camera-monitor.component';
 import { FloatingWidgetsComponent } from './components/floating-widgets/floating-widgets.component';
 import { ScrollRevealDirective } from './directives/scroll-reveal.directive';
+import { CounterDirective } from './directives/counter.directive';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { ScrollRevealDirective } from './directives/scroll-reveal.directive';
     CameraGateComponent,
     CameraMonitorComponent,
     FloatingWidgetsComponent,
-    ScrollRevealDirective
+    ScrollRevealDirective,
+    CounterDirective
   ],
   imports: [
     BrowserModule,

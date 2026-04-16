@@ -86,6 +86,33 @@
     </div>
   </section>
 
+  <!-- Dark Stats Banner -->
+  <section class="dark-stats-section">
+    <div class="container">
+      <div class="dark-stats-grid">
+        <div class="dark-stat" appReveal>
+          <div class="dark-stat-num" [appCounter]="500" counterSuffix="+">500+</div>
+          <div class="dark-stat-lbl">Students Trained</div>
+        </div>
+        <div class="dark-stat-divider"></div>
+        <div class="dark-stat" appReveal [revealDelay]="'150'">
+          <div class="dark-stat-num" [appCounter]="95" counterSuffix="%">95%</div>
+          <div class="dark-stat-lbl">Placement Rate</div>
+        </div>
+        <div class="dark-stat-divider"></div>
+        <div class="dark-stat" appReveal [revealDelay]="'300'">
+          <div class="dark-stat-num" [appCounter]="50" counterSuffix="+">50+</div>
+          <div class="dark-stat-lbl">Hiring Partners</div>
+        </div>
+        <div class="dark-stat-divider"></div>
+        <div class="dark-stat" appReveal [revealDelay]="'450'">
+          <div class="dark-stat-num" [appCounter]="6" counterSuffix="+">6+</div>
+          <div class="dark-stat-lbl">Expert Courses</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Courses Preview Section with Unsplash Images -->
   <section class="courses-section">
     <div class="container">
