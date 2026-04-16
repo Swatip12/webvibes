@@ -42,6 +42,7 @@ import { StudentProgressComponent } from './components/student-progress/student-
 import { CameraGateComponent } from './components/camera-gate/camera-gate.component';
 import { CameraMonitorComponent } from './components/camera-monitor/camera-monitor.component';
 import { FloatingWidgetsComponent } from './components/floating-widgets/floating-widgets.component';
+import { ScrollRevealDirective } from './directives/scroll-reveal.directive';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { FloatingWidgetsComponent } from './components/floating-widgets/floating
     StudentProgressComponent,
     CameraGateComponent,
     CameraMonitorComponent,
-    FloatingWidgetsComponent
+    FloatingWidgetsComponent,
+    ScrollRevealDirective
   ],
   imports: [
     BrowserModule,
