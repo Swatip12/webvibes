@@ -4,13 +4,23 @@
 
 .hero-section {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8f7ff 0%, #ffffff 45%, #f0f9ff 75%, #faf5ff 100%);
+  background: url('/assets/hero-bg.png') center center / cover no-repeat;
   display: flex;
   align-items: center;
   padding: 120px 80px 80px;
   position: relative;
   overflow: hidden;
   gap: 60px;
+}
+
+/* Overlay for readability over bg image */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.82);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Dot grid background */
@@ -23,23 +33,12 @@
   z-index: 0;
 }
 
-/* Soft color blobs */
-.hero-section::before {
-  content: '';
-  position: absolute;
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 65%);
-  top: -200px; right: -150px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  animation: blobPulse 8s ease-in-out infinite;
-}
+/* Soft color blob */
 .hero-section::after {
   content: '';
   position: absolute;
   width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 65%);
   bottom: -150px; left: -100px;
   border-radius: 50%;
   pointer-events: none;
