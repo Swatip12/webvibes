@@ -12,6 +12,6 @@ export class HeroSectionComponent implements OnInit {
 
   ngOnInit(): void {
     // Specific Unsplash photo of a developer coding at a laptop
-    this.heroImageUrl = 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop&q=80';
+    this.heroImageUrl = 'https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=1200&h=800&fit=crop&q=85';
   }
 }
