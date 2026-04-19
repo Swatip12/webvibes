@@ -25,7 +25,7 @@ export class ContactComponent implements OnInit {
       title: 'Contact Us — Enquire About Courses, Internships & Services',
       description: 'Contact WebVibes Technology for IT course enrollment, internship applications, web development projects, or SEO services. WhatsApp: +91 74478 39781. Email: webvibestechnology@gmail.com',
       keywords: 'contact WebVibes Technology, IT training enquiry, course enrollment, internship application, web development enquiry, SEO services contact, software training contact India',
-      canonical: 'https://webvibestechnology.vercel.app/contact'
+      canonical: 'https://www.webvibestechnology.in/contact'
     });
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],

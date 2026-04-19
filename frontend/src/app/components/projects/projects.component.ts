@@ -39,7 +39,7 @@ export class ProjectsComponent implements OnInit {
       title: 'Student Projects — Real-World Web, Mobile & Data Science Projects',
       description: 'Explore real-world projects built by WebVibes Technology students — e-commerce platforms, student management systems, chat apps, Android apps, and ML projects using Java, Angular, Python, and more.',
       keywords: 'student projects portfolio, Java Spring Boot projects, Angular projects, Android app projects, Python machine learning projects, full stack projects, web development portfolio India',
-      canonical: 'https://webvibestechnology.vercel.app/projects'
+      canonical: 'https://www.webvibestechnology.in/projects'
     });
     this.loadProjects();
   }

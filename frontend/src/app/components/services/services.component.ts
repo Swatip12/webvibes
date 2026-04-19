@@ -15,7 +15,7 @@ export class ServicesComponent implements OnInit {
       title: 'Services — Web Development, Mobile Apps, IT Training & SEO',
       description: 'WebVibes Technology offers web development, custom websites, mobile app development, IT internships, industrial training, job-oriented courses, and SEO optimization services in India.',
       keywords: 'web development services India, custom website development, mobile app development India, IT industrial training, SEO services India, job oriented IT courses, internship programs, software development company India',
-      canonical: 'https://webvibestechnology.vercel.app/services'
+      canonical: 'https://www.webvibestechnology.in/services'
     });
   }
 

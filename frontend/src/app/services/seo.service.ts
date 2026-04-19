@@ -13,7 +13,7 @@ export interface SeoConfig {
 @Injectable({ providedIn: 'root' })
 export class SeoService {
   private readonly siteName = 'WebVibes Technology';
-  private readonly baseUrl = 'https://webvibestechnology.vercel.app';
+  private readonly baseUrl = 'https://www.webvibestechnology.in';
 
   constructor(private titleService: Title, private metaService: Meta) {}
 

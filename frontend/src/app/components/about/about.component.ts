@@ -15,7 +15,7 @@ export class AboutComponent implements OnInit {
       title: 'About Us — MSME Certified IT Training Institute India',
       description: 'WebVibes Technology is an MSME certified IT training institute. Learn about our mission, founder, facilities, and why 500+ students chose us for job-oriented IT training, internships, and web development services.',
       keywords: 'about WebVibes Technology, IT training institute India, MSME certified training, ISO 9001 training institute, software training company India, IT institute about us',
-      canonical: 'https://webvibestechnology.vercel.app/about'
+      canonical: 'https://www.webvibestechnology.in/about'
     });
   }
 

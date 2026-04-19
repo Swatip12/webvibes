@@ -124,7 +124,7 @@ export class InternshipComponent implements OnInit {
       title: 'IT Internship Programs — Java, Angular, Android, DevOps, Data Science',
       description: 'Apply for IT internships at WebVibes Technology. Hands-on programs in Full Stack Java, Frontend Angular, Backend, Mobile App, DevOps, and Data Science. Get certificate, LOR, and job referral.',
       keywords: 'IT internship India, Java internship, Angular internship, software developer internship, industrial training program, internship with certificate, paid internship India, web development internship',
-      canonical: 'https://webvibestechnology.vercel.app/internship'
+      canonical: 'https://www.webvibestechnology.in/internship'
     });
     this.internshipService.getInternships().subscribe({
       next: (apiInternships) => {
