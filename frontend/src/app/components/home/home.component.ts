@@ -164,10 +164,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.setPage({
-      title: 'IT Training, Internships & Web Development in India',
-      description: 'WebVibes Technology — MSME certified IT training institute. Job-oriented courses in Java, Spring Boot, Angular, Python. Internships, industrial training, web development & SEO services. 500+ students placed, 95% placement rate.',
-      keywords: 'IT training institute India, Java Spring Boot course, Angular training, internship program India, industrial training, web development company, full stack developer course, job oriented IT courses, software training institute',
-      canonical: 'https://www.webvibestechnology.in/home'
+      title: 'WebVibes Technology | IT Training, Internships & Web Development - webvibestechnology.in',
+      description: 'WebVibes Technology (webvibestechnology.in) — MSME certified IT training institute in Pune. Job-oriented courses in Java, Spring Boot, Angular, Python. Internships, industrial training, web development & SEO services. 500+ students placed, 95% placement rate.',
+      keywords: 'WebVibes Technology, webvibestechnology.in, IT training institute Pune, Java Spring Boot course, Angular training, internship program India, industrial training, web development company, full stack developer course, job oriented IT courses, software training institute',
+      canonical: 'https://www.webvibestechnology.in/'
     });
   }
 
