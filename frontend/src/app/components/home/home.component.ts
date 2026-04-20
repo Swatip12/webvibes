@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
     {
       icon: 'fa-trophy',
       title: 'Placement Assistance',
-      description: '100% placement support with interview prep'
+      description: '100% practical project-based training & internship'
     }
   ];
 

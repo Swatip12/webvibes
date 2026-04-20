@@ -46,7 +46,7 @@
             <div class="offer-point">
               <div class="offer-point-icon"><i class="fas fa-briefcase"></i></div>
               <div>
-                <h4>100% Placement Support</h4>
+                <h4>100% Practical Project-Based Training & Internship</h4>
                 <p>Resume building, mock interviews, and direct referrals to our 50+ hiring partners.</p>
               </div>
             </div>
@@ -243,6 +243,131 @@
     </div>
   </section>
 
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-content" appReveal="left">
+          <span class="section-badge">About Us</span>
+          <h2>Who We Are — <span class="gradient-text">WebVibes Technology</span></h2>
+          <p class="about-lead">WebVibes Technology is a Pune-based IT training institute and internship provider dedicated to making students job-ready through hands-on, practical learning.</p>
+          <p>We offer job-oriented IT courses, live project internships, and software development services. Whether you're a BCA, MCA, BE, or BSc IT student — or a fresher looking to break into tech — we give you the real-world skills companies actually need.</p>
+          <div class="about-highlights">
+            <div class="about-highlight-item">
+              <i class="fas fa-check-circle"></i>
+              <span>MSME Certified IT Training Institute in Pune</span>
+            </div>
+            <div class="about-highlight-item">
+              <i class="fas fa-check-circle"></i>
+              <span>500+ Students Trained with Live Projects</span>
+            </div>
+            <div class="about-highlight-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Internship + Training + Software Development</span>
+            </div>
+            <div class="about-highlight-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Beginner-friendly — No prior experience needed</span>
+            </div>
+          </div>
+          <a routerLink="/about" class="btn btn-primary">Know More About Us</a>
+        </div>
+        <div class="about-stats-col" appReveal="right">
+          <div class="about-stat-card">
+            <div class="about-stat-num">500+</div>
+            <div class="about-stat-lbl">Students Trained</div>
+          </div>
+          <div class="about-stat-card">
+            <div class="about-stat-num">6+</div>
+            <div class="about-stat-lbl">IT Courses</div>
+          </div>
+          <div class="about-stat-card">
+            <div class="about-stat-num">50+</div>
+            <div class="about-stat-lbl">Live Projects</div>
+          </div>
+          <div class="about-stat-card">
+            <div class="about-stat-num">4.9★</div>
+            <div class="about-stat-lbl">Student Rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Internship Section -->
+  <section class="internship-home-section">
+    <div class="container">
+      <div class="section-header" appReveal>
+        <span class="section-badge">Internship Program</span>
+        <h2>Internship with <span class="gradient-text">Live Projects</span> in Pune</h2>
+        <p>Get real industry experience by working on actual client projects — not just assignments</p>
+      </div>
+      <div class="internship-grid">
+        <div class="internship-feature" appReveal>
+          <div class="internship-icon"><i class="fas fa-laptop-code"></i></div>
+          <h3>Full Stack Development</h3>
+          <p>Build complete web applications using Java, Spring Boot, Angular & MySQL on live client projects.</p>
+        </div>
+        <div class="internship-feature" appReveal [revealDelay]="'100'">
+          <div class="internship-icon"><i class="fas fa-python"></i></div>
+          <h3>Python & Data Science</h3>
+          <p>Work on real data analysis and ML projects with Python, Pandas, and industry datasets.</p>
+        </div>
+        <div class="internship-feature" appReveal [revealDelay]="'200'">
+          <div class="internship-icon"><i class="fas fa-bug"></i></div>
+          <h3>Software Testing</h3>
+          <p>Perform manual and automation testing on live applications with Selenium and JUnit.</p>
+        </div>
+        <div class="internship-feature" appReveal [revealDelay]="'300'">
+          <div class="internship-icon"><i class="fas fa-certificate"></i></div>
+          <h3>Certificate + LOR</h3>
+          <p>Get an internship certificate and Letter of Recommendation to boost your resume.</p>
+        </div>
+      </div>
+      <div class="internship-cta">
+        <div class="internship-cta-text">
+          <h3>Ready to gain real industry experience?</h3>
+          <p>Join our internship program and work on live client projects from day one.</p>
+        </div>
+        <a routerLink="/internship" class="btn btn-primary btn-lg">Apply for Internship</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-home-section">
+    <div class="container">
+      <div class="section-header" appReveal>
+        <span class="section-badge gradient-badge">Our Services</span>
+        <h2>Website & Software <span class="gradient-text">Development Services</span></h2>
+        <p>We build professional websites and custom software solutions for businesses across India</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card" appReveal>
+          <div class="service-icon"><i class="fas fa-globe"></i></div>
+          <h3>Business Website Development</h3>
+          <p>Professional, SEO-friendly websites for small businesses, startups, and enterprises. Fast delivery, mobile-responsive design.</p>
+          <a routerLink="/services" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="service-card" appReveal [revealDelay]="'100'">
+          <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
+          <h3>E-Commerce Development</h3>
+          <p>Full-featured online stores with payment integration, product management, and order tracking systems.</p>
+          <a routerLink="/services" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="service-card" appReveal [revealDelay]="'200'">
+          <div class="service-icon"><i class="fas fa-cogs"></i></div>
+          <h3>Custom Software Development</h3>
+          <p>Tailored web applications built with Angular, Spring Boot, and MySQL to solve your specific business needs.</p>
+          <a routerLink="/services" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="section-cta">
+        <a routerLink="/contact" class="btn btn-outline btn-lg">Get a Free Quote</a>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA Section with Gradient Background -->
   <section class="cta-section">
     <div class="cta-bg">
@@ -251,14 +376,14 @@
     </div>
     <div class="container">
       <div class="cta-content" appReveal="scale">
-        <h2>Ready to Transform Your Career?</h2>
-        <p>Join 500+ successful students and start your journey today</p>
+        <h2>Start Your IT Career Journey Today</h2>
+        <p>Join 500+ students who chose WebVibes Technology for practical IT training & internship in Pune</p>
         <div class="cta-buttons">
-          <a routerLink="/courses" class="btn btn-primary btn-lg" aria-label="Explore our courses">
-            Explore Courses
+          <a routerLink="/courses" class="btn btn-primary btn-lg" aria-label="Enroll in IT courses">
+            Enroll Now
           </a>
-          <a routerLink="/contact" class="btn btn-outline btn-lg" aria-label="Contact us for more information">
-            Contact Us
+          <a routerLink="/internship" class="btn btn-outline btn-lg" aria-label="Apply for internship">
+            Apply for Internship
           </a>
         </div>
       </div>
