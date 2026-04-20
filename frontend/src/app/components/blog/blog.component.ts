@@ -9,6 +9,7 @@ interface BlogPost {
   date: string;
   readTime: string;
   tags: string[];
+  imageUrl?: string;
   featured?: boolean;
 }
 
@@ -233,6 +234,29 @@ export class BlogComponent implements OnInit {
       'Project Ideas': 'project'
     };
     return map[category] || 'default';
+  }
+
+  getPostImage(post: BlogPost): string {
+    // Per-post curated Unsplash images relevant to the topic
+    const imageMap: Record<number, string> = {
+      1:  'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80',  // Java code on laptop
+      2:  'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600&q=80',  // database/SQL
+      3:  'https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=600&q=80',  // Angular/frontend code
+      4:  'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&q=80',  // software testing
+      5:  'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80',  // Spring Boot / server
+      6:  'https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=80',  // web development
+      7:  'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600&q=80',  // Python code
+      8:  'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=600&q=80',  // Git/GitHub
+      9:  'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80',  // job interview / office
+      10: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80',  // developer at laptop
+      11: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80',  // internship / team
+      12: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600&q=80',  // portfolio / design
+      13: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80',  // Java project / code
+      14: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80',  // Angular project
+      15: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&q=80',  // Python data science
+      16: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600&q=80',  // full stack project
+    };
+    return imageMap[post.id] || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80';
   }
 
   getCatColor(category: string): string {
