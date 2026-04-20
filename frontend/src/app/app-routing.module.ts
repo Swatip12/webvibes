@@ -26,6 +26,7 @@ import { MachineTestComponent } from './components/machine-test/machine-test.com
 import { MockInterviewComponent } from './components/mock-interview/mock-interview.component';
 import { AdminAssessmentsComponent } from './components/admin-assessments/admin-assessments.component';
 import { AdminAssessmentDetailComponent } from './components/admin-assessment-detail/admin-assessment-detail.component';
+import { BlogComponent } from './components/blog/blog.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'projects', component: ProjectsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'services', component: ServicesComponent },
+  { path: 'blog', component: BlogComponent },
   { path: 'login', component: LoginComponent },
   { path: 'admin', redirectTo: '/admin/dashboard', pathMatch: 'full' },
   { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },

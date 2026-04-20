@@ -44,6 +44,7 @@ import { CameraMonitorComponent } from './components/camera-monitor/camera-monit
 import { FloatingWidgetsComponent } from './components/floating-widgets/floating-widgets.component';
 import { ScrollRevealDirective } from './directives/scroll-reveal.directive';
 import { CounterDirective } from './directives/counter.directive';
+import { BlogComponent } from './components/blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { CounterDirective } from './directives/counter.directive';
     CameraMonitorComponent,
     FloatingWidgetsComponent,
     ScrollRevealDirective,
-    CounterDirective
+    CounterDirective,
+    BlogComponent
   ],
   imports: [
     BrowserModule,
