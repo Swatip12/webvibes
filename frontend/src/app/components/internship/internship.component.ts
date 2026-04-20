@@ -121,9 +121,9 @@ export class InternshipComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.setPage({
-      title: 'IT Internship Programs — Java, Angular, Android, DevOps, Data Science',
-      description: 'Apply for IT internships at WebVibes Technology. Hands-on programs in Full Stack Java, Frontend Angular, Backend, Mobile App, DevOps, and Data Science. Get certificate, LOR, and job referral.',
-      keywords: 'IT internship India, Java internship, Angular internship, software developer internship, industrial training program, internship with certificate, paid internship India, web development internship',
+      title: 'IT Internship in Pune with Live Projects | WebVibes Technology',
+      description: 'Apply for IT internship in Pune at WebVibes Technology. Work on live client projects in Full Stack, Java, Python, and Testing. Get certificate, mentor support, and placement assistance.',
+      keywords: 'IT internship in Pune, software internship Pune, Java internship Pune, full stack internship Pune, Python internship Pune, testing internship Pune, internship with live projects, webvibes technology internship, IT training internship Pune',
       canonical: 'https://www.webvibestechnology.in/internship'
     });
     this.internshipService.getInternships().subscribe({

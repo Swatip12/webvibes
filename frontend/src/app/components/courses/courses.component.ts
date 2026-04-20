@@ -137,9 +137,9 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.setPage({
-      title: 'IT Courses — Java, Spring Boot, Angular, Python, Full Stack',
-      description: 'Enroll in job-oriented IT courses at WebVibes Technology. Learn Java, Spring Boot, Angular, Python for Data Science, Full Stack Development, React Native. 2-4 month programs with placement support.',
-      keywords: 'Java programming course, Spring Boot training, Angular development course, Python data science, full stack development course, React Native course, IT courses India, job oriented courses, software development training',
+      title: 'IT Courses in Pune | Java, Full Stack, Python, Testing — WebVibes Technology',
+      description: 'All IT courses in Pune with practical training at WebVibes Technology. Learn Full Stack, Java, Python, Software Testing, SQL, Web Development with live projects and internship opportunity.',
+      keywords: 'IT courses in Pune, IT training Pune, full stack development course Pune, Java course Pune, Python training Pune, software testing course Pune, web development course Pune, webvibes technology courses, IT institute Pune',
       canonical: 'https://www.webvibestechnology.in/courses'
     });
     this.courseService.getCourses().subscribe({

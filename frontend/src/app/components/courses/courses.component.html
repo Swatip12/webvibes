@@ -17,8 +17,8 @@
         <span class="cp-badge cp-anim-badge">
           <i class="fas fa-graduation-cap"></i> Learn &amp; Grow
         </span>
-        <h1 class="cp-anim-title">Our <span class="cp-grad">Courses</span></h1>
-        <p class="cp-anim-sub">Master in-demand technologies with expert-led training programs</p>
+        <h1 class="cp-anim-title">All IT Courses in Pune with <span class="cp-grad">Practical Training</span></h1>
+        <p class="cp-anim-sub">Job-oriented IT training across Development, Testing, Database & Basic IT — with live projects and internship opportunity</p>
         <div class="cp-stats cp-anim-stats">
           <div class="cp-stat"><span class="cp-stat-num">6+</span><span class="cp-stat-lbl">Courses</span></div>
           <div class="cp-stat-div"></div>
@@ -138,6 +138,94 @@
       <button class="cp-enroll-btn cp-enroll-btn--auto" (click)="clearFilters()">
         <i class="fas fa-redo"></i> Clear Filters
       </button>
+    </div>
+
+    <!-- ── SEO Content Sections ── -->
+    <div class="cp-seo-sections" *ngIf="!showEnrollmentForm">
+
+      <!-- Intro -->
+      <div class="cp-intro-section">
+        <h2>IT Training in Pune Across Multiple Domains</h2>
+        <p>WebVibes Technology offers job-oriented IT training programs designed for students, freshers, and career switchers. Our courses span Development, Testing, Database, and Basic IT Skills — all with hands-on live projects and internship opportunities to make you industry-ready from day one.</p>
+      </div>
+
+      <!-- Course Categories -->
+      <div class="cp-categories-section">
+        <h2>Course Categories</h2>
+        <div class="cp-cat-grid">
+          <div class="cp-cat-card">
+            <div class="cp-cat-icon"><i class="fas fa-code"></i></div>
+            <h3>Development</h3>
+            <ul>
+              <li><i class="fas fa-check-circle"></i> Full Stack Development</li>
+              <li><i class="fas fa-check-circle"></i> Java Programming</li>
+              <li><i class="fas fa-check-circle"></i> Python</li>
+              <li><i class="fas fa-check-circle"></i> Web Development</li>
+            </ul>
+          </div>
+          <div class="cp-cat-card">
+            <div class="cp-cat-icon cp-cat-icon--test"><i class="fas fa-bug"></i></div>
+            <h3>Testing</h3>
+            <ul>
+              <li><i class="fas fa-check-circle"></i> Software Testing</li>
+              <li><i class="fas fa-check-circle"></i> Automation Testing</li>
+            </ul>
+          </div>
+          <div class="cp-cat-card">
+            <div class="cp-cat-icon cp-cat-icon--db"><i class="fas fa-database"></i></div>
+            <h3>Database</h3>
+            <ul>
+              <li><i class="fas fa-check-circle"></i> SQL</li>
+              <li><i class="fas fa-check-circle"></i> MySQL</li>
+            </ul>
+          </div>
+          <div class="cp-cat-card">
+            <div class="cp-cat-icon cp-cat-icon--basic"><i class="fas fa-laptop-code"></i></div>
+            <h3>Basic IT Skills</h3>
+            <ul>
+              <li><i class="fas fa-check-circle"></i> HTML &amp; CSS</li>
+              <li><i class="fas fa-check-circle"></i> Git &amp; APIs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Benefits -->
+      <div class="cp-benefits-section">
+        <h2>Why Learn at WebVibes Technology?</h2>
+        <div class="cp-benefits-grid">
+          <div class="cp-benefit-card">
+            <div class="cp-benefit-icon"><i class="fas fa-tools"></i></div>
+            <h3>Practical Training</h3>
+            <p>Hands-on sessions with real tools and technologies used in the industry — no theory-only classes.</p>
+          </div>
+          <div class="cp-benefit-card">
+            <div class="cp-benefit-icon"><i class="fas fa-project-diagram"></i></div>
+            <h3>Live Projects</h3>
+            <p>Work on actual client projects during training to build a strong portfolio before you graduate.</p>
+          </div>
+          <div class="cp-benefit-card">
+            <div class="cp-benefit-icon"><i class="fas fa-briefcase"></i></div>
+            <h3>Internship Opportunity</h3>
+            <p>Get internship experience with live project exposure and a certificate to boost your resume.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cp-cta-section">
+        <h2>Ready to Start Your IT Career?</h2>
+        <p>Join hundreds of students who have built their careers through WebVibes Technology's practical training programs.</p>
+        <div class="cp-cta-btns">
+          <a routerLink="/courses" class="cp-cta-btn cp-cta-btn--primary">
+            <i class="fas fa-graduation-cap"></i> Explore Courses
+          </a>
+          <a routerLink="/contact" class="cp-cta-btn cp-cta-btn--outline">
+            <i class="fas fa-paper-plane"></i> Enroll Now
+          </a>
+        </div>
+      </div>
+
     </div>
 
     <!-- ── Enrollment Form ── -->
