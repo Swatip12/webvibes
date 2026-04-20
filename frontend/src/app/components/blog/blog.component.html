@@ -18,108 +18,67 @@
         Learn, Grow &amp; <span class="page-hero-gradient">Get Hired</span>
       </h1>
       <p class="page-hero-sub">Interview tips, tutorials, career guidance, and project ideas — everything you need to launch your IT career.</p>
-      <div class="page-hero-stats">
-        <div class="page-hero-stat"><span class="page-hero-stat-num">{{ posts.length }}</span><span class="page-hero-stat-lbl">Articles</span></div>
-        <div class="page-hero-stat-div"></div>
-        <div class="page-hero-stat"><span class="page-hero-stat-num">4</span><span class="page-hero-stat-lbl">Categories</span></div>
-        <div class="page-hero-stat-div"></div>
-        <div class="page-hero-stat"><span class="page-hero-stat-num">Free</span><span class="page-hero-stat-lbl">Always</span></div>
-      </div>
     </div>
   </div>
 
   <div class="blog-wrap">
 
-    <!-- Category Filters -->
-    <div class="blog-filters">
-      <button
-        *ngFor="let cat of categories"
-        class="blog-cat-btn"
+    <!-- Category Tabs -->
+    <div class="blog-tabs">
+      <button *ngFor="let cat of categories"
+        class="blog-tab"
         [class.active]="selectedCategory === cat.value"
         (click)="selectCategory(cat.value)">
-        <i [class]="cat.icon"></i> {{ cat.label }}
+        {{ cat.label }}
       </button>
-    </div>
-
-    <!-- Search -->
-    <div class="blog-search-wrap">
-      <i class="fas fa-search blog-search-icon"></i>
-      <input
-        type="text"
-        class="blog-search"
-        placeholder="Search articles..."
-        [(ngModel)]="searchQuery"
-        (input)="applyFilters()"
-        aria-label="Search blog posts" />
-      <span class="blog-search-clear" *ngIf="searchQuery" (click)="searchQuery=''; applyFilters()">
-        <i class="fas fa-times"></i>
-      </span>
-    </div>
-
-    <!-- Featured Post -->
-    <div class="blog-featured" *ngIf="featuredPost && selectedCategory === 'all' && !searchQuery">
-      <div class="blog-featured-badge"><i class="fas fa-star"></i> Featured</div>
-      <div class="blog-featured-body">
-        <div class="blog-featured-meta">
-          <span class="blog-cat-tag" [style.background]="getCatColor(featuredPost.category)">{{ featuredPost.category }}</span>
-          <span class="blog-date"><i class="far fa-calendar"></i> {{ featuredPost.date }}</span>
-          <span class="blog-read"><i class="far fa-clock"></i> {{ featuredPost.readTime }}</span>
-        </div>
-        <h2 class="blog-featured-title">{{ featuredPost.title }}</h2>
-        <p class="blog-featured-excerpt">{{ featuredPost.excerpt }}</p>
-        <div class="blog-featured-tags">
-          <span class="blog-tag" *ngFor="let tag of featuredPost.tags">{{ tag }}</span>
-        </div>
-        <a routerLink="/contact" class="blog-read-btn">
-          Read Article <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
     </div>
 
     <!-- Posts Grid -->
     <div class="blog-grid" *ngIf="filteredPosts.length > 0">
-      <article class="blog-card" *ngFor="let post of filteredPosts; let i = index"
-               [style.animation-delay]="(i * 0.06) + 's'">
-        <div class="blog-card-top" [style.background]="getCatGradient(post.category)">
-          <div class="blog-card-icon"><i [class]="getCatIcon(post.category)"></i></div>
-          <span class="blog-card-cat">{{ post.category }}</span>
+      <article class="blog-card" *ngFor="let post of filteredPosts; let i = index">
+
+        <!-- Thumbnail -->
+        <div class="blog-card-thumb" [style.background]="getCatGradient(post.category)">
+          <i [class]="getCatIcon(post.category)"></i>
         </div>
+
+        <!-- Body -->
         <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <span><i class="far fa-calendar"></i> {{ post.date }}</span>
-            <span><i class="far fa-clock"></i> {{ post.readTime }}</span>
-          </div>
-          <h3 class="blog-card-title">{{ post.title }}</h3>
+          <span class="blog-cat-badge" [ngClass]="'cat-' + getCatClass(post.category)">
+            {{ post.category }}
+          </span>
+          <h2 class="blog-card-title">{{ post.title }}</h2>
           <p class="blog-card-excerpt">{{ post.excerpt }}</p>
-          <div class="blog-card-tags">
-            <span class="blog-tag" *ngFor="let tag of post.tags.slice(0,3)">{{ tag }}</span>
+
+          <div class="blog-card-footer">
+            <div class="blog-card-meta">
+              <span><i class="fas fa-user-circle"></i> WebVibes Team</span>
+              <span><i class="far fa-calendar-alt"></i> {{ post.date }}</span>
+              <span><i class="far fa-clock"></i> {{ post.readTime }}</span>
+            </div>
+            <a routerLink="/contact" class="blog-read-link">
+              Read More <i class="fas fa-arrow-right"></i>
+            </a>
           </div>
-          <a routerLink="/contact" class="blog-card-link">
-            Read More <i class="fas fa-arrow-right"></i>
-          </a>
         </div>
+
       </article>
     </div>
 
     <!-- Empty -->
     <div class="blog-empty" *ngIf="filteredPosts.length === 0">
       <i class="fas fa-search"></i>
-      <h3>No articles found</h3>
-      <p>Try a different category or search term</p>
-      <button class="blog-reset-btn" (click)="resetFilters()">
-        <i class="fas fa-redo"></i> Reset Filters
-      </button>
+      <p>No articles in this category yet.</p>
+      <button (click)="resetFilters()">Show All</button>
     </div>
 
     <!-- CTA -->
     <div class="blog-cta">
-      <div class="blog-cta-inner">
-        <h2>Want to Learn More?</h2>
-        <p>Join our IT training programs and get hands-on experience with live projects and expert mentorship.</p>
-        <div class="blog-cta-btns">
-          <a routerLink="/courses" class="blog-cta-primary"><i class="fas fa-graduation-cap"></i> Explore Courses</a>
-          <a routerLink="/internship" class="blog-cta-outline"><i class="fas fa-briefcase"></i> Apply for Internship</a>
-        </div>
+      <h2>Want to Learn More?</h2>
+      <p>Join our IT training programs and get hands-on experience with live projects.</p>
+      <div class="blog-cta-btns">
+        <a routerLink="/courses" class="blog-cta-primary"><i class="fas fa-graduation-cap"></i> Explore Courses</a>
+        <a routerLink="/internship" class="blog-cta-outline"><i class="fas fa-briefcase"></i> Apply for Internship</a>
       </div>
     </div>
 

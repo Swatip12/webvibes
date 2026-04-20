@@ -225,6 +225,16 @@ export class BlogComponent implements OnInit {
     this.applyFilters();
   }
 
+  getCatClass(category: string): string {
+    const map: Record<string, string> = {
+      'Interview Questions': 'interview',
+      'Tutorials': 'tutorial',
+      'Career Guidance': 'career',
+      'Project Ideas': 'project'
+    };
+    return map[category] || 'default';
+  }
+
   getCatColor(category: string): string {
     const map: Record<string, string> = {
       'Interview Questions': '#ede9fe',
