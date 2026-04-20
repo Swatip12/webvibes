@@ -45,6 +45,7 @@ import { FloatingWidgetsComponent } from './components/floating-widgets/floating
 import { ScrollRevealDirective } from './directives/scroll-reveal.directive';
 import { CounterDirective } from './directives/counter.directive';
 import { BlogComponent } from './components/blog/blog.component';
+import { BlogPostComponent } from './components/blog-post/blog-post.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { BlogComponent } from './components/blog/blog.component';
     FloatingWidgetsComponent,
     ScrollRevealDirective,
     CounterDirective,
-    BlogComponent
+    BlogComponent,
+    BlogPostComponent
   ],
   imports: [
     BrowserModule,

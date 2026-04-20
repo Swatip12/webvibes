@@ -1,0 +1,69 @@
+<div class="bp-page" *ngIf="post">
+
+  <!-- Hero banner -->
+  <div class="bp-hero" [style.background]="getCatGradient(post.category)">
+    <div class="bp-hero-inner">
+      <nav class="bp-breadcrumb">
+        <a routerLink="/home">Home</a>
+        <span>›</span>
+        <a routerLink="/blog">Blog</a>
+        <span>›</span>
+        <span>{{ post.category }}</span>
+      </nav>
+      <span class="bp-cat-badge cat-{{ getCatClass(post.category) }}">{{ post.category }}</span>
+      <h1 class="bp-title">{{ post.title }}</h1>
+      <div class="bp-meta">
+        <span><i class="fas fa-user-circle"></i> WebVibes Team</span>
+        <span><i class="far fa-calendar-alt"></i> {{ post.date }}</span>
+        <span><i class="far fa-clock"></i> {{ post.readTime }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="bp-wrap">
+    <div class="bp-layout">
+
+      <!-- Article -->
+      <article class="bp-article">
+        <p class="bp-lead">{{ post.excerpt }}</p>
+        <hr class="bp-divider" />
+        <div class="bp-content">
+          <p *ngFor="let para of post.content" class="bp-para">{{ para }}</p>
+        </div>
+
+        <!-- Tags -->
+        <div class="bp-tags">
+          <span class="bp-tag" *ngFor="let tag of post.tags">{{ tag }}</span>
+        </div>
+
+        <!-- Back -->
+        <a routerLink="/blog" class="bp-back-btn">
+          <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="bp-sidebar">
+        <div class="bp-sidebar-card">
+          <h3>About WebVibes Technology</h3>
+          <p>IT training institute in Pune offering job-oriented courses, internships with live projects, and software development services.</p>
+          <a routerLink="/courses" class="bp-sidebar-btn">Explore Courses</a>
+        </div>
+        <div class="bp-sidebar-card">
+          <h3>Apply for Internship</h3>
+          <p>Work on real client projects in Full Stack, Java, Python, or Testing. Get a certificate and placement support.</p>
+          <a routerLink="/internship" class="bp-sidebar-btn bp-sidebar-btn--green">Apply Now</a>
+        </div>
+        <div class="bp-sidebar-card">
+          <h3>Tags</h3>
+          <div class="bp-sidebar-tags">
+            <span class="bp-tag" *ngFor="let tag of post.tags">{{ tag }}</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+</div>
