@@ -1,33 +1,31 @@
 <div class="ab-page">
 
   <!-- ── Hero ── -->
-  <div class="ab-hero">
-    <div class="ab-hero-bg">
-      <img [src]="heroImage" alt="WebVibes Technology students learning" (error)="handleImageError($event)" class="ab-hero-img" />
-      <div class="ab-hero-overlay"></div>
-    </div>
-    <div class="ab-particles">
-      <span class="ab-p ab-p1"></span><span class="ab-p ab-p2"></span>
-      <span class="ab-p ab-p3"></span><span class="ab-p ab-p4"></span>
-      <span class="ab-p ab-p5"></span>
-    </div>
-    <div class="ab-hero-inner">
-      <div class="page-breadcrumb">
+  <div class="page-hero">
+    <div class="page-hero-grid" aria-hidden="true"></div>
+    <div class="page-hero-blob" aria-hidden="true"></div>
+    <div class="page-hero-content">
+      <nav class="page-hero-breadcrumb">
         <a routerLink="/home">Home</a>
-        <i class="fas fa-chevron-right"></i>
+        <span>›</span>
         <span>About Us</span>
+      </nav>
+      <div class="page-hero-pill">
+        <span class="page-hero-pill-dot"></span>
+        <span>About WebVibes Technology</span>
       </div>
-      <span class="ab-hero-badge"><i class="fas fa-building"></i> About Us</span>
-      <h1>About <span class="ab-grad">WebVibes Technology</span></h1>
-      <p>Empowering the next generation of software developers with world-class training and real-world experience</p>
-      <div class="ab-stats">
-        <div class="ab-stat"><span class="ab-stat-num">2000+</span><span class="ab-stat-lbl">Students Trained</span></div>
-        <div class="ab-stat-div"></div>
-        <div class="ab-stat"><span class="ab-stat-num">95%</span><span class="ab-stat-lbl">Placement Rate</span></div>
-        <div class="ab-stat-div"></div>
-        <div class="ab-stat"><span class="ab-stat-num">50+</span><span class="ab-stat-lbl">Hiring Partners</span></div>
-        <div class="ab-stat-div"></div>
-        <div class="ab-stat"><span class="ab-stat-num">5+</span><span class="ab-stat-lbl">Years Experience</span></div>
+      <h1 class="page-hero-title">
+        About <span class="page-hero-gradient">WebVibes Technology</span>
+      </h1>
+      <p class="page-hero-sub">Empowering the next generation of software developers with world-class training and real-world experience.</p>
+      <div class="page-hero-stats">
+        <div class="page-hero-stat"><span class="page-hero-stat-num">2000+</span><span class="page-hero-stat-lbl">Students Trained</span></div>
+        <div class="page-hero-stat-div"></div>
+        <div class="page-hero-stat"><span class="page-hero-stat-num">95%</span><span class="page-hero-stat-lbl">Placement Rate</span></div>
+        <div class="page-hero-stat-div"></div>
+        <div class="page-hero-stat"><span class="page-hero-stat-num">50+</span><span class="page-hero-stat-lbl">Hiring Partners</span></div>
+        <div class="page-hero-stat-div"></div>
+        <div class="page-hero-stat"><span class="page-hero-stat-num">5+</span><span class="page-hero-stat-lbl">Years Experience</span></div>
       </div>
     </div>
   </div>

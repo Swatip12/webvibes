@@ -4316,3 +4316,218 @@ h1, h2, h3, h4, h5, h6 {
    GOOGLE FONTS PRECONNECT (performance)
    ============================================ */
 /* Already handled via @import above */
+
+/* ============================================
+   SHARED PAGE HERO - MODERN LIGHT STYLE
+   Used across: Courses, Internship, Services,
+   About, Contact, Projects pages
+   ============================================ */
+
+.page-hero {
+  position: relative;
+  background: #fff;
+  padding: 100px 24px 72px;
+  text-align: center;
+  overflow: hidden;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Dot grid background */
+.page-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(99,102,241,0.09) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Soft color blob bottom-left */
+.page-hero-blob {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(139,92,246,0.05) 0%, transparent 65%);
+  bottom: -200px;
+  left: -150px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  animation: pageHeroBlobPulse 10s ease-in-out infinite;
+}
+@keyframes pageHeroBlobPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Breadcrumb */
+.page-hero-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+.page-hero-breadcrumb a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.page-hero-breadcrumb a:hover { color: #6366f1; }
+
+/* Pill badge */
+.page-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px 6px 10px;
+  background: rgba(99,102,241,0.07);
+  border: 1.5px solid rgba(99,102,241,0.2);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #4f46e5;
+  animation: fadeInDown 0.5s ease both;
+}
+.page-hero-pill-dot {
+  width: 7px;
+  height: 7px;
+  background: #6366f1;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(99,102,241,0.6);
+  animation: pillDotBlink 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes pillDotBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Heading */
+.page-hero-title {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0;
+  animation: fadeInUp 0.6s ease 0.1s both;
+}
+.page-hero-gradient {
+  background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 40%, #06b6d4 70%, #10b981 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: pageHeroGradMove 4s linear infinite;
+}
+@keyframes pageHeroGradMove {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Subtext */
+.page-hero-sub {
+  font-size: 1.05rem;
+  color: #475569;
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0;
+  animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+/* Stats bar */
+.page-hero-stats {
+  display: inline-flex;
+  align-items: center;
+  padding: 16px 28px;
+  background: #fff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  gap: 0;
+  animation: fadeInUp 0.6s ease 0.3s both;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.page-hero-stats:hover {
+  box-shadow: 0 8px 32px rgba(99,102,241,0.12);
+  transform: translateY(-2px);
+}
+.page-hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px;
+}
+.page-hero-stat-num {
+  font-size: 1.7rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+.page-hero-stat-lbl {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.page-hero-stat-div {
+  width: 1px;
+  height: 36px;
+  background: #e2e8f0;
+  flex-shrink: 0;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-hero { padding: 80px 20px 56px; }
+  .page-hero-title { font-size: clamp(1.7rem, 7vw, 2.4rem); }
+  .page-hero-sub { font-size: 0.95rem; }
+  .page-hero-stats {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 14px 16px;
+    gap: 0;
+  }
+  .page-hero-stat { padding: 6px 14px; }
+  .page-hero-stat-num { font-size: 1.4rem; }
+  .page-hero-stat-div { height: 28px; }
+}
+@media (max-width: 480px) {
+  .page-hero { padding: 72px 16px 48px; }
+  .page-hero-stat-div { display: none; }
+  .page-hero-stat { padding: 4px 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-hero-blob,
+  .page-hero-pill-dot,
+  .page-hero-gradient { animation: none !important; }
+}

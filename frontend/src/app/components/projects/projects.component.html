@@ -1,40 +1,29 @@
 <div class="pp-page">
 
   <!-- Hero Section -->
-  <section class="pp-hero">
-    <div class="pp-hero-particles">
-      <span class="pp-particle"></span>
-      <span class="pp-particle"></span>
-      <span class="pp-particle"></span>
-      <span class="pp-particle"></span>
-      <span class="pp-particle"></span>
-    </div>
-    <div class="pp-hero-content">
-      <div class="page-breadcrumb">
+  <section class="page-hero">
+    <div class="page-hero-grid" aria-hidden="true"></div>
+    <div class="page-hero-blob" aria-hidden="true"></div>
+    <div class="page-hero-content">
+      <nav class="page-hero-breadcrumb">
         <a routerLink="/home">Home</a>
-        <i class="fas fa-chevron-right"></i>
+        <span>›</span>
         <span>Projects</span>
+      </nav>
+      <div class="page-hero-pill">
+        <span class="page-hero-pill-dot"></span>
+        <span>Student Work</span>
       </div>
-      <div class="pp-hero-badge">
-        <i class="bi bi-code-slash"></i> Student Work
-      </div>
-      <h1 class="pp-hero-title">Student <span class="pp-hero-highlight">Projects</span></h1>
-      <p class="pp-hero-subtitle">Real-world projects built by our students — from web apps to data science solutions</p>
-      <div class="pp-hero-stats">
-        <div class="pp-stat-item">
-          <span class="pp-stat-number">{{ projects.length }}+</span>
-          <span class="pp-stat-label">Projects</span>
-        </div>
-        <div class="pp-stat-divider"></div>
-        <div class="pp-stat-item">
-          <span class="pp-stat-number">100%</span>
-          <span class="pp-stat-label">Open Source</span>
-        </div>
-        <div class="pp-stat-divider"></div>
-        <div class="pp-stat-item">
-          <span class="pp-stat-number">Live</span>
-          <span class="pp-stat-label">On GitHub</span>
-        </div>
+      <h1 class="page-hero-title">
+        Student <span class="page-hero-gradient">Projects</span>
+      </h1>
+      <p class="page-hero-sub">Real-world projects built by our students — from web apps to data science solutions.</p>
+      <div class="page-hero-stats">
+        <div class="page-hero-stat"><span class="page-hero-stat-num">{{ projects.length }}+</span><span class="page-hero-stat-lbl">Projects</span></div>
+        <div class="page-hero-stat-div"></div>
+        <div class="page-hero-stat"><span class="page-hero-stat-num">100%</span><span class="page-hero-stat-lbl">Open Source</span></div>
+        <div class="page-hero-stat-div"></div>
+        <div class="page-hero-stat"><span class="page-hero-stat-num">Live</span><span class="page-hero-stat-lbl">On GitHub</span></div>
       </div>
     </div>
   </section>
