@@ -274,21 +274,18 @@
           <a routerLink="/about" class="btn btn-primary">Know More About Us</a>
         </div>
         <div class="about-stats-col" appReveal="right">
-          <div class="about-stat-card">
-            <div class="about-stat-num">500+</div>
-            <div class="about-stat-lbl">Students Trained</div>
-          </div>
-          <div class="about-stat-card">
-            <div class="about-stat-num">6+</div>
-            <div class="about-stat-lbl">IT Courses</div>
-          </div>
-          <div class="about-stat-card">
-            <div class="about-stat-num">50+</div>
-            <div class="about-stat-lbl">Live Projects</div>
-          </div>
-          <div class="about-stat-card">
-            <div class="about-stat-num">4.9★</div>
-            <div class="about-stat-lbl">Student Rating</div>
+          <div class="about-img-wrap">
+            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=700&q=80"
+                 alt="WebVibes Technology students in classroom"
+                 class="about-main-img" loading="lazy" />
+            <div class="about-img-badge-1">
+              <i class="fas fa-users"></i>
+              <div><span class="about-badge-num">500+</span><span class="about-badge-lbl">Students Trained</span></div>
+            </div>
+            <div class="about-img-badge-2">
+              <i class="fas fa-star"></i>
+              <div><span class="about-badge-num">4.9★</span><span class="about-badge-lbl">Student Rating</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -298,39 +295,58 @@
   <!-- Internship Section -->
   <section class="internship-home-section">
     <div class="container">
-      <div class="section-header" appReveal>
-        <span class="section-badge">Internship Program</span>
-        <h2>Internship with <span class="gradient-text">Live Projects</span> in Pune</h2>
-        <p>Get real industry experience by working on actual client projects — not just assignments</p>
-      </div>
-      <div class="internship-grid">
-        <div class="internship-feature" appReveal>
-          <div class="internship-icon"><i class="fas fa-laptop-code"></i></div>
-          <h3>Full Stack Development</h3>
-          <p>Build complete web applications using Java, Spring Boot, Angular & MySQL on live client projects.</p>
+      <div class="internship-split">
+        <div class="internship-img-col" appReveal="left">
+          <div class="internship-img-wrap">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&q=80"
+                 alt="Students working on internship projects at WebVibes Technology"
+                 class="internship-main-img" loading="lazy" />
+            <div class="internship-img-chip chip-a">
+              <i class="fas fa-project-diagram"></i>
+              <span>Live Client Projects</span>
+            </div>
+            <div class="internship-img-chip chip-b">
+              <i class="fas fa-certificate"></i>
+              <span>Certificate + LOR</span>
+            </div>
+          </div>
         </div>
-        <div class="internship-feature" appReveal [revealDelay]="'100'">
-          <div class="internship-icon"><i class="fas fa-python"></i></div>
-          <h3>Python & Data Science</h3>
-          <p>Work on real data analysis and ML projects with Python, Pandas, and industry datasets.</p>
+        <div class="internship-content-col" appReveal="right">
+          <span class="section-badge">Internship Program</span>
+          <h2>Internship with <span class="gradient-text">Live Projects</span> in Pune</h2>
+          <p class="internship-lead">Get real industry experience by working on actual client projects — not just assignments. Build your portfolio before you even graduate.</p>
+          <div class="internship-features-list">
+            <div class="internship-feat">
+              <div class="internship-feat-icon"><i class="fas fa-laptop-code"></i></div>
+              <div>
+                <h4>Full Stack Development</h4>
+                <p>Build complete web applications using Java, Spring Boot, Angular & MySQL on live client projects.</p>
+              </div>
+            </div>
+            <div class="internship-feat">
+              <div class="internship-feat-icon"><i class="fab fa-python"></i></div>
+              <div>
+                <h4>Python & Data Science</h4>
+                <p>Work on real data analysis and ML projects with Python, Pandas, and industry datasets.</p>
+              </div>
+            </div>
+            <div class="internship-feat">
+              <div class="internship-feat-icon"><i class="fas fa-bug"></i></div>
+              <div>
+                <h4>Software Testing</h4>
+                <p>Perform manual and automation testing on live applications with Selenium and JUnit.</p>
+              </div>
+            </div>
+            <div class="internship-feat">
+              <div class="internship-feat-icon"><i class="fas fa-certificate"></i></div>
+              <div>
+                <h4>Certificate + LOR</h4>
+                <p>Get an internship certificate and Letter of Recommendation to boost your resume.</p>
+              </div>
+            </div>
+          </div>
+          <a routerLink="/internship" class="btn btn-primary btn-lg">Apply for Internship</a>
         </div>
-        <div class="internship-feature" appReveal [revealDelay]="'200'">
-          <div class="internship-icon"><i class="fas fa-bug"></i></div>
-          <h3>Software Testing</h3>
-          <p>Perform manual and automation testing on live applications with Selenium and JUnit.</p>
-        </div>
-        <div class="internship-feature" appReveal [revealDelay]="'300'">
-          <div class="internship-icon"><i class="fas fa-certificate"></i></div>
-          <h3>Certificate + LOR</h3>
-          <p>Get an internship certificate and Letter of Recommendation to boost your resume.</p>
-        </div>
-      </div>
-      <div class="internship-cta">
-        <div class="internship-cta-text">
-          <h3>Ready to gain real industry experience?</h3>
-          <p>Join our internship program and work on live client projects from day one.</p>
-        </div>
-        <a routerLink="/internship" class="btn btn-primary btn-lg">Apply for Internship</a>
       </div>
     </div>
   </section>
@@ -345,22 +361,40 @@
       </div>
       <div class="services-grid">
         <div class="service-card" appReveal>
-          <div class="service-icon"><i class="fas fa-globe"></i></div>
-          <h3>Business Website Development</h3>
-          <p>Professional, SEO-friendly websites for small businesses, startups, and enterprises. Fast delivery, mobile-responsive design.</p>
-          <a routerLink="/services" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <div class="service-card-img">
+            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=80"
+                 alt="Business website development" loading="lazy" />
+          </div>
+          <div class="service-card-body">
+            <div class="service-icon"><i class="fas fa-globe"></i></div>
+            <h3>Business Website Development</h3>
+            <p>Professional, SEO-friendly websites for small businesses, startups, and enterprises. Fast delivery, mobile-responsive design.</p>
+            <a routerLink="/services" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
         </div>
         <div class="service-card" appReveal [revealDelay]="'100'">
-          <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
-          <h3>E-Commerce Development</h3>
-          <p>Full-featured online stores with payment integration, product management, and order tracking systems.</p>
-          <a routerLink="/services" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <div class="service-card-img">
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80"
+                 alt="E-commerce development" loading="lazy" />
+          </div>
+          <div class="service-card-body">
+            <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
+            <h3>E-Commerce Development</h3>
+            <p>Full-featured online stores with payment integration, product management, and order tracking systems.</p>
+            <a routerLink="/services" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
         </div>
         <div class="service-card" appReveal [revealDelay]="'200'">
-          <div class="service-icon"><i class="fas fa-cogs"></i></div>
-          <h3>Custom Software Development</h3>
-          <p>Tailored web applications built with Angular, Spring Boot, and MySQL to solve your specific business needs.</p>
-          <a routerLink="/services" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <div class="service-card-img">
+            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80"
+                 alt="Custom software development" loading="lazy" />
+          </div>
+          <div class="service-card-body">
+            <div class="service-icon"><i class="fas fa-cogs"></i></div>
+            <h3>Custom Software Development</h3>
+            <p>Tailored web applications built with Angular, Spring Boot, and MySQL to solve your specific business needs.</p>
+            <a routerLink="/services" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
         </div>
       </div>
       <div class="section-cta">

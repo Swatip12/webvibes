@@ -430,3 +430,56 @@
   .irp-benefits { grid-template-columns: 1fr; }
   .irp-tl-icon { width: 56px; height: 56px; font-size: 1.2rem; }
 }
+
+/* ── Roadmap Image Strip ── */
+.irp-img-strip {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 56px;
+  height: 280px;
+}
+.irp-strip-img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.irp-strip-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(15,23,42,0.75) 0%, rgba(15,23,42,0.2) 60%, transparent 100%);
+  display: flex; align-items: flex-end; justify-content: center;
+  gap: 40px; padding: 28px;
+}
+.irp-strip-stat { text-align: center; }
+.irp-strip-num { display: block; font-size: 1.8rem; font-weight: 900; color: #fff; line-height: 1; }
+.irp-strip-lbl { font-size: 0.72rem; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+.irp-strip-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.3); align-self: center; }
+@media (max-width: 640px) {
+  .irp-img-strip { height: 200px; }
+  .irp-strip-overlay { gap: 20px; padding: 16px; }
+  .irp-strip-num { font-size: 1.4rem; }
+}
+
+/* ── Domain Card Images ── */
+.ip-domain-img {
+  width: 100%; height: 140px;
+  object-fit: cover; border-radius: 12px 12px 0 0;
+  display: block; margin-bottom: 0;
+}
+.ip-domain-card {
+  overflow: hidden;
+  padding: 0 !important;
+}
+.ip-domain-card .ip-domain-icon,
+.ip-domain-card h3,
+.ip-domain-card p,
+.ip-domain-card .ip-domain-link {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.ip-domain-card .ip-domain-icon {
+  margin-top: 16px;
+  margin-bottom: 10px;
+}
+.ip-domain-card h3 { margin-bottom: 8px; }
+.ip-domain-card p  { margin-bottom: 14px; }
+.ip-domain-card .ip-domain-link { padding-bottom: 20px; display: inline-flex; }
