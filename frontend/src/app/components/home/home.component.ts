@@ -176,6 +176,16 @@ export class HomeComponent implements OnInit {
     return `https://via.placeholder.com/140x60/2196F3/FFFFFF?text=${encodeURIComponent(domain.split('.')[0].toUpperCase())}`;
   }
 
+  getFeatureImage(index: number): string {
+    const imgs = [
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&q=80',
+      'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500&q=80',
+      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&q=80',
+      'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=500&q=80'
+    ];
+    return imgs[index % imgs.length];
+  }
+
   handleImageError(event: Event, companyName: string): void {
     const img = event.target as HTMLImageElement;
     // Fallback: display company name as text

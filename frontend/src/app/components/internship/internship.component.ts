@@ -190,6 +190,24 @@ export class InternshipComponent implements OnInit {
     this.filteredInternships = [...this.internships];
   }
 
+  getInternshipImage(title: string): string {
+    const t = title.toLowerCase();
+    if (t.includes('java') || t.includes('spring') || t.includes('backend'))
+      return 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80';
+    if (t.includes('frontend') || t.includes('angular') || t.includes('react'))
+      return 'https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=600&q=80';
+    if (t.includes('python') || t.includes('data') || t.includes('ml'))
+      return 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600&q=80';
+    if (t.includes('devops') || t.includes('cloud') || t.includes('docker'))
+      return 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80';
+    if (t.includes('mobile') || t.includes('android') || t.includes('kotlin'))
+      return 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80';
+    if (t.includes('test') || t.includes('qa'))
+      return 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&q=80';
+    // full stack / default
+    return 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80';
+  }
+
   onApply(internship: InternshipCard): void {
     this.selectedInternship = internship.title;
     this.showApplicationForm = true;

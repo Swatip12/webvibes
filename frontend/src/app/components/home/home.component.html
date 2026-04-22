@@ -71,16 +71,19 @@
       
       <div class="features-grid">
         <div class="feature-card" *ngFor="let feature of features; let i = index" 
-             appReveal [revealDelay]="(i * 100).toString()"
-             [style.animation-delay]="(i * 100) + 'ms'">
-          <div class="feature-icon-wrapper">
-            <div class="feature-icon">
-              <i class="fas" [ngClass]="feature.icon" aria-hidden="true"></i>
+             appReveal [revealDelay]="(i * 100).toString()">
+          <div class="feature-img-wrap">
+            <img [src]="getFeatureImage(i)" [alt]="feature.title" class="feature-img" loading="lazy" />
+            <div class="feature-img-overlay">
+              <div class="feature-icon">
+                <i class="fas" [ngClass]="feature.icon" aria-hidden="true"></i>
+              </div>
             </div>
           </div>
-          <h3>{{ feature.title }}</h3>
-          <p>{{ feature.description }}</p>
-          <div class="feature-glow"></div>
+          <div class="feature-body">
+            <h3>{{ feature.title }}</h3>
+            <p>{{ feature.description }}</p>
+          </div>
         </div>
       </div>
     </div>
