@@ -127,6 +127,140 @@
       </button>
     </div>
 
+    <!-- ── Internship Roadmap Program ── -->
+    <div class="irp-section" *ngIf="!showApplicationForm">
+
+      <!-- Header -->
+      <div class="irp-header">
+        <div class="irp-header-pill"><i class="fas fa-map-signs"></i> Internship Roadmap Program</div>
+        <h2 class="irp-title">Choose your path. Build real skills.<br><span class="irp-grad">Work on real projects.</span></h2>
+        <p class="irp-desc">Our structured internship program is designed to make you industry-ready — not just certified. Choose a duration that fits your goals and start building real-world experience from day one.</p>
+        <p class="irp-trust"><i class="fas fa-shield-alt"></i> Designed to make you industry-ready, not just certified.</p>
+      </div>
+
+      <!-- Plan Cards -->
+      <div class="irp-cards">
+
+        <!-- 1 Month -->
+        <div class="irp-card">
+          <div class="irp-card-top irp-top-blue">
+            <div class="irp-duration-badge">1 Month</div>
+            <div class="irp-card-icon"><i class="fas fa-bolt"></i></div>
+            <h3>1 Month Fast Track Internship</h3>
+            <p class="irp-highlight">Best for quick experience</p>
+          </div>
+          <div class="irp-card-body">
+            <ul class="irp-features">
+              <li><i class="fas fa-check-circle"></i> Work on Industry-Level Project</li>
+              <li><i class="fas fa-check-circle"></i> Hands-on Practical Learning</li>
+              <li><i class="fas fa-check-circle"></i> Internship Certificate</li>
+            </ul>
+            <a routerLink="/contact" class="irp-apply-btn irp-btn-outline">Apply Now</a>
+          </div>
+        </div>
+
+        <!-- 3 Months — Most Popular -->
+        <div class="irp-card irp-card--popular">
+          <div class="irp-popular-tag"><i class="fas fa-star"></i> Most Popular</div>
+          <div class="irp-card-top irp-top-gradient">
+            <div class="irp-duration-badge irp-duration-badge--white">3 Months</div>
+            <div class="irp-card-icon"><i class="fas fa-rocket"></i></div>
+            <h3>3 Months Professional Internship</h3>
+            <p class="irp-highlight">Best for skill + experience</p>
+          </div>
+          <div class="irp-card-body">
+            <ul class="irp-features">
+              <li><i class="fas fa-check-circle"></i> 1 Month Intensive Training (selected tech stack)</li>
+              <li><i class="fas fa-check-circle"></i> 2 Months Real Project Work</li>
+              <li><i class="fas fa-check-circle"></i> Work on technologies used in projects</li>
+              <li><i class="fas fa-check-circle"></i> Training Certificate + Internship Certificate</li>
+              <li><i class="fas fa-check-circle"></i> Performance-Based Offer Opportunity</li>
+            </ul>
+            <a routerLink="/contact" class="irp-apply-btn irp-btn-primary">Apply Now</a>
+          </div>
+        </div>
+
+        <!-- 6 Months -->
+        <div class="irp-card">
+          <div class="irp-card-top irp-top-purple">
+            <div class="irp-duration-badge">6 Months</div>
+            <div class="irp-card-icon"><i class="fas fa-trophy"></i></div>
+            <h3>6 Months Advanced Career Program</h3>
+            <p class="irp-highlight">Best for career transformation</p>
+          </div>
+          <div class="irp-card-body">
+            <ul class="irp-features">
+              <li><i class="fas fa-check-circle"></i> 2 Months Advanced Training</li>
+              <li><i class="fas fa-check-circle"></i> 4 Months Real Client Project Work</li>
+              <li><i class="fas fa-check-circle"></i> Deep understanding of tech stack</li>
+              <li><i class="fas fa-check-circle"></i> Training + Internship Certificates</li>
+              <li><i class="fas fa-check-circle"></i> Performance-Based Offer Opportunity</li>
+            </ul>
+            <a routerLink="/contact" class="irp-apply-btn irp-btn-outline">Apply Now</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Roadmap Flow -->
+      <div class="irp-flow-section">
+        <h3 class="irp-flow-title">Your Journey at WebVibes Technology</h3>
+        <div class="irp-flow">
+          <div class="irp-step">
+            <div class="irp-step-icon irp-step-1"><i class="fas fa-book-open"></i></div>
+            <div class="irp-step-label">Step 1</div>
+            <div class="irp-step-name">Learn</div>
+            <div class="irp-step-sub">Training Phase</div>
+          </div>
+          <div class="irp-arrow"><i class="fas fa-chevron-right"></i></div>
+          <div class="irp-step">
+            <div class="irp-step-icon irp-step-2"><i class="fas fa-code"></i></div>
+            <div class="irp-step-label">Step 2</div>
+            <div class="irp-step-name">Build</div>
+            <div class="irp-step-sub">Project Development</div>
+          </div>
+          <div class="irp-arrow"><i class="fas fa-chevron-right"></i></div>
+          <div class="irp-step">
+            <div class="irp-step-icon irp-step-3"><i class="fas fa-briefcase"></i></div>
+            <div class="irp-step-label">Step 3</div>
+            <div class="irp-step-name">Work</div>
+            <div class="irp-step-sub">Client Project Experience</div>
+          </div>
+          <div class="irp-arrow"><i class="fas fa-chevron-right"></i></div>
+          <div class="irp-step">
+            <div class="irp-step-icon irp-step-4"><i class="fas fa-graduation-cap"></i></div>
+            <div class="irp-step-label">Step 4</div>
+            <div class="irp-step-name">Achieve</div>
+            <div class="irp-step-sub">Certificates + Job Ready</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Benefits -->
+      <div class="irp-benefits-section">
+        <h3 class="irp-benefits-title">What You Get</h3>
+        <div class="irp-benefits-grid">
+          <div class="irp-benefit"><div class="irp-benefit-icon"><i class="fas fa-project-diagram"></i></div><span>Real Project Experience</span></div>
+          <div class="irp-benefit"><div class="irp-benefit-icon"><i class="fas fa-layer-group"></i></div><span>Industry-Relevant Tech Stack</span></div>
+          <div class="irp-benefit"><div class="irp-benefit-icon"><i class="fas fa-file-alt"></i></div><span>Resume Building Support</span></div>
+          <div class="irp-benefit"><div class="irp-benefit-icon"><i class="fab fa-github"></i></div><span>GitHub Project Upload</span></div>
+          <div class="irp-benefit"><div class="irp-benefit-icon"><i class="fas fa-comments"></i></div><span>Mock Interviews</span></div>
+          <div class="irp-benefit"><div class="irp-benefit-icon"><i class="fas fa-compass"></i></div><span>Career Guidance</span></div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="irp-cta">
+        <h2>Ready to Start Your IT Career?</h2>
+        <p>Join hundreds of students who built real-world experience through WebVibes Technology.</p>
+        <div class="irp-cta-btns">
+          <a routerLink="/contact" class="irp-cta-primary"><i class="fas fa-paper-plane"></i> Apply for Internship</a>
+          <a routerLink="/contact" class="irp-cta-secondary"><i class="fas fa-envelope"></i> Contact Us</a>
+        </div>
+      </div>
+
+    </div>
+
     <!-- ── SEO Content Sections ── -->
     <div class="ip-seo-sections" *ngIf="!showApplicationForm">
 
