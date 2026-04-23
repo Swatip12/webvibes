@@ -1,32 +1,50 @@
 <div class="pp-page">
 
   <!-- Hero Section -->
-  <section class="page-hero">
-    <div class="page-hero-grid" aria-hidden="true"></div>
-    <div class="page-hero-blob" aria-hidden="true"></div>
-    <div class="page-hero-content">
-      <nav class="page-hero-breadcrumb">
+  <div class="pp-hero-v2">
+    <!-- Left: text -->
+    <div class="pp-hero-left">
+      <nav class="pp-hero-breadcrumb">
         <a routerLink="/home">Home</a>
         <span>›</span>
         <span>Projects</span>
       </nav>
-      <div class="page-hero-pill">
-        <span class="page-hero-pill-dot"></span>
+      <div class="pp-hero-pill">
+        <span class="pp-hero-pill-dot"></span>
         <span>Student Work</span>
       </div>
-      <h1 class="page-hero-title">
-        Student <span class="page-hero-gradient">Projects</span>
+      <h1 class="pp-hero-h1">
+        Student <span class="pp-hero-grad">Projects</span>
       </h1>
-      <p class="page-hero-sub">Real-world projects built by our students — from web apps to data science solutions.</p>
-      <div class="page-hero-stats">
-        <div class="page-hero-stat"><span class="page-hero-stat-num">{{ projects.length }}+</span><span class="page-hero-stat-lbl">Projects</span></div>
-        <div class="page-hero-stat-div"></div>
-        <div class="page-hero-stat"><span class="page-hero-stat-num">100%</span><span class="page-hero-stat-lbl">Open Source</span></div>
-        <div class="page-hero-stat-div"></div>
-        <div class="page-hero-stat"><span class="page-hero-stat-num">Live</span><span class="page-hero-stat-lbl">On GitHub</span></div>
+      <p class="pp-hero-sub">Real-world projects built by our students — from web apps to data science solutions.</p>
+      <div class="pp-hero-stats">
+        <div class="pp-hero-stat"><span class="pp-hero-stat-num">{{ projects.length }}+</span><span class="pp-hero-stat-lbl">Projects</span></div>
+        <div class="pp-hero-stat-div"></div>
+        <div class="pp-hero-stat"><span class="pp-hero-stat-num">100%</span><span class="pp-hero-stat-lbl">Open Source</span></div>
+        <div class="pp-hero-stat-div"></div>
+        <div class="pp-hero-stat"><span class="pp-hero-stat-num">Live</span><span class="pp-hero-stat-lbl">On GitHub</span></div>
       </div>
     </div>
-  </section>
+
+    <!-- Right: image card -->
+    <div class="pp-hero-img-card">
+      <img
+        src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80"
+        alt="Student Projects"
+        class="pp-hero-img-card-photo"
+      />
+      <div class="pp-hero-img-card-badge">
+        <span class="pp-hero-img-card-dot"></span>
+        <span>Real-World Projects</span>
+      </div>
+      <div class="pp-hero-img-card-tag pp-hero-img-card-tag--tl">
+        <i class="fas fa-code"></i> Full Stack
+      </div>
+      <div class="pp-hero-img-card-tag pp-hero-img-card-tag--br">
+        <i class="fab fa-github"></i> GitHub
+      </div>
+    </div>
+  </div>
 
   <!-- Filter Bar -->
   <section class="pp-filter-bar">
