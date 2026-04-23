@@ -530,3 +530,47 @@ textarea.form-control {
   .ct-form-card { padding: 24px 16px; }
   .ct-faq { padding: 40px 16px; }
 }
+
+/* ── Contact Hero v2 ── */
+.ct-hero-v2 {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #ede9fe 100%);
+  border-radius: 0 0 32px 32px;
+  padding: 80px 60px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+.ct-hero-v2::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(14,165,233,0.06) 1px, transparent 1px);
+  background-size: 32px 32px; pointer-events: none;
+}
+.ct-hero-left { position: relative; z-index: 1; }
+.ct-hero-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: #94a3b8; font-weight: 500; margin-bottom: 20px; }
+.ct-hero-breadcrumb a { color: #94a3b8; text-decoration: none; }
+.ct-hero-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(14,165,233,0.1); border: 1.5px solid rgba(14,165,233,0.25); color: #0369a1; padding: 6px 16px; border-radius: 999px; font-size: 0.82rem; font-weight: 700; margin-bottom: 20px; }
+.ct-hero-pill-dot { width: 7px; height: 7px; background: #0ea5e9; border-radius: 50%; box-shadow: 0 0 8px rgba(14,165,233,0.6); animation: ctBlink 2s ease-in-out infinite; }
+@keyframes ctBlink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.ct-hero-h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; color: #0f172a; line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.03em; }
+.ct-hero-grad { background: linear-gradient(90deg, #0ea5e9 0%, #6366f1 50%, #8b5cf6 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: ctGrad 4s linear infinite; }
+@keyframes ctGrad { 0%{background-position:0% center} 100%{background-position:200% center} }
+.ct-hero-sub { font-size: 1rem; color: #475569; line-height: 1.7; margin-bottom: 32px; max-width: 440px; }
+.ct-hero-stats { display: inline-flex; align-items: center; background: #fff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 14px 22px; box-shadow: 0 4px 20px rgba(14,165,233,0.08); gap: 0; flex-wrap: wrap; }
+.ct-hero-stat { text-align: center; padding: 0 16px; }
+.ct-hero-stat-num { display: block; font-size: 1.2rem; font-weight: 900; background: linear-gradient(135deg, #0ea5e9, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 3px; }
+.ct-hero-stat-lbl { font-size: 0.62rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+.ct-hero-stat-div { width: 1px; height: 32px; background: #e2e8f0; flex-shrink: 0; }
+.ct-hero-img-card { position: relative; z-index: 1; border-radius: 24px; overflow: visible; animation: ctFloat 4s ease-in-out infinite; }
+@keyframes ctFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+.ct-hero-img-card-photo { width: 100%; height: 300px; object-fit: cover; border-radius: 24px; display: block; box-shadow: 0 24px 64px rgba(14,165,233,0.18); }
+.ct-hero-img-card-badge { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); background: #fff; border-radius: 999px; padding: 8px 20px; display: flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 700; color: #1f2937; box-shadow: 0 8px 24px rgba(0,0,0,0.12); white-space: nowrap; }
+.ct-hero-img-card-dot { width: 8px; height: 8px; background: #0ea5e9; border-radius: 50%; box-shadow: 0 0 8px rgba(14,165,233,0.6); }
+.ct-hero-img-card-tag { position: absolute; background: #fff; border-radius: 12px; padding: 7px 14px; font-size: 0.78rem; font-weight: 700; color: #0369a1; box-shadow: 0 6px 20px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 6px; }
+.ct-hero-img-card-tag--tl { top: -14px; left: -14px; }
+.ct-hero-img-card-tag--br { bottom: 20px; right: -14px; color: #25d366; }
+@media (max-width: 900px) { .ct-hero-v2 { padding: 60px 24px 48px; grid-template-columns: 1fr; } .ct-hero-img-card { display: none; } }
+@media (max-width: 640px) { .ct-hero-v2 { padding: 48px 16px 40px; } .ct-hero-h1 { font-size: 2rem; } }
