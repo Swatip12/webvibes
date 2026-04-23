@@ -4758,3 +4758,100 @@ h1, h2, h3, h4, h5, h6 {
     animation: none !important;
   }
 }
+
+/* ============================================
+   GLOBAL SCROLL ANIMATION SYSTEM
+   Applied automatically by AppComponent to
+   all cards and sections across every page.
+   ============================================ */
+
+/* Initial hidden state — applied by JS */
+.sa-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+/* Visible state — added when element enters viewport */
+.sa-animate.sa-visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Specific directional variants for certain elements */
+.ip-intro-section.sa-animate,
+.cp-intro-section.sa-animate,
+.irp-header.sa-animate,
+.irp-img-strip.sa-animate,
+.irp-timeline-wrap.sa-animate,
+.irp-benefits-wrap.sa-animate,
+.irp-cta-banner.sa-animate,
+.blog-featured.sa-animate,
+.blog-cta.sa-animate,
+.ab-founder-card.sa-animate,
+.ab-cta.sa-animate,
+.sv-cta.sa-animate,
+.ct-faq.sa-animate {
+  transform: translateY(40px);
+}
+
+/* Cards get a slight scale effect too */
+.cp-card.sa-animate,
+.ip-card.sa-animate,
+.sv-card.sa-animate,
+.blog-card.sa-animate,
+.pp-card.sa-animate,
+.feature-card.sa-animate,
+.course-card.sa-animate,
+.tm-card.sa-animate,
+.irp-plan.sa-animate,
+.irp-benefit-card.sa-animate,
+.ab-cert-card.sa-animate,
+.ab-facility-card.sa-animate {
+  transform: translateY(24px) scale(0.97);
+}
+
+.cp-card.sa-animate.sa-visible,
+.ip-card.sa-animate.sa-visible,
+.sv-card.sa-animate.sa-visible,
+.blog-card.sa-animate.sa-visible,
+.pp-card.sa-animate.sa-visible,
+.feature-card.sa-animate.sa-visible,
+.course-card.sa-animate.sa-visible,
+.tm-card.sa-animate.sa-visible,
+.irp-plan.sa-animate.sa-visible,
+.irp-benefit-card.sa-animate.sa-visible,
+.ab-cert-card.sa-animate.sa-visible,
+.ab-facility-card.sa-animate.sa-visible {
+  transform: none !important;
+}
+
+/* Left/right slide for split sections */
+.offer-image-col.sa-animate,
+.internship-img-col.sa-animate,
+.ab-why-img-wrap.sa-animate {
+  transform: translateX(-40px);
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.offer-content-col.sa-animate,
+.internship-content-col.sa-animate,
+.ab-why-points.sa-animate {
+  transform: translateX(40px);
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .sa-animate {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
