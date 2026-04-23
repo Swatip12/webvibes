@@ -31,7 +31,7 @@
 
     <div class="sidebar-footer">
       <div class="sidebar-user" *ngIf="dashboard">
-        <div class="sidebar-avatar">{{ dashboard.name?.charAt(0)?.toUpperCase() }}</div>
+        <div class="sidebar-avatar">{{ dashboard.name ? dashboard.name.charAt(0).toUpperCase() : '' }}</div>
         <div class="sidebar-user-info">
           <span class="sidebar-user-name">{{ dashboard.name }}</span>
           <span class="sidebar-user-role">Student</span>
@@ -53,7 +53,7 @@
       </div>
       <div class="topbar-right" *ngIf="dashboard">
         <div class="topbar-avatar-chip">
-          <div class="topbar-avatar">{{ dashboard.name?.charAt(0)?.toUpperCase() }}</div>
+          <div class="topbar-avatar">{{ dashboard.name ? dashboard.name.charAt(0).toUpperCase() : '' }}</div>
           <div class="topbar-info">
             <span class="topbar-name">{{ dashboard.name }}</span>
             <span class="topbar-email">{{ dashboard.email }}</span>
@@ -75,7 +75,7 @@
     <!-- No Plan -->
     <div class="page-body" *ngIf="dashboard && !dashboard.planAssigned && !isLoading">
       <div class="pending-card">
-        <div class="pending-avatar">{{ dashboard.name?.charAt(0)?.toUpperCase() }}</div>
+        <div class="pending-avatar">{{ dashboard.name ? dashboard.name.charAt(0).toUpperCase() : '' }}</div>
         <h2>{{ dashboard.name }}</h2>
         <p class="pending-email">{{ dashboard.email }}</p>
         <div class="pending-notice">
