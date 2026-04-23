@@ -35,12 +35,12 @@
     <!-- ── Mission & Vision ── -->
     <section class="ab-section">
       <div class="ab-mv-grid">
-        <div class="ab-mv-card ab-mv-mission">
+        <div class="ab-mv-card ab-mv-mission" appReveal="left">
           <div class="ab-mv-icon"><i class="fas fa-bullseye"></i></div>
           <h2>Our Mission</h2>
           <p>To provide high-quality, practical IT training that equips students with the skills and confidence needed to excel in the technology industry. We create a supportive learning environment where every student reaches their full potential.</p>
         </div>
-        <div class="ab-mv-card ab-mv-vision">
+        <div class="ab-mv-card ab-mv-vision" appReveal="right">
           <div class="ab-mv-icon"><i class="fas fa-eye"></i></div>
           <h2>Our Vision</h2>
           <p>To be the premier destination for aspiring developers seeking world-class training and career opportunities — a future where our graduates are recognized as skilled, innovative professionals driving technological advancement.</p>
@@ -50,13 +50,13 @@
 
     <!-- ── Why WebVibes Started ── -->
     <section class="ab-section">
-      <div class="ab-section-head">
+      <div class="ab-section-head" appReveal>
         <span class="ab-badge"><i class="fas fa-lightbulb"></i> Our Story</span>
         <h2>Why <span class="ab-grad">WebVibes Technology</span> Started?</h2>
         <p class="ab-section-sub">Born from a simple observation — freshers with degrees but no job-ready skills</p>
       </div>
       <div class="ab-why-grid">
-        <div class="ab-why-left">
+        <div class="ab-why-left" appReveal="left">
           <div class="ab-why-img-wrap">
             <img [src]="whyImage" alt="Students learning to code at WebVibes Technology"
                  (error)="handleImageError($event)" class="ab-why-img" loading="lazy" />
@@ -69,8 +69,9 @@
           <p class="ab-why-body">Our founder witnessed this firsthand. Brilliant students were being rejected not for lack of intelligence, but for lack of practical, hands-on skills that companies actually need on day one.</p>
           <p class="ab-why-body">WebVibes Technology was built to bridge that gap — to turn freshers into job-ready professionals through real project experience, mentorship, and industry-aligned curriculum.</p>
         </div>
-        <div class="ab-why-points">
-          <div class="ab-why-point" *ngFor="let point of whyPoints">
+        <div class="ab-why-points" appReveal="right">
+          <div class="ab-why-point" *ngFor="let point of whyPoints; let i = index"
+               appReveal [revealDelay]="(i * 100).toString()">
             <div class="ab-why-icon"><i [class]="point.icon"></i></div>
             <div class="ab-why-text">
               <h4>{{ point.title }}</h4>
@@ -83,12 +84,12 @@
 
     <!-- ── Founder Section ── -->
     <section class="ab-section">
-      <div class="ab-section-head">
+      <div class="ab-section-head" appReveal>
         <span class="ab-badge"><i class="fas fa-user-tie"></i> Leadership</span>
         <h2>Meet Our <span class="ab-grad">Founder</span></h2>
         <p class="ab-section-sub">The vision behind WebVibes Technology</p>
       </div>
-      <div class="ab-founder-card">
+      <div class="ab-founder-card" appReveal="scale">
         <div class="ab-founder-photo-wrap">
           <div class="ab-founder-photo-ring"></div>
           <img [src]="" alt="WebVibes Technology Founder"
@@ -112,28 +113,28 @@
 
     <!-- ── Achievements & Certifications ── -->
     <section class="ab-section">
-      <div class="ab-section-head">
+      <div class="ab-section-head" appReveal>
         <span class="ab-badge"><i class="fas fa-trophy"></i> Recognition</span>
         <h2>Achievements &amp; <span class="ab-grad">Certifications</span></h2>
       </div>
       <div class="ab-cert-grid">
-        <div class="ab-cert-card">
+        <div class="ab-cert-card" appReveal="scale" revealDelay="0">
           <div class="ab-cert-icon ab-cert-blue"><i class="fas fa-certificate"></i></div>
           <p>ISO 9001:2015 Certified</p>
         </div>
-        <div class="ab-cert-card">
+        <div class="ab-cert-card" appReveal="scale" revealDelay="100">
           <div class="ab-cert-icon ab-cert-orange"><i class="fas fa-award"></i></div>
           <p>NASSCOM Member</p>
         </div>
-        <div class="ab-cert-card">
+        <div class="ab-cert-card" appReveal="scale" revealDelay="200">
           <div class="ab-cert-icon ab-cert-green"><i class="fas fa-medal"></i></div>
           <p>MSME Certified</p>
         </div>
-        <div class="ab-cert-card">
+        <div class="ab-cert-card" appReveal="scale" revealDelay="300">
           <div class="ab-cert-icon ab-cert-purple"><i class="fas fa-handshake"></i></div>
           <p>Industry Partner Network</p>
         </div>
-        <div class="ab-cert-card">
+        <div class="ab-cert-card" appReveal="scale" revealDelay="400">
           <div class="ab-cert-icon ab-cert-red"><i class="fas fa-graduation-cap"></i></div>
           <p>Accredited Training Provider</p>
         </div>
@@ -142,12 +143,11 @@
 
     <!-- ── Facilities ── -->
     <section class="ab-section">
-      <div class="ab-section-head">
+      <div class="ab-section-head" appReveal>
         <span class="ab-badge"><i class="fas fa-building"></i> Infrastructure</span>
         <h2>World-Class <span class="ab-grad">Learning Facilities</span></h2>
       </div>
-      <!-- Facilities banner image -->
-      <div class="ab-facilities-banner">
+      <div class="ab-facilities-banner" appReveal>
         <img [src]="facilitiesImage" alt="Modern learning facilities at WebVibes Technology"
              (error)="handleImageError($event)" class="ab-facilities-img" loading="lazy" />
         <div class="ab-facilities-banner-overlay">
@@ -155,7 +155,8 @@
         </div>
       </div>
       <div class="ab-facilities-grid">
-        <div class="ab-facility-card" *ngFor="let f of facilities">
+        <div class="ab-facility-card" *ngFor="let f of facilities; let i = index"
+             appReveal [revealDelay]="(i * 80).toString()">
           <div class="ab-facility-icon"><i [class]="f.icon"></i></div>
           <h4>{{ f.title }}</h4>
           <p>{{ f.desc }}</p>
@@ -164,7 +165,7 @@
     </section>
 
     <!-- ── CTA ── -->
-    <section class="ab-cta">
+    <section class="ab-cta" appReveal="scale">
       <div class="ab-cta-inner">
         <h2>Ready to Start Your <span class="ab-grad">Journey?</span></h2>
         <p>Join thousands of successful graduates who transformed their careers with WebVibes Technology</p>
