@@ -1,34 +1,53 @@
 <div class="ip-page">
-  <div class="ip-wrap">
 
-    <!-- ── Hero ── -->
-    <div class="page-hero">
-      <div class="page-hero-grid" aria-hidden="true"></div>
-      <div class="page-hero-blob" aria-hidden="true"></div>
-      <div class="page-hero-content">
-        <nav class="page-hero-breadcrumb">
-          <a routerLink="/home">Home</a>
-          <span>›</span>
-          <span>Internships</span>
-        </nav>
-        <div class="page-hero-pill">
-          <span class="page-hero-pill-dot"></span>
-          <span>IT Internship in Pune</span>
-        </div>
-        <h1 class="page-hero-title">
-          IT Internship in Pune with<br>
-          <span class="page-hero-gradient">Live Projects</span>
-        </h1>
-        <p class="page-hero-sub">Work on real client projects from day one. Get hands-on experience, mentorship, and a certificate to launch your IT career.</p>
-        <div class="page-hero-stats">
-          <div class="page-hero-stat"><span class="page-hero-stat-num">4</span><span class="page-hero-stat-lbl">Domains</span></div>
-          <div class="page-hero-stat-div"></div>
-          <div class="page-hero-stat"><span class="page-hero-stat-num">500+</span><span class="page-hero-stat-lbl">Placed</span></div>
-          <div class="page-hero-stat-div"></div>
-          <div class="page-hero-stat"><span class="page-hero-stat-num">100%</span><span class="page-hero-stat-lbl">Mentorship</span></div>
-        </div>
+  <!-- ── Hero ── -->
+  <div class="ip-hero-v2">
+    <!-- Left: text -->
+    <div class="ip-hero-left">
+      <nav class="ip-hero-breadcrumb">
+        <a routerLink="/home">Home</a>
+        <span>›</span>
+        <span>Internships</span>
+      </nav>
+      <div class="ip-hero-pill">
+        <span class="ip-hero-pill-dot"></span>
+        <span>IT Internship in Pune</span>
+      </div>
+      <h1 class="ip-hero-h1">
+        IT Internship in Pune with<br>
+        <span class="ip-hero-grad">Live Projects</span>
+      </h1>
+      <p class="ip-hero-sub">Work on real client projects from day one. Get hands-on experience, mentorship, and a certificate to launch your IT career.</p>
+      <div class="ip-hero-stats">
+        <div class="ip-hero-stat"><span class="ip-hero-stat-num">4</span><span class="ip-hero-stat-lbl">Domains</span></div>
+        <div class="ip-hero-stat-div"></div>
+        <div class="ip-hero-stat"><span class="ip-hero-stat-num">500+</span><span class="ip-hero-stat-lbl">Placed</span></div>
+        <div class="ip-hero-stat-div"></div>
+        <div class="ip-hero-stat"><span class="ip-hero-stat-num">100%</span><span class="ip-hero-stat-lbl">Mentorship</span></div>
       </div>
     </div>
+
+    <!-- Right: image card -->
+    <div class="ip-hero-img-card">
+      <img
+        src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80"
+        alt="IT Internship"
+        class="ip-hero-img-card-photo"
+      />
+      <div class="ip-hero-img-card-badge">
+        <span class="ip-hero-img-card-dot"></span>
+        <span>500+ Students Placed</span>
+      </div>
+      <div class="ip-hero-img-card-tag ip-hero-img-card-tag--tl">
+        <i class="fas fa-briefcase"></i> Real Projects
+      </div>
+      <div class="ip-hero-img-card-tag ip-hero-img-card-tag--br">
+        <i class="fas fa-certificate"></i> Certificate
+      </div>
+    </div>
+  </div>
+
+  <div class="ip-wrap">
 
     <!-- ── Filters ── -->
     <div class="ip-filters" *ngIf="!showApplicationForm">
