@@ -4868,3 +4868,134 @@ h1, h2, h3, h4, h5, h6 {
 [data-reveal-delay="400"] { transition-delay: 0.4s; }
 [data-reveal-delay="480"] { transition-delay: 0.48s; }
 [data-reveal-delay="560"] { transition-delay: 0.56s; }
+
+
+/* ============================================
+   GLOBAL MOBILE RESPONSIVE — All Pages
+   Covers all hero-v2 sections + page wraps
+   ============================================ */
+
+/* Ensure no horizontal overflow on any page */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: hidden; max-width: 100vw; }
+
+/* All page wraps get safe horizontal padding */
+.sv-wrap, .cp-wrap, .ip-wrap, .pp-page > *:not(.pp-hero-v2),
+.blog-wrap, .ct-page > *:not(.ct-hero-v2) {
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+}
+
+/* ── Hero v2 shared mobile rules ── */
+@media (max-width: 768px) {
+
+  /* All hero-v2 sections: single column, reduced padding */
+  .sv-hero-v2,
+  .cp-hero-v2,
+  .ip-hero-v2,
+  .pp-hero-v2,
+  .bl-hero-v2,
+  .ct-hero-v2,
+  .ab-hero-v2 {
+    grid-template-columns: 1fr !important;
+    padding: 48px 20px 40px !important;
+    gap: 24px !important;
+    border-radius: 0 0 20px 20px !important;
+    margin-bottom: 32px !important;
+  }
+
+  /* Hide all right-column image cards on mobile */
+  .sv-hero-img-card,
+  .cp-hero-img-card,
+  .ip-hero-img-card,
+  .pp-hero-img-card,
+  .bl-hero-img-card,
+  .ct-hero-img-card,
+  .ab-hero-right { display: none !important; }
+
+  /* Hero headings */
+  .sv-hero-h1, .cp-hero-h1, .ip-hero-h1,
+  .pp-hero-h1, .bl-hero-h1, .ct-hero-h1,
+  .ab-hero-h1 {
+    font-size: clamp(1.6rem, 6vw, 2.2rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Stats bars — wrap and shrink */
+  .sv-hero-stats, .cp-hero-stats, .ip-hero-stats,
+  .pp-hero-stats, .bl-hero-stats, .ct-hero-stats,
+  .ab-hero-stats {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    padding: 10px 14px !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .sv-hero-stat, .cp-hero-stat, .ip-hero-stat,
+  .pp-hero-stat, .bl-hero-stat, .ct-hero-stat,
+  .ab-hero-stat { padding: 0 10px !important; }
+
+  .sv-hero-stat-div, .cp-hero-stat-div, .ip-hero-stat-div,
+  .pp-hero-stat-div, .bl-hero-stat-div, .ct-hero-stat-div,
+  .ab-hero-stat-div { display: none !important; }
+
+  /* Sub text */
+  .sv-hero-sub, .cp-hero-sub, .ip-hero-sub,
+  .pp-hero-sub, .bl-hero-sub, .ct-hero-sub,
+  .ab-hero-sub { max-width: 100% !important; font-size: 0.92rem !important; }
+
+  /* Navigation */
+  .sv-hero-breadcrumb, .cp-hero-breadcrumb, .ip-hero-breadcrumb,
+  .pp-hero-breadcrumb, .bl-hero-breadcrumb, .ct-hero-breadcrumb { display: none !important; }
+
+  /* Service cards grid */
+  .sv-grid { grid-template-columns: 1fr !important; }
+  .sv-card--wide { grid-column: span 1 !important; }
+
+  /* Course/internship/project filter rows */
+  .cp-filter-row, .ip-filter-row { flex-direction: column !important; gap: 12px !important; }
+  .cp-search-row, .ip-search-row { width: 100% !important; }
+
+  /* Blog grid */
+  .blog-grid { grid-template-columns: 1fr !important; }
+
+  /* Contact layout */
+  .ct-main .ct-inner { flex-direction: column !important; }
+
+  /* Navigation hamburger area */
+  .nav-links { gap: 12px !important; }
+
+  /* Footer */
+  .footer-grid, .ft-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+
+  /* Floating widgets — smaller on mobile */
+  .floating-widgets { bottom: 12px !important; right: 12px !important; }
+  .floating-widget-btn { width: 44px !important; height: 44px !important; font-size: 1.1rem !important; }
+
+  /* Internship roadmap cards */
+  .ir-cards { flex-direction: column !important; align-items: center !important; }
+  .ir-card { width: 100% !important; max-width: 360px !important; }
+
+  /* Why section grid */
+  .sv-why-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* CTA buttons */
+  .sv-cta-btns, .ir-cta-btns { flex-direction: column !important; align-items: center !important; }
+}
+
+@media (max-width: 480px) {
+  /* Extra small phones */
+  .sv-hero-v2, .cp-hero-v2, .ip-hero-v2,
+  .pp-hero-v2, .bl-hero-v2, .ct-hero-v2,
+  .ab-hero-v2 { padding: 36px 16px 32px !important; }
+
+  .sv-hero-h1, .cp-hero-h1, .ip-hero-h1,
+  .pp-hero-h1, .bl-hero-h1, .ct-hero-h1,
+  .ab-hero-h1 { font-size: 1.5rem !important; }
+
+  .sv-why-grid { grid-template-columns: 1fr !important; }
+
+  /* Navigation logo text */
+  .brand-name { font-size: 0.9rem !important; }
+}
