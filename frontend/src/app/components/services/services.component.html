@@ -2,7 +2,7 @@
   <div class="sv-wrap">
 
     <!-- ── Hero ── -->
-    <div class="sv-hero-v2" [style.background-image]="'url(/assets/our-service-bg.png)'"  >
+    <div class="sv-hero-v2" [style.background-image]="'url(/assets/our-service-bg.png)'">
       <div class="sv-hero-left" appReveal="left">
         <nav class="sv-hero-breadcrumb">
           <a routerLink="/home">Home</a>
@@ -23,6 +23,25 @@
           <div class="sv-hero-stat"><span class="sv-hero-stat-num">50+</span><span class="sv-hero-stat-lbl">Projects Delivered</span></div>
           <div class="sv-hero-stat-div"></div>
           <div class="sv-hero-stat"><span class="sv-hero-stat-num">7</span><span class="sv-hero-stat-lbl">Core Services</span></div>
+        </div>
+      </div>
+
+      <!-- Right: floating image card -->
+      <div class="sv-hero-img-card" appReveal="right">
+        <img
+          src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80"
+          alt="IT Services Team"
+          class="sv-hero-img-card-photo"
+        />
+        <div class="sv-hero-img-card-badge">
+          <span class="sv-hero-img-card-dot"></span>
+          <span>500+ Happy Clients</span>
+        </div>
+        <div class="sv-hero-img-card-tag sv-hero-img-card-tag--tl">
+          <i class="fas fa-code"></i> Web Dev
+        </div>
+        <div class="sv-hero-img-card-tag sv-hero-img-card-tag--br">
+          <i class="fas fa-graduation-cap"></i> Training
         </div>
       </div>
     </div>
