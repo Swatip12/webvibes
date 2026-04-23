@@ -4531,3 +4531,230 @@ h1, h2, h3, h4, h5, h6 {
   .page-hero-pill-dot,
   .page-hero-gradient { animation: none !important; }
 }
+
+/* ============================================
+   GLOBAL SCROLL ANIMATIONS — ALL PAGES
+   Uses CSS animation-timeline: view() where
+   supported, with JS-free fallback via
+   animation on page load for above-fold items.
+   ============================================ */
+
+/* ── Keyframes ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.93); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes slideInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Utility animation classes ── */
+/* Apply these to any element for instant animation on load */
+.anim-fade-up   { animation: fadeInUp   0.6s ease both; }
+.anim-fade-left { animation: fadeInLeft 0.6s ease both; }
+.anim-fade-right{ animation: fadeInRight 0.6s ease both; }
+.anim-scale     { animation: fadeInScale 0.5s ease both; }
+.anim-slide-down{ animation: slideInDown 0.5s ease both; }
+
+/* Stagger delays */
+.anim-d1 { animation-delay: 0.1s; }
+.anim-d2 { animation-delay: 0.2s; }
+.anim-d3 { animation-delay: 0.3s; }
+.anim-d4 { animation-delay: 0.4s; }
+.anim-d5 { animation-delay: 0.5s; }
+.anim-d6 { animation-delay: 0.6s; }
+
+/* ── Scroll-triggered via IntersectionObserver (enhanced) ── */
+/* Make the transition smoother and more dramatic */
+[data-reveal] {
+  opacity: 0;
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+[data-reveal="up"], [data-reveal=""] {
+  transform: translateY(36px);
+}
+[data-reveal="left"]  { transform: translateX(-44px); }
+[data-reveal="right"] { transform: translateX(44px); }
+[data-reveal="scale"] { transform: scale(0.9); }
+[data-reveal].revealed {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ── Auto-animate cards on ALL pages using CSS scroll-driven ── */
+/* Cards that appear in the viewport get animated via CSS only */
+
+/* Courses page cards */
+.cp-card,
+.cp-cat-card,
+.cp-benefit-card,
+.cp-intro-section,
+.cp-categories-section,
+.cp-benefits-section {
+  animation: fadeInUp 0.55s ease both;
+}
+.cp-grid .cp-card:nth-child(1) { animation-delay: 0.05s; }
+.cp-grid .cp-card:nth-child(2) { animation-delay: 0.12s; }
+.cp-grid .cp-card:nth-child(3) { animation-delay: 0.19s; }
+.cp-grid .cp-card:nth-child(4) { animation-delay: 0.26s; }
+.cp-grid .cp-card:nth-child(5) { animation-delay: 0.33s; }
+.cp-grid .cp-card:nth-child(6) { animation-delay: 0.40s; }
+.cp-cat-grid .cp-cat-card:nth-child(1) { animation-delay: 0.05s; }
+.cp-cat-grid .cp-cat-card:nth-child(2) { animation-delay: 0.15s; }
+.cp-cat-grid .cp-cat-card:nth-child(3) { animation-delay: 0.25s; }
+.cp-cat-grid .cp-cat-card:nth-child(4) { animation-delay: 0.35s; }
+
+/* Internship page cards */
+.ip-card,
+.ip-domain-card,
+.ip-feature-card,
+.ip-benefit-item,
+.irp-plan,
+.irp-benefit-card {
+  animation: fadeInUp 0.55s ease both;
+}
+.ip-grid .ip-card:nth-child(1) { animation-delay: 0.05s; }
+.ip-grid .ip-card:nth-child(2) { animation-delay: 0.12s; }
+.ip-grid .ip-card:nth-child(3) { animation-delay: 0.19s; }
+.ip-grid .ip-card:nth-child(4) { animation-delay: 0.26s; }
+.ip-grid .ip-card:nth-child(5) { animation-delay: 0.33s; }
+.ip-grid .ip-card:nth-child(6) { animation-delay: 0.40s; }
+.ip-domains-grid .ip-domain-card:nth-child(1) { animation-delay: 0.05s; }
+.ip-domains-grid .ip-domain-card:nth-child(2) { animation-delay: 0.15s; }
+.ip-domains-grid .ip-domain-card:nth-child(3) { animation-delay: 0.25s; }
+.ip-domains-grid .ip-domain-card:nth-child(4) { animation-delay: 0.35s; }
+.irp-plans .irp-plan:nth-child(1) { animation-delay: 0.05s; }
+.irp-plans .irp-plan:nth-child(2) { animation-delay: 0.18s; }
+.irp-plans .irp-plan:nth-child(3) { animation-delay: 0.31s; }
+.irp-benefits .irp-benefit-card:nth-child(1) { animation-delay: 0.05s; }
+.irp-benefits .irp-benefit-card:nth-child(2) { animation-delay: 0.12s; }
+.irp-benefits .irp-benefit-card:nth-child(3) { animation-delay: 0.19s; }
+.irp-benefits .irp-benefit-card:nth-child(4) { animation-delay: 0.26s; }
+.irp-benefits .irp-benefit-card:nth-child(5) { animation-delay: 0.33s; }
+.irp-benefits .irp-benefit-card:nth-child(6) { animation-delay: 0.40s; }
+
+/* Services page cards */
+.sv-card,
+.sv-why-card {
+  animation: fadeInUp 0.55s ease both;
+}
+.sv-grid .sv-card:nth-child(1) { animation-delay: 0.05s; }
+.sv-grid .sv-card:nth-child(2) { animation-delay: 0.12s; }
+.sv-grid .sv-card:nth-child(3) { animation-delay: 0.19s; }
+.sv-grid .sv-card:nth-child(4) { animation-delay: 0.26s; }
+.sv-grid .sv-card:nth-child(5) { animation-delay: 0.33s; }
+.sv-grid .sv-card:nth-child(6) { animation-delay: 0.40s; }
+.sv-why-grid .sv-why-card:nth-child(1) { animation-delay: 0.05s; }
+.sv-why-grid .sv-why-card:nth-child(2) { animation-delay: 0.15s; }
+.sv-why-grid .sv-why-card:nth-child(3) { animation-delay: 0.25s; }
+.sv-why-grid .sv-why-card:nth-child(4) { animation-delay: 0.35s; }
+
+/* Blog page cards */
+.blog-card {
+  animation: fadeInUp 0.5s ease both;
+}
+.blog-grid .blog-card:nth-child(1) { animation-delay: 0.04s; }
+.blog-grid .blog-card:nth-child(2) { animation-delay: 0.10s; }
+.blog-grid .blog-card:nth-child(3) { animation-delay: 0.16s; }
+.blog-grid .blog-card:nth-child(4) { animation-delay: 0.22s; }
+.blog-grid .blog-card:nth-child(5) { animation-delay: 0.28s; }
+.blog-grid .blog-card:nth-child(6) { animation-delay: 0.34s; }
+
+/* About page sections */
+.ab-mv-card,
+.ab-why-point,
+.ab-cert-card,
+.ab-facility-card {
+  animation: fadeInUp 0.55s ease both;
+}
+.ab-mv-grid .ab-mv-card:nth-child(1) { animation-delay: 0.05s; }
+.ab-mv-grid .ab-mv-card:nth-child(2) { animation-delay: 0.18s; }
+.ab-why-points .ab-why-point:nth-child(1) { animation-delay: 0.05s; }
+.ab-why-points .ab-why-point:nth-child(2) { animation-delay: 0.15s; }
+.ab-why-points .ab-why-point:nth-child(3) { animation-delay: 0.25s; }
+.ab-why-points .ab-why-point:nth-child(4) { animation-delay: 0.35s; }
+.ab-cert-grid .ab-cert-card:nth-child(1) { animation-delay: 0.05s; }
+.ab-cert-grid .ab-cert-card:nth-child(2) { animation-delay: 0.12s; }
+.ab-cert-grid .ab-cert-card:nth-child(3) { animation-delay: 0.19s; }
+.ab-cert-grid .ab-cert-card:nth-child(4) { animation-delay: 0.26s; }
+.ab-cert-grid .ab-cert-card:nth-child(5) { animation-delay: 0.33s; }
+.ab-facilities-grid .ab-facility-card:nth-child(1) { animation-delay: 0.05s; }
+.ab-facilities-grid .ab-facility-card:nth-child(2) { animation-delay: 0.12s; }
+.ab-facilities-grid .ab-facility-card:nth-child(3) { animation-delay: 0.19s; }
+.ab-facilities-grid .ab-facility-card:nth-child(4) { animation-delay: 0.26s; }
+
+/* Contact page */
+.ct-info-card,
+.ct-faq-item {
+  animation: fadeInUp 0.5s ease both;
+}
+.ct-info-col .ct-info-card:nth-child(1) { animation-delay: 0.05s; }
+.ct-info-col .ct-info-card:nth-child(2) { animation-delay: 0.12s; }
+.ct-info-col .ct-info-card:nth-child(3) { animation-delay: 0.19s; }
+.ct-info-col .ct-info-card:nth-child(4) { animation-delay: 0.26s; }
+.ct-faq-grid .ct-faq-item:nth-child(1) { animation-delay: 0.05s; }
+.ct-faq-grid .ct-faq-item:nth-child(2) { animation-delay: 0.10s; }
+.ct-faq-grid .ct-faq-item:nth-child(3) { animation-delay: 0.15s; }
+.ct-faq-grid .ct-faq-item:nth-child(4) { animation-delay: 0.20s; }
+.ct-faq-grid .ct-faq-item:nth-child(5) { animation-delay: 0.25s; }
+.ct-faq-grid .ct-faq-item:nth-child(6) { animation-delay: 0.30s; }
+.ct-faq-grid .ct-faq-item:nth-child(7) { animation-delay: 0.35s; }
+.ct-faq-grid .ct-faq-item:nth-child(8) { animation-delay: 0.40s; }
+
+/* Projects page */
+.pp-card {
+  animation: fadeInUp 0.5s ease both;
+}
+.pp-grid .pp-card:nth-child(1) { animation-delay: 0.05s; }
+.pp-grid .pp-card:nth-child(2) { animation-delay: 0.12s; }
+.pp-grid .pp-card:nth-child(3) { animation-delay: 0.19s; }
+.pp-grid .pp-card:nth-child(4) { animation-delay: 0.26s; }
+.pp-grid .pp-card:nth-child(5) { animation-delay: 0.33s; }
+.pp-grid .pp-card:nth-child(6) { animation-delay: 0.40s; }
+
+/* Page hero sections */
+.page-hero-content { animation: fadeInUp 0.7s ease both; }
+.page-hero-pill    { animation: slideInDown 0.5s ease both; }
+.page-hero-title   { animation: fadeInUp 0.65s ease 0.1s both; }
+.page-hero-sub     { animation: fadeInUp 0.65s ease 0.2s both; }
+.page-hero-stats   { animation: fadeInUp 0.65s ease 0.3s both; }
+
+/* SEO sections on courses/internship */
+.cp-seo-sections .cp-intro-section { animation: fadeInUp 0.6s ease 0.05s both; }
+.cp-seo-sections .cp-categories-section { animation: fadeInUp 0.6s ease 0.1s both; }
+.cp-seo-sections .cp-benefits-section { animation: fadeInUp 0.6s ease 0.15s both; }
+.ip-seo-sections .ip-intro-section { animation: fadeInUp 0.6s ease 0.05s both; }
+.ip-seo-sections .ip-domains-section { animation: fadeInUp 0.6s ease 0.1s both; }
+.ip-seo-sections .ip-features-section { animation: fadeInUp 0.6s ease 0.15s both; }
+.ip-seo-sections .ip-benefits-section { animation: fadeInUp 0.6s ease 0.2s both; }
+
+/* Roadmap timeline steps */
+.irp-tl-step:nth-child(1) { animation: fadeInScale 0.5s ease 0.05s both; }
+.irp-tl-step:nth-child(3) { animation: fadeInScale 0.5s ease 0.15s both; }
+.irp-tl-step:nth-child(5) { animation: fadeInScale 0.5s ease 0.25s both; }
+.irp-tl-step:nth-child(7) { animation: fadeInScale 0.5s ease 0.35s both; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cp-card, .ip-card, .sv-card, .blog-card, .pp-card,
+  .ab-mv-card, .ab-why-point, .ab-cert-card, .ab-facility-card,
+  .ct-info-card, .ct-faq-item, .irp-plan, .irp-benefit-card,
+  .irp-tl-step, .page-hero-content, .page-hero-pill,
+  .page-hero-title, .page-hero-sub, .page-hero-stats {
+    animation: none !important;
+  }
+}
