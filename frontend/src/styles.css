@@ -4855,3 +4855,16 @@ h1, h2, h3, h4, h5, h6 {
     transition: none !important;
   }
 }
+
+/* Extended reveal delays for staggered card animations */
+[data-reveal-delay="0"]   { transition-delay: 0s; }
+[data-reveal-delay="80"]  { transition-delay: 0.08s; }
+[data-reveal-delay="120"] { transition-delay: 0.12s; }
+[data-reveal-delay="150"] { transition-delay: 0.15s; }
+[data-reveal-delay="160"] { transition-delay: 0.16s; }
+[data-reveal-delay="240"] { transition-delay: 0.24s; }
+[data-reveal-delay="320"] { transition-delay: 0.32s; }
+[data-reveal-delay="360"] { transition-delay: 0.36s; }
+[data-reveal-delay="400"] { transition-delay: 0.4s; }
+[data-reveal-delay="480"] { transition-delay: 0.48s; }
+[data-reveal-delay="560"] { transition-delay: 0.56s; }
