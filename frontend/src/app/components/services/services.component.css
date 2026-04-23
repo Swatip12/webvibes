@@ -121,7 +121,7 @@
    ══════════════════════════════════════ */
 
 .sv-hero-v2 {
-  background: url('/assets/our-service-bg.png') center center / cover no-repeat;
+  background: linear-gradient(135deg, #f0f0ff 0%, #e8eeff 40%, #f5f0ff 100%);
   border-radius: 0 0 32px 32px;
   padding: 80px 60px 60px;
   display: grid;
@@ -135,7 +135,8 @@
 .sv-hero-v2::before {
   content: '';
   position: absolute; inset: 0;
-  background: rgba(255,255,255,0.82);
+  background-image: radial-gradient(circle, rgba(99,102,241,0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
   pointer-events: none;
   z-index: 0;
 }
@@ -150,13 +151,10 @@
   z-index: 0;
 }
 .sv-hero-bg-img { display: none; }
-.sv-hero-right { display: none; }
 
 /* Left column */
 .sv-hero-left {
   position: relative; z-index: 1;
-  grid-column: 1 / -1;
-  max-width: 560px;
 }
 .sv-hero-breadcrumb {
   display: flex; align-items: center; gap: 8px;
@@ -213,6 +211,19 @@
 .sv-hero-right {
   position: relative; z-index: 1;
   display: flex; align-items: center; justify-content: center;
+}
+.sv-hero-illus {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 20px 48px rgba(99,102,241,0.15));
+  animation: svIllusFloat 4s ease-in-out infinite;
+}
+@keyframes svIllusFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
 }
 .sv-hero-illus {
   width: 100%; max-width: 520px; height: 360px;
