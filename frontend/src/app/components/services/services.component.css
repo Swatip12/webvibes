@@ -132,7 +132,7 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  margin: 0 -24px 48px;
+  margin-bottom: 48px;
 }
 /* White overlay so text is readable */
 .sv-hero-v2::before {
