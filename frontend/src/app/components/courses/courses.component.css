@@ -244,13 +244,12 @@
   position: relative;
   background: linear-gradient(135deg, #ede9fe 0%, #dbeafe 60%, #e0f2fe 100%);
   border-radius: 0 0 32px 32px;
-  padding: 100px 60px 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: 80px 60px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 48px;
+  align-items: center;
   overflow: hidden;
-  min-height: 500px;
   margin: 0 -24px 48px;
 }
 .cp-hero-overlay {
@@ -317,7 +316,6 @@
 /* Right: image card */
 .cp-hero-img-card {
   position: relative; z-index: 1;
-  flex-shrink: 0; width: 420px;
   border-radius: 24px; overflow: visible;
   animation: cpFloat 4s ease-in-out infinite;
 }
