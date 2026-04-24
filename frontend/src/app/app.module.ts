@@ -46,6 +46,7 @@ import { ScrollRevealDirective } from './directives/scroll-reveal.directive';
 import { CounterDirective } from './directives/counter.directive';
 import { BlogComponent } from './components/blog/blog.component';
 import { BlogPostComponent } from './components/blog-post/blog-post.component';
+import { AssessmentRedirectComponent } from './components/assessment-redirect/assessment-redirect.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { BlogPostComponent } from './components/blog-post/blog-post.component';
     ScrollRevealDirective,
     CounterDirective,
     BlogComponent,
-    BlogPostComponent
+    BlogPostComponent,
+    AssessmentRedirectComponent
   ],
   imports: [
     BrowserModule,

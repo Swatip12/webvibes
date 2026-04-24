@@ -163,10 +163,10 @@ export class AdminAssessmentsComponent implements OnInit {
 
   getAssessmentLink(a: AssessmentDTO): string {
     const base = window.location.origin;
-    const path = a.type === 'MOCK_INTERVIEW' ? 'interview'
+    const type = a.type === 'MOCK_INTERVIEW' ? 'interview'
                : a.type === 'MACHINE_TEST'   ? 'machine'
-               : 'take'; // TECHNICAL_MCQ + APTITUDE_TEST
-    return `${base}/student/assessments/${a.id}/${path}`;
+               : 'take';
+    return `${base}/test/${a.id}/${type}`;
   }
 
   copyLink(a: AssessmentDTO): void {

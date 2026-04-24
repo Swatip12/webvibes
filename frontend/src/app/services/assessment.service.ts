@@ -23,6 +23,11 @@ export class AssessmentService {
     return this.http.get<StudentAssessmentDTO[]>(this.apiUrl);
   }
 
+  /** Auto-enroll in an assessment by raw assessmentId, returns studentAssessmentId */
+  enrollInAssessment(assessmentId: number): Observable<{ studentAssessmentId: number }> {
+    return this.http.post<{ studentAssessmentId: number }>(`${this.apiUrl}/enroll/${assessmentId}`, {});
+  }
+
   getAssessmentDetail(saId: number): Observable<AssessmentDetailDTO> {
     return this.http.get<AssessmentDetailDTO>(`${this.apiUrl}/${saId}`);
   }

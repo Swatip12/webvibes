@@ -47,10 +47,22 @@ export class MachineTestComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       },
       error: (err) => {
-        this.isLoading = false;
         if (err.status === 409) {
+          this.isLoading = false;
           this.alreadySubmitted = true;
+        } else if (err.status === 403 || err.status === 404) {
+          this.assessmentService.enrollInAssessment(this.saId).subscribe({
+            next: ({ studentAssessmentId }) => {
+              this.saId = studentAssessmentId;
+              this.assessmentService.getAssessmentDetail(this.saId).subscribe({
+                next: (detail) => { this.detail = detail; this.isLoading = false; },
+                error: () => { this.isLoading = false; this.errorMessage = 'Failed to load assessment. Please try again.'; }
+              });
+            },
+            error: () => { this.isLoading = false; this.errorMessage = 'Failed to load assessment. Please try again.'; }
+          });
         } else {
+          this.isLoading = false;
           this.errorMessage = 'Failed to load assessment. Please try again.';
         }
       }

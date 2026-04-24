@@ -99,6 +99,32 @@ public class AssessmentService {
 
     // ─── 5.8 Assignment methods ─────────────────────────────────────────────────
 
+    /**
+     * Auto-enroll a student in an assessment by assessmentId.
+     * If already enrolled, returns the existing StudentAssessment ID.
+     * If not enrolled, creates a new assignment and returns its ID.
+     */
+    public Long enrollStudentInAssessment(Long assessmentId, String studentEmail) {
+        Assessment assessment = findAssessmentOrThrow(assessmentId);
+        Student student = studentRepository.findByEmail(studentEmail)
+                .orElseThrow(() -> new RuntimeException("Student not found: " + studentEmail));
+
+        // Return existing assignment if already enrolled
+        return studentAssessmentRepository
+                .findByStudentIdAndAssessmentId(student.getId(), assessmentId)
+                .map(sa -> sa.getId())
+                .orElseGet(() -> {
+                    StudentAssessment sa = new StudentAssessment();
+                    sa.setStudent(student);
+                    sa.setAssessment(assessment);
+                    sa.setAssignedAt(LocalDateTime.now());
+                    sa.setStatus(assessment.getType() == AssessmentType.MOCK_INTERVIEW
+                            ? AssessmentStatus.UPCOMING
+                            : AssessmentStatus.PENDING);
+                    return studentAssessmentRepository.save(sa).getId();
+                });
+    }
+
     public AssignResponse assignAssessment(Long assessmentId, AssignRequest req) {
         Assessment assessment = findAssessmentOrThrow(assessmentId);
 

@@ -38,6 +38,19 @@ public class StudentAssessmentController {
         return ResponseEntity.ok(assessmentService.getStudentAssessments(email));
     }
 
+    /**
+     * Auto-enroll: given a raw assessmentId, find or create the StudentAssessment
+     * for this student and return its ID. Used when students access a shared test link.
+     */
+    @PostMapping("/enroll/{assessmentId}")
+    public ResponseEntity<Map<String, Long>> enrollInAssessment(
+            @PathVariable Long assessmentId,
+            Authentication authentication) {
+        String email = authentication.getName();
+        Long saId = assessmentService.enrollStudentInAssessment(assessmentId, email);
+        return ResponseEntity.ok(Map.of("studentAssessmentId", saId));
+    }
+
     @GetMapping("/progress")
     public ResponseEntity<StudentProgressDTO> getMyProgress(Authentication authentication) {
         String email = authentication.getName();

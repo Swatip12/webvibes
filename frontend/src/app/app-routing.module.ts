@@ -28,6 +28,7 @@ import { AdminAssessmentsComponent } from './components/admin-assessments/admin-
 import { AdminAssessmentDetailComponent } from './components/admin-assessment-detail/admin-assessment-detail.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { BlogPostComponent } from './components/blog-post/blog-post.component';
+import { AssessmentRedirectComponent } from './components/assessment-redirect/assessment-redirect.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -57,7 +58,9 @@ const routes: Routes = [
   { path: 'student/assessments/:id/machine', component: MachineTestComponent, canActivate: [StudentGuard] },
   { path: 'student/assessments/:id/interview', component: MockInterviewComponent, canActivate: [StudentGuard] },
   { path: 'admin/assessments', component: AdminAssessmentsComponent, canActivate: [AuthGuard] },
-  { path: 'admin/assessments/:id', component: AdminAssessmentDetailComponent, canActivate: [AuthGuard] }
+  { path: 'admin/assessments/:id', component: AdminAssessmentDetailComponent, canActivate: [AuthGuard] },
+  // Shareable test link — auto-enrolls student then redirects to the test
+  { path: 'test/:assessmentId/:type', component: AssessmentRedirectComponent, canActivate: [StudentGuard] }
 ];
 
 @NgModule({
