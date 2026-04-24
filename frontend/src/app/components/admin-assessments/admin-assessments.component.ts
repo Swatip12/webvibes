@@ -159,6 +159,25 @@ export class AdminAssessmentsComponent implements OnInit {
     }
   }
 
+  copiedId: number | null = null;
+
+  getAssessmentLink(a: AssessmentDTO): string {
+    const base = window.location.origin;
+    const path = a.type === 'MOCK_INTERVIEW' ? 'mock-interview'
+               : a.type === 'MACHINE_TEST'   ? 'machine-test'
+               : a.type === 'TECHNICAL_MCQ'  ? 'mcq-test'
+               : 'mcq-test'; // APTITUDE_TEST
+    return `${base}/student/assessment/${a.id}/${path}`;
+  }
+
+  copyLink(a: AssessmentDTO): void {
+    const link = this.getAssessmentLink(a);
+    navigator.clipboard.writeText(link).then(() => {
+      this.copiedId = a.id;
+      setTimeout(() => this.copiedId = null, 2000);
+    });
+  }
+
   formatDate(dateStr?: string): string {
     if (!dateStr) return '—';
     return new Date(dateStr).toLocaleDateString('en-IN', {

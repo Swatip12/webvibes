@@ -91,6 +91,7 @@
           <th>Type</th>
           <th>Created</th>
           <th>Details</th>
+          <th>Share Link</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -111,6 +112,14 @@
             <span *ngIf="a.type === 'TECHNICAL_MCQ' || a.type === 'APTITUDE_TEST'">
               <i class="bi bi-clock"></i> {{ a.timeLimitMinutes }} min
             </span>
+          </td>
+          <td (click)="$event.stopPropagation()">
+            <div class="adm-share-link-row">
+              <input type="text" class="adm-share-input" [value]="getAssessmentLink(a)" readonly />
+              <button class="adm-btn adm-btn-sm adm-btn-copy" (click)="copyLink(a)" title="Copy link">
+                <i class="bi" [ngClass]="copiedId === a.id ? 'bi-check-lg' : 'bi-clipboard'"></i>
+              </button>
+            </div>
           </td>
           <td>
             <a [routerLink]="['/admin/assessments', a.id]" class="adm-btn adm-btn-sm adm-btn-primary"

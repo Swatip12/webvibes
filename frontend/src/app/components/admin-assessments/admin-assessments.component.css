@@ -56,3 +56,37 @@
   .adm-form-row { grid-template-columns: 1fr; }
   .adm-table th, .adm-table td { padding: 0.5rem 0.6rem; font-size: 0.8rem; }
 }
+
+/* Share link */
+.adm-share-link-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 220px;
+}
+.adm-share-input {
+  flex: 1;
+  font-size: 0.75rem;
+  padding: 5px 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #f8fafc;
+  color: #475569;
+  cursor: text;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.adm-btn-copy {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.adm-btn-copy:hover { background: #e2e8f0; color: #1e293b; }
+.adm-btn-copy .bi-check-lg { color: #10b981; }
