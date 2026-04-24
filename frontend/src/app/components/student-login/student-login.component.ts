@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { StudentAuthService } from '../../services/student-auth.service';
 
 @Component({
@@ -8,20 +8,27 @@ import { StudentAuthService } from '../../services/student-auth.service';
   templateUrl: './student-login.component.html',
   styleUrls: ['./student-login.component.css']
 })
-export class StudentLoginComponent {
+export class StudentLoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage = '';
   isLoading = false;
+  private returnUrl = '/student/dashboard';
 
   constructor(
     private fb: FormBuilder,
     private studentAuthService: StudentAuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
+  }
+
+  ngOnInit(): void {
+    // Capture returnUrl from query params (set by StudentGuard)
+    this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/student/dashboard';
   }
 
   onSubmit(): void {
@@ -33,7 +40,7 @@ export class StudentLoginComponent {
     this.studentAuthService.login(this.loginForm.value).subscribe({
       next: () => {
         this.isLoading = false;
-        this.router.navigate(['/student/dashboard']);
+        this.router.navigateByUrl(this.returnUrl);
       },
       error: (err) => {
         this.isLoading = false;

@@ -16,7 +16,8 @@ export class StudentGuard implements CanActivate {
     if (this.studentAuthService.isStudentAuthenticated()) {
       return true;
     }
-    this.router.navigate(['/student/login']);
+    // Pass the attempted URL so login can redirect back after authentication
+    this.router.navigate(['/student/login'], { queryParams: { returnUrl: state.url } });
     return false;
   }
 }
