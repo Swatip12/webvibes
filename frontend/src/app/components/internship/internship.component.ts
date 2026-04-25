@@ -216,6 +216,8 @@ export class InternshipComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.applicationForm.markAllAsTouched();
+    
     if (this.applicationForm.valid) {
       this.successMessage = '';
       this.errorMessage = '';
@@ -225,8 +227,15 @@ export class InternshipComponent implements OnInit {
           this.applicationForm.reset();
           setTimeout(() => { this.showApplicationForm = false; this.successMessage = ''; }, 3000);
         },
-        error: (err) => { this.errorMessage = err.message || 'Failed to submit. Please try again.'; }
+        error: (err) => { 
+          this.errorMessage = err?.error?.message || err.message || 'Failed to submit. Please try again.'; 
+        }
       });
+    } else {
+      const invalid = Object.keys(this.applicationForm.controls)
+        .filter(k => this.applicationForm.controls[k].invalid)
+        .join(', ');
+      this.errorMessage = `Please fill in: ${invalid}`;
     }
   }
 

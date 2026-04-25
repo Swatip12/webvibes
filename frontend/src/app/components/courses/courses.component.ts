@@ -193,6 +193,9 @@ export class CoursesComponent implements OnInit {
   }
 
   onSubmit(): void {
+    // Mark all fields as touched to show validation errors
+    this.enrollmentForm.markAllAsTouched();
+    
     if (this.enrollmentForm.valid) {
       this.successMessage = '';
       this.errorMessage = '';
@@ -201,16 +204,21 @@ export class CoursesComponent implements OnInit {
         next: () => {
           this.successMessage = 'Enrollment submitted successfully! We will contact you soon.';
           this.enrollmentForm.reset();
-          // Optionally hide the form after a delay
           setTimeout(() => {
             this.showEnrollmentForm = false;
             this.successMessage = '';
           }, 3000);
         },
         error: (error) => {
-          this.errorMessage = error.message || 'Failed to submit enrollment. Please try again.';
+          this.errorMessage = error?.error?.message || error.message || 'Failed to submit enrollment. Please try again.';
         }
       });
+    } else {
+      // Show which fields are invalid
+      const invalid = Object.keys(this.enrollmentForm.controls)
+        .filter(k => this.enrollmentForm.controls[k].invalid)
+        .join(', ');
+      this.errorMessage = `Please fix the following fields: ${invalid}`;
     }
   }
 

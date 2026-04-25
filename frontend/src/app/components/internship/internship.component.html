@@ -503,8 +503,7 @@
             <span class="ip-errmsg" *ngIf="message?.invalid && message?.touched">Max 500 characters</span>
           </div>
           <div class="ip-form-actions">
-            <button type="submit" class="ip-apply-btn ip-apply-btn--auto"
-              [disabled]="applicationForm.invalid">
+            <button type="submit" class="ip-apply-btn ip-apply-btn--auto">
               <i class="fas fa-paper-plane"></i> Submit Application
             </button>
             <button type="button" class="ip-outline-btn" (click)="onCancel()">

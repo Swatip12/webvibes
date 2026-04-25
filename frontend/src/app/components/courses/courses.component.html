@@ -321,8 +321,7 @@
             <span class="cp-errmsg" *ngIf="message?.invalid && message?.touched">Max 500 characters</span>
           </div>
           <div class="cp-form-actions">
-            <button type="submit" class="cp-enroll-btn cp-enroll-btn--auto"
-              [disabled]="enrollmentForm.invalid">
+            <button type="submit" class="cp-enroll-btn cp-enroll-btn--auto">
               <i class="fas fa-paper-plane"></i> Submit
             </button>
             <button type="button" class="cp-outline-btn" (click)="onCancel()">
