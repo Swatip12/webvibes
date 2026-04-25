@@ -1091,7 +1091,7 @@ textarea.form-control {
 
 .cp-card-body p {
   font-size: .83rem; color: #666; line-height: 1.65; margin: 0 0 16px; flex: 1;
-  overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+  overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical;
 }
 
 .cp-meta { display: flex; gap: 16px; margin-bottom: 18px; }
@@ -1380,7 +1380,9 @@ textarea.form-control {
   border:3px solid transparent;
   background:linear-gradient(135deg,#1976d2,#f57c00) border-box;
   -webkit-mask:linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite:destination-out; mask-composite:exclude;
+  -webkit-mask-composite:destination-out;
+  mask:linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask-composite:exclude;
   animation:ab-ring 3s ease-in-out infinite;
 }
 .ab-founder-initials {
@@ -5193,3 +5195,901 @@ footer, .footer, .ft-wrap {
 ::-webkit-scrollbar-track { background: #0a0a0f; }
 ::-webkit-scrollbar-thumb { background: #2d2d4e; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #4c4c7a; }
+
+
+/* ============================================
+   DARK THEME — TEXT READABILITY FIX
+   Force all text to be readable on dark bg
+   ============================================ */
+
+/* Override all hardcoded dark text colors */
+* {
+  color: inherit;
+}
+
+/* Primary text — headings */
+h1, h2, h3, h4, h5, h6,
+.sv-hero-h1, .cp-hero-h1, .ip-hero-h1,
+.pp-hero-h1, .bl-hero-h1, .ct-hero-h1,
+.ab-hero-h1, .sv-hero-h1 *,
+.sv-card-body h3, .sv-why-card h4,
+.sv-section-head h2, .cp-card h3,
+.adm-title, .adm-subtitle, .adm-form-title,
+.stat-label, .stat-value, .topbar-title,
+.welcome-text h2, .card-head h3,
+.dl-label, .dl-value,
+.nav-label, .sidebar-user-name,
+.brand-name, .brand-sub {
+  color: #f1f5f9 !important;
+}
+
+/* Secondary / body text */
+p, li, span, td, th, label,
+.sv-hero-sub, .cp-hero-sub, .ip-hero-sub,
+.pp-hero-sub, .bl-hero-sub, .ct-hero-sub,
+.ab-hero-sub,
+.sv-card-body p, .sv-why-card p,
+.sv-section-sub, .sv-features li,
+.cp-card p, .ip-card p,
+.adm-subtitle, .adm-label,
+.sidebar-user-role, .topbar-email,
+.topbar-name, .nav-label,
+.stat-label, .qs-label,
+.detail-row span, .receipt-btn span,
+.terms-body p, .terms-body li,
+.upi-id-label, .upi-id-name, .upi-hint,
+.ps-paid, .ps-remaining,
+.locked-title, .locked-sub,
+.done-title, .done-sub,
+.pending-email, .pending-notice p,
+.pending-notice h3,
+.cp-count, .cp-empty h3, .cp-empty p,
+.ip-empty h3, .ip-empty p,
+.blog-card p, .blog-card span,
+.ct-info-text h4, .ct-info-text p,
+.footer-text, .ft-link,
+.sv-stat-lbl, .cp-hero-stat-lbl,
+.ip-hero-stat-lbl, .pp-hero-stat-lbl,
+.bl-hero-stat-lbl, .ct-hero-stat-lbl,
+.ab-hero-stat-lbl {
+  color: #cbd5e1 !important;
+}
+
+/* Muted / hint text */
+.sv-hero-breadcrumb, .cp-hero-breadcrumb,
+.ip-hero-breadcrumb, .pp-hero-breadcrumb,
+.bl-hero-breadcrumb, .ct-hero-breadcrumb,
+.page-hero-breadcrumb,
+small, .hint, .cp-errmsg,
+.adm-detail-cell, .adm-empty,
+.sidebar-user-role, .brand-sub {
+  color: #94a3b8 !important;
+}
+
+/* Nav links */
+.nav-item, .nav-item .nav-label,
+.nav-item .nav-icon { color: #cbd5e1 !important; }
+.nav-item.active, .nav-item.active .nav-label { color: #a78bfa !important; }
+
+/* Card body text specifically */
+.sv-card-body *, .cp-card *,
+.ip-card *, .pp-card *,
+.blog-card *, .ct-info-card * {
+  color: #cbd5e1 !important;
+}
+/* But keep gradient text working */
+.sv-grad, .cp-hero-grad, .ip-hero-grad,
+.pp-hero-grad, .bl-hero-grad, .ct-hero-grad,
+.ab-hero-grad, .sv-hero-grad,
+.sv-hero-stat-num, .cp-hero-stat-num,
+.ip-hero-stat-num, .pp-hero-stat-num,
+.bl-hero-stat-num, .ct-hero-stat-num,
+.ab-hero-stat-num,
+.stat-value {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Buttons — keep their own colors */
+.sv-btn, .sv-btn-primary, .sv-btn-whatsapp,
+.cp-enroll-btn, .ip-apply-btn,
+.adm-btn, .btn-primary, .btn-upi-pay,
+.nav-cta, .enquire-btn {
+  color: #fff !important;
+}
+
+/* Badge text */
+.sv-badge, .sv-card-badge,
+.adm-badge, .cp-badge, .ip-badge {
+  color: #e2e8f0 !important;
+}
+
+/* Table text */
+.adm-table td, .adm-table th,
+.adm-title-cell, .adm-detail-cell {
+  color: #e2e8f0 !important;
+}
+
+/* Form labels */
+.cp-fg label, .ip-fg label,
+.adm-label, label { color: #94a3b8 !important; }
+
+/* Input text */
+input, select, textarea,
+.adm-input, .adm-select, .adm-textarea {
+  color: #f1f5f9 !important;
+}
+
+/* Alert text */
+.alert, .adm-alert { color: #f1f5f9 !important; }
+
+/* Footer links */
+footer a, .ft-link, footer span { color: #94a3b8 !important; }
+footer a:hover, .ft-link:hover { color: #a78bfa !important; }
+
+/* Internship roadmap */
+.ir-card h3, .ir-card h4, .ir-card p,
+.ir-card li, .ir-card span { color: #e2e8f0 !important; }
+.ir-card--featured h3, .ir-card--featured p,
+.ir-card--featured li, .ir-card--featured span { color: #fff !important; }
+
+/* Section headings on dark bg */
+.sv-section-head h2, .sv-section-head p,
+.cp-section-head h2, .ip-section-head h2 { color: #f1f5f9 !important; }
+
+/* Why cards */
+.sv-why-card h4 { color: #f1f5f9 !important; }
+.sv-why-card p { color: #94a3b8 !important; }
+
+/* Stat numbers keep gradient */
+.sv-stat-num, .ab-hero-stat-num { color: transparent !important; }
+
+
+/* ============================================
+   DARK THEME — COMPREHENSIVE TEXT FIX v2
+   Catches all hardcoded dark colors that
+   become invisible on dark backgrounds
+   ============================================ */
+
+/* Force ALL text elements to be readable — catch-all */
+body, body * {
+  color: #cbd5e1;
+}
+
+/* Headings — brightest */
+body h1, body h2, body h3, body h4, body h5, body h6 {
+  color: #f1f5f9 !important;
+}
+
+/* Body text */
+body p, body li, body td, body th, body span:not(.badge):not(.pill):not([class*="stat-num"]):not([class*="grad"]) {
+  color: #cbd5e1 !important;
+}
+
+/* Labels */
+body label { color: #94a3b8 !important; }
+
+/* Links */
+body a { color: #a78bfa !important; }
+body a:hover { color: #c4b5fd !important; }
+
+/* Keep white text on colored backgrounds (buttons, heroes, badges) */
+body .sv-btn, body .sv-btn-primary, body .sv-btn-whatsapp,
+body .cp-enroll-btn, body .ip-apply-btn,
+body .adm-btn, body .btn-primary, body .btn-upi-pay,
+body .btn-secondary, body .btn-outline,
+body .navbar-cta-btn, body .mobile-cta-btn,
+body .footer-enquire-btn, body .ct-submit-btn,
+body .ct-quick-btn, body .pp-retry-btn,
+body .pp-cta-btn-primary, body .pp-cta-btn-secondary,
+body .pp-overlay-btn, body .pp-github-btn,
+body .ab-btn-primary, body .ab-btn-outline,
+body .ip-clear-btn, body .cp-outline-btn,
+body .adm-back {
+  color: #fff !important;
+}
+
+/* Keep gradient text transparent */
+body .sv-grad, body .cp-hero-grad, body .ip-hero-grad,
+body .pp-hero-grad, body .bl-hero-grad, body .ct-hero-grad,
+body .ab-hero-grad, body .sv-hero-grad,
+body .page-hero-gradient, body .gradient-text,
+body .text-gradient, body .cp-grad, body .ip-grad,
+body .ab-grad, body .sv-hero-stat-num,
+body .cp-hero-stat-num, body .ip-hero-stat-num,
+body .pp-hero-stat-num, body .bl-hero-stat-num,
+body .ct-hero-stat-num, body .ab-hero-stat-num,
+body .page-hero-stat-num, body .stat-value,
+body .sv-stat-num, body .ab-stat-num,
+body [class*="-grad"], body [class*="gradient"] {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Keep white text in dark hero sections */
+body .sv-hero *, body .cp-hero *, body .ip-hero *,
+body .pp-hero *, body .ct-hero *, body .ab-hero *,
+body .sv-hero-v2 *, body .cp-hero-v2 *,
+body .ip-hero-v2 *, body .pp-hero-v2 *,
+body .bl-hero-v2 *, body .ct-hero-v2 *,
+body .ab-hero-v2 * {
+  color: #f1f5f9 !important;
+}
+
+/* But restore gradient text inside heroes */
+body .sv-hero .sv-grad, body .cp-hero .cp-grad,
+body .ip-hero .ip-grad, body .ab-hero .ab-grad,
+body .sv-hero-v2 .sv-hero-grad, body .cp-hero-v2 .cp-hero-grad,
+body .ip-hero-v2 .ip-hero-grad, body .pp-hero-v2 .pp-hero-grad,
+body .bl-hero-v2 .bl-hero-grad, body .ct-hero-v2 .ct-hero-grad,
+body .ab-hero-v2 .ab-hero-grad {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Keep white text in CTA sections */
+body .sv-cta *, body .ab-cta *, body .pp-cta *,
+body .ct-faq *, body .irp-cta-banner * {
+  color: #fff !important;
+}
+
+/* Sidebar nav active item */
+body .nav-item.active .nav-label,
+body .nav-item.active .nav-icon { color: #a78bfa !important; }
+
+/* Input placeholder */
+body input::placeholder,
+body textarea::placeholder { color: #64748b !important; }
+
+/* Input text */
+body input, body select, body textarea {
+  color: #f1f5f9 !important;
+}
+
+/* Stat numbers in dashboard */
+body .sv-stat-num, body .ab-hero-stat-num,
+body .cp-stat-num, body .ab-stat-num,
+body .ip-stat-num {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Footer */
+body footer *, body .site-footer * { color: #94a3b8 !important; }
+body footer h1, body footer h2, body footer h3,
+body footer h4, body footer h5, body footer h6,
+body .footer-col-title { color: #f1f5f9 !important; }
+body footer a, body .footer-links a { color: #94a3b8 !important; }
+body footer a:hover, body .footer-links a:hover { color: #a78bfa !important; }
+body .footer-enquire-btn, body .footer-enquire-btn * { color: #fff !important; }
+body .footer-social-link { color: #94a3b8 !important; }
+body .footer-social-link:hover { color: #fff !important; }
+
+
+/* ============================================
+   DARK THEME — COMPONENT-LEVEL OVERRIDES
+   Fixes hardcoded light colors in component CSS
+   (Angular view encapsulation bypassed via global)
+   ============================================ */
+
+/* ── Student Dashboard ── */
+.dashboard-container {
+  background: #0a0a0f !important;
+}
+.main-content {
+  background: #0a0a0f !important;
+}
+.topbar {
+  background: #13131f !important;
+  border-bottom-color: rgba(255,255,255,0.07) !important;
+}
+.topbar-title { color: #f1f5f9 !important; }
+.topbar-name  { color: #e2e8f0 !important; }
+.topbar-email { color: #94a3b8 !important; }
+.topbar-avatar-chip {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+
+/* Stat cards */
+.stat-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.07) !important;
+}
+.stat-label { color: #94a3b8 !important; }
+.stat-value { color: #f1f5f9 !important; }
+.stat-icon-wrap { filter: brightness(0.85); }
+
+/* Status pills */
+.pill-green  { background: rgba(34,197,94,0.15)  !important; color: #4ade80 !important; border-color: rgba(34,197,94,0.3) !important; }
+.pill-orange { background: rgba(245,158,11,0.15) !important; color: #fbbf24 !important; border-color: rgba(245,158,11,0.3) !important; }
+.pill-red    { background: rgba(239,68,68,0.15)  !important; color: #fca5a5 !important; border-color: rgba(239,68,68,0.3) !important; }
+
+/* Cards */
+.card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.07) !important;
+  box-shadow: 0 1px 10px rgba(0,0,0,0.3) !important;
+}
+.card-head { border-bottom-color: rgba(255,255,255,0.07) !important; }
+.card-head h3 { color: #f1f5f9 !important; }
+
+/* Detail list */
+.detail-row { border-bottom-color: rgba(255,255,255,0.05) !important; }
+.dl-label { color: #94a3b8 !important; }
+.dl-value { color: #e2e8f0 !important; }
+.dl-value.green  { color: #4ade80 !important; }
+.dl-value.orange { color: #fbbf24 !important; }
+
+/* Receipt buttons */
+.receipt-btn {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #a78bfa !important;
+}
+.receipt-btn:hover { background: #2d2d4e !important; border-color: #a78bfa !important; }
+
+/* Terms box */
+.terms-box {
+  background: #1a1a2e !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.terms-header { color: #e2e8f0 !important; }
+.terms-body   { color: #94a3b8 !important; }
+.terms-body p, .terms-body li { color: #94a3b8 !important; }
+.terms-check  { color: #cbd5e1 !important; }
+
+/* UPI panel */
+.upi-panel {
+  background: linear-gradient(135deg, #0d2a1a, #0a1f14) !important;
+  border-color: rgba(34,197,94,0.3) !important;
+}
+.upi-amount-label { color: #94a3b8 !important; }
+.upi-amount-value { color: #4ade80 !important; }
+.upi-tag { background: rgba(34,197,94,0.2) !important; color: #4ade80 !important; }
+.upi-id-box {
+  background: #13131f !important;
+  border-color: rgba(99,102,241,0.4) !important;
+}
+.upi-id-label { color: #94a3b8 !important; }
+.upi-id-value { color: #a78bfa !important; }
+.upi-id-name  { color: #64748b !important; }
+.upi-hint     { color: #64748b !important; }
+
+/* UTR panel */
+.utr-panel {
+  background: #1a1a2e !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #cbd5e1 !important;
+}
+.utr-panel p { color: #cbd5e1 !important; }
+.utr-input {
+  background: #0a0a0f !important;
+  border-color: rgba(255,255,255,0.15) !important;
+  color: #f1f5f9 !important;
+}
+
+/* Btn outline in dashboard */
+.btn-outline {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.15) !important;
+  color: #cbd5e1 !important;
+}
+.btn-outline:hover:not(:disabled) { background: #2d2d4e !important; }
+
+/* Payment summary */
+.ps-paid      { color: #4ade80 !important; }
+.ps-remaining { color: #fbbf24 !important; }
+
+/* Payment done */
+.payment-done {
+  background: linear-gradient(135deg, #0d2a1a, #0a1f14) !important;
+  border-color: rgba(34,197,94,0.3) !important;
+}
+.done-title { color: #4ade80 !important; }
+.done-sub   { color: #86efac !important; }
+
+/* Locked msg */
+.locked-msg {
+  background: linear-gradient(135deg, #1a1500, #1f1800) !important;
+  border-color: rgba(252,211,77,0.3) !important;
+}
+.locked-title { color: #fbbf24 !important; }
+.locked-sub   { color: #d97706 !important; }
+
+/* Quick stats */
+.qs-item {
+  background: #1a1a2e !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+.qs-label { color: #94a3b8 !important; }
+.qs-value { color: #e2e8f0 !important; }
+.qs-value.green { color: #4ade80 !important; }
+
+/* Pending card */
+.pending-card {
+  background: #13131f !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4) !important;
+}
+.pending-card h2 { color: #f1f5f9 !important; }
+.pending-email   { color: #94a3b8 !important; }
+.pending-notice {
+  background: linear-gradient(135deg, #1a1500, #1f1800) !important;
+  border-color: rgba(252,211,77,0.3) !important;
+}
+.pending-notice h3 { color: #fbbf24 !important; }
+.pending-notice p  { color: #d97706 !important; }
+
+/* Alert overrides for dark */
+.alert-error   { background: rgba(185,28,28,0.15) !important; color: #fca5a5 !important; border-color: rgba(239,68,68,0.3) !important; }
+.alert-success { background: rgba(21,128,61,0.15) !important; color: #86efac !important; border-color: rgba(34,197,94,0.3) !important; }
+.alert-warning { background: rgba(146,64,14,0.15) !important; color: #fbbf24 !important; border-color: rgba(252,211,77,0.3) !important; }
+
+/* Loading state */
+.loading-state { color: #94a3b8 !important; }
+.loading-state p { color: #94a3b8 !important; }
+
+/* ── Assessment List Component ── */
+.assessment-list-section .section-title { color: #f1f5f9 !important; }
+.assessment-count {
+  background: rgba(109,40,217,0.25) !important;
+  color: #c4b5fd !important;
+}
+.assessment-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.assessment-card:hover {
+  box-shadow: 0 4px 16px rgba(99,102,241,0.2) !important;
+}
+.card-pending   { border-left-color: #f59e0b !important; }
+.card-upcoming  { border-left-color: #3b82f6 !important; }
+.card-completed { border-left-color: #22c55e !important; }
+.type-icon {
+  background: #1e1e2e !important;
+}
+.assessment-title { color: #f1f5f9 !important; }
+.type-label       { color: #64748b !important; }
+.badge-pending  { background: rgba(146,64,14,0.2)  !important; color: #fbbf24 !important; border-color: rgba(252,211,77,0.3) !important; }
+.badge-upcoming { background: rgba(29,78,216,0.2)  !important; color: #93c5fd !important; border-color: rgba(59,130,246,0.3) !important; }
+.badge-completed{ background: rgba(21,128,61,0.2)  !important; color: #86efac !important; border-color: rgba(34,197,94,0.3) !important; }
+.meta-chip {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.meta-label { color: #94a3b8 !important; }
+.meta-value { color: #e2e8f0 !important; }
+.score-value { color: #4ade80 !important; }
+.empty-title { color: #94a3b8 !important; }
+.empty-sub   { color: #64748b !important; }
+.payment-gate {
+  background: linear-gradient(135deg, #1a1500, #1f1800) !important;
+  border-color: rgba(252,211,77,0.3) !important;
+  color: #fbbf24 !important;
+}
+
+/* ── MCQ Test Component ── */
+.mcq-test-page { background: transparent !important; }
+.test-header {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3) !important;
+}
+.test-title    { color: #f1f5f9 !important; }
+.question-count { color: #94a3b8 !important; }
+.question-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+}
+.question-prompt { color: #e2e8f0 !important; }
+.question-number { color: #a78bfa !important; }
+.option-label {
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #cbd5e1 !important;
+}
+.option-label:hover {
+  border-color: #a78bfa !important;
+  background: rgba(99,102,241,0.1) !important;
+}
+.option-label.selected {
+  border-color: #6366f1 !important;
+  background: rgba(99,102,241,0.15) !important;
+  color: #f1f5f9 !important;
+}
+.option-letter {
+  background: #2d2d4e !important;
+  color: #cbd5e1 !important;
+}
+.option-label.selected .option-letter {
+  background: #6366f1 !important;
+  color: #fff !important;
+}
+.submit-row { border-top-color: rgba(255,255,255,0.08) !important; }
+.answered-count { color: #94a3b8 !important; }
+.result-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+.result-card.already-submitted {
+  background: rgba(146,64,14,0.15) !important;
+  border-color: rgba(252,211,77,0.3) !important;
+}
+.result-card h2 { color: #f1f5f9 !important; }
+.score-sep   { color: #64748b !important; }
+.score-total { color: #94a3b8 !important; }
+.score-label { color: #94a3b8 !important; }
+.result-card p { color: #94a3b8 !important; }
+
+
+/* ── Machine Test Component ── */
+.machine-test-page { background: transparent !important; }
+.machine-test-page .test-header {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.machine-test-page .test-title { color: #f1f5f9 !important; }
+.test-type {
+  background: rgba(99,102,241,0.2) !important;
+  color: #a78bfa !important;
+}
+.problem-card, .solution-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.section-label { color: #94a3b8 !important; }
+.problem-text  { color: #e2e8f0 !important; }
+.solution-textarea {
+  background: #0a0a0f !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.solution-textarea:focus { border-color: #6366f1 !important; }
+.machine-test-page .submit-row { border-top-color: rgba(255,255,255,0.08) !important; }
+.machine-test-page .result-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.machine-test-page .result-card h2 { color: #f1f5f9 !important; }
+.confirm-text { color: #94a3b8 !important; }
+
+/* ── Mock Interview Component ── */
+.interview-page { background: transparent !important; }
+.interview-header {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.interview-title { color: #f1f5f9 !important; }
+.interview-type {
+  background: rgba(99,102,241,0.2) !important;
+  color: #a78bfa !important;
+}
+.info-card, .countdown-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.schedule-time { color: #e2e8f0 !important; }
+.countdown-unit {
+  background: #1e1e2e !important;
+}
+.countdown-value { color: #a78bfa !important; }
+.countdown-label { color: #94a3b8 !important; }
+.countdown-sep   { color: #64748b !important; }
+.badge-upcoming {
+  background: rgba(29,78,216,0.2) !important;
+  color: #93c5fd !important;
+}
+.badge-ready {
+  background: rgba(6,95,70,0.2) !important;
+  color: #6ee7b7 !important;
+}
+.notice-card {
+  background: rgba(146,64,14,0.15) !important;
+  border-color: rgba(252,211,77,0.3) !important;
+}
+.notice-title { color: #fbbf24 !important; }
+.notice-text  { color: #d97706 !important; }
+.attend-hint  { color: #94a3b8 !important; }
+.completed-banner {
+  background: linear-gradient(135deg, #0d2a1a, #0a1f14) !important;
+  border-color: rgba(34,197,94,0.3) !important;
+}
+.completed-banner strong { color: #4ade80 !important; }
+.completed-banner span   { color: #86efac !important; }
+.interview-page .btn-back {
+  color: #a78bfa !important;
+  border-color: #a78bfa !important;
+  background: transparent !important;
+}
+.interview-page .btn-back:hover {
+  background: rgba(99,102,241,0.1) !important;
+}
+
+/* ── Student Login & Register ── */
+.auth-container {
+  background: #0a0a0f !important;
+}
+.auth-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4) !important;
+  border: 1px solid rgba(255,255,255,0.07) !important;
+}
+.auth-card h2 { color: #f1f5f9 !important; }
+.auth-card label { color: #94a3b8 !important; }
+.auth-card input {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.auth-card input:focus { border-color: #6366f1 !important; }
+.auth-card .field-error { color: #fca5a5 !important; }
+.auth-card .alert-error {
+  background: rgba(185,28,28,0.15) !important;
+  color: #fca5a5 !important;
+  border-color: rgba(239,68,68,0.3) !important;
+}
+.auth-link { color: #94a3b8 !important; }
+.auth-link a { color: #a78bfa !important; }
+
+
+/* ── Admin Assessments Component ── */
+.adm-title { color: #f1f5f9 !important; }
+.adm-subtitle { color: #94a3b8 !important; }
+.adm-form-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+.adm-form-title { color: #f1f5f9 !important; }
+.adm-label { color: #94a3b8 !important; }
+.hint { color: #64748b !important; }
+.adm-input, .adm-select, .adm-textarea {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.adm-input:focus, .adm-select:focus, .adm-textarea:focus {
+  border-color: #6366f1 !important;
+}
+.adm-table-wrap {
+  background: #13131f !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+.adm-table th {
+  background: #1a1a2e !important;
+  color: #94a3b8 !important;
+  border-bottom-color: rgba(255,255,255,0.08) !important;
+}
+.adm-table td { border-bottom-color: rgba(255,255,255,0.05) !important; }
+.adm-row-link:hover td { background: #1e1e2e !important; }
+.adm-title-cell { color: #e2e8f0 !important; }
+.adm-detail-cell { color: #94a3b8 !important; }
+.adm-empty {
+  background: #1a1a2e !important;
+  color: #94a3b8 !important;
+}
+.adm-loading { color: #94a3b8 !important; }
+.adm-alert-success {
+  background: rgba(21,128,61,0.15) !important;
+  color: #86efac !important;
+  border-color: rgba(34,197,94,0.3) !important;
+}
+.adm-alert-error {
+  background: rgba(185,28,28,0.15) !important;
+  color: #fca5a5 !important;
+  border-color: rgba(239,68,68,0.3) !important;
+}
+/* Admin badges */
+.badge-interview { background: rgba(0,64,133,0.25) !important; color: #93c5fd !important; }
+.badge-machine   { background: rgba(133,100,4,0.25) !important; color: #fbbf24 !important; }
+.badge-mcq       { background: rgba(21,87,36,0.25) !important; color: #86efac !important; }
+.badge-aptitude  { background: rgba(74,35,90,0.25) !important; color: #d8b4fe !important; }
+/* Share link */
+.adm-share-input {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #94a3b8 !important;
+}
+.adm-btn-copy {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #94a3b8 !important;
+}
+.adm-btn-copy:hover {
+  background: #2d2d4e !important;
+  color: #e2e8f0 !important;
+}
+
+/* ── Navigation — dark mode ── */
+.navbar {
+  background: rgba(10,10,15,0.85) !important;
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+.navbar.scrolled {
+  background: rgba(10,10,15,0.95) !important;
+  border-bottom-color: rgba(99,102,241,0.15) !important;
+}
+.nav-link { color: #cbd5e1 !important; }
+.nav-link:hover, .nav-link.active { color: #a78bfa !important; background: rgba(99,102,241,0.1) !important; }
+.hamburger-icon .line { background: #cbd5e1 !important; }
+.mobile-menu-drawer {
+  background: #13131f !important;
+  box-shadow: -8px 0 40px rgba(0,0,0,0.5) !important;
+}
+.mobile-nav-link { color: #cbd5e1 !important; }
+.mobile-nav-link:hover, .mobile-nav-link.active {
+  color: #a78bfa !important;
+  background: rgba(99,102,241,0.1) !important;
+  border-left-color: #a78bfa !important;
+}
+
+
+/* ── Admin Dashboard ── */
+.admin-dashboard { background: #0a0a0f !important; }
+.admin-dashboard h1 { color: #f1f5f9 !important; }
+.admin-dashboard .section-title { color: #f1f5f9 !important; }
+.admin-dashboard .stat-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+.admin-dashboard .stat-number { color: #f1f5f9 !important; }
+.admin-dashboard .stat-label  { color: #94a3b8 !important; }
+.admin-dashboard .nav-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+.admin-dashboard .nav-card-content h4 { color: #f1f5f9 !important; }
+.admin-dashboard .nav-card-content p  { color: #94a3b8 !important; }
+.admin-dashboard .nav-card-arrow { color: #64748b !important; }
+.admin-dashboard .text-muted { color: #94a3b8 !important; }
+
+/* ── Admin Login ── */
+.login-container {
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%) !important;
+}
+.login-card {
+  background: #13131f !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5) !important;
+}
+.login-card h2, .login-card label { color: #f1f5f9 !important; }
+.login-card .subtitle { color: #94a3b8 !important; }
+.login-card .form-control {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.login-card .form-control:focus { border-color: #6366f1 !important; }
+.login-card .alert-danger {
+  background: rgba(185,28,28,0.15) !important;
+  color: #fca5a5 !important;
+  border-color: rgba(239,68,68,0.3) !important;
+}
+
+
+/* ── Student Progress Component ── */
+.progress-card {
+  background: #13131f !important;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.3) !important;
+}
+.progress-title h3 { color: #f1f5f9 !important; }
+.progress-title p  { color: #94a3b8 !important; }
+.ring-bg { stroke: #2d2d4e !important; }
+.ring-sub { color: #94a3b8 !important; }
+.bar-label { color: #94a3b8 !important; }
+.bar-count { color: #64748b !important; }
+.progress-bar-track { background: #2d2d4e !important; }
+.cat-label { color: #cbd5e1 !important; }
+.cat-count { color: #94a3b8 !important; }
+.count-done { color: #e2e8f0 !important; }
+.cat-pct { color: #94a3b8 !important; }
+.icon-purple { background: rgba(109,40,217,0.2) !important; }
+.icon-blue   { background: rgba(59,130,246,0.2) !important; }
+.icon-orange { background: rgba(245,158,11,0.2) !important; }
+.icon-green  { background: rgba(34,197,94,0.2) !important; }
+.all-done-banner {
+  background: linear-gradient(135deg, #0d2a1a, #0a1f14) !important;
+  border-color: rgba(34,197,94,0.3) !important;
+}
+.all-done-banner strong { color: #4ade80 !important; }
+.all-done-banner span   { color: #86efac !important; }
+.prog-error { color: #fca5a5 !important; }
+
+/* ── Attendance Tracker Component ── */
+.at-card {
+  background: #13131f !important;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.3) !important;
+}
+.at-card-header h3 { color: #f1f5f9 !important; }
+.phase-chip {
+  background: rgba(99,102,241,0.2) !important;
+  color: #a78bfa !important;
+  border-color: rgba(99,102,241,0.3) !important;
+}
+.phase-chip-none {
+  background: #1e1e2e !important;
+  color: #64748b !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.time-row {
+  border-top-color: rgba(255,255,255,0.06) !important;
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+.time-label { color: #94a3b8 !important; }
+.time-value { color: #e2e8f0 !important; }
+.at-error {
+  color: #fca5a5 !important;
+  background: rgba(185,28,28,0.15) !important;
+  border-color: rgba(239,68,68,0.3) !important;
+}
+.phase-not-configured {
+  color: #fbbf24 !important;
+  background: rgba(146,64,14,0.15) !important;
+  border-color: rgba(252,211,77,0.3) !important;
+}
+.phase-tab {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #94a3b8 !important;
+}
+.phase-tab:hover {
+  background: rgba(99,102,241,0.15) !important;
+  color: #a78bfa !important;
+  border-color: rgba(99,102,241,0.3) !important;
+}
+.phase-date-range {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #94a3b8 !important;
+}
+.date-range-label { color: #cbd5e1 !important; }
+.date-range-arrow { color: #64748b !important; }
+.stat-present { background: rgba(21,128,61,0.15) !important; border-color: rgba(34,197,94,0.25) !important; }
+.stat-present .stat-num { color: #4ade80 !important; }
+.stat-present .stat-lbl { color: #86efac !important; }
+.stat-late { background: rgba(146,64,14,0.15) !important; border-color: rgba(252,211,77,0.25) !important; }
+.stat-late .stat-num { color: #fbbf24 !important; }
+.stat-late .stat-lbl { color: #d97706 !important; }
+.stat-absent { background: rgba(185,28,28,0.15) !important; border-color: rgba(239,68,68,0.25) !important; }
+.stat-absent .stat-num { color: #fca5a5 !important; }
+.stat-absent .stat-lbl { color: #f87171 !important; }
+.stat-pct { background: rgba(99,102,241,0.15) !important; border-color: rgba(99,102,241,0.25) !important; }
+.stat-pct .stat-num { color: #a78bfa !important; }
+.stat-pct .stat-lbl { color: #818cf8 !important; }
+/* Calendar */
+.cal-month-label { color: #f1f5f9 !important; }
+.cal-nav-btn {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #a78bfa !important;
+}
+.cal-nav-btn:hover { background: rgba(99,102,241,0.2) !important; }
+.cal-dow { color: #64748b !important; }
+.cell-empty   { background: transparent !important; }
+.cell-present { background: rgba(21,128,61,0.2) !important; border-color: rgba(34,197,94,0.3) !important; color: #4ade80 !important; }
+.cell-late    { background: rgba(146,64,14,0.2) !important; border-color: rgba(252,211,77,0.3) !important; color: #fbbf24 !important; }
+.cell-absent  { background: rgba(185,28,28,0.2) !important; border-color: rgba(239,68,68,0.3) !important; color: #fca5a5 !important; }
+.cell-weekend { background: #1a1a2e !important; border-color: rgba(255,255,255,0.05) !important; color: #475569 !important; }
+.cell-future  { background: #1a1a2e !important; border-color: rgba(255,255,255,0.05) !important; color: #64748b !important; }
+.cell-out     { background: #1a1a2e !important; border-color: rgba(255,255,255,0.05) !important; color: #475569 !important; }
+.cal-legend { border-top-color: rgba(255,255,255,0.06) !important; }
+.legend-item { color: #94a3b8 !important; }
+.state-complete {
+  background: rgba(21,128,61,0.15) !important;
+  border-color: rgba(34,197,94,0.3) !important;
+  color: #4ade80 !important;
+}
+.state-no-phase {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #64748b !important;
+}
+.min-hours-hint {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #94a3b8 !important;
+}
+/* Attendance status badges */
+.badge-present { background: rgba(21,128,61,0.2) !important; color: #4ade80 !important; border-color: rgba(34,197,94,0.3) !important; }
+.badge-late    { background: rgba(146,64,14,0.2) !important; color: #fbbf24 !important; border-color: rgba(252,211,77,0.3) !important; }
+.badge-absent  { background: rgba(185,28,28,0.2) !important; color: #fca5a5 !important; border-color: rgba(239,68,68,0.3) !important; }
+.badge-none    { background: #1e1e2e !important; color: #64748b !important; border-color: rgba(255,255,255,0.08) !important; }
