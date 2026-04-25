@@ -6093,3 +6093,115 @@ body .footer-social-link:hover { color: #fff !important; }
 .badge-late    { background: rgba(146,64,14,0.2) !important; color: #fbbf24 !important; border-color: rgba(252,211,77,0.3) !important; }
 .badge-absent  { background: rgba(185,28,28,0.2) !important; color: #fca5a5 !important; border-color: rgba(239,68,68,0.3) !important; }
 .badge-none    { background: #1e1e2e !important; color: #64748b !important; border-color: rgba(255,255,255,0.08) !important; }
+
+
+/* ============================================
+   DARK THEME — WHITE BACKGROUND TEXT FIX
+   Any element that still has a white/light bg
+   must have dark text so it's readable
+   ============================================ */
+
+/* Catch-all: if background is white or near-white, text must be dark */
+[style*="background: #fff"],
+[style*="background:#fff"],
+[style*="background: white"],
+[style*="background-color: #fff"],
+[style*="background-color: white"] {
+  color: #1e293b !important;
+}
+
+/* Bootstrap / utility white backgrounds */
+.bg-white, .bg-light {
+  background-color: #13131f !important;
+  color: #e2e8f0 !important;
+}
+.bg-white *, .bg-light * { color: #cbd5e1 !important; }
+
+/* Any remaining white cards/panels in admin or public pages */
+.card.bg-white, .panel, .box {
+  background: #13131f !important;
+  color: #e2e8f0 !important;
+}
+
+/* Bootstrap text-dark / text-body overrides */
+.text-dark, .text-body, .text-black { color: #e2e8f0 !important; }
+.text-muted { color: #94a3b8 !important; }
+.text-secondary { color: #94a3b8 !important; }
+
+/* Bootstrap table */
+.table { color: #e2e8f0 !important; }
+.table th, .table td { 
+  color: #e2e8f0 !important; 
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.table-striped tbody tr:nth-of-type(odd) { background-color: rgba(255,255,255,0.03) !important; }
+.table-hover tbody tr:hover { background-color: rgba(255,255,255,0.05) !important; }
+
+/* Bootstrap form controls */
+.form-control, .form-select {
+  background-color: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.form-control:focus, .form-select:focus {
+  background-color: #1e1e2e !important;
+  border-color: #6366f1 !important;
+  color: #f1f5f9 !important;
+  box-shadow: 0 0 0 0.2rem rgba(99,102,241,0.25) !important;
+}
+.form-label, .col-form-label { color: #94a3b8 !important; }
+
+/* Bootstrap modal */
+.modal-content {
+  background-color: #13131f !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #e2e8f0 !important;
+}
+.modal-header {
+  border-bottom-color: rgba(255,255,255,0.08) !important;
+}
+.modal-footer {
+  border-top-color: rgba(255,255,255,0.08) !important;
+}
+.modal-title { color: #f1f5f9 !important; }
+.btn-close { filter: invert(1); }
+
+/* Bootstrap dropdown */
+.dropdown-menu {
+  background-color: #13131f !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.dropdown-item { color: #cbd5e1 !important; }
+.dropdown-item:hover { 
+  background-color: #1e1e2e !important; 
+  color: #f1f5f9 !important;
+}
+.dropdown-divider { border-color: rgba(255,255,255,0.08) !important; }
+
+/* Bootstrap list group */
+.list-group-item {
+  background-color: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #e2e8f0 !important;
+}
+.list-group-item:hover { background-color: #1e1e2e !important; }
+
+/* Bootstrap alert overrides */
+.alert-info    { background: rgba(0,188,212,0.15) !important; color: #67e8f9 !important; border-color: rgba(0,188,212,0.3) !important; }
+.alert-primary { background: rgba(99,102,241,0.15) !important; color: #a78bfa !important; border-color: rgba(99,102,241,0.3) !important; }
+.alert-danger  { background: rgba(185,28,28,0.15) !important; color: #fca5a5 !important; border-color: rgba(239,68,68,0.3) !important; }
+
+/* Bootstrap badge */
+.badge.bg-secondary { background-color: #2d2d4e !important; color: #cbd5e1 !important; }
+.badge.bg-light     { background-color: #2d2d4e !important; color: #cbd5e1 !important; }
+
+/* Any inline white background via style attribute on divs/spans */
+div[style*="background: white"],
+div[style*="background-color: white"],
+div[style*="background: #ffffff"],
+div[style*="background-color: #ffffff"],
+div[style*="background: #FFFFFF"],
+div[style*="background-color: #FFFFFF"] {
+  background: #13131f !important;
+  color: #e2e8f0 !important;
+}
