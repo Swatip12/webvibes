@@ -1043,3 +1043,59 @@ button:focus {
   .ab-hero-v2 { padding: 48px 16px 40px; }
   .ab-facilities-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+
+/* ============================================
+   DARK THEME OVERRIDES
+   ============================================ */
+.ab-page { background: #0a0a0f !important; }
+.ab-wrap { background: transparent !important; }
+.ab-mv-card { background: #13131f !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+.ab-mv-card h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ab-mv-card p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ab-why-point { background: #13131f !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+.ab-why-text h4 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ab-why-text p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ab-why-lead { color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; }
+.ab-why-body { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ab-founder-card { background: #13131f !important; box-shadow: 0 4px 24px rgba(0,0,0,0.4) !important; }
+.ab-founder-name-row h3 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ab-founder-tag { background: rgba(109,40,217,0.25) !important; color: #c4b5fd !important; -webkit-text-fill-color: #c4b5fd !important; }
+.ab-founder-quote { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; border-left-color: #6366f1 !important; }
+.ab-fh-item { color: #cbd5e1 !important; -webkit-text-fill-color: #cbd5e1 !important; }
+.ab-cert-card { background: #13131f !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+.ab-cert-card p { color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; }
+.ab-facility-card { background: #13131f !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+.ab-facility-card h4 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ab-facility-card p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ab-section-head h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ab-section-sub { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ab-hero-v2 { background: linear-gradient(135deg, #0f0f1a 0%, #12121f 50%, #0d1117 100%) !important; }
+.ab-hero-h1 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ab-hero-sub { color: #cbd5e1 !important; -webkit-text-fill-color: #cbd5e1 !important; }
+.ab-hero-stats { background: rgba(255,255,255,0.06) !important; border-color: rgba(255,255,255,0.1) !important; }
+.ab-hero-stat-lbl { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ab-hero-stat-div { background: rgba(255,255,255,0.1) !important; }
+.ab-hero-pill { background: rgba(99,102,241,0.2) !important; border-color: rgba(99,102,241,0.4) !important; color: #a78bfa !important; -webkit-text-fill-color: #a78bfa !important; }
+.ab-why-img-badge { background: #13131f !important; color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; }
+/* Old about page sections */
+.mission-vision-section { background: #0a0a0f !important; }
+.team-section { background: #0a0a0f !important; }
+.achievements-section { background: #0a0a0f !important; }
+.facilities-section { background: #0a0a0f !important; }
+.mission-card, .vision-card { background: #13131f !important; border-color: rgba(255,255,255,0.08) !important; }
+.mission-card h2, .vision-card h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.mission-card p, .vision-card p { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.team-member-card { background: #13131f !important; border-color: rgba(255,255,255,0.08) !important; }
+.team-member-name { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.team-member-bio  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.certification-card { background: #13131f !important; border-color: rgba(255,255,255,0.08) !important; }
+.certification-card p { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.certifications-title { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.facilities-text h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.facilities-text p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.facilities-list li { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.section-title { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.section-subtitle { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.page-title { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.page-subtitle { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }

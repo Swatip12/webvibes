@@ -259,3 +259,26 @@
 .bl-hero-img-card-tag--br { bottom: 20px; right: -14px; color: #7c3aed; }
 @media (max-width: 900px) { .bl-hero-v2 { padding: 60px 24px 48px; grid-template-columns: 1fr; } .bl-hero-img-card { display: none; } }
 @media (max-width: 640px) { .bl-hero-v2 { padding: 48px 16px 40px; } .bl-hero-h1 { font-size: 2rem; } }
+
+
+/* ============================================
+   DARK THEME OVERRIDES
+   ============================================ */
+.blog-page { background: #0a0a0f !important; }
+.blog-wrap { background: transparent !important; }
+.blog-card { background: #13131f !important; border-color: rgba(255,255,255,0.08) !important; }
+.blog-card-title { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.blog-card-excerpt { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.blog-card-footer { border-top-color: rgba(255,255,255,0.08) !important; }
+.blog-card-meta span { color: #64748b !important; -webkit-text-fill-color: #64748b !important; }
+.blog-tabs { border-bottom-color: rgba(255,255,255,0.08) !important; }
+.blog-tab { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.blog-tab.active { color: #a78bfa !important; -webkit-text-fill-color: #a78bfa !important; border-bottom-color: #a78bfa !important; }
+.bl-hero-v2 { background: linear-gradient(135deg, #0f0f1a 0%, #12121f 50%, #0d1117 100%) !important; }
+.bl-hero-h1 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.bl-hero-sub { color: #cbd5e1 !important; -webkit-text-fill-color: #cbd5e1 !important; }
+.bl-hero-stats { background: rgba(255,255,255,0.06) !important; border-color: rgba(255,255,255,0.1) !important; }
+.bl-hero-stat-lbl { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.bl-hero-stat-div { background: rgba(255,255,255,0.1) !important; }
+.bl-hero-img-card-badge { background: #13131f !important; color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; }
+.bl-hero-img-card-tag { background: #13131f !important; color: #f59e0b !important; -webkit-text-fill-color: #f59e0b !important; }

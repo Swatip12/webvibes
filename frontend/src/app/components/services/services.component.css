@@ -313,3 +313,28 @@
   .sv-hero-img-card { display: none; }
   .sv-hero-v2 { justify-content: flex-start; }
 }
+
+
+/* ============================================
+   DARK THEME OVERRIDES
+   ============================================ */
+.sv-page { background: #0a0a0f !important; }
+.sv-wrap { background: transparent !important; }
+.sv-card { background: #13131f !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+.sv-card-body h3 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.sv-card-body p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.sv-features li  { color: #cbd5e1 !important; -webkit-text-fill-color: #cbd5e1 !important; }
+.sv-why-section { background: #13131f !important; box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important; }
+.sv-why-card h4 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.sv-why-card p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.sv-section-head h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.sv-section-sub { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.sv-hero-v2 { background: linear-gradient(135deg, #0f0f1a 0%, #12121f 50%, #0d1117 100%) !important; }
+.sv-hero-h1 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.sv-hero-sub { color: #cbd5e1 !important; -webkit-text-fill-color: #cbd5e1 !important; }
+.sv-hero-stats { background: rgba(255,255,255,0.06) !important; border-color: rgba(255,255,255,0.1) !important; }
+.sv-hero-stat-lbl { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.sv-hero-stat-div { background: rgba(255,255,255,0.1) !important; }
+.sv-hero-pill { background: rgba(99,102,241,0.2) !important; border-color: rgba(99,102,241,0.4) !important; color: #a78bfa !important; -webkit-text-fill-color: #a78bfa !important; }
+.sv-hero-img-card-badge { background: #13131f !important; color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; }
+.sv-hero-img-card-tag { background: #13131f !important; color: #a78bfa !important; -webkit-text-fill-color: #a78bfa !important; }

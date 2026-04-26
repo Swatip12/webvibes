@@ -88,3 +88,18 @@
   .bp-hero { padding: 60px 16px 40px; }
   .bp-article { padding: 24px 16px; }
 }
+
+
+/* ============================================
+   DARK THEME OVERRIDES
+   ============================================ */
+.bp-page { background: #0a0a0f !important; }
+.bp-article { background: #13131f !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+.bp-lead { color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; }
+.bp-para { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.bp-divider { border-top-color: rgba(255,255,255,0.08) !important; }
+.bp-tag { background: #1e1e2e !important; color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.bp-back-btn { background: #1e1e2e !important; color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; }
+.bp-sidebar-card { background: #13131f !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+.bp-sidebar-card h3 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.bp-sidebar-card p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }

@@ -374,3 +374,27 @@ h1 {
   .pp-hero-v2 { padding: 48px 16px 40px; }
   .pp-hero-h1 { font-size: 2rem; }
 }
+
+
+/* ============================================
+   DARK THEME OVERRIDES
+   ============================================ */
+.pp-page, .projects-container { background: #0a0a0f !important; }
+.project-card, .pp-card { background: #13131f !important; border-color: rgba(255,255,255,0.08) !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+.card-title, .pp-card-title { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.card-text, .pp-card-desc { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.card-footer, .pp-card-footer { background: transparent !important; border-top-color: rgba(255,255,255,0.08) !important; }
+.pp-tag { background: #1e1e2e !important; color: #cbd5e1 !important; -webkit-text-fill-color: #cbd5e1 !important; }
+.pp-filter-bar { background: #13131f !important; border-bottom-color: rgba(255,255,255,0.08) !important; }
+.pp-search-input { background: #1e1e2e !important; border-color: rgba(255,255,255,0.12) !important; color: #f1f5f9 !important; }
+.pp-filter-tab { background: #1e1e2e !important; border-color: rgba(255,255,255,0.1) !important; color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.pp-hero-v2 { background: linear-gradient(135deg, #0f0f1a 0%, #12121f 50%, #0d1117 100%) !important; }
+.pp-hero-h1 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.pp-hero-sub { color: #cbd5e1 !important; -webkit-text-fill-color: #cbd5e1 !important; }
+.pp-hero-stats { background: rgba(255,255,255,0.06) !important; border-color: rgba(255,255,255,0.1) !important; }
+.pp-hero-stat-lbl { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.pp-hero-stat-div { background: rgba(255,255,255,0.1) !important; }
+.pp-hero-img-card-badge { background: #13131f !important; color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; }
+.pp-hero-img-card-tag { background: #13131f !important; color: #a78bfa !important; -webkit-text-fill-color: #a78bfa !important; }
+h1 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.text-muted { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }

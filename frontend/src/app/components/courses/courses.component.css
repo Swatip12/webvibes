@@ -354,3 +354,43 @@
   .cp-hero-v2 { padding: 60px 16px 48px; min-height: 400px; }
   .cp-hero-h1 { font-size: 2rem; }
 }
+
+
+/* ============================================
+   DARK THEME OVERRIDES
+   ============================================ */
+.cp-page { background: #0a0a0f !important; }
+.cp-wrap { background: transparent !important; }
+.cp-card { background: #13131f !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+.cp-card-body h3 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.cp-card-body p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.cp-students { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.cp-meta-item { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.cp-filters { background: #13131f !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+.cp-search-input { background: #1e1e2e !important; border-color: rgba(255,255,255,0.12) !important; color: #f1f5f9 !important; }
+.cp-fgroup label { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.cp-fgroup select { background: #1e1e2e !important; border-color: rgba(255,255,255,0.12) !important; color: #f1f5f9 !important; }
+.cp-count { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.cp-intro-section { background: #13131f !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+.cp-intro-section h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.cp-intro-section p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.cp-cat-card { background: #13131f !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+.cp-cat-card h3 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.cp-cat-card ul li { color: #cbd5e1 !important; -webkit-text-fill-color: #cbd5e1 !important; }
+.cp-benefit-card { background: #13131f !important; box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+.cp-benefit-card h3 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.cp-benefit-card p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.cp-form-card { background: #13131f !important; box-shadow: 0 4px 24px rgba(0,0,0,0.4) !important; }
+.cp-form-head h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.cp-form-head p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.cp-fg label { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.cp-input-wrap input, .cp-fg textarea { background: #1e1e2e !important; border-color: rgba(255,255,255,0.12) !important; color: #f1f5f9 !important; }
+.cp-hero-v2 { background: linear-gradient(135deg, #0f0f1a 0%, #12121f 50%, #0d1117 100%) !important; }
+.cp-hero-h1 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.cp-hero-sub { color: #cbd5e1 !important; -webkit-text-fill-color: #cbd5e1 !important; }
+.cp-hero-stats { background: rgba(255,255,255,0.06) !important; border-color: rgba(255,255,255,0.1) !important; }
+.cp-hero-stat-lbl { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.cp-hero-stat-div { background: rgba(255,255,255,0.1) !important; }
+.cp-hero-pill { background: rgba(99,102,241,0.2) !important; border-color: rgba(99,102,241,0.4) !important; color: #a78bfa !important; -webkit-text-fill-color: #a78bfa !important; }
+.cp-hero-img-card-badge { background: #13131f !important; color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; }
+.cp-hero-img-card-tag { background: #13131f !important; color: #a78bfa !important; -webkit-text-fill-color: #a78bfa !important; }

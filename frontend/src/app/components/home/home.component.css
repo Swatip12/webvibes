@@ -1201,3 +1201,82 @@ section {
 .feature-body { padding: 18px 20px 22px; }
 .feature-body h3 { font-size: 1rem; font-weight: 700; color: #1f2937; margin-bottom: 8px; }
 .feature-body p  { font-size: 0.85rem; color: #64748b; line-height: 1.6; margin: 0; }
+
+
+/* ============================================
+   DARK THEME OVERRIDES
+   ============================================ */
+.home-page { background: #0a0a0f !important; }
+
+/* Testimonial cards */
+.tm-section { background: #0a0a0f !important; }
+.tm-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.tm-text { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.tm-name { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.tm-role { color: #64748b !important; -webkit-text-fill-color: #64748b !important; }
+.tm-footer { border-top-color: rgba(255,255,255,0.08) !important; }
+.tm-quote-icon { color: rgba(99,102,241,0.3) !important; }
+
+/* Course preview cards */
+.course-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.course-content h3 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.course-content p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.course-meta { border-top-color: rgba(255,255,255,0.08) !important; }
+.course-meta span { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+
+/* Section headers */
+.section-header h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.section-header p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.section-badge {
+  background: rgba(99,102,241,0.15) !important;
+  color: #a78bfa !important;
+  -webkit-text-fill-color: #a78bfa !important;
+  border-color: rgba(99,102,241,0.3) !important;
+}
+
+/* Company logos section */
+.company-logo {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
+/* About section on home */
+.about-section { background: #0a0a0f !important; border-top-color: rgba(255,255,255,0.06) !important; }
+.about-content h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.about-lead { color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; }
+.about-content p { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.about-highlight-item { color: #cbd5e1 !important; -webkit-text-fill-color: #cbd5e1 !important; }
+.about-stat-card { background: #1a1a2e !important; border-color: rgba(255,255,255,0.08) !important; }
+.about-stat-lbl { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.about-img-badge-1, .about-img-badge-2 { background: #13131f !important; }
+.about-badge-num { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.about-badge-lbl { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+
+/* Internship section on home */
+.internship-home-section { background: #0a0a0f !important; }
+.internship-feature { background: #13131f !important; border-color: rgba(255,255,255,0.08) !important; }
+.internship-feature h3 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.internship-feature p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.internship-feat h4 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.internship-feat p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.internship-lead { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.internship-img-chip { background: #13131f !important; color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; }
+
+/* Services section on home */
+.services-home-section { background: #0a0a0f !important; border-top-color: rgba(255,255,255,0.06) !important; }
+.service-card { background: #13131f !important; border-color: rgba(255,255,255,0.08) !important; }
+.service-card h3 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.service-card p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.service-icon { background: rgba(99,102,241,0.15) !important; color: #a78bfa !important; -webkit-text-fill-color: #a78bfa !important; }
+
+/* Features section */
+.features-section { background: #0a0a0f !important; }
+.courses-section  { background: #0a0a0f !important; }
+.companies-section { background: #0a0a0f !important; }
