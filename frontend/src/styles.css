@@ -6392,3 +6392,346 @@ div[style*="background-color: #FFFFFF"] {
 .features-section { background: #0a0a0f !important; }
 .courses-section  { background: #0a0a0f !important; }
 .companies-section { background: #0a0a0f !important; }
+
+
+/* ============================================
+   DARK THEME — ALL PAGES CARD FIXES
+   ============================================ */
+
+/* ── About Page ── */
+.ab-page { background: #0a0a0f !important; }
+.ab-mv-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ab-mv-card h2 { color: #f1f5f9 !important; }
+.ab-mv-card p  { color: #94a3b8 !important; }
+.ab-why-point {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ab-why-text h4 { color: #f1f5f9 !important; }
+.ab-why-text p  { color: #94a3b8 !important; }
+.ab-why-lead { color: #e2e8f0 !important; }
+.ab-why-body { color: #94a3b8 !important; }
+.ab-founder-card {
+  background: #13131f !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4) !important;
+}
+.ab-founder-name-row h3 { color: #f1f5f9 !important; }
+.ab-founder-quote { color: #94a3b8 !important; border-left-color: #6366f1 !important; }
+.ab-fh-item { color: #cbd5e1 !important; }
+.ab-cert-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ab-cert-card p { color: #e2e8f0 !important; }
+.ab-facility-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ab-facility-card h4 { color: #f1f5f9 !important; }
+.ab-facility-card p  { color: #94a3b8 !important; }
+.ab-section-head h2 { color: #f1f5f9 !important; }
+.ab-section-sub { color: #94a3b8 !important; }
+.ab-why-img-badge {
+  background: #13131f !important;
+  color: #e2e8f0 !important;
+}
+.ab-hero-stats {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.ab-hero-stat-div { background: rgba(255,255,255,0.1) !important; }
+.ab-hero-stat-lbl { color: #94a3b8 !important; }
+/* About page section backgrounds */
+.mission-vision-section { background: #0a0a0f !important; }
+.team-section { background: #0a0a0f !important; }
+.achievements-section { background: #0a0a0f !important; }
+.facilities-section { background: #0a0a0f !important; }
+.mission-card, .vision-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.mission-card h2, .vision-card h2 { color: #f1f5f9 !important; }
+.mission-card p, .vision-card p { color: #94a3b8 !important; }
+.team-member-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.team-member-name { color: #f1f5f9 !important; }
+.team-member-bio  { color: #94a3b8 !important; }
+.certification-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.certification-card p { color: #94a3b8 !important; }
+.certifications-title { color: #f1f5f9 !important; }
+.facilities-text h2 { color: #f1f5f9 !important; }
+.facilities-text p  { color: #94a3b8 !important; }
+.facilities-list li { color: #94a3b8 !important; }
+
+/* ── Services Page ── */
+.sv-page { background: #0a0a0f !important; }
+.sv-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.sv-card-body h3 { color: #f1f5f9 !important; }
+.sv-card-body p  { color: #94a3b8 !important; }
+.sv-features li  { color: #cbd5e1 !important; }
+.sv-why-section {
+  background: #13131f !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+}
+.sv-why-card h4 { color: #f1f5f9 !important; }
+.sv-why-card p  { color: #94a3b8 !important; }
+.sv-section-head h2 { color: #f1f5f9 !important; }
+.sv-section-sub { color: #94a3b8 !important; }
+
+/* ── Projects Page ── */
+.pp-page { background: #0a0a0f !important; }
+.projects-container { background: #0a0a0f !important; }
+.project-card, .pp-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.card-title, .pp-card-title { color: #f1f5f9 !important; }
+.card-text, .pp-card-desc  { color: #94a3b8 !important; }
+.card-footer, .pp-card-footer {
+  background: transparent !important;
+  border-top-color: rgba(255,255,255,0.08) !important;
+}
+.pp-tag { background: #1e1e2e !important; color: #cbd5e1 !important; }
+.pp-filter-bar {
+  background: #13131f !important;
+  border-bottom-color: rgba(255,255,255,0.08) !important;
+}
+.pp-search-input {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.pp-filter-tab {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #94a3b8 !important;
+}
+.pp-filter-tab:hover { border-color: #0ea5e9 !important; color: #0ea5e9 !important; }
+.pp-error h3, .pp-empty h3 { color: #e2e8f0 !important; }
+.pp-error p, .pp-empty p   { color: #94a3b8 !important; }
+.pp-hero-stats {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.pp-hero-stat-div { background: rgba(255,255,255,0.1) !important; }
+.pp-hero-stat-lbl { color: #94a3b8 !important; }
+.pp-hero-img-card-badge {
+  background: #13131f !important;
+  color: #e2e8f0 !important;
+}
+.pp-hero-img-card-tag {
+  background: #13131f !important;
+  color: #a78bfa !important;
+}
+
+/* ── Blog Page ── */
+.blog-page { background: #0a0a0f !important; }
+.blog-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.blog-card-title   { color: #f1f5f9 !important; }
+.blog-card-excerpt { color: #94a3b8 !important; }
+.blog-card-footer  { border-top-color: rgba(255,255,255,0.08) !important; }
+.blog-card-meta span { color: #64748b !important; }
+.blog-tabs { border-bottom-color: rgba(255,255,255,0.08) !important; }
+.blog-tab { color: #94a3b8 !important; }
+.blog-tab:hover, .blog-tab.active { color: #a78bfa !important; border-bottom-color: #a78bfa !important; }
+.bl-hero-stats {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.bl-hero-stat-div { background: rgba(255,255,255,0.1) !important; }
+.bl-hero-stat-lbl { color: #94a3b8 !important; }
+.bl-hero-img-card-badge {
+  background: #13131f !important;
+  color: #e2e8f0 !important;
+}
+.bl-hero-img-card-tag {
+  background: #13131f !important;
+  color: #f59e0b !important;
+}
+
+/* ── Blog Post Page ── */
+.bp-page { background: #0a0a0f !important; }
+.bp-article {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.bp-lead { color: #e2e8f0 !important; }
+.bp-para { color: #94a3b8 !important; }
+.bp-divider { border-top-color: rgba(255,255,255,0.08) !important; }
+.bp-tag { background: #1e1e2e !important; color: #94a3b8 !important; }
+.bp-back-btn {
+  background: #1e1e2e !important;
+  color: #e2e8f0 !important;
+}
+.bp-back-btn:hover { background: #2d2d4e !important; color: #f1f5f9 !important; }
+.bp-sidebar-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.bp-sidebar-card h3 { color: #f1f5f9 !important; }
+.bp-sidebar-card p  { color: #94a3b8 !important; }
+.bp-sidebar-tags .bp-tag { background: #1e1e2e !important; color: #94a3b8 !important; }
+
+/* ── Internship Page ── */
+.ip-page { background: #0a0a0f !important; }
+.ip-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ip-card-body h3 { color: #f1f5f9 !important; }
+.ip-company { color: #10b981 !important; }
+.ip-card-meta span { color: #94a3b8 !important; }
+.ip-desc { color: #94a3b8 !important; }
+.ip-skill { background: #1e1e2e !important; color: #cbd5e1 !important; }
+.ip-perk { color: #94a3b8 !important; }
+.ip-filters {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ip-search-input {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.ip-fgroup select {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.ip-fgroup label { color: #94a3b8 !important; }
+.ip-count { color: #94a3b8 !important; }
+.ip-empty h3 { color: #e2e8f0 !important; }
+.ip-empty p  { color: #94a3b8 !important; }
+.ip-intro-section {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ip-intro-section h2 { color: #f1f5f9 !important; }
+.ip-intro-section p  { color: #94a3b8 !important; }
+.ip-domain-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ip-domain-card h3 { color: #f1f5f9 !important; }
+.ip-domain-card p  { color: #94a3b8 !important; }
+.ip-feature-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ip-feature-card h3 { color: #f1f5f9 !important; }
+.ip-feature-card p  { color: #94a3b8 !important; }
+.ip-benefit-item {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ip-benefit-item h3 { color: #f1f5f9 !important; }
+.ip-benefit-item p  { color: #94a3b8 !important; }
+.ip-form-card {
+  background: #13131f !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4) !important;
+}
+.ip-form-head h2 { color: #f1f5f9 !important; }
+.ip-form-head p  { color: #94a3b8 !important; }
+.ip-fg label { color: #94a3b8 !important; }
+.ip-input-wrap input, .ip-fg textarea {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+/* Internship roadmap */
+.irp-plan {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.irp-plan-body .irp-plan-list li { color: #cbd5e1 !important; }
+.irp-timeline-wrap {
+  background: #13131f !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3) !important;
+}
+.irp-timeline-title { color: #f1f5f9 !important; }
+.irp-tl-name { color: #f1f5f9 !important; }
+.irp-tl-sub  { color: #94a3b8 !important; }
+.irp-benefits-wrap { background: #1a1a2e !important; }
+.irp-benefits-title { color: #f1f5f9 !important; }
+.irp-benefit-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.irp-benefit-card h4 { color: #f1f5f9 !important; }
+.irp-benefit-card p  { color: #94a3b8 !important; }
+.ip-hero-stats {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.ip-hero-stat-div { background: rgba(255,255,255,0.1) !important; }
+.ip-hero-stat-lbl { color: #94a3b8 !important; }
+
+/* ── Contact Page ── */
+.ct-page { background: #0a0a0f !important; }
+.ct-info-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ct-info-text h4 { color: #f1f5f9 !important; }
+.ct-info-text p  { color: #94a3b8 !important; }
+.ct-form-card {
+  background: #13131f !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4) !important;
+}
+.ct-form-header h2 { color: #f1f5f9 !important; }
+.ct-form-header p  { color: #94a3b8 !important; }
+.ct-label { color: #94a3b8 !important; }
+.ct-input {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.ct-input:focus { border-color: #8b5cf6 !important; }
+.ct-char-count { color: #64748b !important; }
+.ct-faq { background: #0a0a0f !important; }
+.ct-faq-title { color: #f1f5f9 !important; }
+.ct-faq-item {
+  background: #13131f !important;
+}
+.ct-faq-item h4 { color: #f1f5f9 !important; }
+.ct-faq-item p  { color: #94a3b8 !important; }
+.ct-hero-stats {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.ct-hero-stat-div { background: rgba(255,255,255,0.1) !important; }
+.ct-hero-stat-lbl { color: #94a3b8 !important; }
+.ct-hero-img-card-badge {
+  background: #13131f !important;
+  color: #e2e8f0 !important;
+}
+.ct-hero-img-card-tag {
+  background: #13131f !important;
+  color: #0369a1 !important;
+}
+/* Old contact form */
+.contact-form-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.contact-form-card .form-label { color: #94a3b8 !important; }
+.contact-form-card .form-control {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
