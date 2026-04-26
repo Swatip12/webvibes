@@ -6960,3 +6960,78 @@ div[style*="background-color: #FFFFFF"] {
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
 }
+
+
+/* ============================================
+   DARK THEME — FLOATING WIDGETS POPUP + HERO BUTTON FIXES
+   ============================================ */
+
+/* ── Internship Application Popup ── */
+.popup-card {
+  background: #13131f !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6) !important;
+}
+.popup-close {
+  background: #1e1e2e !important;
+  color: #94a3b8 !important;
+}
+.popup-close:hover { background: #2d2d4e !important; color: #f1f5f9 !important; }
+.popup-badge {
+  background: rgba(99,102,241,0.2) !important;
+  color: #a78bfa !important;
+  border-color: rgba(99,102,241,0.3) !important;
+}
+.popup-header h2 { color: #f1f5f9 !important; }
+.popup-header p  { color: #94a3b8 !important; }
+.form-group label { color: #94a3b8 !important; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #6366f1 !important;
+}
+.popup-note { color: #64748b !important; }
+.error-msg {
+  background: rgba(185,28,28,0.15) !important;
+  border-color: rgba(239,68,68,0.3) !important;
+  color: #fca5a5 !important;
+}
+.popup-success h3 { color: #4ade80 !important; }
+.popup-success p  { color: #94a3b8 !important; }
+
+/* ── Home Hero Button Fix ── */
+/* The hero-btn-primary was getting white text on white bg due to catch-all */
+.hero-btn-primary {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
+  color: #fff !important;
+}
+.hero-btn-primary:hover { color: #fff !important; }
+
+/* hero-btn-secondary on dark overlay */
+.hero-btn-secondary {
+  background: rgba(255,255,255,0.1) !important;
+  border-color: rgba(255,255,255,0.25) !important;
+  color: #f1f5f9 !important;
+}
+.hero-btn-secondary:hover {
+  background: rgba(255,255,255,0.18) !important;
+  color: #fff !important;
+}
+
+/* ── Fix: hero section text that was being overridden to white-on-white ── */
+/* The body * catch-all was making hero-btn-primary text invisible */
+/* Ensure all buttons in hero keep white text */
+.hero-section .hero-btn-primary,
+.hero-section .hero-btn-secondary {
+  color: #fff !important;
+}
+
+/* ── Fix: hero trust items ── */
+.hero-trust-item { color: #cbd5e1 !important; }
+.hero-trust-item i { color: #a78bfa !important; }
