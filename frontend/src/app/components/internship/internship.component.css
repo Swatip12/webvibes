@@ -598,3 +598,163 @@
   .ip-hero-v2 { padding: 48px 16px 40px; }
   .ip-hero-h1 { font-size: 2rem; }
 }
+
+
+/* ============================================
+   DARK THEME OVERRIDES — applied in component CSS
+   for highest specificity
+   ============================================ */
+
+.ip-page { background: #0a0a0f !important; }
+
+/* Hero */
+.ip-hero {
+  background: linear-gradient(135deg, #0f0f1a 0%, #12121f 50%, #0d1117 100%) !important;
+}
+.ip-hero-inner h1 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ip-hero-inner > p { color: #cbd5e1 !important; -webkit-text-fill-color: #cbd5e1 !important; }
+.ip-stat-lbl { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ip-stat-div { background: rgba(255,255,255,0.15) !important; }
+.ip-hero-badge {
+  background: rgba(16,185,129,0.15) !important;
+  border-color: rgba(16,185,129,0.3) !important;
+  color: #6ee7b7 !important;
+  -webkit-text-fill-color: #6ee7b7 !important;
+}
+.page-breadcrumb, .page-breadcrumb a {
+  color: #64748b !important;
+  -webkit-text-fill-color: #64748b !important;
+}
+
+/* Filters */
+.ip-filters {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ip-search-input {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.ip-fgroup label { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ip-fgroup select {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.ip-clear-btn {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+}
+.ip-count { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+
+/* Cards */
+.ip-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ip-card-body h3 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ip-card-meta span { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ip-desc { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ip-skill { background: #1e1e2e !important; color: #cbd5e1 !important; -webkit-text-fill-color: #cbd5e1 !important; }
+.ip-perk { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+
+/* SEO sections */
+.ip-intro-section {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ip-intro-section h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ip-intro-section p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ip-domains-section > h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ip-domain-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ip-domain-card h3 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ip-domain-card p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ip-features-section > h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ip-feature-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ip-feature-card h3 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ip-feature-card p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ip-benefits-section > h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ip-benefit-item {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.ip-benefit-item h3 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ip-benefit-item p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+
+/* Form */
+.ip-form-card {
+  background: #13131f !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4) !important;
+}
+.ip-form-head h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ip-form-head p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ip-fg label { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ip-input-wrap input, .ip-fg textarea {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+
+/* Roadmap plans */
+.irp-plan {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.irp-plan-body .irp-plan-list li { color: #cbd5e1 !important; -webkit-text-fill-color: #cbd5e1 !important; }
+.irp-timeline-wrap {
+  background: #13131f !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3) !important;
+}
+.irp-timeline-title { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.irp-tl-name { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.irp-tl-sub  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.irp-benefits-wrap { background: #1a1a2e !important; }
+.irp-benefits-title { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.irp-benefit-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.irp-benefit-card h4 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.irp-benefit-card p  { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+
+/* Hero v2 */
+.ip-hero-v2 {
+  background: linear-gradient(135deg, #0f0f1a 0%, #12121f 50%, #0d1117 100%) !important;
+}
+.ip-hero-h1 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.ip-hero-sub { color: #cbd5e1 !important; -webkit-text-fill-color: #cbd5e1 !important; }
+.ip-hero-breadcrumb, .ip-hero-breadcrumb a {
+  color: #64748b !important;
+  -webkit-text-fill-color: #64748b !important;
+}
+.ip-hero-pill {
+  background: rgba(16,185,129,0.15) !important;
+  border-color: rgba(16,185,129,0.3) !important;
+  color: #6ee7b7 !important;
+  -webkit-text-fill-color: #6ee7b7 !important;
+}
+.ip-hero-stats {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.ip-hero-stat-lbl { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.ip-hero-stat-div { background: rgba(255,255,255,0.1) !important; }
+.ip-hero-img-card-badge {
+  background: #13131f !important;
+  color: #e2e8f0 !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+}
+.ip-hero-img-card-tag {
+  background: #13131f !important;
+  color: #6ee7b7 !important;
+  -webkit-text-fill-color: #6ee7b7 !important;
+}
