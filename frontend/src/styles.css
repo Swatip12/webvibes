@@ -7035,3 +7035,113 @@ div[style*="background-color: #FFFFFF"] {
 /* ── Fix: hero trust items ── */
 .hero-trust-item { color: #cbd5e1 !important; }
 .hero-trust-item i { color: #a78bfa !important; }
+
+
+/* ============================================
+   DARK THEME — TARGETED FIXES (high specificity)
+   ============================================ */
+
+/* ── Home Hero "Enroll Now" button — force visible ── */
+body .hero-section .hero-btn-primary,
+body .hero-btn-primary {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+body .hero-section .hero-btn-secondary,
+body .hero-btn-secondary {
+  background: rgba(255,255,255,0.12) !important;
+  border: 1.5px solid rgba(255,255,255,0.3) !important;
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+}
+
+/* ── About page founder highlights ── */
+body .ab-fh-item {
+  color: #cbd5e1 !important;
+  -webkit-text-fill-color: #cbd5e1 !important;
+}
+body .ab-fh-item i { color: #a78bfa !important; }
+
+/* Founder card full fix */
+body .ab-founder-card {
+  background: #13131f !important;
+}
+body .ab-founder-name-row h3 {
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+}
+body .ab-founder-tag {
+  background: rgba(109,40,217,0.25) !important;
+  color: #c4b5fd !important;
+  -webkit-text-fill-color: #c4b5fd !important;
+}
+body .ab-founder-quote {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+  border-left-color: #6366f1 !important;
+}
+
+/* ── Footer logo fix ── */
+body footer .brand-logo-img,
+body .footer-logo { filter: brightness(1); }
+body footer .footer-logo-text,
+body footer .footer-brand-name {
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+}
+
+/* ── Home hero section — ensure the two-column layout shows ── */
+/* The hero section background was overridden to dark, but the image card should still show */
+body .hero-section .hero-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+body .hero-section .hero-card-bar {
+  background: #1a1a2e !important;
+  border-bottom-color: rgba(255,255,255,0.08) !important;
+}
+body .hero-section .hero-card-url {
+  background: #0a0a0f !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+}
+body .hero-section .chip-title {
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+}
+body .hero-section .chip-sub {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+}
+body .hero-section .hero-chip {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+
+/* ── About page section titles ── */
+body .ab-section-head h2 {
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+}
+body .ab-section-sub {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+}
+
+/* ── Why section text ── */
+body .ab-why-lead {
+  color: #e2e8f0 !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+}
+body .ab-why-body {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+}
+body .ab-why-img-badge {
+  background: #13131f !important;
+  color: #e2e8f0 !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+}
+body .ab-why-img-badge i { color: #a78bfa !important; }
