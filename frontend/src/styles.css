@@ -6735,3 +6735,228 @@ div[style*="background-color: #FFFFFF"] {
   border-color: rgba(255,255,255,0.12) !important;
   color: #f1f5f9 !important;
 }
+
+
+/* ============================================
+   DARK THEME — COURSES PAGE + ALL HERO FIXES
+   ============================================ */
+
+/* ── Courses Page ── */
+.cp-page { background: #0a0a0f !important; }
+.cp-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.cp-card-body h3 { color: #f1f5f9 !important; }
+.cp-card-body p  { color: #94a3b8 !important; }
+.cp-students { color: #94a3b8 !important; }
+.cp-meta-item { color: #94a3b8 !important; }
+.cp-level--beginner    { background: rgba(16,185,129,0.2) !important; color: #6ee7b7 !important; }
+.cp-level--intermediate{ background: rgba(59,130,246,0.2) !important; color: #93c5fd !important; }
+.cp-level--advanced    { background: rgba(139,92,246,0.2) !important; color: #c4b5fd !important; }
+.cp-cbadge--bestseller { background: rgba(146,64,14,0.2) !important; color: #fbbf24 !important; }
+.cp-cbadge--trending   { background: rgba(185,28,28,0.2) !important; color: #fca5a5 !important; }
+.cp-cbadge--new        { background: rgba(6,95,70,0.2)  !important; color: #6ee7b7 !important; }
+.cp-syllabus-btn {
+  background: transparent !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #94a3b8 !important;
+}
+.cp-syllabus-btn:hover:not(.cp-syllabus-disabled) {
+  border-color: #6366f1 !important;
+  color: #a78bfa !important;
+}
+.cp-filters {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.cp-search-input {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.cp-fgroup label { color: #94a3b8 !important; }
+.cp-fgroup select {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.cp-count { color: #94a3b8 !important; }
+.cp-empty h3 { color: #e2e8f0 !important; }
+.cp-empty p  { color: #94a3b8 !important; }
+.cp-intro-section {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.cp-intro-section h2 { color: #f1f5f9 !important; }
+.cp-intro-section p  { color: #94a3b8 !important; }
+.cp-categories-section > h2 { color: #f1f5f9 !important; }
+.cp-cat-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.cp-cat-card h3 { color: #f1f5f9 !important; }
+.cp-cat-card ul li { color: #cbd5e1 !important; }
+.cp-benefits-section > h2 { color: #f1f5f9 !important; }
+.cp-benefit-card {
+  background: #13131f !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+}
+.cp-benefit-card h3 { color: #f1f5f9 !important; }
+.cp-benefit-card p  { color: #94a3b8 !important; }
+.cp-form-card {
+  background: #13131f !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4) !important;
+}
+.cp-form-head h2 { color: #f1f5f9 !important; }
+.cp-form-head p  { color: #94a3b8 !important; }
+.cp-fg label { color: #94a3b8 !important; }
+.cp-input-wrap input, .cp-fg textarea {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.cp-outline-btn {
+  background: transparent !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #94a3b8 !important;
+}
+
+/* ── Courses Hero v2 stats bar ── */
+.cp-hero-stats {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.cp-hero-stat-div { background: rgba(255,255,255,0.1) !important; }
+.cp-hero-stat-lbl { color: #94a3b8 !important; }
+.cp-hero-img-card-badge {
+  background: #13131f !important;
+  color: #e2e8f0 !important;
+}
+.cp-hero-img-card-tag {
+  background: #13131f !important;
+  color: #a78bfa !important;
+}
+
+/* ── ALL HERO SECTIONS — white overlay fix ── */
+/* Any hero that still has a light/white overlay — darken it */
+.cp-hero::before,
+.ip-hero::before,
+.sv-hero-v2::before {
+  background: rgba(10, 10, 15, 0.72) !important;
+}
+
+/* Hero text for old-style heroes (cp-hero, ip-hero, sv-hero) */
+.cp-hero-inner h1,
+.cp-anim-title { color: #f1f5f9 !important; }
+.cp-anim-sub { color: #cbd5e1 !important; }
+.cp-hero-inner > p { color: #cbd5e1 !important; }
+.cp-stat-lbl { color: #94a3b8 !important; }
+.cp-stat-div { background: rgba(255,255,255,0.15) !important; }
+
+.ip-hero-inner h1 { color: #f1f5f9 !important; }
+.ip-hero-inner > p { color: #cbd5e1 !important; }
+.ip-stat-lbl { color: #94a3b8 !important; }
+.ip-stat-div { background: rgba(255,255,255,0.15) !important; }
+
+/* Hero v2 sections — all have light gradient backgrounds, darken them */
+.cp-hero-v2,
+.ip-hero-v2,
+.sv-hero-v2,
+.pp-hero-v2,
+.bl-hero-v2,
+.ct-hero-v2,
+.ab-hero-v2 {
+  background: linear-gradient(135deg, #0f0f1a 0%, #12121f 50%, #0d1117 100%) !important;
+}
+
+/* Force all text inside hero-v2 to be light */
+.cp-hero-v2 *,
+.ip-hero-v2 *,
+.sv-hero-v2 *,
+.pp-hero-v2 *,
+.bl-hero-v2 *,
+.ct-hero-v2 *,
+.ab-hero-v2 * {
+  color: #f1f5f9 !important;
+}
+
+/* Restore gradient text inside hero-v2 */
+.cp-hero-v2 .cp-hero-grad,
+.ip-hero-v2 .ip-hero-grad,
+.sv-hero-v2 .sv-hero-grad,
+.pp-hero-v2 .pp-hero-grad,
+.bl-hero-v2 .bl-hero-grad,
+.ct-hero-v2 .ct-hero-grad,
+.ab-hero-v2 .ab-hero-grad,
+.cp-hero-v2 .cp-hero-stat-num,
+.ip-hero-v2 .ip-hero-stat-num,
+.sv-hero-v2 .sv-hero-stat-num,
+.pp-hero-v2 .pp-hero-stat-num,
+.bl-hero-v2 .bl-hero-stat-num,
+.ct-hero-v2 .ct-hero-stat-num,
+.ab-hero-v2 .ab-hero-stat-num {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Stat labels in hero-v2 */
+.cp-hero-v2 .cp-hero-stat-lbl,
+.ip-hero-v2 .ip-hero-stat-lbl,
+.sv-hero-v2 .sv-hero-stat-lbl,
+.pp-hero-v2 .pp-hero-stat-lbl,
+.bl-hero-v2 .bl-hero-stat-lbl,
+.ct-hero-v2 .ct-hero-stat-lbl,
+.ab-hero-v2 .ab-hero-stat-lbl { color: #94a3b8 !important; }
+
+/* Stats bars in hero-v2 */
+.cp-hero-v2 .cp-hero-stats,
+.ip-hero-v2 .ip-hero-stats,
+.sv-hero-v2 .sv-hero-stats,
+.pp-hero-v2 .pp-hero-stats,
+.bl-hero-v2 .bl-hero-stats,
+.ct-hero-v2 .ct-hero-stats,
+.ab-hero-v2 .ab-hero-stats {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+
+/* Pill badges in hero-v2 */
+.cp-hero-v2 .cp-hero-pill,
+.ip-hero-v2 .ip-hero-pill,
+.sv-hero-v2 .sv-hero-pill,
+.pp-hero-v2 .pp-hero-pill,
+.bl-hero-v2 .bl-hero-pill,
+.ct-hero-v2 .ct-hero-pill,
+.ab-hero-v2 .ab-hero-pill {
+  background: rgba(99,102,241,0.2) !important;
+  border-color: rgba(99,102,241,0.4) !important;
+  color: #a78bfa !important;
+}
+
+/* Image card badges/tags in hero-v2 */
+.cp-hero-img-card-badge,
+.ip-hero-img-card-badge,
+.pp-hero-img-card-badge,
+.bl-hero-img-card-badge,
+.ct-hero-img-card-badge {
+  background: #13131f !important;
+  color: #e2e8f0 !important;
+}
+
+/* Old hero sections (non-v2) — also darken */
+.cp-hero, .ip-hero, .sv-hero,
+.pp-hero, .ct-hero, .ab-hero {
+  background: linear-gradient(135deg, #0f0f1a 0%, #12121f 50%, #0d1117 100%) !important;
+}
+.cp-hero *, .ip-hero *, .sv-hero *,
+.pp-hero *, .ct-hero *, .ab-hero * {
+  color: #f1f5f9 !important;
+}
+/* Restore gradient text in old heroes */
+.cp-hero .cp-grad, .ip-hero .ip-grad, .sv-hero .sv-grad,
+.cp-hero .cp-stat-num, .ip-hero .ip-stat-num, .sv-hero .sv-stat-num,
+.pp-hero .pp-stat-number, .ct-hero .ct-hero-highlight {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
