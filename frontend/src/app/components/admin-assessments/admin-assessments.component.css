@@ -90,3 +90,40 @@
 }
 .adm-btn-copy:hover { background: #e2e8f0; color: #1e293b; }
 .adm-btn-copy .bi-check-lg { color: #10b981; }
+
+
+/* ============================================
+   DARK THEME OVERRIDES
+   ============================================ */
+.adm-page { background: #0a0a0f !important; }
+.adm-title { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.adm-subtitle { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.adm-form-card { background: #13131f !important; box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important; }
+.adm-form-title { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.adm-label { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.hint { color: #64748b !important; -webkit-text-fill-color: #64748b !important; }
+.adm-input, .adm-select, .adm-textarea {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+}
+.adm-input:focus, .adm-select:focus { border-color: #6366f1 !important; }
+.adm-table-wrap { background: #13131f !important; box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important; }
+.adm-table th { background: #1a1a2e !important; color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; border-bottom-color: rgba(255,255,255,0.08) !important; }
+.adm-table td { border-bottom-color: rgba(255,255,255,0.05) !important; color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; }
+.adm-row-link:hover td { background: #1e1e2e !important; }
+.adm-title-cell { color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; }
+.adm-detail-cell { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.adm-alert-success { background: rgba(21,128,61,0.15) !important; color: #86efac !important; -webkit-text-fill-color: #86efac !important; border-color: rgba(34,197,94,0.3) !important; }
+.adm-alert-error   { background: rgba(185,28,28,0.15) !important; color: #fca5a5 !important; -webkit-text-fill-color: #fca5a5 !important; border-color: rgba(239,68,68,0.3) !important; }
+.adm-empty { background: #1a1a2e !important; color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.adm-loading { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+/* Badges */
+.badge-interview { background: rgba(0,64,133,0.25) !important; color: #93c5fd !important; -webkit-text-fill-color: #93c5fd !important; }
+.badge-machine   { background: rgba(133,100,4,0.25) !important; color: #fbbf24 !important; -webkit-text-fill-color: #fbbf24 !important; }
+.badge-mcq       { background: rgba(21,87,36,0.25) !important; color: #86efac !important; -webkit-text-fill-color: #86efac !important; }
+.badge-aptitude  { background: rgba(74,35,90,0.25) !important; color: #d8b4fe !important; -webkit-text-fill-color: #d8b4fe !important; }
+/* Share link */
+.adm-share-input { background: #1e1e2e !important; border-color: rgba(255,255,255,0.1) !important; color: #94a3b8 !important; }
+.adm-btn-copy { background: #1e1e2e !important; border-color: rgba(255,255,255,0.1) !important; color: #94a3b8 !important; }
+.adm-btn-copy:hover { background: #2d2d4e !important; color: #e2e8f0 !important; }

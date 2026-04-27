@@ -259,3 +259,38 @@
   opacity: 1; visibility: visible;
   pointer-events: auto;
 }
+
+
+/* ============================================
+   DARK THEME OVERRIDES
+   ============================================ */
+.navbar {
+  background: rgba(10,10,15,0.85) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.3) !important;
+}
+.navbar.scrolled {
+  background: rgba(10,10,15,0.95) !important;
+  border-bottom-color: rgba(99,102,241,0.15) !important;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.4) !important;
+}
+.nav-link { color: #cbd5e1 !important; }
+.nav-link:hover { color: #a78bfa !important; background: rgba(99,102,241,0.1) !important; }
+.nav-link.active { color: #a78bfa !important; background: rgba(99,102,241,0.1) !important; }
+.hamburger-icon .line { background: #cbd5e1 !important; }
+.mobile-menu-drawer {
+  background: #13131f !important;
+  box-shadow: -8px 0 40px rgba(0,0,0,0.5) !important;
+}
+.mobile-nav-link { color: #cbd5e1 !important; }
+.mobile-nav-link:hover {
+  color: #a78bfa !important;
+  background: rgba(99,102,241,0.1) !important;
+  border-left-color: #a78bfa !important;
+}
+.mobile-nav-link.active {
+  color: #a78bfa !important;
+  background: rgba(99,102,241,0.1) !important;
+  border-left-color: #a78bfa !important;
+}

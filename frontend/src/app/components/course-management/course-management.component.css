@@ -130,3 +130,18 @@ h2 {
     padding: 0.5rem;
   }
 }
+
+
+/* ============================================
+   DARK THEME OVERRIDES
+   ============================================ */
+:host { display: block; background: #0a0a0f; }
+h2 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.card { background: #13131f !important; border-color: rgba(255,255,255,0.07) !important; box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important; }
+.card-header { background: #1a1a2e !important; border-bottom-color: rgba(255,255,255,0.07) !important; }
+.card-header h5 { color: #f1f5f9 !important; -webkit-text-fill-color: #f1f5f9 !important; }
+.table th { background: #1a1a2e !important; color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; border-bottom-color: rgba(255,255,255,0.08) !important; }
+.table td { color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; border-color: rgba(255,255,255,0.05) !important; }
+.table tr:hover td { background: #1e1e2e !important; }
+.form-label { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.text-danger { color: #fca5a5 !important; -webkit-text-fill-color: #fca5a5 !important; }
