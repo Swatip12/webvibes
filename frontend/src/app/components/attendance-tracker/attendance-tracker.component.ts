@@ -57,6 +57,12 @@ export class AttendanceTrackerComponent implements OnInit, OnDestroy {
 
   // ── Today ──────────────────────────────────────────────────────────────────
 
+  refresh(): void {
+    this.loadToday();
+    this.loadSummary();
+    this.loadCalendar();
+  }
+
   loadToday(): void {
     this.todayLoading = true;
     this.todayError = '';

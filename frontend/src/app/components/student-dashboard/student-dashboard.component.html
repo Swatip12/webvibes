@@ -322,8 +322,8 @@
         </div>
       </div>
 
-      <!-- Progress + Attendance side by side when FULL -->
-      <div class="two-col" *ngIf="dashboard.paymentStatus === 'FULL'">
+      <!-- Progress + Quick Stats side by side when plan assigned -->
+      <div class="two-col" *ngIf="dashboard.planAssigned">
         <app-student-progress></app-student-progress>
         <div class="card section-card">
           <div class="card-head">
@@ -350,8 +350,8 @@
         </div>
       </div>
 
-      <!-- Attendance Tracker -->
-      <app-attendance-tracker *ngIf="dashboard.paymentStatus === 'FULL'"></app-attendance-tracker>
+      <!-- Attendance Tracker — visible to all enrolled students (phase dates set by admin) -->
+      <app-attendance-tracker *ngIf="dashboard.planAssigned"></app-attendance-tracker>
 
     </div>
   </div>

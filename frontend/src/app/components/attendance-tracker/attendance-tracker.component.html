@@ -9,9 +9,14 @@
         <p>Track your daily check-in and check-out</p>
       </div>
     </div>
-    <div class="at-live-clock">
-      <span class="clock-time">{{ currentTime | date:'HH:mm:ss' }}</span>
-      <span class="clock-date">{{ currentTime | date:'EEEE, d MMM yyyy' }}</span>
+    <div class="at-header-right">
+      <button class="at-refresh-btn" (click)="refresh()" [disabled]="todayLoading || summaryLoading || calendarLoading" title="Refresh attendance data">
+        <span [class.at-spin]="todayLoading || summaryLoading || calendarLoading">🔄</span>
+      </button>
+      <div class="at-live-clock">
+        <span class="clock-time">{{ currentTime | date:'HH:mm:ss' }}</span>
+        <span class="clock-date">{{ currentTime | date:'EEEE, d MMM yyyy' }}</span>
+      </div>
     </div>
   </div>
 
