@@ -59,8 +59,10 @@ export class StudentLoginComponent implements OnInit {
   }
 
   openForgot(): void {
-    // Pre-fill email from login form if entered
-    this.forgotEmail = this.loginForm.value.email || '';
+    // Pre-fill email only if it's a valid email format
+    const emailVal = this.loginForm.value.email || '';
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    this.forgotEmail = emailRegex.test(emailVal) ? emailVal : '';
     this.forgotMsg = '';
     this.forgotError = '';
     this.showForgot = true;
