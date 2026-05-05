@@ -60,11 +60,10 @@
              target="_blank" rel="noopener">
             <span>💬</span> WhatsApp Admin
           </a>
-          <a class="forgot-email-btn"
-             [href]="'mailto:webvibetechnology@gmail.com?subject=Password%20Reset%20Request&body=Hi%2C%20please%20reset%20my%20password.%20My%20registered%20email%20is%3A%20' + forgotEmail"
-             target="_blank" rel="noopener">
+          <button type="button" class="forgot-email-btn"
+             (click)="emailAdmin()">
             <span>✉️</span> Email Admin
-          </a>
+          </button>
         </div>
 
         <div class="forgot-email-row">

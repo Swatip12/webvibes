@@ -51,4 +51,12 @@ export class StudentLoginComponent implements OnInit {
   }
 
   get f() { return this.loginForm.controls; }
+
+  emailAdmin(): void {
+    const subject = encodeURIComponent('Password Reset Request');
+    const body = encodeURIComponent(
+      `Hi,\n\nPlease reset my student portal password.\n\nMy registered email is: ${this.forgotEmail}\n\nThank you.`
+    );
+    window.location.href = `mailto:webvibetechnology@gmail.com?subject=${subject}&body=${body}`;
+  }
 }
