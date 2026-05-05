@@ -261,3 +261,93 @@ input:focus { border-color: #6366f1 !important; }
 .forgot-email-input { background: #1e1e2e !important; border-color: rgba(255,255,255,0.12) !important; color: #f1f5f9 !important; }
 .btn-back { background: #1e1e2e !important; border-color: rgba(255,255,255,0.12) !important; color: #94a3b8 !important; }
 .btn-back:hover { background: #2d2d4e !important; }
+
+/* ── Step header ── */
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.step-header h2 { margin: 0; }
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #4f46e5;
+  font-size: 0.88rem;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.back-btn:hover { text-decoration: underline; }
+
+.step-desc {
+  font-size: 0.88rem;
+  color: #555;
+  margin: 0 0 1.25rem;
+  line-height: 1.6;
+}
+
+/* ── Password toggle ── */
+.pw-wrap {
+  position: relative;
+  display: flex;
+}
+
+.pw-wrap input {
+  flex: 1;
+  padding-right: 2.5rem;
+}
+
+.pw-toggle {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  line-height: 1;
+}
+
+/* ── OTP input ── */
+.otp-input {
+  letter-spacing: 0.3em;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ── Resend row ── */
+.resend-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* ── Alert success ── */
+.alert-success {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Dark theme overrides for new elements */
+.step-desc { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.back-btn { color: #a78bfa !important; }
+.resend-row { color: #64748b !important; -webkit-text-fill-color: #64748b !important; }
+.alert-success { background: rgba(21,128,61,0.15) !important; color: #86efac !important; -webkit-text-fill-color: #86efac !important; border-color: rgba(34,197,94,0.3) !important; }

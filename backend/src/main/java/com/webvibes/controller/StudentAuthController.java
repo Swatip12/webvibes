@@ -1,11 +1,15 @@
 package com.webvibes.controller;
 
+import com.webvibes.dto.ForgotPasswordRequest;
 import com.webvibes.dto.MessageResponse;
 import com.webvibes.dto.ResetPasswordRequest;
 import com.webvibes.dto.StudentAuthResponse;
 import com.webvibes.dto.StudentLoginRequest;
 import com.webvibes.dto.StudentRegisterRequest;
+import com.webvibes.dto.VerifyOtpRequest;
 import com.webvibes.security.JwtTokenProvider;
+import com.webvibes.service.EmailService;
+import com.webvibes.service.OtpService;
 import com.webvibes.service.StudentService;
 import com.webvibes.entity.Student;
 import jakarta.validation.Valid;
@@ -41,6 +45,12 @@ public class StudentAuthController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private OtpService otpService;
+
+    @Autowired
+    private EmailService emailService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody StudentRegisterRequest request) {
@@ -83,8 +93,48 @@ public class StudentAuthController {
     }
 
     /**
-     * Admin-only: reset a student's password.
-     * POST /api/student/auth/reset-password
+     * Step 1: Student requests OTP — POST /api/student/auth/forgot-password
+     * Sends a 6-digit OTP to the student's registered email.
+     */
+    @PostMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
+        Student student = studentService.findByEmail(request.getEmail()).orElse(null);
+        // Always return success to prevent email enumeration
+        if (student == null) {
+            return ResponseEntity.ok(new MessageResponse("If this email is registered, an OTP has been sent."));
+        }
+        try {
+            String otp = otpService.generateOtp(request.getEmail());
+            emailService.sendOtpEmail(request.getEmail(), otp);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new MessageResponse(e.getMessage()));
+        }
+        return ResponseEntity.ok(new MessageResponse("OTP sent to your registered email. Valid for 10 minutes."));
+    }
+
+    /**
+     * Step 2: Student verifies OTP and sets new password — POST /api/student/auth/verify-otp
+     */
+    @PostMapping("/verify-otp")
+    public ResponseEntity<?> verifyOtp(@Valid @RequestBody VerifyOtpRequest request) {
+        if (!otpService.verifyOtp(request.getEmail(), request.getOtp())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new MessageResponse("Invalid or expired OTP. Please request a new one."));
+        }
+        Student student = studentService.findByEmail(request.getEmail()).orElse(null);
+        if (student == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new MessageResponse("Student not found."));
+        }
+        student.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        studentService.save(student);
+        log.info("Password reset via OTP for student: {}", request.getEmail());
+        return ResponseEntity.ok(new MessageResponse("Password reset successfully. You can now log in."));
+    }
+
+    /**
+     * Admin-only: reset a student's password — POST /api/student/auth/reset-password
      */
     @PostMapping("/reset-password")
     @PreAuthorize("hasRole('ADMIN')")
