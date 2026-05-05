@@ -36,4 +36,8 @@ public class StudentService {
     public Optional<Student> findByEmail(String email) {
         return studentRepository.findByEmail(email);
     }
+
+    public Student save(Student student) {
+        return studentRepository.save(student);
+    }
 }

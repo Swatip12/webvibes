@@ -86,6 +86,9 @@
               <button class="adm-btn adm-btn-sm adm-btn-secondary" (click)="toggleAdminCalendar(student)">
                 <i class="bi bi-calendar3"></i> Attendance
               </button>
+              <button class="adm-btn adm-btn-sm adm-btn-danger" (click)="openResetPassword(student)">
+                <i class="bi bi-key"></i> Reset Pwd
+              </button>
             </td>
           </tr>
 
@@ -210,6 +213,40 @@
 
                 <div class="phase-actions">
                   <button class="adm-btn adm-btn-secondary adm-btn-sm" (click)="toggleAdminCalendar(student)">
+                    <i class="bi bi-x-lg"></i> Close
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Reset Password inline panel -->
+          <tr *ngIf="resetPasswordStudentId === student.id">
+            <td colspan="10" class="phase-dates-cell">
+              <div class="phase-dates-panel">
+                <h4 class="phase-panel-title">🔑 Reset Password — {{ student.name }}</h4>
+                <div class="phase-dates-grid" style="grid-template-columns: 1fr 1fr;">
+                  <div class="phase-field">
+                    <label class="phase-label">New Password</label>
+                    <input type="password" class="phase-input" [(ngModel)]="resetPasswordForm.newPassword"
+                      placeholder="Min 6 characters" autocomplete="new-password" />
+                  </div>
+                  <div class="phase-field">
+                    <label class="phase-label">Confirm Password</label>
+                    <input type="password" class="phase-input" [(ngModel)]="resetPasswordForm.confirm"
+                      placeholder="Repeat password" autocomplete="new-password" />
+                  </div>
+                </div>
+                <div *ngIf="resetPasswordError" class="phase-validation-error">⚠️ {{ resetPasswordError }}</div>
+                <div *ngIf="resetPasswordMsg" class="adm-alert adm-alert-success phase-msg">✅ {{ resetPasswordMsg }}</div>
+                <div class="phase-actions">
+                  <button class="adm-btn adm-btn-danger adm-btn-sm"
+                    [disabled]="resetPasswordSaving || !resetPasswordForm.newPassword || !resetPasswordForm.confirm"
+                    (click)="saveResetPassword()">
+                    <i class="bi bi-key"></i>
+                    {{ resetPasswordSaving ? 'Resetting...' : 'Reset Password' }}
+                  </button>
+                  <button class="adm-btn adm-btn-secondary adm-btn-sm" (click)="closeResetPassword()">
                     <i class="bi bi-x-lg"></i> Close
                   </button>
                 </div>

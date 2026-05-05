@@ -51,7 +51,9 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/student/auth/**").permitAll()
+                .requestMatchers("/api/student/auth/register").permitAll()
+                .requestMatchers("/api/student/auth/login").permitAll()
+                .requestMatchers("/api/student/auth/reset-password").hasRole("ADMIN")
                 .requestMatchers("/api/courses").permitAll()
                 .requestMatchers("/api/courses/*/syllabus").permitAll()
                 .requestMatchers("/api/internships").permitAll()

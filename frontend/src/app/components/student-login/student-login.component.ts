@@ -14,6 +14,12 @@ export class StudentLoginComponent implements OnInit {
   isLoading = false;
   private returnUrl = '/student/dashboard';
 
+  // Forgot password state
+  showForgot = false;
+  forgotEmail = '';
+  forgotMsg = '';
+  forgotError = '';
+
   constructor(
     private fb: FormBuilder,
     private studentAuthService: StudentAuthService,
@@ -27,7 +33,6 @@ export class StudentLoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Capture returnUrl from query params (set by StudentGuard)
     this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/student/dashboard';
   }
 
@@ -51,6 +56,21 @@ export class StudentLoginComponent implements OnInit {
         }
       }
     });
+  }
+
+  openForgot(): void {
+    // Pre-fill email from login form if entered
+    this.forgotEmail = this.loginForm.value.email || '';
+    this.forgotMsg = '';
+    this.forgotError = '';
+    this.showForgot = true;
+    this.errorMessage = '';
+  }
+
+  closeForgot(): void {
+    this.showForgot = false;
+    this.forgotMsg = '';
+    this.forgotError = '';
   }
 
   get f() { return this.loginForm.controls; }

@@ -1,23 +1,27 @@
 package com.webvibes.controller;
 
 import com.webvibes.dto.MessageResponse;
+import com.webvibes.dto.ResetPasswordRequest;
 import com.webvibes.dto.StudentAuthResponse;
 import com.webvibes.dto.StudentLoginRequest;
 import com.webvibes.dto.StudentRegisterRequest;
 import com.webvibes.security.JwtTokenProvider;
 import com.webvibes.service.StudentService;
+import com.webvibes.entity.Student;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,6 +38,9 @@ public class StudentAuthController {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody StudentRegisterRequest request) {
@@ -73,5 +80,23 @@ public class StudentAuthController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new MessageResponse("Login failed: " + e.getMessage()));
         }
+    }
+
+    /**
+     * Admin-only: reset a student's password.
+     * POST /api/student/auth/reset-password
+     */
+    @PostMapping("/reset-password")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
+        Student student = studentService.findByEmail(request.getEmail()).orElse(null);
+        if (student == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new MessageResponse("No student found with email: " + request.getEmail()));
+        }
+        student.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        studentService.save(student);
+        log.info("Admin reset password for student: {}", request.getEmail());
+        return ResponseEntity.ok(new MessageResponse("Password reset successfully for " + student.getName()));
     }
 }

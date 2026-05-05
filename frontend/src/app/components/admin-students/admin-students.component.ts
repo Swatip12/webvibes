@@ -229,7 +229,54 @@ export class AdminStudentsComponent implements OnInit {
     });
   }
 
-  // ── Admin Calendar ─────────────────────────────────────────────────────────
+  // ── Reset Password ────────────────────────────────────────────────────────
+
+  resetPasswordStudentId: number | null = null;
+  resetPasswordEmail = '';
+  resetPasswordForm = { newPassword: '', confirm: '' };
+  resetPasswordMsg = '';
+  resetPasswordError = '';
+  resetPasswordSaving = false;
+
+  openResetPassword(student: AdminStudentDTO): void {
+    this.resetPasswordStudentId = student.id;
+    this.resetPasswordEmail = student.email;
+    this.resetPasswordForm = { newPassword: '', confirm: '' };
+    this.resetPasswordMsg = '';
+    this.resetPasswordError = '';
+  }
+
+  closeResetPassword(): void {
+    this.resetPasswordStudentId = null;
+  }
+
+  saveResetPassword(): void {
+    if (!this.resetPasswordForm.newPassword || this.resetPasswordForm.newPassword.length < 6) {
+      this.resetPasswordError = 'Password must be at least 6 characters.';
+      return;
+    }
+    if (this.resetPasswordForm.newPassword !== this.resetPasswordForm.confirm) {
+      this.resetPasswordError = 'Passwords do not match.';
+      return;
+    }
+    this.resetPasswordSaving = true;
+    this.resetPasswordError = '';
+    this.resetPasswordMsg = '';
+    this.http.post<{ message: string }>(
+      `${this.apiUrl}/api/student/auth/reset-password`,
+      { email: this.resetPasswordEmail, newPassword: this.resetPasswordForm.newPassword }
+    ).subscribe({
+      next: (res) => {
+        this.resetPasswordSaving = false;
+        this.resetPasswordMsg = res.message;
+        this.resetPasswordForm = { newPassword: '', confirm: '' };
+      },
+      error: (err) => {
+        this.resetPasswordSaving = false;
+        this.resetPasswordError = err?.error?.message || 'Failed to reset password.';
+      }
+    });
+  }
 
   getAdminCalendarState(studentId: number): AdminCalendarState {
     if (!this.adminCalendarMap.has(studentId)) {
