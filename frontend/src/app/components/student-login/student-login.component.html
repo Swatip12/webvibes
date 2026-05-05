@@ -9,7 +9,9 @@
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="email">Email</label>
-          <input id="email" type="email" formControlName="email" placeholder="Enter your email" autocomplete="email" />
+          <div class="pw-wrap">
+            <input id="email" type="email" formControlName="email" placeholder="Enter your email" autocomplete="email" />
+          </div>
           <span class="field-error" *ngIf="f['email'].touched && f['email'].errors?.['required']">Email is required</span>
           <span class="field-error" *ngIf="f['email'].touched && f['email'].errors?.['email']">Enter a valid email</span>
         </div>
@@ -27,7 +29,7 @@
         </div>
 
         <div class="forgot-link-row">
-          <button type="button" class="forgot-link" (click)="goToForgot()">Forgot password?</button>
+          <button type="button" class="forgot-link" (click)="step = 'forgot'">Forgot password?</button>
         </div>
 
         <button type="submit" [disabled]="loginForm.invalid || isLoading" class="btn-primary">
@@ -38,83 +40,40 @@
       <p class="auth-link">Don't have an account? <a routerLink="/student/register">Register</a></p>
     </ng-container>
 
-    <!-- ── Step 2: Enter Email for OTP ── -->
+    <!-- ── Step 2: Forgot Password — Contact Admin ── -->
     <ng-container *ngIf="step === 'forgot'">
       <div class="step-header">
         <button class="back-btn" (click)="step = 'login'">← Back</button>
-        <h2>Forgot Password</h2>
-      </div>
-      <p class="step-desc">Enter your registered email address and we'll send you a 6-digit OTP.</p>
-
-      <div *ngIf="forgotError" class="alert alert-error">{{ forgotError }}</div>
-      <div *ngIf="forgotMsg" class="alert alert-success">
-        {{ forgotMsg }}
-        <br><small>Check your inbox and spam folder.</small>
+        <h2>Forgot Password?</h2>
       </div>
 
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" [(ngModel)]="forgotEmail" placeholder="your@email.com" autocomplete="email" />
-      </div>
+      <div class="forgot-panel">
+        <div class="forgot-icon">🔑</div>
+        <p class="forgot-desc">
+          To reset your password, contact your WebVibes Technology admin.<br>
+          They will reset it for you from the admin panel.
+        </p>
 
-      <button class="btn-primary" [disabled]="!forgotEmail || forgotLoading" (click)="sendOtp()">
-        {{ forgotLoading ? 'Sending OTP...' : 'Send OTP' }}
-      </button>
-
-      <button *ngIf="forgotMsg" class="btn-primary" style="margin-top:0.5rem;background:#22c55e"
-        (click)="step = 'otp'">
-        Enter OTP →
-      </button>
-    </ng-container>
-
-    <!-- ── Step 3: Enter OTP + New Password ── -->
-    <ng-container *ngIf="step === 'otp'">
-      <div class="step-header">
-        <button class="back-btn" (click)="step = 'forgot'">← Back</button>
-        <h2>Reset Password</h2>
-      </div>
-      <p class="step-desc">
-        OTP sent to <strong>{{ forgotEmail }}</strong>.<br>
-        Check your inbox (and spam folder).
-      </p>
-
-      <div *ngIf="otpError" class="alert alert-error">{{ otpError }}</div>
-      <div *ngIf="otpMsg" class="alert alert-success">{{ otpMsg }}</div>
-
-      <div class="form-group">
-        <label>6-Digit OTP</label>
-        <input type="text" [(ngModel)]="otp" placeholder="Enter OTP" maxlength="6"
-          class="otp-input" autocomplete="one-time-code" />
-      </div>
-
-      <div class="form-group">
-        <label>New Password</label>
-        <div class="pw-wrap">
-          <input [type]="showNewPw ? 'text' : 'password'" [(ngModel)]="newPassword"
-            placeholder="Min 6 characters" autocomplete="new-password" />
-          <button type="button" class="pw-toggle" (click)="showNewPw = !showNewPw" tabindex="-1">
-            {{ showNewPw ? '🙈' : '👁️' }}
-          </button>
+        <div class="forgot-contact-btns">
+          <a class="forgot-wa-btn"
+             href="https://wa.me/917447603603?text=Hi%2C%20I%20need%20to%20reset%20my%20student%20portal%20password.%20My%20registered%20email%20is%3A%20{{ forgotEmail }}"
+             target="_blank" rel="noopener">
+            <span>💬</span> WhatsApp Admin
+          </a>
+          <a class="forgot-email-btn"
+             href="mailto:webvibetechnology@gmail.com?subject=Password%20Reset%20Request&body=Hi%2C%20please%20reset%20my%20password.%20My%20registered%20email%20is%3A%20{{ forgotEmail }}"
+             target="_blank" rel="noopener">
+            <span>✉️</span> Email Admin
+          </a>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label>Confirm Password</label>
-        <input type="password" [(ngModel)]="confirmPassword" placeholder="Repeat password" autocomplete="new-password" />
-        <span class="field-error" *ngIf="confirmPassword && newPassword !== confirmPassword">Passwords do not match</span>
-      </div>
+        <div class="forgot-email-row">
+          <label class="forgot-email-label">Your registered email (to include in message)</label>
+          <input type="email" class="forgot-email-input" [(ngModel)]="forgotEmail"
+            placeholder="your@email.com" />
+        </div>
 
-      <button class="btn-primary"
-        [disabled]="!otp || !newPassword || newPassword !== confirmPassword || otpLoading"
-        (click)="verifyOtp()">
-        {{ otpLoading ? 'Resetting...' : 'Reset Password' }}
-      </button>
-
-      <div class="resend-row">
-        <span>Didn't receive OTP?</span>
-        <button type="button" class="forgot-link" (click)="sendOtp()" [disabled]="forgotLoading">
-          {{ forgotLoading ? 'Sending...' : 'Resend OTP' }}
-        </button>
+        <button type="button" class="btn-back" (click)="step = 'login'">← Back to Login</button>
       </div>
     </ng-container>
 
