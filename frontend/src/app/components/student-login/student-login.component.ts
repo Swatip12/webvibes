@@ -108,7 +108,7 @@ export class StudentLoginComponent implements OnInit {
           this.otpMsg = '';
           this.otpError = '';
           this.step = 'otp';
-        }, 800);
+        }, 1500);
       },
       error: (err) => {
         this.forgotLoading = false;
