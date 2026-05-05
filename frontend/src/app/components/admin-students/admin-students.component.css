@@ -357,3 +357,20 @@
 .cell-late    { background: rgba(146,64,14,0.2) !important; border-color: rgba(252,211,77,0.3) !important; color: #fbbf24 !important; -webkit-text-fill-color: #fbbf24 !important; }
 .cell-absent  { background: rgba(185,28,28,0.2) !important; border-color: rgba(239,68,68,0.3) !important; color: #fca5a5 !important; -webkit-text-fill-color: #fca5a5 !important; }
 .cell-weekend, .cell-future, .cell-out { background: #1a1a2e !important; border-color: rgba(255,255,255,0.05) !important; color: #475569 !important; -webkit-text-fill-color: #475569 !important; }
+
+/* ── Reset Password panel dark theme ── */
+.phase-dates-panel input[type="password"] {
+  background: #1e1e2e !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+}
+.phase-dates-panel input[type="password"]:focus {
+  border-color: #6366f1 !important;
+}
+.phase-validation-error {
+  background: rgba(185,28,28,0.15) !important;
+  border-color: rgba(239,68,68,0.3) !important;
+  color: #fca5a5 !important;
+  -webkit-text-fill-color: #fca5a5 !important;
+}
