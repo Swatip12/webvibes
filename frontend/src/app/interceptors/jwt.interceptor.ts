@@ -28,7 +28,19 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Skip public auth endpoints
     if (request.url.includes('/api/auth/login') ||
-        request.url.includes('/api/student/auth/')) {
+        request.url.includes('/api/student/auth/register') ||
+        request.url.includes('/api/student/auth/login')) {
+      return next.handle(request);
+    }
+
+    // Admin reset-password endpoint — attach admin token
+    if (request.url.includes('/api/student/auth/reset-password')) {
+      const adminToken = this.authService.getToken();
+      if (adminToken) {
+        request = request.clone({
+          setHeaders: { Authorization: `Bearer ${adminToken}` }
+        });
+      }
       return next.handle(request);
     }
 
