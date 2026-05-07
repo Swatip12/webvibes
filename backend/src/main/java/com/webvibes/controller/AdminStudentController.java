@@ -70,6 +70,9 @@ public class AdminStudentController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(results);
     }
+
+    /**
+     * Get ALL registered students. Students without a plan show planAssigned=false.
      * Optionally filter by paymentStatus (only applies to students with a plan).
      */
     @GetMapping

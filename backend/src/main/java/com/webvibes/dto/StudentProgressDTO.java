@@ -17,6 +17,10 @@ public class StudentProgressDTO {
     private int technicalMcqTotal;
     private int technicalMcqCompleted;
 
+    // Average score percentages for MCQ-type tests (null if no completed tests)
+    private Double aptitudeTestAvgScorePct;
+    private Double technicalMcqAvgScorePct;
+
     public StudentProgressDTO() {}
 
     public int getTotalAssigned() { return totalAssigned; }
@@ -48,11 +52,6 @@ public class StudentProgressDTO {
 
     public int getTechnicalMcqCompleted() { return technicalMcqCompleted; }
     public void setTechnicalMcqCompleted(int technicalMcqCompleted) { this.technicalMcqCompleted = technicalMcqCompleted; }
-}
-
-    // Average score percentages for MCQ-type tests (null if no completed tests)
-    private Double aptitudeTestAvgScorePct;
-    private Double technicalMcqAvgScorePct;
 
     public Double getAptitudeTestAvgScorePct() { return aptitudeTestAvgScorePct; }
     public void setAptitudeTestAvgScorePct(Double aptitudeTestAvgScorePct) { this.aptitudeTestAvgScorePct = aptitudeTestAvgScorePct; }
