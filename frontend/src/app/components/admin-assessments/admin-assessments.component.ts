@@ -26,7 +26,8 @@ export class AdminAssessmentsComponent implements OnInit {
     scheduledAt: '',
     videoLink: '',
     problemStatement: '',
-    timeLimitMinutes: undefined
+    timeLimitMinutes: undefined,
+    marksPerQuestion: 1
   };
 
   constructor(
@@ -70,7 +71,8 @@ export class AdminAssessmentsComponent implements OnInit {
       scheduledAt: '',
       videoLink: '',
       problemStatement: '',
-      timeLimitMinutes: undefined
+      timeLimitMinutes: undefined,
+      marksPerQuestion: 1
     };
   }
 
@@ -112,6 +114,7 @@ export class AdminAssessmentsComponent implements OnInit {
       req.problemStatement = this.form.problemStatement;
     } else if (this.isMcqOrAptitude()) {
       req.timeLimitMinutes = this.form.timeLimitMinutes;
+      req.marksPerQuestion = this.form.marksPerQuestion || 1;
     }
 
     this.adminAssessmentService.createAssessment(req).subscribe({

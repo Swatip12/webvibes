@@ -58,4 +58,11 @@ export class StudentProgressComponent implements OnInit {
     return !!this.progress && this.progress.totalAssigned > 0 &&
            this.progress.totalCompleted === this.progress.totalAssigned;
   }
+
+  avgScore(key: string): number | null {
+    if (!this.progress) return null;
+    if (key === 'aptitudeTest') return this.progress.aptitudeTestAvgScorePct ?? null;
+    if (key === 'technicalMcq') return this.progress.technicalMcqAvgScorePct ?? null;
+    return null;
+  }
 }

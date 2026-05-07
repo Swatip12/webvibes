@@ -29,6 +29,9 @@ public class CreateAssessmentRequest {
     @Max(value = 180, message = "Time limit must not exceed 180 minutes")
     private Integer timeLimitMinutes;
 
+    @Min(value = 1, message = "Marks per question must be at least 1")
+    private Integer marksPerQuestion = 1;
+
     public CreateAssessmentRequest() {}
 
     public String getTitle() { return title; }
@@ -51,4 +54,7 @@ public class CreateAssessmentRequest {
 
     public Integer getTimeLimitMinutes() { return timeLimitMinutes; }
     public void setTimeLimitMinutes(Integer timeLimitMinutes) { this.timeLimitMinutes = timeLimitMinutes; }
+
+    public Integer getMarksPerQuestion() { return marksPerQuestion; }
+    public void setMarksPerQuestion(Integer marksPerQuestion) { this.marksPerQuestion = marksPerQuestion; }
 }

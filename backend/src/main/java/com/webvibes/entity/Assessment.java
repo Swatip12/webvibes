@@ -38,6 +38,9 @@ public class Assessment {
     @Column(name = "time_limit_minutes")
     private Integer timeLimitMinutes;
 
+    @Column(name = "marks_per_question")
+    private Integer marksPerQuestion = 1; // default 1 mark per question
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
@@ -77,6 +80,9 @@ public class Assessment {
 
     public Integer getTimeLimitMinutes() { return timeLimitMinutes; }
     public void setTimeLimitMinutes(Integer timeLimitMinutes) { this.timeLimitMinutes = timeLimitMinutes; }
+
+    public Integer getMarksPerQuestion() { return marksPerQuestion; }
+    public void setMarksPerQuestion(Integer marksPerQuestion) { this.marksPerQuestion = marksPerQuestion; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }

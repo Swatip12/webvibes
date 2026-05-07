@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { AdminAssessmentService } from '../../services/admin-assessment.service';
+import { environment } from '../../../environments/environment';
 import {
   AssessmentDTO,
   AssessmentType,
@@ -10,7 +12,8 @@ import {
   AssignRequest,
   AssignResponse,
   ResultDTO,
-  UpdateStatusRequest
+  UpdateStatusRequest,
+  AdminStudentDTO
 } from '../../models/dtos';
 
 @Component({
@@ -40,12 +43,18 @@ export class AdminAssessmentDetailComponent implements OnInit {
   questionSuccess = '';
 
   // Assign section
-  assignMode: 'batch' | 'ids' = 'batch';
+  assignMode: 'batch' | 'ids' | 'name' = 'batch';
   batchName = '';
   studentIdsInput = '';
   assigning = false;
   assignResponse: AssignResponse | null = null;
   assignError = '';
+
+  // Student name search
+  studentSearchQuery = '';
+  studentSearchResults: AdminStudentDTO[] = [];
+  selectedStudents: AdminStudentDTO[] = [];
+  private searchTimeout: any;
 
   // Status update
   updatingStatusId: number | null = null;
@@ -55,7 +64,8 @@ export class AdminAssessmentDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private adminAssessmentService: AdminAssessmentService
+    private adminAssessmentService: AdminAssessmentService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -166,6 +176,8 @@ export class AdminAssessmentDetailComponent implements OnInit {
     const req: AssignRequest = {};
     if (this.assignMode === 'batch') {
       req.batchName = this.batchName.trim();
+    } else if (this.assignMode === 'name') {
+      req.studentIds = this.selectedStudents.map(s => s.id);
     } else {
       req.studentIds = this.studentIdsInput
         .split(',')
@@ -179,6 +191,8 @@ export class AdminAssessmentDetailComponent implements OnInit {
         this.assigning = false;
         this.batchName = '';
         this.studentIdsInput = '';
+        this.selectedStudents = [];
+        this.studentSearchQuery = '';
         this.loadResults(this.assessment!.id);
       },
       error: (err) => {
@@ -186,6 +200,35 @@ export class AdminAssessmentDetailComponent implements OnInit {
         this.assigning = false;
       }
     });
+  }
+
+  onStudentSearch(): void {
+    clearTimeout(this.searchTimeout);
+    const q = this.studentSearchQuery.trim();
+    if (q.length < 2) { this.studentSearchResults = []; return; }
+    this.searchTimeout = setTimeout(() => {
+      this.http.get<AdminStudentDTO[]>(`${environment.apiUrl}/api/admin/students/search?q=${encodeURIComponent(q)}`)
+        .subscribe({
+          next: (results) => {
+            this.studentSearchResults = results.filter(
+              r => !this.selectedStudents.find(s => s.id === r.id)
+            );
+          },
+          error: () => { this.studentSearchResults = []; }
+        });
+    }, 300);
+  }
+
+  selectStudent(s: AdminStudentDTO): void {
+    if (!this.selectedStudents.find(x => x.id === s.id)) {
+      this.selectedStudents.push(s);
+    }
+    this.studentSearchResults = [];
+    this.studentSearchQuery = '';
+  }
+
+  removeStudent(s: AdminStudentDTO): void {
+    this.selectedStudents = this.selectedStudents.filter(x => x.id !== s.id);
   }
 
   // Status update

@@ -13,6 +13,10 @@ public class StudentAssessmentDTO {
     private AssessmentStatus status;
     private LocalDateTime scheduledAt;
     private Integer timeLimitMinutes;
+    private Integer score;        // marks scored (marksPerQuestion * correct)
+    private Integer totalMarks;   // total possible marks
+    private Integer correctAnswers;
+    private Integer totalQuestions;
 
     public StudentAssessmentDTO() {}
 
@@ -48,4 +52,16 @@ public class StudentAssessmentDTO {
 
     public Integer getTimeLimitMinutes() { return timeLimitMinutes; }
     public void setTimeLimitMinutes(Integer timeLimitMinutes) { this.timeLimitMinutes = timeLimitMinutes; }
+
+    public Integer getScore() { return score; }
+    public void setScore(Integer score) { this.score = score; }
+
+    public Integer getTotalMarks() { return totalMarks; }
+    public void setTotalMarks(Integer totalMarks) { this.totalMarks = totalMarks; }
+
+    public Integer getCorrectAnswers() { return correctAnswers; }
+    public void setCorrectAnswers(Integer correctAnswers) { this.correctAnswers = correctAnswers; }
+
+    public Integer getTotalQuestions() { return totalQuestions; }
+    public void setTotalQuestions(Integer totalQuestions) { this.totalQuestions = totalQuestions; }
 }

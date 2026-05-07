@@ -151,7 +151,10 @@ export interface StudentAssessmentDTO {
   status: AssessmentStatus;
   scheduledAt?: string;
   timeLimitMinutes?: number;
-  score?: number;
+  score?: number | null;
+  totalMarks?: number | null;
+  correctAnswers?: number | null;
+  totalQuestions?: number | null;
 }
 
 export interface AssessmentDetailDTO {
@@ -203,6 +206,7 @@ export interface CreateAssessmentRequest {
   videoLink?: string;
   problemStatement?: string;
   timeLimitMinutes?: number;
+  marksPerQuestion?: number;
 }
 
 export interface CreateQuestionRequest {

@@ -154,6 +154,9 @@
             <input type="radio" [(ngModel)]="assignMode" value="batch" /> Batch Name
           </label>
           <label class="adm-radio-label">
+            <input type="radio" [(ngModel)]="assignMode" value="name" /> Student Name / Email
+          </label>
+          <label class="adm-radio-label">
             <input type="radio" [(ngModel)]="assignMode" value="ids" /> Student IDs
           </label>
         </div>
@@ -162,6 +165,25 @@
       <div *ngIf="assignMode === 'batch'" class="adm-form-group">
         <label class="adm-label">Batch Name <span class="required">*</span></label>
         <input type="text" class="adm-input" [(ngModel)]="batchName" placeholder="e.g. Java Batch" />
+      </div>
+
+      <div *ngIf="assignMode === 'name'" class="adm-form-group">
+        <label class="adm-label">Search Student <span class="required">*</span></label>
+        <input type="text" class="adm-input" [(ngModel)]="studentSearchQuery"
+          (input)="onStudentSearch()"
+          placeholder="Type name or email..." />
+        <div class="adm-search-results" *ngIf="studentSearchResults.length > 0">
+          <div class="adm-search-item" *ngFor="let s of studentSearchResults"
+            (click)="selectStudent(s)">
+            <strong>{{ s.name }}</strong> &nbsp;·&nbsp; {{ s.email }}
+          </div>
+        </div>
+        <div class="adm-selected-students" *ngIf="selectedStudents.length > 0">
+          <span class="adm-student-chip" *ngFor="let s of selectedStudents">
+            {{ s.name }}
+            <button class="chip-remove" (click)="removeStudent(s)">×</button>
+          </span>
+        </div>
       </div>
 
       <div *ngIf="assignMode === 'ids'" class="adm-form-group">

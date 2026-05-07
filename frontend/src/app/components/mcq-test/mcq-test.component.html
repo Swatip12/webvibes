@@ -121,7 +121,10 @@
       <span class="score-sep">/</span>
       <span class="score-total">{{ result.total }}</span>
     </div>
-    <p class="score-label">Your Score</p>
+    <p class="score-label">Your Score (Marks)</p>
+    <p class="score-sublabel" *ngIf="result.score != null && result.total != null">
+      {{ getScorePercent() }}% — {{ getScoreGrade() }}
+    </p>
     <button class="btn-back" (click)="goBack()">Back to Dashboard</button>
   </div>
 

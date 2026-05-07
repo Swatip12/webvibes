@@ -68,6 +68,11 @@
           <div class="progress-bar-fill" [ngClass]="'fill-' + cat.color"
                [style.width.%]="pct(cat.key)"></div>
         </div>
+        <!-- Score summary for MCQ types -->
+        <div class="cat-score-row" *ngIf="(cat.key === 'aptitudeTest' || cat.key === 'technicalMcq') && avgScore(cat.key) !== null">
+          <span class="cat-score-label">Avg Score:</span>
+          <span class="cat-score-val">{{ avgScore(cat.key) }}%</span>
+        </div>
       </div>
       <span class="cat-badge" *ngIf="pct(cat.key) === 100 && total(cat.key) > 0">✓</span>
       <span class="cat-pct" *ngIf="pct(cat.key) < 100 || total(cat.key) === 0">{{ pct(cat.key) }}%</span>

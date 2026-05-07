@@ -47,10 +47,18 @@
 
         <div class="card-meta-row">
           <!-- Score for COMPLETED MCQ/Aptitude -->
-          <div class="meta-chip" *ngIf="a.status === 'COMPLETED' && isMcqOrAptitude(a.type)">
+          <div class="meta-chip score-chip" *ngIf="a.status === 'COMPLETED' && isMcqOrAptitude(a.type) && a.score != null">
             <span class="meta-icon">🏆</span>
             <span class="meta-label">Score:</span>
-            <span class="meta-value score-value">{{ a.score !== undefined ? a.score : '—' }}</span>
+            <span class="meta-value score-value">{{ a.score }} / {{ a.totalMarks }}</span>
+            <span class="score-pct">({{ getScorePct(a) }}%)</span>
+          </div>
+
+          <!-- Correct answers detail -->
+          <div class="meta-chip" *ngIf="a.status === 'COMPLETED' && isMcqOrAptitude(a.type) && a.correctAnswers != null">
+            <span class="meta-icon">✅</span>
+            <span class="meta-label">Correct:</span>
+            <span class="meta-value">{{ a.correctAnswers }} / {{ a.totalQuestions }}</span>
           </div>
 
           <!-- Scheduled date for UPCOMING mock interview -->
@@ -58,6 +66,12 @@
             <span class="meta-icon">📅</span>
             <span class="meta-label">Scheduled:</span>
             <span class="meta-value">{{ formatDate(a.scheduledAt) }}</span>
+          </div>
+
+          <!-- Completed badge for non-MCQ -->
+          <div class="meta-chip completed-chip" *ngIf="a.status === 'COMPLETED' && !isMcqOrAptitude(a.type)">
+            <span class="meta-icon">✓</span>
+            <span class="meta-value">Completed</span>
           </div>
         </div>
 

@@ -43,6 +43,7 @@ public class AssessmentService {
         a.setVideoLink(req.getVideoLink());
         a.setProblemStatement(req.getProblemStatement());
         a.setTimeLimitMinutes(req.getTimeLimitMinutes());
+        if (req.getMarksPerQuestion() != null) a.setMarksPerQuestion(req.getMarksPerQuestion());
 
         Assessment saved = assessmentRepository.save(a);
         return toAssessmentDTO(saved);
@@ -214,12 +215,43 @@ public class AssessmentService {
             int completed = (int) byType.stream().filter(sa -> sa.getStatus() == AssessmentStatus.COMPLETED).count();
             switch (type) {
                 case MOCK_INTERVIEW   -> { dto.setMockInterviewTotal(total);  dto.setMockInterviewCompleted(completed); }
-                case APTITUDE_TEST    -> { dto.setAptitudeTestTotal(total);   dto.setAptitudeTestCompleted(completed); }
+                case APTITUDE_TEST    -> {
+                    dto.setAptitudeTestTotal(total);
+                    dto.setAptitudeTestCompleted(completed);
+                    dto.setAptitudeTestAvgScorePct(computeAvgScorePct(byType));
+                }
                 case MACHINE_TEST     -> { dto.setMachineTestTotal(total);    dto.setMachineTestCompleted(completed); }
-                case TECHNICAL_MCQ   -> { dto.setTechnicalMcqTotal(total);   dto.setTechnicalMcqCompleted(completed); }
+                case TECHNICAL_MCQ   -> {
+                    dto.setTechnicalMcqTotal(total);
+                    dto.setTechnicalMcqCompleted(completed);
+                    dto.setTechnicalMcqAvgScorePct(computeAvgScorePct(byType));
+                }
             }
         }
         return dto;
+    }
+
+    private Double computeAvgScorePct(List<StudentAssessment> assessments) {
+        List<StudentAssessment> completed = assessments.stream()
+                .filter(sa -> sa.getStatus() == AssessmentStatus.COMPLETED)
+                .collect(Collectors.toList());
+        if (completed.isEmpty()) return null;
+
+        double totalPct = 0;
+        int count = 0;
+        for (StudentAssessment sa : completed) {
+            submissionRepository.findByStudentAssessmentId(sa.getId()).ifPresent(sub -> {});
+            var subOpt = submissionRepository.findByStudentAssessmentId(sa.getId());
+            if (subOpt.isPresent() && subOpt.get().getScore() != null) {
+                int totalQ = sa.getAssessment().getQuestions().size();
+                if (totalQ > 0) {
+                    totalPct += (subOpt.get().getScore() * 100.0) / totalQ;
+                    count++;
+                }
+            }
+        }
+        if (count == 0) return null;
+        return Math.round(totalPct / count * 10.0) / 10.0;
     }
 
     @Transactional(readOnly = true)
@@ -306,7 +338,16 @@ public class AssessmentService {
         sa.setStatus(AssessmentStatus.COMPLETED);
         studentAssessmentRepository.save(sa);
 
-        return new SubmitResponse(score, total, AssessmentStatus.COMPLETED);
+        // Calculate marks-based score for response
+        Integer marksScore = null;
+        Integer totalMarks = null;
+        if (score != null && total != null) {
+            int marksPerQ = sa.getAssessment().getMarksPerQuestion() != null ? sa.getAssessment().getMarksPerQuestion() : 1;
+            marksScore = score * marksPerQ;
+            totalMarks = total * marksPerQ;
+        }
+
+        return new SubmitResponse(marksScore, totalMarks, AssessmentStatus.COMPLETED);
     }
 
     public void updateStudentAssessmentStatus(Long studentAssessmentId, AssessmentStatus status) {
@@ -415,9 +456,23 @@ public class AssessmentService {
 
     private StudentAssessmentDTO toStudentAssessmentDTO(StudentAssessment sa) {
         Assessment a = sa.getAssessment();
-        return new StudentAssessmentDTO(
+        StudentAssessmentDTO dto = new StudentAssessmentDTO(
                 sa.getId(), a.getId(), a.getTitle(), a.getType(),
                 sa.getStatus(), a.getScheduledAt(), a.getTimeLimitMinutes());
+
+        // Include score/total for completed MCQ/Aptitude tests
+        if (sa.getStatus() == AssessmentStatus.COMPLETED &&
+                (a.getType() == AssessmentType.TECHNICAL_MCQ || a.getType() == AssessmentType.APTITUDE_TEST)) {
+            submissionRepository.findByStudentAssessmentId(sa.getId()).ifPresent(sub -> {
+                int marksPerQ = a.getMarksPerQuestion() != null ? a.getMarksPerQuestion() : 1;
+                int totalQ = a.getQuestions().size();
+                dto.setScore(sub.getScore() != null ? sub.getScore() * marksPerQ : null);
+                dto.setTotalMarks(totalQ * marksPerQ);
+                dto.setCorrectAnswers(sub.getScore());
+                dto.setTotalQuestions(totalQ);
+            });
+        }
+        return dto;
     }
 
     private ResultDTO toResultDTO(StudentAssessment sa) {

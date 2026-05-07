@@ -53,7 +53,23 @@ public class AdminStudentController {
     }
 
     /**
-     * Get ALL registered students. Students without a plan show planAssigned=false.
+     * Search students by name or email (for assignment UI).
+     */
+    @GetMapping("/search")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<AdminStudentDTO>> searchStudents(@RequestParam String q) {
+        String lower = q.toLowerCase();
+        List<AdminStudentDTO> results = studentRepository.findAll().stream()
+                .filter(s -> s.getName().toLowerCase().contains(lower) || s.getEmail().toLowerCase().contains(lower))
+                .limit(10)
+                .map(student -> {
+                    Optional<StudentInternship> si = studentInternshipRepository.findByStudentId(student.getId());
+                    return si.map(this::toDTO)
+                             .orElse(new AdminStudentDTO(student.getId(), student.getName(), student.getEmail(), student.getMobile()));
+                })
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(results);
+    }
      * Optionally filter by paymentStatus (only applies to students with a plan).
      */
     @GetMapping

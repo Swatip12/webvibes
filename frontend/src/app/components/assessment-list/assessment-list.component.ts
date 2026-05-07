@@ -104,4 +104,9 @@ export class AssessmentListComponent implements OnInit {
       default: return '📋';
     }
   }
+
+  getScorePct(a: StudentAssessmentDTO): number {
+    if (a.score == null || !a.totalMarks) return 0;
+    return Math.round((a.score / a.totalMarks) * 100);
+  }
 }

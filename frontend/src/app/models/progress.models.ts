@@ -9,4 +9,6 @@ export interface StudentProgressDTO {
   machineTestCompleted: number;
   technicalMcqTotal: number;
   technicalMcqCompleted: number;
+  aptitudeTestAvgScorePct?: number | null;
+  technicalMcqAvgScorePct?: number | null;
 }

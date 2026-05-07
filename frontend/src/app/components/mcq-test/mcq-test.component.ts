@@ -155,4 +155,17 @@ export class McqTestComponent implements OnInit, OnDestroy {
   goBack(): void {
     this.router.navigate(['/student/dashboard']);
   }
+
+  getScorePercent(): number {
+    if (!this.result?.score || !this.result?.total) return 0;
+    return Math.round((this.result.score / this.result.total) * 100);
+  }
+
+  getScoreGrade(): string {
+    const pct = this.getScorePercent();
+    if (pct >= 90) return 'Excellent 🌟';
+    if (pct >= 75) return 'Good 👍';
+    if (pct >= 50) return 'Average';
+    return 'Needs Improvement';
+  }
 }
