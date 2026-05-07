@@ -3,6 +3,7 @@ package com.webvibes.controller;
 import com.webvibes.dto.AdminPaymentUpdateRequest;
 import com.webvibes.dto.AdminStudentDTO;
 import com.webvibes.dto.AssignPlanRequest;
+import com.webvibes.dto.AttendanceSummaryDTO;
 import com.webvibes.dto.CalendarDayDTO;
 import com.webvibes.dto.PhaseDatesRequest;
 import com.webvibes.entity.AttendancePhase;
@@ -148,6 +149,19 @@ public class AdminStudentController {
         logger.info("Admin fetching attendance for studentId: {}, phase: {}, year: {}, month: {}", id, phase, year, month);
         List<CalendarDayDTO> calendar = attendanceService.getMonthlyCalendarForAdmin(id, year, month, phase);
         return ResponseEntity.ok(calendar);
+    }
+
+    /**
+     * Get attendance summary (present/late/absent counts) for a specific student (admin view).
+     */
+    @GetMapping("/{id}/attendance/summary")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<AttendanceSummaryDTO> getStudentAttendanceSummary(
+            @PathVariable Long id,
+            @RequestParam AttendancePhase phase) {
+        logger.info("Admin fetching attendance summary for studentId: {}, phase: {}", id, phase);
+        AttendanceSummaryDTO summary = attendanceService.getSummaryForAdmin(id, phase);
+        return ResponseEntity.ok(summary);
     }
 
     private AdminStudentDTO toDTO(StudentInternship si) {

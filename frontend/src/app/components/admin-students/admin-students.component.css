@@ -374,3 +374,72 @@
   color: #fca5a5 !important;
   -webkit-text-fill-color: #fca5a5 !important;
 }
+
+/* ── Admin Attendance Summary Row ── */
+.admin-summary-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.admin-summary-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  min-width: 70px;
+}
+
+.admin-stat-num {
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+
+.admin-stat-lbl {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.admin-summary-stat.stat-present { background: #f0fdf4; border-color: #bbf7d0; }
+.admin-summary-stat.stat-present .admin-stat-num { color: #15803d; }
+.admin-summary-stat.stat-present .admin-stat-lbl { color: #16a34a; }
+
+.admin-summary-stat.stat-late { background: #fffbeb; border-color: #fcd34d; }
+.admin-summary-stat.stat-late .admin-stat-num { color: #92400e; }
+.admin-summary-stat.stat-late .admin-stat-lbl { color: #d97706; }
+
+.admin-summary-stat.stat-absent { background: #fef2f2; border-color: #fecaca; }
+.admin-summary-stat.stat-absent .admin-stat-num { color: #b91c1c; }
+.admin-summary-stat.stat-absent .admin-stat-lbl { color: #dc2626; }
+
+.admin-summary-stat.stat-total { background: #f8fafc; border-color: #e2e8f0; }
+.admin-summary-stat.stat-total .admin-stat-num { color: #475569; }
+.admin-summary-stat.stat-total .admin-stat-lbl { color: #64748b; }
+
+.admin-summary-stat.stat-pct { background: #ede9fe; border-color: #c4b5fd; }
+.admin-summary-stat.stat-pct .admin-stat-num { color: #4f46e5; }
+.admin-summary-stat.stat-pct .admin-stat-lbl { color: #6366f1; }
+
+/* Dark theme overrides for summary */
+.admin-summary-stat.stat-present { background: rgba(21,128,61,0.15) !important; border-color: rgba(34,197,94,0.25) !important; }
+.admin-summary-stat.stat-present .admin-stat-num { color: #4ade80 !important; -webkit-text-fill-color: #4ade80 !important; }
+.admin-summary-stat.stat-present .admin-stat-lbl { color: #86efac !important; -webkit-text-fill-color: #86efac !important; }
+.admin-summary-stat.stat-late { background: rgba(146,64,14,0.15) !important; border-color: rgba(252,211,77,0.25) !important; }
+.admin-summary-stat.stat-late .admin-stat-num { color: #fbbf24 !important; -webkit-text-fill-color: #fbbf24 !important; }
+.admin-summary-stat.stat-late .admin-stat-lbl { color: #fcd34d !important; -webkit-text-fill-color: #fcd34d !important; }
+.admin-summary-stat.stat-absent { background: rgba(185,28,28,0.15) !important; border-color: rgba(239,68,68,0.25) !important; }
+.admin-summary-stat.stat-absent .admin-stat-num { color: #fca5a5 !important; -webkit-text-fill-color: #fca5a5 !important; }
+.admin-summary-stat.stat-absent .admin-stat-lbl { color: #fca5a5 !important; -webkit-text-fill-color: #fca5a5 !important; }
+.admin-summary-stat.stat-total { background: #1a1a2e !important; border-color: rgba(255,255,255,0.08) !important; }
+.admin-summary-stat.stat-total .admin-stat-num { color: #94a3b8 !important; -webkit-text-fill-color: #94a3b8 !important; }
+.admin-summary-stat.stat-total .admin-stat-lbl { color: #64748b !important; -webkit-text-fill-color: #64748b !important; }
+.admin-summary-stat.stat-pct { background: rgba(99,102,241,0.15) !important; border-color: rgba(139,92,246,0.25) !important; }
+.admin-summary-stat.stat-pct .admin-stat-num { color: #a78bfa !important; -webkit-text-fill-color: #a78bfa !important; }
+.admin-summary-stat.stat-pct .admin-stat-lbl { color: #c4b5fd !important; -webkit-text-fill-color: #c4b5fd !important; }

@@ -160,6 +160,12 @@
         <span class="cal-month-label">{{ calendarMonthLabel }}</span>
         <button class="cal-nav-btn" (click)="nextMonth()">›</button>
       </div>
+      <button class="at-download-btn"
+        *ngIf="summary && calendarDays.length"
+        (click)="downloadReport()"
+        title="Download attendance report as PDF">
+        📥 Download Report
+      </button>
     </div>
 
     <div class="today-loading" *ngIf="calendarLoading">

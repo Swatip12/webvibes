@@ -22,6 +22,8 @@ interface AdminCalendarState {
   days: CalendarDayDTO[];
   loading: boolean;
   error: string;
+  summary: { presentDays: number; lateDays: number; absentDays: number; totalWorkingDays: number; attendancePercentage: number } | null;
+  summaryLoading: boolean;
 }
 
 interface PhaseDatesState {
@@ -291,7 +293,9 @@ export class AdminStudentsComponent implements OnInit {
         month: now.getMonth() + 1,
         days: [],
         loading: false,
-        error: ''
+        error: '',
+        summary: null,
+        summaryLoading: false
       });
     }
     return this.adminCalendarMap.get(studentId)!;
@@ -317,6 +321,18 @@ export class AdminStudentsComponent implements OnInit {
       error: () => {
         state.error = 'Phase not configured or no data available.';
         state.loading = false;
+      }
+    });
+    // Load summary counts
+    state.summaryLoading = true;
+    state.summary = null;
+    this.attendanceService.getAdminSummary(studentId, state.phase).subscribe({
+      next: (s) => {
+        state.summary = s;
+        state.summaryLoading = false;
+      },
+      error: () => {
+        state.summaryLoading = false;
       }
     });
   }

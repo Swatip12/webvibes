@@ -245,6 +245,25 @@ public class AttendanceService {
     }
 
     // -------------------------------------------------------------------------
+    // 6.8b getSummaryForAdmin
+    // -------------------------------------------------------------------------
+
+    public AttendanceSummaryDTO getSummaryForAdmin(Long studentId, AttendancePhase phase) {
+        studentRepository.findById(studentId)
+                .orElseThrow(() -> new EntityNotFoundException("Student not found"));
+
+        StudentInternship si = studentInternshipRepository.findByStudentId(studentId)
+                .orElseThrow(() -> new PhaseNotConfiguredException("Phase " + phase + " is not configured for this student"));
+
+        validatePhaseConfigured(si, phase);
+
+        LocalDate startDate = getPhaseStart(si, phase);
+        LocalDate endDate = getPhaseEnd(si, phase);
+        Student student = si.getStudent();
+        return computeSummary(student, phase, startDate, endDate);
+    }
+
+    // -------------------------------------------------------------------------
     // 6.9 updatePhaseDates
     // -------------------------------------------------------------------------
 

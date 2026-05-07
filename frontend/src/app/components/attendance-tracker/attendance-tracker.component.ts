@@ -247,4 +247,108 @@ export class AttendanceTrackerComponent implements OnInit, OnDestroy {
     // Force local-time parsing to avoid UTC midnight shifting the date back by 1 day in IST
     return new Date(day.date + 'T00:00:00').getDate().toString();
   }
+
+  // ── PDF Download ───────────────────────────────────────────────────────────
+
+  downloadReport(): void {
+    if (!this.summary || !this.calendarDays.length) return;
+
+    const monthName = new Date(this.calendarYear, this.calendarMonth - 1, 1)
+      .toLocaleString('default', { month: 'long', year: 'numeric' });
+
+    // Build calendar rows
+    const firstDay = new Date(this.calendarYear, this.calendarMonth - 1, 1);
+    const startOffset = (firstDay.getDay() + 6) % 7;
+    const cells: (CalendarDayDTO | null)[] = [];
+    for (let i = 0; i < startOffset; i++) cells.push(null);
+    cells.push(...this.calendarDays);
+    while (cells.length % 7 !== 0) cells.push(null);
+
+    const weeks: (CalendarDayDTO | null)[][] = [];
+    for (let i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i + 7));
+
+    const statusColor: Record<string, string> = {
+      PRESENT: '#d4edda', LATE: '#fff3cd', ABSENT: '#f8d7da',
+      WEEKEND: '#f0f0f0', FUTURE: '#f0f0f0', OUT_OF_PHASE: '#f0f0f0'
+    };
+    const statusText: Record<string, string> = {
+      PRESENT: '#155724', LATE: '#856404', ABSENT: '#721c24',
+      WEEKEND: '#aaa', FUTURE: '#aaa', OUT_OF_PHASE: '#aaa'
+    };
+
+    const calRows = weeks.map(week => {
+      const cells = week.map(day => {
+        if (!day) return '<td style="background:#fff;border:1px solid #eee;padding:8px;"></td>';
+        const bg = statusColor[day.displayStatus] || '#fff';
+        const tc = statusText[day.displayStatus] || '#333';
+        const num = new Date(day.date + 'T00:00:00').getDate();
+        const time = (day.displayStatus === 'PRESENT' || day.displayStatus === 'LATE') && day.checkInTime
+          ? `<br><small style="font-size:10px">${this.formatTime(day.checkInTime)}</small>` : '';
+        return `<td style="background:${bg};color:${tc};border:1px solid #ddd;padding:8px;text-align:center;font-weight:600">${num}${time}</td>`;
+      }).join('');
+      return `<tr>${cells}</tr>`;
+    }).join('');
+
+    const html = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Attendance Report - ${monthName}</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; color: #333; }
+    h1 { color: #1e1b4b; margin-bottom: 4px; }
+    .subtitle { color: #666; margin-bottom: 20px; font-size: 14px; }
+    .summary { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+    .stat { padding: 12px 20px; border-radius: 8px; text-align: center; min-width: 80px; }
+    .stat .num { font-size: 24px; font-weight: 800; display: block; }
+    .stat .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-p { background: #d4edda; color: #155724; }
+    .stat-l { background: #fff3cd; color: #856404; }
+    .stat-a { background: #f8d7da; color: #721c24; }
+    .stat-t { background: #e9ecef; color: #495057; }
+    .stat-pct { background: #e8e4ff; color: #4f46e5; }
+    table { width: 100%; border-collapse: collapse; }
+    th { background: #1e1b4b; color: #fff; padding: 10px; text-align: center; font-size: 13px; }
+    td { height: 50px; vertical-align: top; }
+    .legend { display: flex; gap: 16px; margin-top: 16px; font-size: 12px; flex-wrap: wrap; }
+    .leg { display: flex; align-items: center; gap: 6px; }
+    .dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+    @media print { body { padding: 10px; } }
+  </style>
+</head>
+<body>
+  <h1>Attendance Report</h1>
+  <div class="subtitle">${this.selectedPhase} Phase &nbsp;·&nbsp; ${monthName}</div>
+  <div class="summary">
+    <div class="stat stat-p"><span class="num">${this.summary.presentDays}</span><span class="lbl">Present</span></div>
+    <div class="stat stat-l"><span class="num">${this.summary.lateDays}</span><span class="lbl">Late</span></div>
+    <div class="stat stat-a"><span class="num">${this.summary.absentDays}</span><span class="lbl">Absent</span></div>
+    <div class="stat stat-t"><span class="num">${this.summary.totalWorkingDays}</span><span class="lbl">Working Days</span></div>
+    <div class="stat stat-pct"><span class="num">${this.summary.attendancePercentage}%</span><span class="lbl">Attendance</span></div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
+      </tr>
+    </thead>
+    <tbody>${calRows}</tbody>
+  </table>
+  <div class="legend">
+    <div class="leg"><span class="dot" style="background:#28a745"></span>Present</div>
+    <div class="leg"><span class="dot" style="background:#ffc107"></span>Late</div>
+    <div class="leg"><span class="dot" style="background:#dc3545"></span>Absent</div>
+    <div class="leg"><span class="dot" style="background:#ccc"></span>Weekend / Out of phase</div>
+  </div>
+</body>
+</html>`;
+
+    const win = window.open('', '_blank');
+    if (win) {
+      win.document.write(html);
+      win.document.close();
+      win.focus();
+      setTimeout(() => win.print(), 500);
+    }
+  }
 }

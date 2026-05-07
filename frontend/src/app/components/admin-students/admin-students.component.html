@@ -178,6 +178,30 @@
                     (click)="adminCalSelectPhase(student.id, 'INTERNSHIP')">💼 Internship</button>
                 </div>
 
+                <!-- Summary counts -->
+                <div class="admin-summary-row" *ngIf="getAdminCalendarState(student.id).summary">
+                  <div class="admin-summary-stat stat-present">
+                    <span class="admin-stat-num">{{ getAdminCalendarState(student.id).summary!.presentDays }}</span>
+                    <span class="admin-stat-lbl">Present</span>
+                  </div>
+                  <div class="admin-summary-stat stat-late">
+                    <span class="admin-stat-num">{{ getAdminCalendarState(student.id).summary!.lateDays }}</span>
+                    <span class="admin-stat-lbl">Late</span>
+                  </div>
+                  <div class="admin-summary-stat stat-absent">
+                    <span class="admin-stat-num">{{ getAdminCalendarState(student.id).summary!.absentDays }}</span>
+                    <span class="admin-stat-lbl">Absent</span>
+                  </div>
+                  <div class="admin-summary-stat stat-total">
+                    <span class="admin-stat-num">{{ getAdminCalendarState(student.id).summary!.totalWorkingDays }}</span>
+                    <span class="admin-stat-lbl">Working Days</span>
+                  </div>
+                  <div class="admin-summary-stat stat-pct">
+                    <span class="admin-stat-num">{{ getAdminCalendarState(student.id).summary!.attendancePercentage }}%</span>
+                    <span class="admin-stat-lbl">Attendance</span>
+                  </div>
+                </div>
+
                 <!-- Month navigation -->
                 <div class="calendar-header">
                   <button class="cal-nav" (click)="adminCalPrevMonth(student.id)">‹</button>

@@ -54,4 +54,9 @@ export class AttendanceService {
       .set('phase', phase);
     return this.http.get<CalendarDayDTO[]>(`${this.adminUrl}/${studentId}/attendance`, { params });
   }
+
+  getAdminSummary(studentId: number, phase: string): Observable<AttendanceSummaryDTO> {
+    const params = new HttpParams().set('phase', phase);
+    return this.http.get<AttendanceSummaryDTO>(`${this.adminUrl}/${studentId}/attendance/summary`, { params });
+  }
 }

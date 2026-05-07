@@ -584,3 +584,25 @@
   border-radius: 8px;
   padding: 0.4rem 0.75rem;
 }
+
+/* ── Download Report Button ── */
+.at-download-btn {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.at-download-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
