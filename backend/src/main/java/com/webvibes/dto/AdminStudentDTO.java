@@ -23,6 +23,7 @@ public class AdminStudentDTO {
     private LocalDate trainingEndDate;
     private LocalDate internshipStartDate;
     private LocalDate internshipEndDate;
+    private String batchTime; // e.g. "12:00" or "14:00"
 
     public AdminStudentDTO() {}
 
@@ -97,4 +98,7 @@ public class AdminStudentDTO {
 
     public LocalDate getInternshipEndDate() { return internshipEndDate; }
     public void setInternshipEndDate(LocalDate internshipEndDate) { this.internshipEndDate = internshipEndDate; }
+
+    public String getBatchTime() { return batchTime; }
+    public void setBatchTime(String batchTime) { this.batchTime = batchTime; }
 }

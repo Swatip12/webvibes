@@ -66,6 +66,9 @@ public class StudentInternship {
     @Column(name = "internship_end_date")
     private LocalDate internshipEndDate;
 
+    @Column(name = "batch_time", length = 5)
+    private String batchTime; // e.g. "12:00" or "14:00" — student's batch start time for late detection
+
     public StudentInternship() {
     }
 
@@ -187,4 +190,7 @@ public class StudentInternship {
 
     public LocalDate getInternshipEndDate() { return internshipEndDate; }
     public void setInternshipEndDate(LocalDate internshipEndDate) { this.internshipEndDate = internshipEndDate; }
+
+    public String getBatchTime() { return batchTime; }
+    public void setBatchTime(String batchTime) { this.batchTime = batchTime; }
 }
