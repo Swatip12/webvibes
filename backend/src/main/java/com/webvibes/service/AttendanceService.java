@@ -105,7 +105,8 @@ public class AttendanceService {
         }
 
         Student student = requireStudent(studentEmail);
-        AttendancePhase phase = detectActivePhase(studentEmail);
+        StudentInternship si = studentInternshipRepository.findByStudentEmail(studentEmail).orElse(null);
+        AttendancePhase phase = si != null ? detectActivePhaseFromSI(si) : null;
 
         if (phase == null) {
             throw new NoActivePhaseException("No active phase configured for today");
@@ -117,7 +118,7 @@ public class AttendanceService {
         }
 
         LocalDateTime now = LocalDateTime.now();
-        AttendanceStatus status = resolveCheckInStatus(now.toLocalTime());
+        AttendanceStatus status = resolveCheckInStatusForStudent(now.toLocalTime(), si);
 
         Attendance attendance = new Attendance();
         attendance.setStudent(student);
@@ -274,6 +275,7 @@ public class AttendanceService {
         if (req.getTrainingEndDate()     != null) si.setTrainingEndDate(req.getTrainingEndDate());
         if (req.getInternshipStartDate() != null) si.setInternshipStartDate(req.getInternshipStartDate());
         if (req.getInternshipEndDate()   != null) si.setInternshipEndDate(req.getInternshipEndDate());
+        if (req.getBatchTime()           != null) si.setBatchTime(req.getBatchTime());
 
         StudentInternship saved = studentInternshipRepository.save(si);
         return toAdminStudentDTO(saved);
@@ -295,6 +297,14 @@ public class AttendanceService {
 
     private AttendanceStatus resolveCheckInStatus(LocalTime checkInTime) {
         LocalTime threshold = LocalTime.parse(lateThreshold);
+        return checkInTime.isAfter(threshold) ? AttendanceStatus.LATE : AttendanceStatus.PRESENT;
+    }
+
+    private AttendanceStatus resolveCheckInStatusForStudent(LocalTime checkInTime, StudentInternship si) {
+        String batchTime = si != null ? si.getBatchTime() : null;
+        LocalTime threshold = (batchTime != null && !batchTime.isBlank())
+                ? LocalTime.parse(batchTime)
+                : LocalTime.parse(lateThreshold);
         return checkInTime.isAfter(threshold) ? AttendanceStatus.LATE : AttendanceStatus.PRESENT;
     }
 
@@ -469,6 +479,7 @@ public class AttendanceService {
         dto.setTrainingEndDate(si.getTrainingEndDate());
         dto.setInternshipStartDate(si.getInternshipStartDate());
         dto.setInternshipEndDate(si.getInternshipEndDate());
+        dto.setBatchTime(si.getBatchTime());
         return dto;
     }
 }

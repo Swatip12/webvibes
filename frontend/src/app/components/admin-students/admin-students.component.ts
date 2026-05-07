@@ -11,6 +11,7 @@ interface PhaseDatesForm {
   trainingEndDate: string;
   internshipStartDate: string;
   internshipEndDate: string;
+  batchTime: string;
 }
 
 interface AdminCalendarState {
@@ -158,7 +159,7 @@ export class AdminStudentsComponent implements OnInit {
     if (!this.phaseDatesMap.has(studentId)) {
       this.phaseDatesMap.set(studentId, {
         open: false,
-        form: { trainingStartDate: '', trainingEndDate: '', internshipStartDate: '', internshipEndDate: '' },
+        form: { trainingStartDate: '', trainingEndDate: '', internshipStartDate: '', internshipEndDate: '', batchTime: '' },
         saveMsg: '',
         saveError: '',
         saving: false
@@ -176,7 +177,8 @@ export class AdminStudentsComponent implements OnInit {
         trainingStartDate: student.trainingStartDate || '',
         trainingEndDate: student.trainingEndDate || '',
         internshipStartDate: student.internshipStartDate || '',
-        internshipEndDate: student.internshipEndDate || ''
+        internshipEndDate: student.internshipEndDate || '',
+        batchTime: student.batchTime || ''
       };
       state.saveMsg = '';
       state.saveError = '';
@@ -209,7 +211,8 @@ export class AdminStudentsComponent implements OnInit {
       trainingStartDate: state.form.trainingStartDate || null,
       trainingEndDate: state.form.trainingEndDate || null,
       internshipStartDate: state.form.internshipStartDate || null,
-      internshipEndDate: state.form.internshipEndDate || null
+      internshipEndDate: state.form.internshipEndDate || null,
+      batchTime: state.form.batchTime || null
     };
 
     this.attendanceService.updatePhaseDates(student.id, req).subscribe({

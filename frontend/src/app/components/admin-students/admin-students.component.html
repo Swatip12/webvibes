@@ -127,6 +127,12 @@
                       [(ngModel)]="getPhaseDatesState(student.id).form.internshipEndDate"
                       (ngModelChange)="getPhaseDatesState(student.id).saveError = ''" />
                   </div>
+                  <!-- Batch Time -->
+                  <div class="phase-field">
+                    <label class="phase-label">Batch Time (e.g. 12:00 or 14:00)</label>
+                    <input type="time" class="phase-input"
+                      [(ngModel)]="getPhaseDatesState(student.id).form.batchTime" />
+                  </div>
                 </div>
 
                 <!-- Inline validation error -->

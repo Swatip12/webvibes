@@ -32,4 +32,5 @@ export interface PhaseDatesRequest {
   trainingEndDate: string | null;
   internshipStartDate: string | null;
   internshipEndDate: string | null;
+  batchTime?: string | null;
 }

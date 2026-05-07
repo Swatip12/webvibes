@@ -136,6 +136,7 @@ export interface AdminStudentDTO {
   trainingEndDate?: string | null;
   internshipStartDate?: string | null;
   internshipEndDate?: string | null;
+  batchTime?: string | null;
 }
 
 // Assessment portal DTOs
