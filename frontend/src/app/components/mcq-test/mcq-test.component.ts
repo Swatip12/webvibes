@@ -50,49 +50,54 @@ export class McqTestComponent implements OnInit, OnDestroy {
   loadData(): void {
     this.isLoading = true;
     this.errorMessage = '';
-    forkJoin({
-      detail: this.assessmentService.getAssessmentDetail(this.saId),
-      questions: this.assessmentService.getQuestions(this.saId)
-    }).subscribe({
-      next: ({ detail, questions }) => {
-        this.detail = detail;
-        this.questions = questions;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        if (err.status === 409) {
-          this.isLoading = false;
-          this.alreadySubmitted = true;
-        } else if (err.status === 403 || err.status === 404) {
-          // saId might actually be an assessmentId — try auto-enroll
-          this.assessmentService.enrollInAssessment(this.saId).subscribe({
-            next: ({ studentAssessmentId }) => {
-              this.saId = studentAssessmentId;
-              // Reload with the correct studentAssessmentId
-              forkJoin({
-                detail: this.assessmentService.getAssessmentDetail(this.saId),
-                questions: this.assessmentService.getQuestions(this.saId)
-              }).subscribe({
-                next: ({ detail, questions }) => {
-                  this.detail = detail;
-                  this.questions = questions;
-                  this.isLoading = false;
-                },
-                error: () => {
-                  this.isLoading = false;
-                  this.errorMessage = 'Failed to load assessment. Please try again.';
-                }
-              });
-            },
-            error: () => {
+
+    // Always enroll first to get the correct studentAssessmentId.
+    // If saId is already a studentAssessmentId, enroll returns the existing one.
+    // If saId is an assessmentId (from a share link), enroll creates/returns the assignment.
+    this.assessmentService.enrollInAssessment(this.saId).subscribe({
+      next: ({ studentAssessmentId }) => {
+        this.saId = studentAssessmentId;
+        forkJoin({
+          detail: this.assessmentService.getAssessmentDetail(this.saId),
+          questions: this.assessmentService.getQuestions(this.saId)
+        }).subscribe({
+          next: ({ detail, questions }) => {
+            this.detail = detail;
+            this.questions = questions;
+            this.isLoading = false;
+          },
+          error: (err) => {
+            if (err.status === 409) {
+              this.isLoading = false;
+              this.alreadySubmitted = true;
+            } else {
               this.isLoading = false;
               this.errorMessage = 'Failed to load assessment. Please try again.';
             }
-          });
-        } else {
-          this.isLoading = false;
-          this.errorMessage = 'Failed to load assessment. Please try again.';
-        }
+          }
+        });
+      },
+      error: () => {
+        // Enroll failed — try loading directly (saId might already be a valid studentAssessmentId)
+        forkJoin({
+          detail: this.assessmentService.getAssessmentDetail(this.saId),
+          questions: this.assessmentService.getQuestions(this.saId)
+        }).subscribe({
+          next: ({ detail, questions }) => {
+            this.detail = detail;
+            this.questions = questions;
+            this.isLoading = false;
+          },
+          error: (err) => {
+            if (err.status === 409) {
+              this.isLoading = false;
+              this.alreadySubmitted = true;
+            } else {
+              this.isLoading = false;
+              this.errorMessage = 'You are not assigned to this assessment.';
+            }
+          }
+        });
       }
     });
   }

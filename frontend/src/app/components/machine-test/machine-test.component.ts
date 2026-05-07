@@ -41,30 +41,27 @@ export class MachineTestComponent implements OnInit, OnDestroy {
   loadDetail(): void {
     this.isLoading = true;
     this.errorMessage = '';
-    this.assessmentService.getAssessmentDetail(this.saId).subscribe({
-      next: (detail) => {
-        this.detail = detail;
-        this.isLoading = false;
+    // Always enroll first to resolve the correct studentAssessmentId
+    this.assessmentService.enrollInAssessment(this.saId).subscribe({
+      next: ({ studentAssessmentId }) => {
+        this.saId = studentAssessmentId;
+        this.assessmentService.getAssessmentDetail(this.saId).subscribe({
+          next: (detail) => { this.detail = detail; this.isLoading = false; },
+          error: (err) => {
+            if (err.status === 409) { this.isLoading = false; this.alreadySubmitted = true; }
+            else { this.isLoading = false; this.errorMessage = 'Failed to load assessment.'; }
+          }
+        });
       },
-      error: (err) => {
-        if (err.status === 409) {
-          this.isLoading = false;
-          this.alreadySubmitted = true;
-        } else if (err.status === 403 || err.status === 404) {
-          this.assessmentService.enrollInAssessment(this.saId).subscribe({
-            next: ({ studentAssessmentId }) => {
-              this.saId = studentAssessmentId;
-              this.assessmentService.getAssessmentDetail(this.saId).subscribe({
-                next: (detail) => { this.detail = detail; this.isLoading = false; },
-                error: () => { this.isLoading = false; this.errorMessage = 'Failed to load assessment. Please try again.'; }
-              });
-            },
-            error: () => { this.isLoading = false; this.errorMessage = 'Failed to load assessment. Please try again.'; }
-          });
-        } else {
-          this.isLoading = false;
-          this.errorMessage = 'Failed to load assessment. Please try again.';
-        }
+      error: () => {
+        // Fallback: try direct load
+        this.assessmentService.getAssessmentDetail(this.saId).subscribe({
+          next: (detail) => { this.detail = detail; this.isLoading = false; },
+          error: (err) => {
+            if (err.status === 409) { this.isLoading = false; this.alreadySubmitted = true; }
+            else { this.isLoading = false; this.errorMessage = 'You are not assigned to this assessment.'; }
+          }
+        });
       }
     });
   }
