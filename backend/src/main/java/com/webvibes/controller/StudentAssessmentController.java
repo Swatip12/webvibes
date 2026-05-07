@@ -93,16 +93,17 @@ public class StudentAssessmentController {
             Authentication authentication) {
         String email = authentication.getName();
 
-        // Try to find by studentAssessmentId first
+        // Try to find by studentAssessmentId first; if not found, treat as assessmentId
         StudentAssessment sa = studentAssessmentRepository.findById(id).orElse(null);
+        final Long saId;
 
-        // If not found, treat id as an assessmentId and find the student's assignment
         if (sa == null) {
-            Long resolvedSaId = assessmentService.enrollStudentInAssessment(id, email);
-            sa = studentAssessmentRepository.findById(resolvedSaId)
+            saId = assessmentService.enrollStudentInAssessment(id, email);
+            sa = studentAssessmentRepository.findById(saId)
                     .orElseThrow(() -> new AssessmentNotFoundException(
-                            "StudentAssessment not found for assessmentId: " + id));
-            id = resolvedSaId;
+                            "StudentAssessment not found for assessmentId: " + saId));
+        } else {
+            saId = id;
         }
 
         AssessmentType type = sa.getAssessment().getType();
@@ -116,6 +117,6 @@ public class StudentAssessmentController {
             submitRequest = objectMapper.convertValue(body != null ? body : Map.of(), McqSubmitRequest.class);
         }
 
-        return ResponseEntity.ok(assessmentService.submitAssessment(id, submitRequest, email));
+        return ResponseEntity.ok(assessmentService.submitAssessment(saId, submitRequest, email));
     }
 }
