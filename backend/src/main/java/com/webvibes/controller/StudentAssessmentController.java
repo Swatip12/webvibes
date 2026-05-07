@@ -57,36 +57,53 @@ public class StudentAssessmentController {
         return ResponseEntity.ok(assessmentService.getStudentProgress(email));
     }
 
-    @GetMapping("/{studentAssessmentId}")
+    @GetMapping("/{id}")
     public ResponseEntity<AssessmentDetailDTO> getAssessmentDetail(
-            @PathVariable Long studentAssessmentId,
+            @PathVariable Long id,
             Authentication authentication) {
         String email = authentication.getName();
-        return ResponseEntity.ok(assessmentService.getAssessmentForStudent(studentAssessmentId, email));
+        // Auto-resolve: if id is an assessmentId, enroll and get the studentAssessmentId
+        if (!studentAssessmentRepository.existsById(id)) {
+            id = assessmentService.enrollStudentInAssessment(id, email);
+        }
+        return ResponseEntity.ok(assessmentService.getAssessmentForStudent(id, email));
     }
 
-    @GetMapping("/{studentAssessmentId}/questions")
+    @GetMapping("/{id}/questions")
     public ResponseEntity<List<QuestionStudentDTO>> getQuestions(
-            @PathVariable Long studentAssessmentId,
+            @PathVariable Long id,
             Authentication authentication) {
         String email = authentication.getName();
-        return ResponseEntity.ok(assessmentService.getQuestionsForStudent(studentAssessmentId, email));
+        // Auto-resolve: if id is an assessmentId, enroll and get the studentAssessmentId
+        if (!studentAssessmentRepository.existsById(id)) {
+            id = assessmentService.enrollStudentInAssessment(id, email);
+        }
+        return ResponseEntity.ok(assessmentService.getQuestionsForStudent(id, email));
     }
 
     /**
      * Unified submit endpoint — dispatches based on assessment type.
      * Accepts MCQ answers, machine test solution, or empty body for mock interview.
+     * Supports both studentAssessmentId and raw assessmentId (auto-resolves).
      */
-    @PostMapping("/{studentAssessmentId}/submit")
+    @PostMapping("/{id}/submit")
     public ResponseEntity<SubmitResponse> submit(
-            @PathVariable Long studentAssessmentId,
+            @PathVariable Long id,
             @RequestBody(required = false) Map<String, Object> body,
             Authentication authentication) {
         String email = authentication.getName();
 
-        StudentAssessment sa = studentAssessmentRepository.findById(studentAssessmentId)
-                .orElseThrow(() -> new AssessmentNotFoundException(
-                        "StudentAssessment not found with id: " + studentAssessmentId));
+        // Try to find by studentAssessmentId first
+        StudentAssessment sa = studentAssessmentRepository.findById(id).orElse(null);
+
+        // If not found, treat id as an assessmentId and find the student's assignment
+        if (sa == null) {
+            Long resolvedSaId = assessmentService.enrollStudentInAssessment(id, email);
+            sa = studentAssessmentRepository.findById(resolvedSaId)
+                    .orElseThrow(() -> new AssessmentNotFoundException(
+                            "StudentAssessment not found for assessmentId: " + id));
+            id = resolvedSaId;
+        }
 
         AssessmentType type = sa.getAssessment().getType();
         Object submitRequest;
@@ -94,12 +111,11 @@ public class StudentAssessmentController {
         if (type == AssessmentType.MACHINE_TEST) {
             submitRequest = objectMapper.convertValue(body != null ? body : Map.of(), MachineSubmitRequest.class);
         } else if (type == AssessmentType.MOCK_INTERVIEW) {
-            // Mock interview — no body needed, pass empty MCQ request
             submitRequest = new McqSubmitRequest();
         } else {
             submitRequest = objectMapper.convertValue(body != null ? body : Map.of(), McqSubmitRequest.class);
         }
 
-        return ResponseEntity.ok(assessmentService.submitAssessment(studentAssessmentId, submitRequest, email));
+        return ResponseEntity.ok(assessmentService.submitAssessment(id, submitRequest, email));
     }
 }
