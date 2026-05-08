@@ -295,7 +295,12 @@ public class AssessmentService {
         Integer total = null;
 
         if (type == AssessmentType.TECHNICAL_MCQ || type == AssessmentType.APTITUDE_TEST) {
-            McqSubmitRequest mcqReq = (McqSubmitRequest) submitRequest;
+            McqSubmitRequest mcqReq;
+            if (submitRequest instanceof McqSubmitRequest) {
+                mcqReq = (McqSubmitRequest) submitRequest;
+            } else {
+                mcqReq = objectMapper.convertValue(submitRequest, McqSubmitRequest.class);
+            }
             List<Question> questions = sa.getAssessment().getQuestions();
             total = questions.size();
 
