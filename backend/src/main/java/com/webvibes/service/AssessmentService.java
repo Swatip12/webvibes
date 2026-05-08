@@ -278,6 +278,22 @@ public class AssessmentService {
 
     // ─── 5.15 Submission methods ─────────────────────────────────────────────────
 
+    public SubmitResponse submitAssessmentFromBody(Long studentAssessmentId, java.util.Map<String, Object> body, String studentEmail) {
+        StudentAssessment sa = findStudentAssessmentOrThrow(studentAssessmentId);
+        AssessmentType type = sa.getAssessment().getType();
+
+        Object submitRequest;
+        if (type == AssessmentType.MACHINE_TEST) {
+            submitRequest = objectMapper.convertValue(body != null ? body : java.util.Map.of(), MachineSubmitRequest.class);
+        } else if (type == AssessmentType.MOCK_INTERVIEW) {
+            submitRequest = new McqSubmitRequest();
+        } else {
+            submitRequest = objectMapper.convertValue(body != null ? body : java.util.Map.of(), McqSubmitRequest.class);
+        }
+
+        return submitAssessment(studentAssessmentId, submitRequest, studentEmail);
+    }
+
     public SubmitResponse submitAssessment(Long studentAssessmentId, Object submitRequest, String studentEmail) {
         StudentAssessment sa = findStudentAssessmentOrThrow(studentAssessmentId);
         verifyOwnership(sa, studentEmail);

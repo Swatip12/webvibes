@@ -1,10 +1,6 @@
 package com.webvibes.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.webvibes.dto.*;
-import com.webvibes.entity.AssessmentType;
-import com.webvibes.entity.StudentAssessment;
-import com.webvibes.exception.AssessmentNotFoundException;
 import com.webvibes.repository.StudentAssessmentRepository;
 import com.webvibes.service.AssessmentService;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +18,11 @@ public class StudentAssessmentController {
 
     private final AssessmentService assessmentService;
     private final StudentAssessmentRepository studentAssessmentRepository;
-    private final ObjectMapper objectMapper;
 
     public StudentAssessmentController(AssessmentService assessmentService,
-                                       StudentAssessmentRepository studentAssessmentRepository,
-                                       ObjectMapper objectMapper) {
+                                       StudentAssessmentRepository studentAssessmentRepository) {
         this.assessmentService = assessmentService;
         this.studentAssessmentRepository = studentAssessmentRepository;
-        this.objectMapper = objectMapper;
     }
 
     @GetMapping
@@ -93,30 +86,15 @@ public class StudentAssessmentController {
             Authentication authentication) {
         String email = authentication.getName();
 
-        // Try to find by studentAssessmentId first; if not found, treat as assessmentId
-        StudentAssessment sa = studentAssessmentRepository.findById(id).orElse(null);
+        // Resolve studentAssessmentId — if id is an assessmentId, auto-enroll
         final Long saId;
-
-        if (sa == null) {
-            saId = assessmentService.enrollStudentInAssessment(id, email);
-            sa = studentAssessmentRepository.findById(saId)
-                    .orElseThrow(() -> new AssessmentNotFoundException(
-                            "StudentAssessment not found for assessmentId: " + saId));
-        } else {
+        if (studentAssessmentRepository.existsById(id)) {
             saId = id;
-        }
-
-        AssessmentType type = sa.getAssessment().getType();
-        Object submitRequest;
-
-        if (type == AssessmentType.MACHINE_TEST) {
-            submitRequest = objectMapper.convertValue(body != null ? body : Map.of(), MachineSubmitRequest.class);
-        } else if (type == AssessmentType.MOCK_INTERVIEW) {
-            submitRequest = new McqSubmitRequest();
         } else {
-            submitRequest = objectMapper.convertValue(body != null ? body : Map.of(), McqSubmitRequest.class);
+            saId = assessmentService.enrollStudentInAssessment(id, email);
         }
 
-        return ResponseEntity.ok(assessmentService.submitAssessment(saId, submitRequest, email));
+        // Pass raw body to service — service handles type resolution and casting
+        return ResponseEntity.ok(assessmentService.submitAssessmentFromBody(saId, body, email));
     }
 }
