@@ -22,6 +22,9 @@ export class McqTestComponent implements OnInit, OnDestroy {
   questions: QuestionStudentDTO[] = [];
   answers: Map<number, number> = new Map();
 
+  // One-at-a-time navigation
+  currentIndex: number = 0;
+
   cameraGranted = false;
 
   isLoading = true;
@@ -51,53 +54,36 @@ export class McqTestComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.errorMessage = '';
 
-    // Always enroll first to get the correct studentAssessmentId.
-    // If saId is already a studentAssessmentId, enroll returns the existing one.
-    // If saId is an assessmentId (from a share link), enroll creates/returns the assignment.
     this.assessmentService.enrollInAssessment(this.saId).subscribe({
       next: ({ studentAssessmentId }) => {
         this.saId = studentAssessmentId;
-        forkJoin({
-          detail: this.assessmentService.getAssessmentDetail(this.saId),
-          questions: this.assessmentService.getQuestions(this.saId)
-        }).subscribe({
-          next: ({ detail, questions }) => {
-            this.detail = detail;
-            this.questions = questions;
-            this.isLoading = false;
-          },
-          error: (err) => {
-            if (err.status === 409) {
-              this.isLoading = false;
-              this.alreadySubmitted = true;
-            } else {
-              this.isLoading = false;
-              this.errorMessage = 'Failed to load assessment. Please try again.';
-            }
-          }
-        });
+        this.loadQuestionsWithSaId();
       },
       error: () => {
-        // Enroll failed — try loading directly (saId might already be a valid studentAssessmentId)
-        forkJoin({
-          detail: this.assessmentService.getAssessmentDetail(this.saId),
-          questions: this.assessmentService.getQuestions(this.saId)
-        }).subscribe({
-          next: ({ detail, questions }) => {
-            this.detail = detail;
-            this.questions = questions;
-            this.isLoading = false;
-          },
-          error: (err) => {
-            if (err.status === 409) {
-              this.isLoading = false;
-              this.alreadySubmitted = true;
-            } else {
-              this.isLoading = false;
-              this.errorMessage = 'You are not assigned to this assessment.';
-            }
-          }
-        });
+        this.loadQuestionsWithSaId();
+      }
+    });
+  }
+
+  private loadQuestionsWithSaId(): void {
+    forkJoin({
+      detail: this.assessmentService.getAssessmentDetail(this.saId),
+      questions: this.assessmentService.getQuestions(this.saId)
+    }).subscribe({
+      next: ({ detail, questions }) => {
+        this.detail = detail;
+        this.questions = questions;
+        this.currentIndex = 0;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        if (err.status === 409) {
+          this.isLoading = false;
+          this.alreadySubmitted = true;
+        } else {
+          this.isLoading = false;
+          this.errorMessage = 'You are not assigned to this assessment.';
+        }
       }
     });
   }
@@ -106,12 +92,43 @@ export class McqTestComponent implements OnInit, OnDestroy {
     return this.detail?.timeLimitMinutes ?? 0;
   }
 
+  get currentQuestion(): QuestionStudentDTO | null {
+    return this.questions[this.currentIndex] ?? null;
+  }
+
   selectAnswer(questionId: number, selectedIndex: number): void {
     this.answers.set(questionId, selectedIndex);
   }
 
   getSelectedAnswer(questionId: number): number | undefined {
     return this.answers.get(questionId);
+  }
+
+  isAnswered(index: number): boolean {
+    const q = this.questions[index];
+    return q ? this.answers.has(q.questionId) : false;
+  }
+
+  goToQuestion(index: number): void {
+    if (index >= 0 && index < this.questions.length) {
+      this.currentIndex = index;
+    }
+  }
+
+  prevQuestion(): void {
+    if (this.currentIndex > 0) this.currentIndex--;
+  }
+
+  nextQuestion(): void {
+    if (this.currentIndex < this.questions.length - 1) this.currentIndex++;
+  }
+
+  get answeredCount(): number {
+    return this.answers.size;
+  }
+
+  get unansweredCount(): number {
+    return this.questions.length - this.answers.size;
   }
 
   get canSubmit(): boolean {

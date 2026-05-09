@@ -31,84 +31,107 @@
   <!-- Test form -->
   <div class="test-container" *ngIf="!isLoading && !errorMessage && !submitted && !alreadySubmitted && detail">
 
-    <!-- Header with timer -->
+    <!-- Header -->
     <div class="test-header">
       <div class="test-title-block">
         <h1 class="test-title">{{ detail.title }}</h1>
-        <span class="question-count">{{ questions.length }} Questions</span>
+        <div class="test-meta">
+          <span class="meta-chip">{{ questions.length }} Questions</span>
+          <span class="meta-chip answered-chip">✅ {{ answeredCount }} Answered</span>
+          <span class="meta-chip unanswered-chip" *ngIf="unansweredCount > 0">⬜ {{ unansweredCount }} Unanswered</span>
+        </div>
       </div>
       <div class="timer-block" *ngIf="timeLimitMinutes > 0">
         <app-timer [totalMinutes]="timeLimitMinutes" (timerExpired)="onTimerExpired()"></app-timer>
       </div>
     </div>
 
-    <!-- Questions -->
-    <div class="questions-list">
-      <div class="question-card" *ngFor="let q of questions; let i = index">
-        <div class="question-prompt">
-          <span class="question-number">Q{{ i + 1 }}.</span>
-          {{ q.prompt }}
-        </div>
-        <div class="options-list">
-          <label class="option-label" [class.selected]="getSelectedAnswer(q.questionId) === 0">
-            <input
-              type="radio"
-              [name]="'q' + q.questionId"
-              [value]="0"
-              [checked]="getSelectedAnswer(q.questionId) === 0"
-              (change)="selectAnswer(q.questionId, 0)"
-            />
-            <span class="option-letter">A</span>
-            <span class="option-text">{{ q.optionA }}</span>
-          </label>
-          <label class="option-label" [class.selected]="getSelectedAnswer(q.questionId) === 1">
-            <input
-              type="radio"
-              [name]="'q' + q.questionId"
-              [value]="1"
-              [checked]="getSelectedAnswer(q.questionId) === 1"
-              (change)="selectAnswer(q.questionId, 1)"
-            />
-            <span class="option-letter">B</span>
-            <span class="option-text">{{ q.optionB }}</span>
-          </label>
-          <label class="option-label" [class.selected]="getSelectedAnswer(q.questionId) === 2">
-            <input
-              type="radio"
-              [name]="'q' + q.questionId"
-              [value]="2"
-              [checked]="getSelectedAnswer(q.questionId) === 2"
-              (change)="selectAnswer(q.questionId, 2)"
-            />
-            <span class="option-letter">C</span>
-            <span class="option-text">{{ q.optionC }}</span>
-          </label>
-          <label class="option-label" [class.selected]="getSelectedAnswer(q.questionId) === 3">
-            <input
-              type="radio"
-              [name]="'q' + q.questionId"
-              [value]="3"
-              [checked]="getSelectedAnswer(q.questionId) === 3"
-              (change)="selectAnswer(q.questionId, 3)"
-            />
-            <span class="option-letter">D</span>
-            <span class="option-text">{{ q.optionD }}</span>
-          </label>
-        </div>
-      </div>
-    </div>
+    <!-- Main layout: question + palette -->
+    <div class="test-body">
 
-    <!-- Submit -->
-    <div class="submit-row">
-      <div class="answered-count">
-        {{ answers.size }} / {{ questions.length }} answered
+      <!-- Question panel -->
+      <div class="question-panel">
+        <div class="question-card" *ngIf="currentQuestion">
+          <div class="question-header">
+            <span class="question-badge">Question {{ currentIndex + 1 }} of {{ questions.length }}</span>
+            <span class="answered-badge" *ngIf="isAnswered(currentIndex)">✓ Answered</span>
+            <span class="unanswered-badge" *ngIf="!isAnswered(currentIndex)">Not answered</span>
+          </div>
+
+          <div class="question-prompt">
+            {{ currentQuestion.prompt }}
+          </div>
+
+          <div class="options-list">
+            <label class="option-label" [class.selected]="getSelectedAnswer(currentQuestion.questionId) === 0"
+              (click)="selectAnswer(currentQuestion.questionId, 0)">
+              <span class="option-letter" [class.letter-selected]="getSelectedAnswer(currentQuestion.questionId) === 0">A</span>
+              <span class="option-text">{{ currentQuestion.optionA }}</span>
+            </label>
+            <label class="option-label" [class.selected]="getSelectedAnswer(currentQuestion.questionId) === 1"
+              (click)="selectAnswer(currentQuestion.questionId, 1)">
+              <span class="option-letter" [class.letter-selected]="getSelectedAnswer(currentQuestion.questionId) === 1">B</span>
+              <span class="option-text">{{ currentQuestion.optionB }}</span>
+            </label>
+            <label class="option-label" [class.selected]="getSelectedAnswer(currentQuestion.questionId) === 2"
+              (click)="selectAnswer(currentQuestion.questionId, 2)">
+              <span class="option-letter" [class.letter-selected]="getSelectedAnswer(currentQuestion.questionId) === 2">C</span>
+              <span class="option-text">{{ currentQuestion.optionC }}</span>
+            </label>
+            <label class="option-label" [class.selected]="getSelectedAnswer(currentQuestion.questionId) === 3"
+              (click)="selectAnswer(currentQuestion.questionId, 3)">
+              <span class="option-letter" [class.letter-selected]="getSelectedAnswer(currentQuestion.questionId) === 3">D</span>
+              <span class="option-text">{{ currentQuestion.optionD }}</span>
+            </label>
+          </div>
+
+          <!-- Navigation -->
+          <div class="nav-row">
+            <button class="btn-nav" (click)="prevQuestion()" [disabled]="currentIndex === 0">
+              ← Previous
+            </button>
+            <span class="nav-progress">{{ currentIndex + 1 }} / {{ questions.length }}</span>
+            <button class="btn-nav btn-nav-next" (click)="nextQuestion()" [disabled]="currentIndex === questions.length - 1">
+              Next →
+            </button>
+          </div>
+        </div>
+
+        <!-- Submit row -->
+        <div class="submit-row">
+          <div class="submit-info">
+            <span class="answered-count">{{ answeredCount }} / {{ questions.length }} answered</span>
+            <span class="unanswered-warn" *ngIf="unansweredCount > 0">
+              ⚠️ {{ unansweredCount }} question(s) unanswered
+            </span>
+          </div>
+          <button class="btn-submit" [disabled]="!canSubmit" (click)="onSubmit()">
+            {{ isSubmitting ? 'Submitting...' : 'Submit Test' }}
+          </button>
+        </div>
       </div>
-      <button
-        class="btn-submit"
-        [disabled]="!canSubmit"
-        (click)="onSubmit()">
-        {{ isSubmitting ? 'Submitting...' : 'Submit Test' }}
-      </button>
+
+      <!-- Question palette -->
+      <div class="question-palette">
+        <div class="palette-header">Question Palette</div>
+        <div class="palette-legend">
+          <span class="legend-item"><span class="palette-dot dot-answered"></span>Answered</span>
+          <span class="legend-item"><span class="palette-dot dot-current"></span>Current</span>
+          <span class="legend-item"><span class="palette-dot dot-unanswered"></span>Not answered</span>
+        </div>
+        <div class="palette-grid">
+          <button
+            *ngFor="let q of questions; let i = index"
+            class="palette-btn"
+            [class.palette-answered]="isAnswered(i)"
+            [class.palette-current]="i === currentIndex"
+            [class.palette-unanswered]="!isAnswered(i) && i !== currentIndex"
+            (click)="goToQuestion(i)">
+            {{ i + 1 }}
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
 
